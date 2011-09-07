@@ -9,12 +9,9 @@
     <version>1.0</version>
     <modules>
         <module>Domain</module>
-        <module>Master</module>
-        <module>Inventory</module>
-        <module>ProcurementTransaction</module>
-        <module>SalesTransaction</module>
-        <module>ProcurementBilling</module>
-        <module>SalesBilling</module>
+        <module>Common</module>
+        <module>DataAccess</module>
+        <module>Services</module>
         <module>Web</module>
     </modules>
     <dependencies>

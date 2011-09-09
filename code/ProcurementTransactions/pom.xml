@@ -11,4 +11,5 @@
     <groupId>com.bis.project</groupId>
     <artifactId>procurement-transactions</artifactId>
     <version>1.0</version>
+    <packaging>jar</packaging>
 </project>

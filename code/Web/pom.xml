@@ -10,8 +10,6 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.bis.project</groupId>
     <artifactId>web</artifactId>
+    <packaging>war</packaging>
     <version>1.0</version>
-    <dependencies>
-
-    </dependencies>
 </project>

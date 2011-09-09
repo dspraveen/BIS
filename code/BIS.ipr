@@ -178,16 +178,20 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/BIS.iml" filepath="$PROJECT_DIR$/BIS.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Common/Common.iml" filepath="$PROJECT_DIR$/Common/Common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Core/Core.iml" filepath="$PROJECT_DIR$/Core/Core.iml" />
       <module fileurl="file://$PROJECT_DIR$/DataAccess/DataAccess.iml" filepath="$PROJECT_DIR$/DataAccess/DataAccess.iml" />
       <module fileurl="file://$PROJECT_DIR$/Domain/Domain.iml" filepath="$PROJECT_DIR$/Domain/Domain.iml" />
       <module fileurl="file://$PROJECT_DIR$/Inventory/Inventory.iml" filepath="$PROJECT_DIR$/Inventory/Inventory.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Inventory/Inventory.iml" filepath="$PROJECT_DIR$/Inventory/Inventory.iml" />
       <module fileurl="file://$PROJECT_DIR$/Master/Master.iml" filepath="$PROJECT_DIR$/Master/Master.iml" />
       <module fileurl="file://$PROJECT_DIR$/ProcurementBilling/ProcurementBilling.iml" filepath="$PROJECT_DIR$/ProcurementBilling/ProcurementBilling.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ProcurementBilling/ProcurementBilling.iml" filepath="$PROJECT_DIR$/ProcurementBilling/ProcurementBilling.iml" />
       <module fileurl="file://$PROJECT_DIR$/ProcurementTransaction/ProcurementTransaction.iml" filepath="$PROJECT_DIR$/ProcurementTransaction/ProcurementTransaction.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Common/ProcurementTransactions.iml" filepath="$PROJECT_DIR$/Common/ProcurementTransactions.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SalesBilling/SalesBilling.iml" filepath="$PROJECT_DIR$/SalesBilling/SalesBilling.iml" />
       <module fileurl="file://$PROJECT_DIR$/SalesBilling/SalesBilling.iml" filepath="$PROJECT_DIR$/SalesBilling/SalesBilling.iml" />
       <module fileurl="file://$PROJECT_DIR$/SalesTransaction/SalesTransaction.iml" filepath="$PROJECT_DIR$/SalesTransaction/SalesTransaction.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Services/Services.iml" filepath="$PROJECT_DIR$/Services/Services.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Services/SalesTransactions.iml" filepath="$PROJECT_DIR$/Services/SalesTransactions.iml" />
       <module fileurl="file://$PROJECT_DIR$/Web/Web.iml" filepath="$PROJECT_DIR$/Web/Web.iml" />
     </modules>
   </component>

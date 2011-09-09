@@ -8,7 +8,5 @@
         <version>1.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.bis.project</groupId>
-    <artifactId>services</artifactId>
-    <version>1.0</version>
+    <artifactId>Inventory</artifactId>
 </project>

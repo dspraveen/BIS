@@ -13,6 +13,10 @@
         <module>DataAccess</module>
         <module>Services</module>
         <module>Web</module>
+        <module>Core</module>
+        <module>ProcurementBilling</module>
+        <module>SalesBilling</module>
+        <module>Inventory</module>
     </modules>
     <dependencies>
         <dependency>

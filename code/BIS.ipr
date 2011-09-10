@@ -190,10 +190,12 @@
       <module fileurl="file://$PROJECT_DIR$/ProcurementBilling/ProcurementBilling.iml" filepath="$PROJECT_DIR$/ProcurementBilling/ProcurementBilling.iml" />
       <module fileurl="file://$PROJECT_DIR$/ProcurementBilling/ProcurementBilling.iml" filepath="$PROJECT_DIR$/ProcurementBilling/ProcurementBilling.iml" />
       <module fileurl="file://$PROJECT_DIR$/ProcurementTransaction/ProcurementTransaction.iml" filepath="$PROJECT_DIR$/ProcurementTransaction/ProcurementTransaction.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ProcurementTransactions/ProcurementTransactions.iml" filepath="$PROJECT_DIR$/ProcurementTransactions/ProcurementTransactions.iml" />
       <module fileurl="file://$PROJECT_DIR$/Common/ProcurementTransactions.iml" filepath="$PROJECT_DIR$/Common/ProcurementTransactions.iml" />
       <module fileurl="file://$PROJECT_DIR$/SalesBilling/SalesBilling.iml" filepath="$PROJECT_DIR$/SalesBilling/SalesBilling.iml" />
       <module fileurl="file://$PROJECT_DIR$/SalesBilling/SalesBilling.iml" filepath="$PROJECT_DIR$/SalesBilling/SalesBilling.iml" />
       <module fileurl="file://$PROJECT_DIR$/SalesTransaction/SalesTransaction.iml" filepath="$PROJECT_DIR$/SalesTransaction/SalesTransaction.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SalesTransactions/SalesTransactions.iml" filepath="$PROJECT_DIR$/SalesTransactions/SalesTransactions.iml" />
       <module fileurl="file://$PROJECT_DIR$/Services/SalesTransactions.iml" filepath="$PROJECT_DIR$/Services/SalesTransactions.iml" />
       <module fileurl="file://$PROJECT_DIR$/Web/Web.iml" filepath="$PROJECT_DIR$/Web/Web.iml" />
     </modules>

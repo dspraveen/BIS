@@ -2,28 +2,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
     
-    <display-name>appfuse</display-name>
-    <distributable/>
-
-    <!-- precompiled jsp mappings -->
-
-    <!-- Define the default CSS Theme -->
-    <context-param>
-        <param-name>csstheme</param-name>
-        <param-value>simplicity</param-value>
-    </context-param>
-    <!-- Define the basename for a resource bundle for I18N -->
-    <context-param>
-        <param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
-        <param-value>ApplicationResources</param-value>
-    </context-param>
-    <!-- Fallback locale if no bundles found for browser's preferred locale -->
-    <!-- Force a single locale using param-name 'javax.servlet.jsp.jstl.fmt.locale' -->
-    <context-param>
-        <param-name>javax.servlet.jsp.jstl.fmt.fallbackLocale</param-name>
-        <param-value>en</param-value>
-    </context-param>
-    <!-- Context Configuration locations for Spring XML files -->
+    <display-name>BIS</display-name>
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>

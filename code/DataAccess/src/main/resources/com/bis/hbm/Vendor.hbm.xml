@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.bis.domain.Vendor" table="vendor" catalog="BIS">
+        <id name="vendorId" type="java.lang.Integer">
+            <column name="Vendor_ID" />
+            <generator class="identity" />
+        </id>
+        <property name="vendorName" type="string">
+            <column name="Vendor_Name" length="127" not-null="true" />
+        </property>
+        <property name="address" type="string">
+            <column name="Address" />
+        </property>
+        <property name="phoneNumber" type="string">
+            <column name="Phone_Number" length="15" />
+        </property>
+        <property name="vendorDiscount" type="java.lang.Float">
+            <column name="Vendor_Discount" precision="4" />
+        </property>
+        <property name="billingCycle" type="java.lang.Character">
+            <column name="Billing_Cycle" length="1" />
+        </property>
+        <property name="alternatePhone" type="string">
+            <column name="Alternate_Phone" length="15" />
+        </property>
+    </class>
+</hibernate-mapping>

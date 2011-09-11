@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.bis.domain.StDetails" table="st_details" catalog="BIS">
+        <id name="detailsId" type="java.lang.Integer">
+            <column name="Details_ID" />
+            <generator class="identity" />
+        </id>
+        <property name="transactionId" type="int">
+            <column name="Transaction_ID" not-null="true" />
+        </property>
+        <property name="itemCode" type="int">
+            <column name="Item_Code" not-null="true" />
+        </property>
+        <property name="dateOfPublishing" type="timestamp">
+            <column name="Date_Of_Publishing" length="19" not-null="true" />
+        </property>
+        <property name="quantity" type="java.lang.Integer">
+            <column name="Quantity" />
+        </property>
+        <property name="amount" type="java.lang.Float">
+            <column name="Amount" precision="12" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -18,5 +18,16 @@
             <artifactId>domain</artifactId>
             <version>1.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.bis.project</groupId>
+            <artifactId>bis-common</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.bis.project</groupId>
+            <artifactId>test-bis-common</artifactId>
+            <version>1.0</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 </project>

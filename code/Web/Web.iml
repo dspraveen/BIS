@@ -19,9 +19,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="ProcurementTransactions" />
-    <orderEntry type="module" module-name="SalesTransactions" />
-    <orderEntry type="module" module-name="Domain" />
+    <orderEntry type="module" module-name="Common" />
     <orderEntry type="library" name="Maven: org.mockito:mockito-all:1.8.5" level="project" />
     <orderEntry type="library" name="Maven: log4j:log4j:1.2.16" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.6.1" level="project" />
@@ -81,6 +79,8 @@
     <orderEntry type="library" name="Maven: commons-httpclient:commons-httpclient:3.1" level="project" />
     <orderEntry type="library" name="Maven: commons-logging:commons-logging:1.0.4" level="project" />
     <orderEntry type="library" name="Maven: org.quartz-scheduler:quartz:1.8.4" level="project" />
+    <orderEntry type="module" module-name="TestCommon" scope="TEST" />
+    <orderEntry type="module" module-name="Domain" />
     <orderEntry type="module" module-name="Core" />
     <orderEntry type="module" module-name="DataAccess" />
     <orderEntry type="module" module-name="Inventory" />

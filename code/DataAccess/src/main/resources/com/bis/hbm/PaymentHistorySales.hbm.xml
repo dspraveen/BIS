@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.bis.domain.PaymentHistorySales" table="payment_history_sales" catalog="BIS">
+        <id name="paymentId" type="java.lang.Integer">
+            <column name="Payment_ID" />
+            <generator class="identity" />
+        </id>
+        <property name="hawkerId" type="int">
+            <column name="Hawker_ID" not-null="true" />
+        </property>
+        <property name="date" type="timestamp">
+            <column name="Date" length="19" />
+        </property>
+        <property name="amount" type="java.lang.Float">
+            <column name="Amount" precision="12" />
+        </property>
+        <property name="receiptNum" type="string">
+            <column name="Receipt_Num" length="10" />
+        </property>
+        <property name="mode" type="java.lang.Character">
+            <column name="Mode" length="1" />
+        </property>
+        <property name="remarks" type="string">
+            <column name="Remarks" />
+        </property>
+    </class>
+</hibernate-mapping>

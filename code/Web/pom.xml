@@ -13,6 +13,17 @@
     <packaging>war</packaging>
     <version>1.0</version>
     <dependencies>
+         <dependency>
+            <groupId>com.bis.project</groupId>
+            <artifactId>bis-common</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.bis.project</groupId>
+            <artifactId>test-bis-common</artifactId>
+            <version>1.0</version>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>com.bis.project</groupId>
             <artifactId>domain</artifactId>

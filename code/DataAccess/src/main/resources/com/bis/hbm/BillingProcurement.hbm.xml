@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.bis.domain.BillingProcurement" table="billing_procurement" catalog="BIS">
+        <id name="billId" type="java.lang.Integer">
+            <column name="Bill_ID" />
+            <generator class="identity" />
+        </id>
+        <property name="vendorId" type="int">
+            <column name="Vendor_ID" not-null="true" />
+        </property>
+        <property name="startDate" type="timestamp">
+            <column name="Start_Date" length="19" />
+        </property>
+        <property name="endDate" type="timestamp">
+            <column name="End_Date" length="19" />
+        </property>
+        <property name="balanceAmount" type="java.lang.Float">
+            <column name="Balance_Amount" precision="12" />
+        </property>
+    </class>
+</hibernate-mapping>

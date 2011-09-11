@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.bis.domain.ProcurementTransaction" table="procurement_transaction" catalog="BIS">
+        <id name="transactionId" type="java.lang.Integer">
+            <column name="Transaction_ID" />
+            <generator class="identity" />
+        </id>
+        <property name="vendorId" type="int">
+            <column name="Vendor_ID" not-null="true" />
+        </property>
+        <property name="date" type="timestamp">
+            <column name="Date" length="19" />
+        </property>
+        <property name="transactionType" type="java.lang.Character">
+            <column name="Transaction_Type" length="1" />
+        </property>
+        <property name="totalAmount" type="java.lang.Float">
+            <column name="Total_Amount" precision="12" />
+        </property>
+    </class>
+</hibernate-mapping>

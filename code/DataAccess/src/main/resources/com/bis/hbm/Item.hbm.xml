@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.bis.domain.Item" table="item" catalog="BIS">
+        <id name="itemCode" type="java.lang.Integer">
+            <column name="Item_Code" />
+            <generator class="identity" />
+        </id>
+        <property name="itemName" type="string">
+            <column name="Item_Name" length="127" />
+        </property>
+        <property name="description" type="string">
+            <column name="Description" />
+        </property>
+        <property name="itemLife" type="char">
+            <column name="Item_Life" length="1" not-null="true">
+                <comment>Frequency of the Item.</comment>
+            </column>
+        </property>
+        <property name="returnable" type="char">
+            <column name="Returnable" length="1" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

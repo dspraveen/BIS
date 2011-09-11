@@ -181,6 +181,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/BIS.iml" filepath="$PROJECT_DIR$/BIS.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Common/Common.iml" filepath="$PROJECT_DIR$/Commom/Common.iml" />
       <module fileurl="file://$PROJECT_DIR$/Core/Core.iml" filepath="$PROJECT_DIR$/Core/Core.iml" />
       <module fileurl="file://$PROJECT_DIR$/DataAccess/DataAccess.iml" filepath="$PROJECT_DIR$/DataAccess/DataAccess.iml" />
       <module fileurl="file://$PROJECT_DIR$/Domain/Domain.iml" filepath="$PROJECT_DIR$/Domain/Domain.iml" />
@@ -194,6 +195,7 @@
       <module fileurl="file://$PROJECT_DIR$/SalesTransaction/SalesTransaction.iml" filepath="$PROJECT_DIR$/SalesTransaction/SalesTransaction.iml" />
       <module fileurl="file://$PROJECT_DIR$/SalesTransactions/SalesTransactions.iml" filepath="$PROJECT_DIR$/SalesTransactions/SalesTransactions.iml" />
       <module fileurl="file://$PROJECT_DIR$/Services/SalesTransactions.iml" filepath="$PROJECT_DIR$/Services/SalesTransactions.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TestCommon/TestCommon.iml" filepath="$PROJECT_DIR$/TestCommon/TestCommon.iml" />
       <module fileurl="file://$PROJECT_DIR$/Web/Web.iml" filepath="$PROJECT_DIR$/Web/Web.iml" />
     </modules>
   </component>
@@ -942,6 +944,7 @@
       </JAVADOC>
       <SOURCES>
         <root url="jar://$MAVEN_REPOSITORY$/org/springframework/spring-orm/3.0.5.RELEASE/spring-orm-3.0.5.RELEASE-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/springframework/spring-orm/3.0.5.RELEASE/spring-orm-3.0.5.RELEASE.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: org.springframework:spring-test:3.0.5.RELEASE">

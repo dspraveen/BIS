@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.bis.domain.ItemPrice" table="item_price" catalog="BIS">
+        <id name="priceId" type="java.lang.Integer">
+            <column name="Price_ID" />
+            <generator class="identity" />
+        </id>
+        <property name="itemCode" type="int">
+            <column name="Item_Code" not-null="true" />
+        </property>
+        <property name="price" type="float">
+            <column name="Price" precision="6" not-null="true" />
+        </property>
+        <property name="startDate" type="timestamp">
+            <column name="Start_Date" length="19" not-null="true" />
+        </property>
+        <property name="endTime" type="timestamp">
+            <column name="End_Time" length="19" />
+        </property>
+    </class>
+</hibernate-mapping>

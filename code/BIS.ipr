@@ -181,7 +181,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/BIS.iml" filepath="$PROJECT_DIR$/BIS.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Common/Common.iml" filepath="$PROJECT_DIR$/Commom/Common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Common/Common.iml" filepath="$PROJECT_DIR$/Common/Common.iml" />
       <module fileurl="file://$PROJECT_DIR$/Core/Core.iml" filepath="$PROJECT_DIR$/Core/Core.iml" />
       <module fileurl="file://$PROJECT_DIR$/DataAccess/DataAccess.iml" filepath="$PROJECT_DIR$/DataAccess/DataAccess.iml" />
       <module fileurl="file://$PROJECT_DIR$/Domain/Domain.iml" filepath="$PROJECT_DIR$/Domain/Domain.iml" />

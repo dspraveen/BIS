@@ -1,5 +1,8 @@
 package com.bis.domain;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+
 public class Item implements java.io.Serializable {
 
 	private Integer itemCode;
@@ -64,4 +67,13 @@ public class Item implements java.io.Serializable {
 		this.returnable = returnable;
 	}
 
+    @Override
+    public int hashCode() {
+        return HashCodeBuilder.reflectionHashCode(this);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return EqualsBuilder.reflectionEquals(this,obj);
+    }
 }

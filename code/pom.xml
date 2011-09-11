@@ -16,8 +16,8 @@
     </properties>
     <modules>
         <module>Common</module>
-        <module>TestCommon</module>
         <module>Domain</module>
+        <module>TestCommon</module>
         <module>DataAccess</module>
         <module>Core</module>
         <module>Inventory</module>

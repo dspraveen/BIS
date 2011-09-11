@@ -13,19 +13,20 @@ public abstract class BaseRepository<T> extends HibernateDaoSupport {
     }
 
     public void save(T object) {
-        getSession().save(object);
+        getHibernateTemplate().save(object);
     }
 
     public T get(Serializable id) {
-        return (T) getSession().get(type,id);
+        return (T) getHibernateTemplate().get(type, id);
     }
 
     public void delete(T object) {
-        getSession().delete(object);
+        getHibernateTemplate().delete(object);
     }
 
     public void update(T object) {
-        getSession().update(object);
+        getHibernateTemplate().update(object);
     }
+
 }
 

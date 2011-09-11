@@ -1,7 +1,7 @@
 CREATE TABLE Hawker (
   Hawker_ID INT(5) UNSIGNED  NOT NULL   AUTO_INCREMENT,
-  Hawker_Name VARCHAR  NULL  ,
-  Address VARCHAR  NOT NULL  ,
+  Hawker_Name VARCHAR(127)  NULL  ,
+  Address VARCHAR(255)  NOT NULL  ,
   Phone_Number CHAR(15)  NULL  ,
   Hawker_Discount FLOAT(4,2)  NULL  ,
   Billing_Cycle CHAR(1)  NULL  ,
@@ -12,8 +12,8 @@ PRIMARY KEY(Hawker_ID));
 
 CREATE TABLE Item (
   Item_Code INT(5) UNSIGNED  NOT NULL   AUTO_INCREMENT,
-  Item_Name VARCHAR  NULL  ,
-  Description VARCHAR  NULL  ,
+  Item_Name VARCHAR(127)  NULL  ,
+  Description VARCHAR(255)  NULL  ,
   Item_Life CHAR(1)  NOT NULL   COMMENT 'Frequency of the Item.' ,
   Returnable CHAR(1)  NOT NULL    ,
 PRIMARY KEY(Item_Code));
@@ -23,8 +23,8 @@ PRIMARY KEY(Item_Code));
 
 CREATE TABLE Vendor (
   Vendor_ID INT(5) UNSIGNED  NOT NULL   AUTO_INCREMENT,
-  Vendor_Name VARCHAR  NOT NULL  ,
-  Address VARCHAR  NULL  ,
+  Vendor_Name VARCHAR(127)  NOT NULL  ,
+  Address VARCHAR(255)  NULL  ,
   Phone_Number CHAR(15)  NULL  ,
   Vendor_Discount FLOAT(4,2)  NULL  ,
   Billing_Cycle CHAR(1)  NULL  ,
@@ -55,7 +55,7 @@ CREATE TABLE Payment_History_Sales (
   Amount FLOAT(12,2)  NULL  ,
   Receipt_Num CHAR(10)  NULL  ,
   Mode CHAR(1)  NULL  ,
-  Remarks VARCHAR  NULL    ,
+  Remarks VARCHAR(255)  NULL    ,
 PRIMARY KEY(Payment_ID)  ,
 INDEX Payment_History_Sales_FKIndex1(Hawker_ID),
   FOREIGN KEY(Hawker_ID)
@@ -66,10 +66,12 @@ INDEX Payment_History_Sales_FKIndex1(Hawker_ID),
 
 
 CREATE TABLE Stock (
-  Date_Of_Publishing DATETIME  NOT NULL  ,
+  Stock_ID INTEGER UNSIGNED  NOT NULL   AUTO_INCREMENT,
   Item_Code INT(5) UNSIGNED  NOT NULL  ,
+  Date_Of_Publishing DATETIME  NOT NULL  ,
   Quantity INT  NULL    ,
-PRIMARY KEY(Date_Of_Publishing, Item_Code),
+PRIMARY KEY(Stock_ID)  ,
+INDEX Stock_FKIndex1(Item_Code),
   FOREIGN KEY(Item_Code)
     REFERENCES Item(Item_Code)
       ON DELETE NO ACTION
@@ -98,7 +100,8 @@ CREATE TABLE Item_Price (
   Price FLOAT(6,2)  NOT NULL  ,
   Start_Date DATETIME  NOT NULL  ,
   End_Time DATETIME  NULL    ,
-PRIMARY KEY(Price_ID),
+PRIMARY KEY(Price_ID)  ,
+INDEX Item_Price_FKIndex1(Item_Code),
   FOREIGN KEY(Item_Code)
     REFERENCES Item(Item_Code)
       ON DELETE NO ACTION
@@ -143,7 +146,7 @@ CREATE TABLE Payment_History_Procurement (
   Amount FLOAT(12,2)  NULL  ,
   Receipt_Num CHAR(10)  NULL  ,
   Mode CHAR(1)  NULL  ,
-  Remarks VARCHAR  NULL    ,
+  Remarks VARCHAR(255)  NULL    ,
 PRIMARY KEY(Payment_ID)  ,
 INDEX Payment_History_Procurement_FKIndex1(Vendor_ID),
   FOREIGN KEY(Vendor_ID)
@@ -154,49 +157,54 @@ INDEX Payment_History_Procurement_FKIndex1(Vendor_ID),
 
 
 CREATE TABLE ST_Details (
-  Date_Of_Publishing DATETIME  NOT NULL  ,
+  Details_ID INTEGER UNSIGNED  NOT NULL   AUTO_INCREMENT,
   Transaction_ID INTEGER UNSIGNED  NOT NULL  ,
   Item_Code INT(5) UNSIGNED  NOT NULL  ,
+  Date_Of_Publishing DATETIME  NOT NULL  ,
   Quantity INT UNSIGNED  NULL  ,
   Amount FLOAT(12,2)  NULL    ,
-PRIMARY KEY(Date_Of_Publishing, Transaction_ID, Item_Code)  ,
-INDEX ST_Details_FKIndex1(Transaction_ID),
-  FOREIGN KEY(Transaction_ID)
-    REFERENCES Sales_Transaction(Transaction_ID)
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION,
+PRIMARY KEY(Details_ID)  ,
+INDEX ST_Details_FKIndex1(Item_Code)  ,
+INDEX ST_Details_FKIndex2(Transaction_ID),
   FOREIGN KEY(Item_Code)
     REFERENCES Item(Item_Code)
+      ON DELETE NO ACTION
+      ON UPDATE NO ACTION,
+  FOREIGN KEY(Transaction_ID)
+    REFERENCES Sales_Transaction(Transaction_ID)
       ON DELETE NO ACTION
       ON UPDATE NO ACTION);
 
 
 
 CREATE TABLE PT_Details (
-  Date_Of_Publishing DATETIME  NOT NULL  ,
+  Details_ID INTEGER UNSIGNED  NOT NULL   AUTO_INCREMENT,
   Transaction_ID INTEGER UNSIGNED  NOT NULL  ,
   Item_Code INT(5) UNSIGNED  NOT NULL  ,
+  Date_Of_Publishing DATETIME  NOT NULL  ,
   Quantity INT UNSIGNED  NULL  ,
   Amount FLOAT(12,2)  NULL    ,
-PRIMARY KEY(Date_Of_Publishing, Transaction_ID, Item_Code)  ,
-INDEX PT_Details_FKIndex1(Transaction_ID),
-  FOREIGN KEY(Item_Code)
-    REFERENCES Item(Item_Code)
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION,
+PRIMARY KEY(Details_ID)  ,
+INDEX PT_Details_FKIndex1(Transaction_ID)  ,
+INDEX PT_Details_FKIndex2(Item_Code),
   FOREIGN KEY(Transaction_ID)
     REFERENCES Procurement_Transaction(Transaction_ID)
+      ON DELETE NO ACTION
+      ON UPDATE NO ACTION,
+  FOREIGN KEY(Item_Code)
+    REFERENCES Item(Item_Code)
       ON DELETE NO ACTION
       ON UPDATE NO ACTION);
 
 
 
 CREATE TABLE Item_Vendor (
-  Item_Vendor_ID INT(5))  NOT NULL   AUTO_INCREMENT,
+  Item_Vendor_ID INT(5) UNSIGNED  NOT NULL   AUTO_INCREMENT,
   Item_Code INT(5) UNSIGNED  NOT NULL  ,
   Vendor_ID INT(5) UNSIGNED  NOT NULL    ,
 PRIMARY KEY(Item_Vendor_ID)  ,
-INDEX Item_Vendor_Link_FKIndex2(Vendor_ID),
+INDEX Item_Vendor_Link_FKIndex2(Vendor_ID)  ,
+INDEX Item_Vendor_FKIndex2(Item_Code),
   FOREIGN KEY(Item_Code)
     REFERENCES Item(Item_Code)
       ON DELETE NO ACTION

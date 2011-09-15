@@ -178,6 +178,13 @@
       </item>
     </group>
   </component>
+  <component name="ProjectDictionaryState">
+    <dictionary name="pshivana">
+      <words>
+        <w>springframework</w>
+      </words>
+    </dictionary>
+  </component>
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/BIS.iml" filepath="$PROJECT_DIR$/BIS.iml" />

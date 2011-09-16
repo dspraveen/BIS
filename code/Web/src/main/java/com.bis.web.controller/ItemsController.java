@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @Controller
@@ -48,14 +47,14 @@ public class ItemsController {
     }
 
     @RequestMapping(value = "/create",method = RequestMethod.POST)
-    public String create(@Valid Item item, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
+    public String create(@Valid Item item, BindingResult bindingResult, Model uiModel) {
         uiModel.asMap().clear();
         itemMasterService.create(item);
         return "redirect:/item/show/"+item.getItemCode();
     }
 
     @RequestMapping(value = "/update",method = RequestMethod.POST)
-    public String update(@Valid Item item, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
+    public String update(@Valid Item item, BindingResult bindingResult, Model uiModel) {
         uiModel.asMap().clear();
         itemMasterService.update(item);
         return "redirect:/item/show/"+item.getItemCode();

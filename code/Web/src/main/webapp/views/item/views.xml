@@ -2,11 +2,17 @@
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
         "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 <tiles-definitions>
-    <definition name="item/show" template="/views/default.jsp">
+
+    <definition name="item/show" extends="default">
         <put-attribute name="body" value="/views/item/show.jsp"/>
     </definition>
 
-    <definition name="pt_show" template="/views/default.jsp">
-        <put-attribute name="body" value="/views/item/show.jsp"/>
+    <definition name="item/createForm" extends="default">
+        <put-attribute name="body" value="/views/item/createForm.jsp"/>
     </definition>
+
+    <definition name="item/updateForm" extends="default">
+        <put-attribute name="body" value="/views/item/updateForm.jsp"/>
+    </definition>
+
 </tiles-definitions>

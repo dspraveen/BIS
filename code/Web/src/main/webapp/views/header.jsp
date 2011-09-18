@@ -8,8 +8,8 @@
   </h1>
   <div id="header-links">
     <p>
-        <a href="index.html">Settings</a>|
-        <a href="index.html">Profile</a>
+        <a href="#">Settings</a>|
+        <a href="#">Profile</a>
      </p>
   </div>
 </div>

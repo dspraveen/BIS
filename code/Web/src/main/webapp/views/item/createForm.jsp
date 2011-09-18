@@ -4,12 +4,24 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <form:form commandName="item" method="POST" action="create">
     <div>
-        <h1>Hello - Spring Application</h1>
-        <p><label>Code</label><form:input path="itemCode" /></p>
-        <p><label>Code</label><form:input path="itemName" /></p>
-        <p><label>Code</label><form:input path="description" /></p>
-        <p><label>Code</label><form:input path="itemLife"/></p>
-        <p><label>Code</label><form:input path="returnable" /></p>
-        <p><input type="submit" value="Clear"/> <input type="clear" value="Clear"/></p>
+        <div class="section">
+            <span class="left"><label>Item Name:</label></span
+            <span class="right"><form:input path="itemName" />*</span>
+        </div>
+        <div class="section">
+            <span class="left"><label>Item Description:</label></span
+            <span class="right"><form:input path="description" /></span>
+        </div>
+        <div class="section">
+            <span class="left"><label>Item Type:</label></span
+            <span class="right"><form:select path="itemLife" items="${itemTypes}" />*</span>
+        </div>
+        <div class="section">
+            <span class="left"><label>Item Returnable:</label></span
+            <span class="right"><form:select path="returnable" items="${itemReturnTypes}"/>*</span>
+        </div>
+        <div class="section">
+            <span class="center"><input type="submit" value="Submit"/> <input type="reset" value="Clear"/></span>
+        </div>
     </div>
 </form:form>

@@ -5,6 +5,7 @@
 <html>
     <head>
         <link rel="stylesheet" href="/styles/bis-styles.css" type="text/css" />
+        <link rel="stylesheet" href="/styles/bis-panel.css" type="text/css" />
         <title>BIS</title>
     </head>
     <body>

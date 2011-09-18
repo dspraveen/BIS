@@ -6,13 +6,13 @@
   <div id="light-brown-line"></div>
   <ul>
     <li>
-      <a href="#">Master</a>
+      <a href="/item/createForm">Master</a>
     </li>
     <li>
-      <a href="#">Procurement</a>
+      <a href="/procurement/createForm">Procurement</a>
     </li>
     <li>
-      <a href="#">Sales</a>
+      <a href="/procurement/createForm">Sales</a>
     </li>
     <li>
       <a href="#">Inventory</a>

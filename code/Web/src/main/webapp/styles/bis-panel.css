@@ -1,0 +1,15 @@
+.section{
+    margin-top : 15px;
+    margin-left : 5px;
+}
+.center{
+    margin-left : 100px;
+}
+.left {
+	float:left;
+	width:30%
+}.
+.right {
+	float:left;
+	width:70%
+}

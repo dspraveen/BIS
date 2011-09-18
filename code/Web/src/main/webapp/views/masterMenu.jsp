@@ -9,7 +9,7 @@
       <a href="#">Add New Vendor</a>
     </li>
     <li>
-      <a href="#">Add New Item</a>
+      <a href="/item/createForm">Add New Item</a>
     </li>
     <li>
       <a href="#">Add New Hawker</a>

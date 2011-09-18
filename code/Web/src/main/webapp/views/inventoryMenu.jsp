@@ -2,12 +2,11 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<html>
-  	<body class="tundra spring">
-   		<div id="wrapper">
-		    <div id="main">
-	    		<tiles:insertAttribute name="body"/>
-		    </div>
-		</div>
-	</body>
-</html>
+<div>
+  <h3>Inventory Menu</h3>
+  <ul class="sidemenu">
+    <li>
+      <a href="#">Stock Details</a>
+    </li>
+  </ul>
+</div>

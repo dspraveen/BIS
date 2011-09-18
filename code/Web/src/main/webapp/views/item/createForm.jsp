@@ -10,6 +10,6 @@
         <p><label>Code</label><form:input path="description" /></p>
         <p><label>Code</label><form:input path="itemLife"/></p>
         <p><label>Code</label><form:input path="returnable" /></p>
-        <p><label>Code</label><input type="submit" value="save"/></p>
+        <p><input type="submit" value="Clear"/> <input type="clear" value="Clear"/></p>
     </div>
 </form:form>

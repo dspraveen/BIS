@@ -3,16 +3,16 @@
         "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 <tiles-definitions>
 
-    <definition name="item/show" extends="default">
-        <put-attribute name="body" value="/views/item/show.jsp"/>
+    <definition name="item/show" extends="master">
+        <put-attribute name="main-content" value="/views/item/show.jsp"/>
     </definition>
 
-    <definition name="item/createForm" extends="default">
-        <put-attribute name="body" value="/views/item/createForm.jsp"/>
+    <definition name="item/createForm" extends="master">
+        <put-attribute name="main-content" value="/views/item/createForm.jsp"/>
     </definition>
 
-    <definition name="item/updateForm" extends="default">
-        <put-attribute name="body" value="/views/item/updateForm.jsp"/>
+    <definition name="item/updateForm" extends="master">
+        <put-attribute name="main-content" value="/views/item/updateForm.jsp"/>
     </definition>
 
 </tiles-definitions>

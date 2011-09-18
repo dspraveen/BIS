@@ -2,18 +2,32 @@
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
         "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 <tiles-definitions>
-    <definition name="default" template="/WEB-INF/layouts/default.jsp"/>
 
-    <definition name="item/show" extends="default">
-        <put-attribute name="body" value="/views/item/show.jsp"/>
+    <definition name="default" template="/views/default.jsp">
+       <put-attribute name="header" value="/views/header.jsp"/>
+       <put-attribute name="navigation" value="/views/navigation.jsp"/>
+       <put-attribute name="quick-links" value="/views/quickLinks.jsp"/>
+       <put-attribute name="footer" value="/views/footer.jsp"/>
     </definition>
 
-    <definition name="item/createForm" extends="default">
-        <put-attribute name="body" value="/views/item/createForm.jsp"/>
+    <definition name="master" extends="default">
+       <put-attribute name="context-menu" value="/views/masterMenu.jsp"/>
     </definition>
 
-    <definition name="item/updateForm" extends="default">
-        <put-attribute name="body" value="/views/item/updateForm.jsp"/>
+    <definition name="procurement" extends="default">
+       <put-attribute name="context-menu" value="/views/procurementMenu.jsp"/>
+    </definition>
+
+    <definition name="sales" extends="default">
+       <put-attribute name="context-menu" value="/views/salesMenu.jsp"/>
+    </definition>
+
+    <definition name="inventory" extends="default">
+       <put-attribute name="context-menu" value="/views/inventoryMenu.jsp"/>
+    </definition>
+
+    <definition name="reports" extends="default">
+       <put-attribute name="context-menu" value="/views/reportsMenu.jsp"/>
     </definition>
 
 </tiles-definitions>

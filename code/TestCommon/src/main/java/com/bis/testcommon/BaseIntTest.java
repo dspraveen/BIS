@@ -9,4 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 @TransactionConfiguration(defaultRollback = false)
 @Transactional
 public class BaseIntTest extends AbstractTransactionalJUnit4SpringContextTests{
+
+
 }

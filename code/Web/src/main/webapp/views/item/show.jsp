@@ -9,8 +9,17 @@
         <span class="right"><label>${item.itemName}</label></span>
     </div>
     <div class="section">
-        <span class="left"><label>Item Description:</label></span
-        <span class="right"><label>${item.description}</label></span>
+        <span class="left"><label>Item Description:</label></span>
+        <span class="right"><label>
+          <c:choose>
+            <c:when test="${item.description != ''}">
+                ${item.description}
+            </c:when>
+            <c:otherwise>
+                Not Provided
+            </c:otherwise>
+          </c:choose>
+        </label></span>
     </div>
     <div class="section">
         <span class="left"><label>Item Type:</label></span
@@ -21,6 +30,6 @@
         <span class="right"><label>${item.returnable}</label></span>
     </div>
     <div class="section">
-        <span class="center"><a href="/item/updateForm/${item.itemCode}">Update Item</a></span>
+        <span class="left"><a href="/item/updateForm/${item.itemCode}">Update Item</a></span>
     </div>
 </div>

@@ -17,4 +17,9 @@ public class ItemBuilder {
         item.setReturnable('Y');
         return this;
     }
+
+    public ItemBuilder setName(String name) {
+        item.setItemName(name);
+        return this;
+    }
 }

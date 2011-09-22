@@ -6,6 +6,7 @@
     <head>
         <link rel="stylesheet" href="/styles/bis-styles.css" type="text/css" />
         <link rel="stylesheet" href="/styles/bis-panel.css" type="text/css" />
+        <script type="text/javascript" src="/js/ThirdParty/jquery-1.6.4.min.js"></script>
         <title>BIS</title>
     </head>
     <body>

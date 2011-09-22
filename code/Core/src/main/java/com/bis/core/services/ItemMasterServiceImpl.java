@@ -5,6 +5,8 @@ import com.bis.domain.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ItemMasterServiceImpl implements ItemMasterService{
 
@@ -28,5 +30,10 @@ public class ItemMasterServiceImpl implements ItemMasterService{
     @Override
     public Item get(int itemCode) {
         return itemRepository.get(itemCode);
+    }
+
+    @Override
+    public List<Item> getAll() {
+        return itemRepository.getAll();
     }
 }

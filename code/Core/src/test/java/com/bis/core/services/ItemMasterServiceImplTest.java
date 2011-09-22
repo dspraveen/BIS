@@ -9,6 +9,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+import java.util.ArrayList;
+
 import static org.mockito.Mockito.verify;
 
 public class ItemMasterServiceImplTest {
@@ -37,9 +39,16 @@ public class ItemMasterServiceImplTest {
     }
 
     @Test
-    public void testGet() throws Exception {
+    public void shouldGetItem() throws Exception {
         Item item = new Item();
         Mockito.when(itemRepository.get(12)).thenReturn(item);
         Assert.assertEquals(item,itemMasterService.get(12));
+    }
+
+    @Test
+    public void shouldGetAllItem() throws Exception {
+        ArrayList<Item> items = new ArrayList<Item>();
+        Mockito.when(itemRepository.getAll()).thenReturn(items);
+        Assert.assertEquals(items,itemMasterService.getAll());
     }
 }

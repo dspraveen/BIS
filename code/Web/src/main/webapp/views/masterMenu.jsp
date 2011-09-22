@@ -15,19 +15,10 @@
       <a href="#">Add New Hawker</a>
     </li>
     <li>
-      <a href="#">Update Vendor Details</a>
-    </li>
-    <li>
-      <a href="#">Update Item Details</a>
-    </li>
-    <li>
-      <a href="#">Update Hawker Details</a>
-    </li>
-    <li>
       <a href="#">Vendor Details</a>
     </li>
     <li>
-      <a href="#">Item Details</a>
+      <a href="/item/list">Item Details</a>
     </li>
     <li>
       <a href="#">Hawker Details</a>

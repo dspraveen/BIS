@@ -2,20 +2,19 @@ package com.bis.web.controller;
 
 import com.bis.core.services.ItemMasterService;
 import com.bis.domain.Item;
+import com.bis.domain.ItemCycle;
+import com.bis.domain.ItemReturnType;
+import com.bis.web.viewmodel.ItemList;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping("/item")
@@ -25,18 +24,19 @@ public class ItemsController {
 
     @ModelAttribute("itemTypes")
     public Map<Character,String> itemTypes(){
-        Map<Character,String> itemTypes = new HashMap<Character,String>();
-        itemTypes.put('W',"WEEKLY");
-        itemTypes.put('F',"FORTNIGHT");
-        itemTypes.put('M',"MONTHLY");
-        return itemTypes;
+        Map<Character,String> itemCycles = new HashMap<Character,String>();
+        for(ItemCycle itemCycle: ItemCycle.values()){
+            itemCycles.put(itemCycle.getCode(), itemCycle.toString());
+        }
+        return itemCycles;
     }
 
     @ModelAttribute("itemReturnTypes")
     public Map<Character,String> itemReturnTypes(){
         Map<Character,String> itemReturnTypes = new HashMap<Character,String>();
-        itemReturnTypes.put('Y',"YES");
-        itemReturnTypes.put('N',"NO");
+        for(ItemReturnType itemReturnType: ItemReturnType.values()){
+            itemReturnTypes.put(itemReturnType.getCode(), itemReturnType.toString());
+        }
         return itemReturnTypes;
     }
 
@@ -78,5 +78,18 @@ public class ItemsController {
         uiModel.asMap().clear();
         itemMasterService.update(item);
         return "redirect:/item/show/"+item.getItemCode();
+    }
+
+    @RequestMapping(value = "/list")
+    public ModelAndView list(@RequestParam( value = "selectedItemCode",defaultValue = "0",required = false) int selectedItemCode) {
+        List<Item> all = itemMasterService.getAll();
+        Collections.sort(all,new Comparator<Item>() {
+            @Override
+            public int compare(Item o1, Item o2) {
+                return o1.getItemName().compareToIgnoreCase(o2.getItemName());
+            }
+        });
+        new ItemList(selectedItemCode,all);
+        return new ModelAndView("item/list","itemList",new ItemList(selectedItemCode,all));
     }
 }

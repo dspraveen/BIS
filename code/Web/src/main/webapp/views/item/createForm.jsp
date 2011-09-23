@@ -23,11 +23,11 @@
         </div>
         <div class="section">
             <span class="left"><label>Item Type:</label></span
-            <span class="right"><form:select path="itemLife" items="${itemTypes}" />*</span>
+            <span class="right"><form:select path="itemLife" items="${itemTypes}" /></span>
         </div>
         <div class="section">
             <span class="left"><label>Item Returnable:</label></span
-            <span class="right"><form:select path="returnable" items="${itemReturnTypes}"/>*</span>
+            <span class="right"><form:select path="returnable" items="${itemReturnTypes}"/></span>
         </div>
         <div class="section">
             <span class="center"><input type="submit" value="Submit"/> <input type="reset" value="Clear"/></span>

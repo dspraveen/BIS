@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+        "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+
+    <definition name="vendor/show" extends="master">
+        <put-attribute name="main-content" value="/views/vendor/show.jsp"/>
+    </definition>
+
+    <definition name="vendor/createForm" extends="master">
+        <put-attribute name="main-content" value="/views/vendor/createForm.jsp"/>
+    </definition>
+
+    <definition name="vendor/updateForm" extends="master">
+        <put-attribute name="main-content" value="/views/vendor/updateForm.jsp"/>
+    </definition>
+
+    <definition name="vendor/list" extends="master">
+        <put-attribute name="main-content" value="/views/vendor/list.jsp"/>
+    </definition>
+
+</tiles-definitions>

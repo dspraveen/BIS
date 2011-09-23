@@ -6,7 +6,7 @@
   <h3>Master Menu</h3>
   <ul class="sidemenu">
     <li>
-      <a href="#">Add New Vendor</a>
+      <a href="/vendor/createForm">Add New Vendor</a>
     </li>
     <li>
       <a href="/item/createForm">Add New Item</a>
@@ -15,7 +15,7 @@
       <a href="#">Add New Hawker</a>
     </li>
     <li>
-      <a href="#">Vendor Details</a>
+      <a href="/vendor/list">Vendor Details</a>
     </li>
     <li>
       <a href="/item/list">Item Details</a>

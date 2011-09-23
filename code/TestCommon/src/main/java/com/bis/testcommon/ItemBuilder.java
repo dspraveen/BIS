@@ -10,7 +10,7 @@ public class ItemBuilder {
     }
 
     public ItemBuilder withDefaults(){
-       Item item = new Item("testName","old",'W','Y');
+        item = new Item("testName","old",'W','Y');
         item.setItemName("name");
         item.setDescription("description");
         item.setItemLife('W');

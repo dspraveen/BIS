@@ -20,32 +20,14 @@ import java.util.*;
 @RequestMapping("/item")
 public class ItemsController {
 
+    protected final Logger logger = Logger.getLogger(getClass());
+
     private ItemMasterService itemMasterService;
-
-    @ModelAttribute("itemTypes")
-    public Map<Character,String> itemTypes(){
-        Map<Character,String> itemCycles = new HashMap<Character,String>();
-        for(ItemCycle itemCycle: ItemCycle.values()){
-            itemCycles.put(itemCycle.getCode(), itemCycle.toString());
-        }
-        return itemCycles;
-    }
-
-    @ModelAttribute("itemReturnTypes")
-    public Map<Character,String> itemReturnTypes(){
-        Map<Character,String> itemReturnTypes = new HashMap<Character,String>();
-        for(ItemReturnType itemReturnType: ItemReturnType.values()){
-            itemReturnTypes.put(itemReturnType.getCode(), itemReturnType.toString());
-        }
-        return itemReturnTypes;
-    }
 
     @Autowired
     public ItemsController(ItemMasterService itemMasterService) {
          this.itemMasterService = itemMasterService;
     }
-
-    protected final Logger logger = Logger.getLogger(getClass());
 
     @RequestMapping(value = "/show/{id}",method = RequestMethod.GET)
     public ModelAndView show(@PathVariable("id") int itemCode) {
@@ -89,7 +71,24 @@ public class ItemsController {
                 return o1.getItemName().compareToIgnoreCase(o2.getItemName());
             }
         });
-        new ItemList(selectedItemCode,all);
         return new ModelAndView("item/list","itemList",new ItemList(selectedItemCode,all));
+    }
+
+    @ModelAttribute("itemTypes")
+    public Map<Character,String> itemTypes(){
+        Map<Character,String> itemCycles = new HashMap<Character,String>();
+        for(ItemCycle itemCycle: ItemCycle.values()){
+            itemCycles.put(itemCycle.getCode(), itemCycle.toString());
+        }
+        return itemCycles;
+    }
+
+    @ModelAttribute("itemReturnTypes")
+    public Map<Character,String> itemReturnTypes(){
+        Map<Character,String> itemReturnTypes = new HashMap<Character,String>();
+        for(ItemReturnType itemReturnType: ItemReturnType.values()){
+            itemReturnTypes.put(itemReturnType.getCode(), itemReturnType.toString());
+        }
+        return itemReturnTypes;
     }
 }

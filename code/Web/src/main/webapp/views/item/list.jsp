@@ -8,7 +8,7 @@
     }
 </script>
 <div>
-    <form method="GET" action="/item/list" id="item_list">
+    <form method="POST" action="/item/list" id="item_list">
         <c:if test="${itemList.count != '0'}">
             <h1>Item Details</h1>
                 <div class="section">

@@ -1,5 +1,8 @@
 package com.bis.domain;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+
 public class Vendor implements java.io.Serializable {
 
 	private Integer vendorId;
@@ -82,5 +85,15 @@ public class Vendor implements java.io.Serializable {
 	public void setAlternatePhone(String alternatePhone) {
 		this.alternatePhone = alternatePhone;
 	}
+
+    @Override
+    public int hashCode() {
+        return HashCodeBuilder.reflectionHashCode(this);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return EqualsBuilder.reflectionEquals(this, obj);
+    }
 
 }

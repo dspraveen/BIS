@@ -26,7 +26,7 @@ public class ItemRepositoryIntTest extends BaseIntTest {
         assertEquals(item, dbItem);
 
         dbItem.setDescription("new");
-        itemRepository.save(dbItem);
+        itemRepository.update(dbItem);
 
         Item updatedItem = itemRepository.get(dbItem.getItemCode());
         assertEquals("new", updatedItem.getDescription());

@@ -3,6 +3,7 @@ package com.bis.repository;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import java.io.Serializable;
+import java.util.List;
 
 public abstract class BaseRepository<T> extends HibernateDaoSupport {
 
@@ -26,6 +27,10 @@ public abstract class BaseRepository<T> extends HibernateDaoSupport {
 
     public void update(T object) {
         getHibernateTemplate().update(object);
+    }
+
+    public List<T> getAll(){
+        return getHibernateTemplate().loadAll(type);
     }
 
 }

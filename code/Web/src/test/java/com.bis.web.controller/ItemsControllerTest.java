@@ -4,6 +4,8 @@ import com.bis.core.services.ItemMasterService;
 import com.bis.domain.Item;
 import com.bis.domain.ItemCycle;
 import com.bis.domain.ItemReturnType;
+import com.bis.testcommon.ItemBuilder;
+import com.bis.web.viewmodel.ItemList;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
@@ -98,15 +101,18 @@ public class ItemsControllerTest {
 
     @Test
     public void shouldGetListOfItems() {
-        /*Item itemOne = new ItemBuilder().withDefaults().setName("pqr").build();
-        Item itemTwo = new ItemBuilder().withDefaults().setName("abc").build();
-        ArrayList<Item> itemList = new ArrayList<Item>();
-        itemList.add(itemOne);
-        itemList.add(itemTwo);
-        when(itemMasterService.getAll()).thenReturn(itemList);
-        List<Item> items = controller.list();
-        assertEquals(2, items.size());
-        assertEquals(itemTwo, items.get(0));
-        assertEquals(itemOne, items.get(1));*/
+        Item itemOne = new ItemBuilder().withDefaults().setItemCode(0).setName("pqr").build();
+        Item itemTwo = new ItemBuilder().withDefaults().setItemCode(1).setName("abc").build();
+        ArrayList<Item> items = new ArrayList<Item>();
+        items.add(itemOne);
+        items.add(itemTwo);
+        when(itemMasterService.getAll()).thenReturn(items);
+        ModelAndView modelAndView = controller.list(1);
+        ItemList itemList = (ItemList) modelAndView.getModel().get("itemList");
+        assertEquals(2, itemList.getItems().size());
+        assertEquals(1, itemList.getSelectedItemCode());
+        assertEquals(itemTwo, itemList.getItems().get(0));
+        assertEquals(itemOne, itemList.getItems().get(1));
+        assertEquals(itemTwo, itemList.getSelectedItem());
     }
 }

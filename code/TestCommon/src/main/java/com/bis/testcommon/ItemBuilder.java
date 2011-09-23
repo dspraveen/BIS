@@ -22,4 +22,9 @@ public class ItemBuilder {
         item.setItemName(name);
         return this;
     }
+
+    public ItemBuilder setItemCode(int itemCode) {
+        item.setItemCode(itemCode);
+        return this;
+    }
 }

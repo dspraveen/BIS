@@ -12,7 +12,7 @@
       <a href="/item/createForm">Add New Item</a>
     </li>
     <li>
-      <a href="#">Add New Hawker</a>
+      <a href="/hawker/createForm">Add New Hawker</a>
     </li>
     <li>
       <a href="/vendor/list">Vendor Details</a>
@@ -21,7 +21,7 @@
       <a href="/item/list">Item Details</a>
     </li>
     <li>
-      <a href="#">Hawker Details</a>
+      <a href="/hawker/list">Hawker Details</a>
     </li>
   </ul>
 </div>

@@ -13,18 +13,6 @@ public class ItemPrice implements java.io.Serializable {
 	public ItemPrice() {
 	}
 
-	public ItemPrice(int itemCode, float price, Date startDate) {
-		this.itemCode = itemCode;
-		this.price = price;
-		this.startDate = startDate;
-	}
-
-	public ItemPrice(int itemCode, float price, Date startDate, Date endTime) {
-		this.itemCode = itemCode;
-		this.price = price;
-		this.startDate = startDate;
-		this.endTime = endTime;
-	}
 
 	public Integer getPriceId() {
 		return this.priceId;

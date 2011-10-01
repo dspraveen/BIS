@@ -14,13 +14,7 @@ public class Item implements java.io.Serializable {
 	public Item() {
 	}
 
-	public Item(char itemLife, char returnable) {
-		this.itemLife = itemLife;
-		this.returnable = returnable;
-	}
-
-	public Item(String itemName, String description, char itemLife,
-			char returnable) {
+	public Item(String itemName, String description, char itemLife,char returnable) {
 		this.itemName = itemName;
 		this.description = description;
 		this.itemLife = itemLife;

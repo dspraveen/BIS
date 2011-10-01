@@ -7,27 +7,12 @@ public class StDetails implements java.io.Serializable {
 
 	private Integer detailsId;
 	private int transactionId;
-	private int itemCode;
 	private Date dateOfPublishing;
 	private Integer quantity;
 	private Float amount;
+    private Item item;
 
 	public StDetails() {
-	}
-
-	public StDetails(int transactionId, int itemCode, Date dateOfPublishing) {
-		this.transactionId = transactionId;
-		this.itemCode = itemCode;
-		this.dateOfPublishing = dateOfPublishing;
-	}
-
-	public StDetails(int transactionId, int itemCode, Date dateOfPublishing,
-			Integer quantity, Float amount) {
-		this.transactionId = transactionId;
-		this.itemCode = itemCode;
-		this.dateOfPublishing = dateOfPublishing;
-		this.quantity = quantity;
-		this.amount = amount;
 	}
 
 	public Integer getDetailsId() {
@@ -44,14 +29,6 @@ public class StDetails implements java.io.Serializable {
 
 	public void setTransactionId(int transactionId) {
 		this.transactionId = transactionId;
-	}
-
-	public int getItemCode() {
-		return this.itemCode;
-	}
-
-	public void setItemCode(int itemCode) {
-		this.itemCode = itemCode;
 	}
 
 	public Date getDateOfPublishing() {
@@ -78,4 +55,11 @@ public class StDetails implements java.io.Serializable {
 		this.amount = amount;
 	}
 
+    public Item getItem() {
+        return item;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
+    }
 }

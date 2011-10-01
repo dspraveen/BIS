@@ -1,6 +1,8 @@
 package com.bis.domain;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class ProcurementTransaction implements java.io.Serializable {
 
@@ -9,6 +11,7 @@ public class ProcurementTransaction implements java.io.Serializable {
 	private Date date;
 	private Character transactionType;
 	private Float totalAmount;
+    private List<PtDetails> transactionDetails = new ArrayList<PtDetails>();
 
 	public ProcurementTransaction() {
 	}
@@ -65,4 +68,11 @@ public class ProcurementTransaction implements java.io.Serializable {
 		this.totalAmount = totalAmount;
 	}
 
+    public List<PtDetails> getTransactionDetails() {
+        return transactionDetails;
+    }
+
+    public void setTransactionDetails(List<PtDetails> transactionDetails) {
+        this.transactionDetails = transactionDetails;
+    }
 }

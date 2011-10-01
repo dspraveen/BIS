@@ -19,5 +19,9 @@
         <property name="totalAmount" type="java.lang.Float">
             <column name="Total_Amount" precision="12" />
         </property>
+        <bag name="transactionDetails" cascade="all">
+            <key column="Transaction_ID" not-null="true"/>
+            <one-to-many class="com.bis.domain.StDetails"/>
+        </bag>
     </class>
 </hibernate-mapping>

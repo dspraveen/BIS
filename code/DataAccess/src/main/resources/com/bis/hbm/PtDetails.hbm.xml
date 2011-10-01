@@ -7,12 +7,10 @@
             <column name="Details_ID" />
             <generator class="identity" />
         </id>
-        <property name="transactionId" type="int">
-            <column name="Transaction_ID" not-null="true" />
+        <property name="transactionId" type="int" insert="false" update="false">
+            <column name="Transaction_ID" not-null="true"/>
         </property>
-        <property name="itemCode" type="int">
-            <column name="Item_Code" not-null="true" />
-        </property>
+        <many-to-one name="item" class="com.bis.domain.Item" column="Item_Code" cascade="none" not-null="true" lazy="false"/>
         <property name="dateOfPublishing" type="timestamp">
             <column name="Date_Of_Publishing" length="19" not-null="true" />
         </property>

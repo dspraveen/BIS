@@ -32,6 +32,5 @@ public abstract class BaseRepository<T> extends HibernateDaoSupport {
     public List<T> getAll(){
         return getHibernateTemplate().loadAll(type);
     }
-
 }
 

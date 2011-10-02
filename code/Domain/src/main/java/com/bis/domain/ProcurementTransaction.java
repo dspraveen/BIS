@@ -75,4 +75,13 @@ public class ProcurementTransaction implements java.io.Serializable {
     public void setTransactionDetails(List<PtDetails> transactionDetails) {
         this.transactionDetails = transactionDetails;
     }
+
+    public void calculateAndSetTotalAmount() {
+        List<PtDetails> transactionDetails = this.getTransactionDetails();
+        float totalAmount = 0;
+        for (PtDetails details : transactionDetails) {
+            totalAmount += details.getAmount();
+        }
+        this.setTotalAmount(totalAmount);
+    }
 }

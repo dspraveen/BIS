@@ -5,6 +5,7 @@ import com.bis.domain.SalesTransaction;
 import com.bis.domain.StDetails;
 import com.bis.sales.repository.SalesRepository;
 
+import java.util.Date;
 import java.util.List;
 
 public class SalesServiceImpl implements SalesService {
@@ -30,5 +31,9 @@ public class SalesServiceImpl implements SalesService {
     @Override
     public SalesTransaction getSalesTransaction(int transactionId) {
         return salesRepository.get(transactionId);
+    }
+    @Override
+    public List<SalesTransaction> getSalesTransactions(Date fromDate, Date toDate){
+        return salesRepository.getSalesTransactions(fromDate, toDate);
     }
 }

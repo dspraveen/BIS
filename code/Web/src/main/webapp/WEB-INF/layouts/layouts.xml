@@ -18,7 +18,7 @@
        <put-attribute name="context-menu" value="/views/procurementMenu.jsp"/>
     </definition>
 
-    <definition name="sales" extends="default">
+    <definition name="services" extends="default">
        <put-attribute name="context-menu" value="/views/salesMenu.jsp"/>
     </definition>
 

@@ -3,12 +3,14 @@ package com.bis.web.controller;
 
 import com.bis.common.DateUtils;
 import com.bis.domain.SalesTransaction;
+import com.bis.domain.SalesTransactionType;
 import com.bis.sales.services.SalesService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,6 +18,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/sales")
@@ -62,5 +66,14 @@ public class SalesController {
         uiModel.asMap().clear();
         salesService.updateSalesTransaction(salesTransaction);
         return "redirect:/sales/show/"+salesTransaction.getTransactionId();
+    }
+
+    @ModelAttribute("salesTransactionType")
+    public Map<Character,String> salesTransactionType(){
+        Map<Character,String> salesTransactionTypes = new HashMap<Character,String>();
+        for(SalesTransactionType salesTransactionType: SalesTransactionType.values()){
+            salesTransactionTypes.put(salesTransactionType.getCode(), salesTransactionType.toString());
+        }
+        return salesTransactionTypes;
     }
 }

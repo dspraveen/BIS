@@ -1,6 +1,7 @@
 package com.bis.web.controller;
 
 
+import com.bis.common.DateUtils;
 import com.bis.domain.SalesTransaction;
 import com.bis.sales.services.SalesService;
 import org.apache.log4j.Logger;
@@ -17,7 +18,7 @@ import javax.validation.Valid;
 import java.util.Calendar;
 
 @Controller
-@RequestMapping("/Sales")
+@RequestMapping("/sales")
 public class SalesController {
 
     protected final Logger logger = Logger.getLogger(getClass());
@@ -32,34 +33,34 @@ public class SalesController {
     @RequestMapping(value = "/show/{id}",method = RequestMethod.GET)
     public ModelAndView show(@PathVariable("id") int transactionId) {
         SalesTransaction salesTransaction = salesService.getSalesTransaction(transactionId);
-        return new ModelAndView("Sales/show", "SalesTransaction", salesTransaction);
+        return new ModelAndView("sales/show", "SalesTransaction", salesTransaction);
     }
 
     @RequestMapping(value = "/createForm",method = RequestMethod.GET)
     public ModelAndView createForm() {
         SalesTransaction salesTransaction = new SalesTransaction();
         salesTransaction.setTransactionType('S');
-        salesTransaction.setDate(Calendar.getInstance().getTime());
-        return new ModelAndView("Sales/createForm", "SalesTransaction", salesTransaction);
+        salesTransaction.setDate(DateUtils.currentDate());
+        return new ModelAndView("sales/createForm", "SalesTransaction", salesTransaction);
     }
 
     @RequestMapping(value = "/updateForm/{id}",method = RequestMethod.GET)
     public ModelAndView updateForm(@PathVariable("id") int transactionId) {
         SalesTransaction salesTransaction = salesService.getSalesTransaction(transactionId);
-        return new ModelAndView("Sales/updateForm", "SalesTransaction", salesTransaction);
+        return new ModelAndView("sales/updateForm", "SalesTransaction", salesTransaction);
     }
 
     @RequestMapping(value = "/addSalesTransaction",method = RequestMethod.POST)
     public String addSalesTransaction(@Valid SalesTransaction salesTransaction, BindingResult bindingResult, Model uiModel) {
         uiModel.asMap().clear();
         salesService.addSalesTransaction(salesTransaction);
-        return "redirect:/Sales/show/"+salesTransaction.getTransactionId();
+        return "redirect:/sales/show/"+salesTransaction.getTransactionId();
     }
 
     @RequestMapping(value = "/updateSalesTransaction",method = RequestMethod.POST)
     public String updateSalesTransaction(@Valid SalesTransaction salesTransaction, BindingResult bindingResult, Model uiModel) {
         uiModel.asMap().clear();
         salesService.updateSalesTransaction(salesTransaction);
-        return "redirect:/Sales/show/"+salesTransaction.getTransactionId();
+        return "redirect:/sales/show/"+salesTransaction.getTransactionId();
     }
 }

@@ -8,6 +8,10 @@ import java.util.Date;
 import java.util.List;
 
 public class SalesBillingServiceImpl implements SalesBillingService, SalesPaymentService{
+    public SalesBillingServiceImpl(SalesPaymentRepository salesPaymentRepository, SalesBillingRepository salesBillingRepository) {
+        this.salesPaymentRepository = salesPaymentRepository;
+        this.salesBillingRepository = salesBillingRepository;
+    }
 
     private SalesPaymentRepository salesPaymentRepository;
     private SalesBillingRepository salesBillingRepository;

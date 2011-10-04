@@ -2,7 +2,6 @@ package com.bis.sales.repository;
 
 
 import com.bis.domain.SalesTransaction;
-import com.bis.domain.SalesTransaction;
 import com.bis.repository.BaseRepository;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -20,7 +19,7 @@ public class SalesRepository extends BaseRepository<SalesTransaction>{
         setSessionFactory(sessionFactory);
     }
 
- public List<SalesTransaction> getSalesTransactions(Date fromDate, Date toDate){
+    public List<SalesTransaction> getSalesTransactions(Date fromDate, Date toDate){
         return getSession().createCriteria(SalesTransaction.class)
                 .add(Restrictions.ge("date", fromDate))
                 .add(Restrictions.le("date", toDate)).list();

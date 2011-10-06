@@ -11,4 +11,6 @@ public interface ItemMasterService {
     void update(Item item);
     Item get(int itemCode);
     List<Item> getAll();
+    float setItemPrice(int itemCode, float price);
+    float getItemPrice(int itemCode);
 }

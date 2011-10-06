@@ -5,6 +5,7 @@ import com.bis.domain.Item;
 import com.bis.domain.ItemCycle;
 import com.bis.domain.ItemReturnType;
 import com.bis.web.viewmodel.ItemList;
+import com.bis.web.viewmodel.ItemViewForm;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,7 +33,8 @@ public class ItemsController {
     @RequestMapping(value = "/show/{id}",method = RequestMethod.GET)
     public ModelAndView show(@PathVariable("id") int itemCode) {
         Item item= itemMasterService.get(itemCode);
-        return new ModelAndView("item/show", "item", item);
+        float itemPrice = itemMasterService.getItemPrice(item.getItemCode());
+        return new ModelAndView("item/show", "itemForm", new ItemViewForm(item,itemPrice));
     }
 
     @RequestMapping(value = "/createForm",method = RequestMethod.GET)
@@ -40,25 +42,30 @@ public class ItemsController {
         Item item = new Item();
         item.setReturnable('Y');
         item.setItemLife('W');
-        return new ModelAndView("item/createForm", "item", item);
+        return new ModelAndView("item/createForm", "itemForm", new ItemViewForm(item,0f));
     }
     @RequestMapping(value = "/updateForm/{id}",method = RequestMethod.GET)
     public ModelAndView updateForm(@PathVariable("id") int itemCode) {
         Item item= itemMasterService.get(itemCode);
-        return new ModelAndView("item/updateForm", "item", item);
+        float itemPrice = itemMasterService.getItemPrice(item.getItemCode());
+        return new ModelAndView("item/updateForm", "itemForm", new ItemViewForm(item,itemPrice));
     }
 
     @RequestMapping(value = "/create",method = RequestMethod.POST)
-    public String create(@Valid Item item, BindingResult bindingResult, Model uiModel) {
+    public String create(@Valid ItemViewForm itemForm, BindingResult bindingResult, Model uiModel) {
         uiModel.asMap().clear();
+        Item item = itemForm.getItem();
         itemMasterService.create(item);
+        itemMasterService.setItemPrice(item.getItemCode(),itemForm.getItemPrice());
         return "redirect:/item/show/"+item.getItemCode();
     }
 
     @RequestMapping(value = "/update",method = RequestMethod.POST)
-    public String update(@Valid Item item, BindingResult bindingResult, Model uiModel) {
+    public String update(@Valid ItemViewForm itemForm, BindingResult bindingResult, Model uiModel) {
         uiModel.asMap().clear();
+        Item item = itemForm.getItem();
         itemMasterService.update(item);
+        itemMasterService.setItemPrice(item.getItemCode(),itemForm.getItemPrice());
         return "redirect:/item/show/"+item.getItemCode();
     }
 
@@ -71,7 +78,15 @@ public class ItemsController {
                 return o1.getItemName().compareToIgnoreCase(o2.getItemName());
             }
         });
-        return new ModelAndView("item/list","itemList",new ItemList(selectedItemCode,all));
+        List<ItemViewForm>  itemViewForms = new ArrayList<ItemViewForm>();
+        for (Item item : all) {
+            float itemPrice=0f;
+            if(selectedItemCode == item.getItemCode()){
+                itemPrice = itemMasterService.getItemPrice(item.getItemCode());
+            }
+            itemViewForms.add(new ItemViewForm(item,itemPrice));
+        }
+        return new ModelAndView("item/list","itemList",new ItemList(selectedItemCode,itemViewForms));
     }
 
     @ModelAttribute("itemTypes")

@@ -5,6 +5,7 @@ import com.bis.domain.ProcurementTransaction;
 import com.bis.domain.ProcurementTransactionType;
 import com.bis.pt.services.ProcurementTransactionService;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,6 +27,7 @@ public class ProcurementController {
 
     private ProcurementTransactionService procurementTransactionService;
 
+    @Autowired
     public ProcurementController(ProcurementTransactionService procurementTransactionService){
         this.procurementTransactionService = procurementTransactionService;
     }

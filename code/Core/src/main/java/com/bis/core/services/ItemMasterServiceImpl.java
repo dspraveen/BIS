@@ -36,4 +36,14 @@ public class ItemMasterServiceImpl implements ItemMasterService{
     public List<Item> getAll() {
         return itemRepository.getAll();
     }
+
+    @Override
+    public float setItemPrice(int itemCode, float price) {
+        return itemRepository.setItemPrice(itemCode,price);
+    }
+
+    @Override
+    public float getItemPrice(int itemCode) {
+        return itemRepository.getPrice(itemCode);
+    }
 }

@@ -51,4 +51,20 @@ public class ItemMasterServiceImplTest {
         Mockito.when(itemRepository.getAll()).thenReturn(items);
         Assert.assertEquals(items,itemMasterService.getAll());
     }
+
+    @Test
+    public void shouldSetItemPrice(){
+        int  itemCode = 101;
+        float price = 10f;
+        Mockito.when(itemRepository.setItemPrice(itemCode, price)).thenReturn(price);
+        Assert.assertTrue(price==itemMasterService.setItemPrice(itemCode, price));
+    }
+
+    @Test
+    public void shouldGetItemPrice(){
+        int  itemCode = 101;
+        float price = 10f;
+        Mockito.when(itemRepository.getPrice(itemCode)).thenReturn(price);
+        Assert.assertTrue(price==itemMasterService.getItemPrice(itemCode));
+    }
 }

@@ -1,7 +1,6 @@
 package com.bis.core.repository;
 
 import com.bis.domain.Item;
-import com.bis.domain.ItemPrice;
 import com.bis.testcommon.BaseIntTest;
 import com.bis.testcommon.ItemBuilder;
 import junit.framework.Assert;
@@ -10,9 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class ItemRepositoryIntTest extends BaseIntTest {
 
@@ -52,16 +49,20 @@ public class ItemRepositoryIntTest extends BaseIntTest {
 
     @Test
     public void shouldSetItemPrice(){
-        ItemPrice itemPrice = itemRepository.setItemPrice(48, 12);
-        ItemPrice newItemPrice = itemRepository.setItemPrice(48, 24);
-        Assert.assertEquals(24f,newItemPrice.getPrice());
+        Item item = new ItemBuilder().withDefaults().build();
+        itemRepository.save(item);
+        itemRepository.setItemPrice(item.getItemCode(), 12);
+        float updatedPrice = itemRepository.setItemPrice(item.getItemCode(), 24);
+        Assert.assertEquals(24f,updatedPrice);
     }
 
     @Test
     public void shouldGetItemPrice(){
-        itemRepository.setItemPrice(48, 24);
-        ItemPrice newItemPrice = itemRepository.getPrice(48);
-        Assert.assertEquals(24f,newItemPrice.getPrice());
+        Item item = new ItemBuilder().withDefaults().build();
+        itemRepository.save(item);
+        itemRepository.setItemPrice(item.getItemCode(), 24);
+        float price = itemRepository.getPrice(item.getItemCode());
+        Assert.assertEquals(24f,price);
     }
 
 }

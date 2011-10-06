@@ -2,16 +2,19 @@ package com.bis.sales.services;
 
 
 import com.bis.domain.SalesTransaction;
-import com.bis.domain.StDetails;
 import com.bis.sales.repository.SalesRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
 
+@Service
 public class SalesServiceImpl implements SalesService {
 
     private SalesRepository salesRepository;
 
+    @Autowired
     public SalesServiceImpl(SalesRepository salesRepository) {
         this.salesRepository = salesRepository;
     }

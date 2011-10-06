@@ -4,9 +4,8 @@
  */
 package com.bis.inventory.repository;
 
-import com.bis.repository.BaseRepository;
 import com.bis.domain.Stock;
-
+import com.bis.repository.BaseRepository;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +15,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Date;
 import java.util.List;
 
+@Repository
 public class StockRepository extends BaseRepository<Stock> {
     @Autowired
     public StockRepository(@Qualifier("sessionFactory") SessionFactory sessionFactory) {

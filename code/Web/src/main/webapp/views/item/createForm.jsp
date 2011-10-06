@@ -11,23 +11,27 @@
         return true;
     }
 </script>
-<form:form commandName="item" method="POST" action="create"  onsubmit="return validateForm();">
+<form:form commandName="itemForm" method="POST" action="create"  onsubmit="return validateForm();">
     <div>
         <div class="section">
             <span class="left"><label>Item Name:</label></span
-            <span class="right"><form:input path="itemName" class="item_name"/>*</span>
+            <span class="right"><form:input path="item.itemName" class="item_name"/>*</span>
         </div>
         <div class="section">
             <span class="left"><label>Item Description:</label></span
-            <span class="right"><form:input path="description" /></span>
+            <span class="right"><form:input path="item.description" /></span>
+        </div>
+        <div class="section">
+            <span class="left"><label>Item Price:</label></span
+            <span class="right"><form:input path="itemPrice" /></span>
         </div>
         <div class="section">
             <span class="left"><label>Item Type:</label></span
-            <span class="right"><form:select path="itemLife" items="${itemTypes}" /></span>
+            <span class="right"><form:select path="item.itemLife" items="${itemTypes}" /></span>
         </div>
         <div class="section">
             <span class="left"><label>Item Returnable:</label></span
-            <span class="right"><form:select path="returnable" items="${itemReturnTypes}"/></span>
+            <span class="right"><form:select path="item.returnable" items="${itemReturnTypes}"/></span>
         </div>
         <div class="section">
             <span class="center"><input type="submit" value="Submit"/> <input type="reset" value="Clear"/></span>

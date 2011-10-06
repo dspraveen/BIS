@@ -6,14 +6,14 @@
     <h1>Item Details</h1>
     <div class="section">
         <span class="left"><label>Item Name:</label></span
-        <span class="right"><label>${item.itemName}</label></span>
+        <span class="right"><label>${itemForm.item.itemName}</label></span>
     </div>
     <div class="section">
         <span class="left"><label>Item Description:</label></span>
         <span class="right"><label>
           <c:choose>
-            <c:when test="${item.description != ''}">
-                ${item.description}
+            <c:when test="${itemForm.item.description != ''}">
+                ${itemForm.item.description}
             </c:when>
             <c:otherwise>
                 Not Provided
@@ -22,14 +22,18 @@
         </label></span>
     </div>
     <div class="section">
+        <span class="left"><label>Item Price:</label></span
+        <span class="right"><label>${itemForm.itemPrice}</label></span>
+    </div>
+    <div class="section">
         <span class="left"><label>Item Type:</label></span
-        <span class="right"><label>${item.itemLife}</label></span>
+        <span class="right"><label>${itemForm.item.itemLife}</label></span>
     </div>
     <div class="section">
         <span class="left"><label>Item Returnable:</label></span
-        <span class="right"><label>${item.returnable}</label></span>
+        <span class="right"><label>${itemForm.item.returnable}</label></span>
     </div>
     <div class="section">
-        <span class="left"><a href="/item/updateForm/${item.itemCode}">Update Item</a></span>
+        <span class="left"><a href="/item/updateForm/${itemForm.item.itemCode}">Update Item</a></span>
     </div>
 </div>

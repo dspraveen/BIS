@@ -2,14 +2,18 @@ package com.bis.pt.services;
 
 import com.bis.domain.ProcurementTransaction;
 import com.bis.pt.repository.ProcurementTransactionRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
 
+@Service
 public class  ProcurementTransactionServiceImpl implements ProcurementTransactionService{
 
     private ProcurementTransactionRepository procurementTransactionRepository;
 
+    @Autowired
     public ProcurementTransactionServiceImpl(ProcurementTransactionRepository procurementTransactionRepository){
         this.procurementTransactionRepository = procurementTransactionRepository;
     }

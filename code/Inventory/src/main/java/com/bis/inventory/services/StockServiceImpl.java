@@ -3,14 +3,18 @@ package com.bis.inventory.services;
 
 import com.bis.domain.Stock;
 import com.bis.inventory.repository.StockRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
 
+@Service
 public class StockServiceImpl implements StockService{
 
-    StockRepository stockRepository;
+    private StockRepository stockRepository;
 
+    @Autowired
     public StockServiceImpl(StockRepository stockRepository) {
         this.stockRepository = stockRepository;
     }

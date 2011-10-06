@@ -14,7 +14,7 @@
                 <div class="section">
                     <span class="left"><label>Select Item:</label></span
                     <span class="right">
-                        <form:select path="itemList.selectedItemCode" items="${itemList.items}" itemValue="itemCode" itemLabel="itemName" onChange="submitForm();"/>
+                        <form:select path="itemList.selectedItemCode" items="${itemList.itemNames}" onChange="submitForm();"/>
                     </span>
                 </div>
                 <div class="section">
@@ -33,6 +33,10 @@
                             </c:otherwise>
                         </c:choose>
                     </label></span>
+                </div>
+                <div class="section">
+                    <span class="left"><label>Item Price:</label></span
+                    <span class="right"><label>${itemList.selectedItemPrice}</label></span>
                 </div>
                 <div class="section">
                     <span class="left"><label>Item Type:</label></span

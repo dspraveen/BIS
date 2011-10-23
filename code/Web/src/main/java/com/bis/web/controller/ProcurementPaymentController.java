@@ -3,8 +3,9 @@ package com.bis.web.controller;
 import com.bis.common.DateUtils;
 import com.bis.domain.PaymentHistoryProcurement;
 import com.bis.domain.PaymentMode;
-import com.bis.pb.services.ProcurementPaymentService;
+import com.bis.procurement.services.ProcurementPaymentService;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,8 +18,8 @@ import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
 
-/*@Controller
-@RequestMapping("/procurementPayment")*/
+@Controller
+@RequestMapping("/procurementPayment")
 public class ProcurementPaymentController {
 
     protected final Logger logger = Logger.getLogger(getClass());

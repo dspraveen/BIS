@@ -3,8 +3,9 @@ package com.bis.web.controller;
 import com.bis.common.DateUtils;
 import com.bis.domain.PaymentHistorySales;
 import com.bis.domain.PaymentMode;
-import com.bis.sb.services.SalesPaymentService;
+import com.bis.sales.services.SalesBillingService;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -23,17 +24,17 @@ public class SalesPaymentController{
 
     protected final Logger logger = Logger.getLogger(getClass());
 
-    private SalesPaymentService salesPaymentService;
+    private SalesBillingService salesBillingService;
 
-//    @Autowired
-    public SalesPaymentController(SalesPaymentService salesPaymentService) {
-        this.salesPaymentService = salesPaymentService;
+    @Autowired
+    public SalesPaymentController(SalesBillingService salesBillingService) {
+        this.salesBillingService = salesBillingService;
     }
 
     @RequestMapping(value = "/show/{id}",method = RequestMethod.GET)
     public ModelAndView show(@PathVariable("id") int paymentId) {
-        PaymentHistorySales paymentHistorySales = salesPaymentService.getSalesPayment(paymentId);
-        return new ModelAndView("salesPayment/show", "PaymentHistorySales", salesPaymentService);
+        PaymentHistorySales paymentHistorySales = salesBillingService.getSalesPayment(paymentId);
+        return new ModelAndView("salesPayment/show", "PaymentHistorySales", paymentHistorySales);
     }
 
     @RequestMapping(value = "/createForm",method = RequestMethod.GET)
@@ -46,21 +47,21 @@ public class SalesPaymentController{
 
     @RequestMapping(value = "/updateForm/{id}",method = RequestMethod.GET)
     public ModelAndView updateForm(@PathVariable("id") int paymentId) {
-        PaymentHistorySales paymentHistorySales = salesPaymentService.getSalesPayment(paymentId);
+        PaymentHistorySales paymentHistorySales = salesBillingService.getSalesPayment(paymentId);
         return new ModelAndView("salesPayment/updateForm", "PaymentHistorySales", paymentHistorySales);
     }
 
     @RequestMapping(value = "/addSalesPayment",method = RequestMethod.POST)
     public String addSalesPayment(@Valid PaymentHistorySales paymentHistorySales, BindingResult bindingResult, Model uiModel) {
         uiModel.asMap().clear();
-        salesPaymentService.addSalesPayment(paymentHistorySales);
+        salesBillingService.addSalesPayment(paymentHistorySales);
         return "redirect:/salesPayment/show/"+paymentHistorySales.getPaymentId();
     }
 
     @RequestMapping(value = "/updateSalesPayment",method = RequestMethod.POST)
     public String updateSalesPayment(@Valid PaymentHistorySales paymentHistorySales, BindingResult bindingResult, Model uiModel) {
         uiModel.asMap().clear();
-        salesPaymentService.updateSalesPayment(paymentHistorySales);
+        salesBillingService.updateSalesPayment(paymentHistorySales);
         return "redirect:/salesPayment/show/" + paymentHistorySales.getPaymentId();
     }
 

@@ -5,6 +5,7 @@ import com.bis.domain.PaymentHistoryProcurement;
 import com.bis.domain.PaymentMode;
 import com.bis.procurement.services.ProcurementPaymentService;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,7 +27,7 @@ public class ProcurementPaymentController {
 
     private ProcurementPaymentService procurementPaymentService;
 
-//    @Autowired
+    @Autowired
     public ProcurementPaymentController(ProcurementPaymentService procurementPaymentService) {
         this.procurementPaymentService = procurementPaymentService;
     }

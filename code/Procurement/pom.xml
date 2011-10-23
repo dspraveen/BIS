@@ -28,11 +28,6 @@
         </dependency>
         <dependency>
             <groupId>com.bis.project</groupId>
-            <artifactId>procurement-transactions</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.bis.project</groupId>
             <artifactId>test-bis-common</artifactId>
             <version>1.0</version>
             <scope>test</scope>

@@ -7,25 +7,13 @@ import java.util.List;
 public class ProcurementTransaction implements java.io.Serializable {
 
 	private Integer transactionId;
-	private int vendorId;
+	private Vendor vendor = new Vendor();
 	private Date date;
 	private Character transactionType;
 	private Float totalAmount;
     private List<PtDetails> transactionDetails = new ArrayList<PtDetails>();
 
 	public ProcurementTransaction() {
-	}
-
-	public ProcurementTransaction(int vendorId) {
-		this.vendorId = vendorId;
-	}
-
-	public ProcurementTransaction(int vendorId, Date date,
-			Character transactionType, Float totalAmount) {
-		this.vendorId = vendorId;
-		this.date = date;
-		this.transactionType = transactionType;
-		this.totalAmount = totalAmount;
 	}
 
 	public Integer getTransactionId() {
@@ -36,15 +24,15 @@ public class ProcurementTransaction implements java.io.Serializable {
 		this.transactionId = transactionId;
 	}
 
-	public int getVendorId() {
-		return this.vendorId;
-	}
+    public Vendor getVendor() {
+        return vendor;
+    }
 
-	public void setVendorId(int vendorId) {
-		this.vendorId = vendorId;
-	}
+    public void setVendor(Vendor vendor) {
+        this.vendor = vendor;
+    }
 
-	public Date getDate() {
+    public Date getDate() {
 		return this.date;
 	}
 

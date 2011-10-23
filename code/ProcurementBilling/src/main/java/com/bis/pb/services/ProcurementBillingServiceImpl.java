@@ -8,11 +8,13 @@ import com.bis.pb.repository.ProcurementPaymentRepository;
 import java.util.Date;
 import java.util.List;
 
+//@Service
 public class ProcurementBillingServiceImpl implements ProcurementBillingService, ProcurementPaymentService{
 
     private ProcurementBillingRepository procurementBillingRepository;
     private ProcurementPaymentRepository procurementPaymentRepository;
 
+//    @Autowired
     public ProcurementBillingServiceImpl(ProcurementPaymentRepository procurementPaymentRepository, ProcurementBillingRepository procurementBillingRepository) {
         this.procurementPaymentRepository = procurementPaymentRepository;
         this.procurementBillingRepository = procurementBillingRepository;

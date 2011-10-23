@@ -5,8 +5,6 @@ import com.bis.domain.PaymentHistorySales;
 import com.bis.domain.PaymentMode;
 import com.bis.sb.services.SalesPaymentService;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -19,15 +17,15 @@ import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
 
-@Controller
-@RequestMapping("/salesPayment")
+/*@Controller
+@RequestMapping("/salesPayment")*/
 public class SalesPaymentController{
 
     protected final Logger logger = Logger.getLogger(getClass());
 
     private SalesPaymentService salesPaymentService;
 
-    @Autowired
+//    @Autowired
     public SalesPaymentController(SalesPaymentService salesPaymentService) {
         this.salesPaymentService = salesPaymentService;
     }

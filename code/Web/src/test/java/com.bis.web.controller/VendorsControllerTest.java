@@ -10,10 +10,12 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -106,5 +108,15 @@ public class VendorsControllerTest {
         assertEquals(vendorTwo, vendorList.getVendors().get(0));
         assertEquals(vendorOne, vendorList.getVendors().get(1));
         assertEquals(vendorTwo, vendorList.getSelectedVendor());
+    }
+
+    @Test
+    public void shouldGetItemPriceJson() throws IOException {
+        MockHttpServletResponse response = new MockHttpServletResponse();
+        Vendor vendor = new Vendor();
+        vendor.setVendorDiscount(10f);
+        when(vendorMasterService.get(1)).thenReturn(vendor);
+        controller.getVendorDiscount(1,response);
+        Assert.assertEquals("{\"discount\":10.0}",response.getContentAsString());
     }
 }

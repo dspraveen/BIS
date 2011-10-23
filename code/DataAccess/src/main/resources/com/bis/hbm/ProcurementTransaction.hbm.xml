@@ -2,14 +2,12 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="com.bis.domain.ProcurementTransaction" table="procurement_transaction" catalog="BIS">
+    <class name="com.bis.domain.ProcurementTransaction" table="procurement_transaction" catalog="BIS" lazy="false">
         <id name="transactionId" type="java.lang.Integer">
             <column name="Transaction_ID" />
             <generator class="identity" />
         </id>
-        <property name="vendorId" type="int">
-            <column name="Vendor_ID" not-null="true" />
-        </property>
+        <many-to-one name="vendor" class="com.bis.domain.Vendor" column="Vendor_ID" cascade="none" not-null="true" lazy="false"/>
         <property name="date" type="timestamp">
             <column name="Date" length="19" />
         </property>
@@ -19,7 +17,7 @@
         <property name="totalAmount" type="java.lang.Float">
             <column name="Total_Amount" precision="12" />
         </property>
-        <bag name="transactionDetails" cascade="all">
+        <bag name="transactionDetails" cascade="all" lazy="false">
             <key column="Transaction_ID" not-null="true"/>
             <one-to-many class="com.bis.domain.PtDetails"/>
         </bag>

@@ -111,8 +111,7 @@ tr {
 td {
 	padding-left: 11px;
 	padding-right: 11px;
-	border-left: 1px solid #E8E8E8;
-	border-bottom: 1px solid #DFDFDF;
+	height:50px;
 }
 td.first,th.first {
 	border-left: 0px;
@@ -164,7 +163,7 @@ input.button {
 ------------------------------------------- */ 
 #wrap {
 	position: relative;
-	width: 830px;
+	width: 1500px;
 	margin: 0 auto;
 	text-align: left;
 	border-right: 1px solid #FFF;
@@ -174,15 +173,14 @@ input.button {
 	position: relative;
 	clear: both;
 	float: left;	
-	width: 830px;	
+	width: 100%;
 	padding: 0; 	
-	border-bottom: 2px solid #FFF;
-	background: #F2EFBA url(/images/contentbg.jpg) repeat-y center top;	
+	background-color:#FFFFC6;
 	display: inline;
 	min-height: 600px;
 }
 #header {
-	width: 830px;
+	width: 100%;
 	position: relative;
 	height: 104px;
 	background: #FFF url(/images/headerbg.jpg) repeat-x;
@@ -236,9 +234,9 @@ input.button {
 	position: relative;
 	clear: both;	
 	padding: 0;		
-	width: 830px;
+	width: 100%;
 	margin: 0 auto;	
-	background: url(/images/menubg.jpg) repeat-x;
+	background-color:#674C2C;
 	height: 52px;
 }
 #nav #light-brown-line {
@@ -248,11 +246,11 @@ input.button {
 	top: 0; left: 0;
 }
 #nav ul {
-	position: absolute;
 	list-style: none;
 	text-transform: uppercase;
-	padding: 0;	margin: 0;	
-	right: 0; bottom: 0;
+	padding: 0;
+	margin: 0 0 0 10px;
+	float:left;
 }
 #nav ul li {
 	display: inline;
@@ -280,10 +278,11 @@ input.button {
 
 /* Main Column */
 #main {
-	float: right;
+	float: left;
 	width: 68%;
-	padding: 0; margin: 10px 10px 0 0;
-	display: inline;	
+	padding: 0; margin: 30px 10px 0 30px;
+	display: inline;
+    min-height: 600px;
 }
 #main h2 {
 	margin-top: 10px;
@@ -304,10 +303,12 @@ input.button {
 /* Sidebar */	
 #sidebar {
 	float: left;
-	width: 25.5%;
+	width: 14.8%;
 	padding: 0; 
-	margin: 22px 0 0 15px;		
-	display: inline; 
+	margin-left: 15px;
+	border-right: 2px solid;
+	display: inline;
+	min-height: 610px;
 }	
 #sidebar h3 {
 	margin-top: 10px;
@@ -397,10 +398,10 @@ input.button {
 
 /* footer*/
 #footer {
-	 background: url("/images/bg.jpg") repeat scroll -30px 10px transparent;
+	background-color: #674C2C;
 	clear: both;
 	color: #FFF;	
-	width: 830px;
+	width: 100%;
 	padding: 5px 0 15px 0;
 	text-align: center;
 }

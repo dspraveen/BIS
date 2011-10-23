@@ -7,6 +7,7 @@ import com.bis.sb.repository.SalesPaymentRepository;
 import java.util.Date;
 import java.util.List;
 
+//@Service
 public class SalesBillingServiceImpl implements SalesBillingService, SalesPaymentService{
     public SalesBillingServiceImpl(SalesPaymentRepository salesPaymentRepository, SalesBillingRepository salesBillingRepository) {
         this.salesPaymentRepository = salesPaymentRepository;

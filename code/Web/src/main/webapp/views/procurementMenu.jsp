@@ -6,7 +6,7 @@
   <h3>Procurement Menu</h3>
   <ul class="sidemenu">
     <li>
-      <a href="#">New Transaction</a>
+      <a href="/procurement/createForm">New Transaction</a>
     </li>
     <li>
       <a href="#">Transaction Details</a>

@@ -12,10 +12,12 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -124,5 +126,13 @@ public class ItemsControllerTest {
         assertEquals(itemTwo.getItemName(), itemList.getItemNames().get(itemTwo.getItemCode()));
         assertEquals(itemOne.getItemName(), itemList.getItemNames().get(itemOne.getItemCode()));
         assertEquals(itemTwo, itemList.getSelectedItem());
+    }
+
+    @Test
+    public void shouldGetItemPriceJson() throws IOException {
+        MockHttpServletResponse response = new MockHttpServletResponse();
+        when(itemMasterService.getItemPrice(1)).thenReturn(10f);
+        controller.getItemPrice(1,response);
+        Assert.assertEquals("{\"price\":10.0}",response.getContentAsString());
     }
 }

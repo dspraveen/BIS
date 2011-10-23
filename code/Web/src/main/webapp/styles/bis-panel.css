@@ -6,10 +6,35 @@
     margin-left : 100px;
 }
 .left {
-	float:left;
-	width:30%
+    float:left;
+    width:30%
 }.
 .right {
-	float:left;
-	width:70%
+    float:left;
+    width:70%
+}
+
+.item_select{
+}
+
+.item_name{
+    width:200px;
+}
+.date_of_publish{
+    width:150px;
+}
+.mrp{
+    width:70px;
+}
+.discount{
+    width:70px;
+}
+.price_per_item{
+    width:70px;
+}
+.qty{
+    width:70px;
+}
+.total{
+    width:70px;
 }

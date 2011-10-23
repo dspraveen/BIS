@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+        "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+    <definition name="procurement/createForm" extends="master">
+        <put-attribute name="main-content" value="/views/procurement/newTransaction.jsp"/>
+    </definition>
+    <definition name="procurement/show" extends="master">
+        <put-attribute name="main-content" value="/views/procurement/showTransaction.jsp"/>
+    </definition>
+</tiles-definitions>

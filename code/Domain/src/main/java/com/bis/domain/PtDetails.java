@@ -6,7 +6,7 @@ public class PtDetails implements java.io.Serializable {
 
 	private Integer detailsId;
 	private int transactionId;
-	private Item item;
+	private Item item = new Item();
 	private Date dateOfPublishing;
 	private Integer quantity;
 	private Float amount;

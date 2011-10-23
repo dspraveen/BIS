@@ -21,10 +21,8 @@
         <module>DataAccess</module>
         <module>Core</module>
         <module>Inventory</module>
-        <module>ProcurementTransactions</module>
-        <module>ProcurementBilling</module>
-        <module>SalesBilling</module>
-        <module>SalesTransactions</module>
+        <module>Procurement</module>
+        <module>Sales</module>
         <module>Web</module>
     </modules>
     <build>

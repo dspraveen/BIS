@@ -47,7 +47,6 @@
 			alert(errors.join('\n'));
 			return false;
 		}
-		alert("correct");
         return false;
     }
 
@@ -195,3 +194,6 @@
         </div>
     </div>
 </form:form>
+
+
+

@@ -3,10 +3,12 @@ package com.bis.sales.services;
 import com.bis.domain.PaymentHistorySales;
 import com.bis.sales.repository.SalesPaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
 
+@Service
 public class SalesPaymentServiceImpl implements SalesPaymentService {
 
     private SalesPaymentRepository salesPaymentRepository;

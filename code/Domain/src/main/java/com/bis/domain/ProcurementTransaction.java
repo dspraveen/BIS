@@ -6,23 +6,23 @@ import java.util.List;
 
 public class ProcurementTransaction implements java.io.Serializable {
 
-	private Integer transactionId;
-	private Vendor vendor = new Vendor();
-	private Date date;
-	private Character transactionType;
-	private Float totalAmount;
+    private Integer transactionId;
+    private Vendor vendor = new Vendor();
+    private Date date;
+    private Character transactionType;
+    private Float totalAmount;
     private List<PtDetails> transactionDetails = new ArrayList<PtDetails>();
 
-	public ProcurementTransaction() {
-	}
+    public ProcurementTransaction() {
+    }
 
-	public Integer getTransactionId() {
-		return this.transactionId;
-	}
+    public Integer getTransactionId() {
+        return this.transactionId;
+    }
 
-	public void setTransactionId(Integer transactionId) {
-		this.transactionId = transactionId;
-	}
+    public void setTransactionId(Integer transactionId) {
+        this.transactionId = transactionId;
+    }
 
     public Vendor getVendor() {
         return vendor;
@@ -33,28 +33,28 @@ public class ProcurementTransaction implements java.io.Serializable {
     }
 
     public Date getDate() {
-		return this.date;
-	}
+        return this.date;
+    }
 
-	public void setDate(Date date) {
-		this.date = date;
-	}
+    public void setDate(Date date) {
+        this.date = date;
+    }
 
-	public Character getTransactionType() {
-		return this.transactionType;
-	}
+    public Character getTransactionType() {
+        return this.transactionType;
+    }
 
-	public void setTransactionType(Character transactionType) {
-		this.transactionType = transactionType;
-	}
+    public void setTransactionType(Character transactionType) {
+        this.transactionType = transactionType;
+    }
 
-	public Float getTotalAmount() {
-		return this.totalAmount;
-	}
+    public Float getTotalAmount() {
+        return this.totalAmount;
+    }
 
-	public void setTotalAmount(Float totalAmount) {
-		this.totalAmount = totalAmount;
-	}
+    public void setTotalAmount(Float totalAmount) {
+        this.totalAmount = totalAmount;
+    }
 
     public List<PtDetails> getTransactionDetails() {
         return transactionDetails;
@@ -71,5 +71,9 @@ public class ProcurementTransaction implements java.io.Serializable {
             totalAmount += details.getAmount();
         }
         this.setTotalAmount(totalAmount);
+    }
+
+    public PtDetails getPtDetails(PtDetails details) {
+        return transactionDetails.get(transactionDetails.indexOf(details));
     }
 }

@@ -3,7 +3,7 @@ package com.bis.web.controller;
 import com.bis.common.DateUtils;
 import com.bis.domain.PaymentHistorySales;
 import com.bis.domain.PaymentMode;
-import com.bis.sales.services.SalesBillingService;
+import com.bis.sales.services.SalesPaymentService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,16 +25,16 @@ public class SalesPaymentController{
 
     protected final Logger logger = Logger.getLogger(getClass());
 
-    private SalesBillingService salesBillingService;
+    private SalesPaymentService salesPaymentService;
 
     @Autowired
-    public SalesPaymentController(SalesBillingService salesBillingService) {
-        this.salesBillingService = salesBillingService;
+    public SalesPaymentController(SalesPaymentService salesPaymentService) {
+        this.salesPaymentService = salesPaymentService;
     }
 
     @RequestMapping(value = "/show/{id}",method = RequestMethod.GET)
     public ModelAndView show(@PathVariable("id") int paymentId) {
-        PaymentHistorySales paymentHistorySales = salesBillingService.getSalesPayment(paymentId);
+        PaymentHistorySales paymentHistorySales = salesPaymentService.getSalesPayment(paymentId);
         return new ModelAndView("salesPayment/show", "PaymentHistorySales", paymentHistorySales);
     }
 
@@ -48,21 +48,21 @@ public class SalesPaymentController{
 
     @RequestMapping(value = "/updateForm/{id}",method = RequestMethod.GET)
     public ModelAndView updateForm(@PathVariable("id") int paymentId) {
-        PaymentHistorySales paymentHistorySales = salesBillingService.getSalesPayment(paymentId);
+        PaymentHistorySales paymentHistorySales = salesPaymentService.getSalesPayment(paymentId);
         return new ModelAndView("salesPayment/updateForm", "PaymentHistorySales", paymentHistorySales);
     }
 
     @RequestMapping(value = "/addSalesPayment",method = RequestMethod.POST)
     public String addSalesPayment(@Valid PaymentHistorySales paymentHistorySales, BindingResult bindingResult, Model uiModel) {
         uiModel.asMap().clear();
-        salesBillingService.addSalesPayment(paymentHistorySales);
+        salesPaymentService.addSalesPayment(paymentHistorySales);
         return "redirect:/salesPayment/show/"+paymentHistorySales.getPaymentId();
     }
 
     @RequestMapping(value = "/updateSalesPayment",method = RequestMethod.POST)
     public String updateSalesPayment(@Valid PaymentHistorySales paymentHistorySales, BindingResult bindingResult, Model uiModel) {
         uiModel.asMap().clear();
-        salesBillingService.updateSalesPayment(paymentHistorySales);
+        salesPaymentService.updateSalesPayment(paymentHistorySales);
         return "redirect:/salesPayment/show/" + paymentHistorySales.getPaymentId();
     }
 

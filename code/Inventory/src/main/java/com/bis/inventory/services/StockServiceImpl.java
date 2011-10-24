@@ -46,8 +46,7 @@ public class StockServiceImpl implements StockService{
     public void reduceStock( int itemCode, Date dateOfPublishing, int quantity) {
         Stock stock = stockRepository.getStock(itemCode, dateOfPublishing);
         if(stock == null){
-            Stock newStock = new Stock(itemCode, dateOfPublishing, quantity);
-            stockRepository.save(newStock);
+            throw new RuntimeException("Stock not available");
         }else {
             int effectiveQty = stock.getQuantity() - quantity;
             if(effectiveQty <0){

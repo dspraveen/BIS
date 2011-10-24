@@ -41,6 +41,4 @@ public class ProcurementPaymentServiceImpl implements ProcurementPaymentService 
     public List<PaymentHistoryProcurement> getProcurementPayments(int vendorId, Date fromDate, Date toDate) {
         return procurementPaymentRepository.getProcurementPayments(vendorId, fromDate, toDate);
     }
-
-
 }

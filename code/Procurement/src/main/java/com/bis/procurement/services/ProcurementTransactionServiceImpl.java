@@ -9,12 +9,12 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class  ProcurementTransactionServiceImpl implements ProcurementTransactionService{
+public class ProcurementTransactionServiceImpl implements ProcurementTransactionService {
 
     private ProcurementTransactionRepository procurementTransactionRepository;
 
     @Autowired
-    public ProcurementTransactionServiceImpl(ProcurementTransactionRepository procurementTransactionRepository){
+    public ProcurementTransactionServiceImpl(ProcurementTransactionRepository procurementTransactionRepository) {
         this.procurementTransactionRepository = procurementTransactionRepository;
     }
 
@@ -35,7 +35,7 @@ public class  ProcurementTransactionServiceImpl implements ProcurementTransactio
         return procurementTransactionRepository.get(transactionId);
     }
 
-    public List<ProcurementTransaction> getProcurementTransactions(Date fromDate, Date toDate){
+    public List<ProcurementTransaction> getProcurementTransactions(Date fromDate, Date toDate) {
         return procurementTransactionRepository.getProcurementTransactions(fromDate, toDate);
     }
 }

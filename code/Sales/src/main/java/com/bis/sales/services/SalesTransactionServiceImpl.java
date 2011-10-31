@@ -35,8 +35,10 @@ public class SalesTransactionServiceImpl implements SalesTransactionService {
     public SalesTransaction getSalesTransaction(int transactionId) {
         return salesRepository.get(transactionId);
     }
+
     @Override
-    public List<SalesTransaction> getSalesTransactions(Date fromDate, Date toDate){
+    public List<SalesTransaction> getSalesTransactions(Date fromDate, Date toDate) {
         return salesRepository.getSalesTransactions(fromDate, toDate);
     }
+
 }

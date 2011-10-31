@@ -29,8 +29,8 @@ public class SalesBillingRepository extends BaseRepository<BillingSales> {
                 .add(Restrictions.le("date", toDate)).list();
     }
 
-    public Date getLastBillEndDate(Hawker hawker) {
-        return (Date) getSession().createCriteria(BillingSales.class)
+    public BillingSales getLastBill(Hawker hawker) {
+        return (BillingSales) getSession().createCriteria(BillingSales.class)
                 .add(Restrictions.eq("hawkerId", hawker.getHawkerId()))
                 .addOrder(Order.desc("endDate")).list().get(0);
     }

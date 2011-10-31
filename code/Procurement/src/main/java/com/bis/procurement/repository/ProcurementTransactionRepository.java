@@ -1,6 +1,7 @@
 package com.bis.procurement.repository;
 
 import com.bis.domain.ProcurementTransaction;
+import com.bis.domain.Vendor;
 import com.bis.repository.BaseRepository;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -20,7 +21,14 @@ public class ProcurementTransactionRepository extends BaseRepository<Procurement
         setSessionFactory(sessionFactory);
     }
 
-    public List<ProcurementTransaction> getProcurementTransactions(Date fromDate, Date toDate) {
+    public List<ProcurementTransaction> getProcurementTransactions(Vendor vendor, Date fromDate, Date toDate) {
+        return getSession().createCriteria(ProcurementTransaction.class)
+                .add(Restrictions.eq("vendorID", vendor.getVendorId()))
+                .add(Restrictions.ge("date", fromDate))
+                .add(Restrictions.le("date", toDate)).list();
+    }
+
+    public List<ProcurementTransaction> getProcurementTransactions( Date fromDate, Date toDate) {
         return getSession().createCriteria(ProcurementTransaction.class)
                 .add(Restrictions.ge("date", fromDate))
                 .add(Restrictions.le("date", toDate)).list();

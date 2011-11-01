@@ -3,7 +3,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <div>
-    <h1>Vendor Details</h1>
+    <h1>Transaction Details</h1>
     <div class="section">
         <span class="left"><label>Vendor Name:</label></span
         <span class="right"><label>${procurementTransaction.vendor.vendorName}</label></span>

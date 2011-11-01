@@ -115,6 +115,7 @@
 		var row = table.insertRow(rowCount);
 		var firstRowHtml = document.getElementById(tableID).rows[0].innerHTML;
 		row.innerHTML = firstRowHtml.replace(/[0]/g,rowCount).replace(/(0)/g,rowCount);
+		$($('.date_of_publish')[rowCount]).val("");
         $($('.date_of_publish')[rowCount]).datepicker({dateFormat: 'dd-mm-yy' });
 	}
 
@@ -138,8 +139,9 @@
 		}
     }
 </script>
-<form:form commandName="procurementTransaction" method="POST" action="addProcurementTransaction"  onsubmit="return validateForm();">
+<form:form commandName="procurementTransaction" method="POST" action="/procurement/updateProcurementTransaction"  onsubmit="return validateForm();">
     <div>
+		<form:hidden path="transactionId"/>
         <div class="section">
             <span class="left"><label>Select Vendor:</label></span
             <span class="right">
@@ -151,7 +153,7 @@
         </div>
         <div class="section">
             <span class="left"><label>Transaction Date:</label></span
-            <span class="right"><input name="date" class="transaction_date"/></span>
+            <span class="right"><form:input path="date" class="transaction_date"/></span>
         </div>
         <div class="section">
             <span class="left"><label>Transaction Type:</label></span
@@ -163,27 +165,23 @@
 					<TD></TD>
 					<TD>Item</TD>
 					<TD>Date Of Publishing</TD>
-					<TD>MRP</TD>
-					<TD>Discount</TD>
 					<TD>Price Per Item</TD>
 					<TD>Qty</TD>
-					<TD>Total</TD>
 				</thead>
-				<tr>
-					<td><input type='checkbox' name='chk' class='item_select'/></td>
-					<td>
-						<form:select path='transactionDetails[0].item.itemCode' class='item_name'  onChange='itemSelected(0);'>
-							<form:option value="-" label="--Please Select"/>
-							<form:options items="${items}" itemLabel="itemName" itemValue="itemCode"/>
-						</form:select>
-					</td>
-					<td><input name='transactionDetails[0].dateOfPublishing' class='date_of_publish' type='text'/></td>
-					<td><input class='mrp' type='text' readonly='true'/></td>
-					<td><input class='discount' type='text' onChange='onDiscountChange(0)'/></td>
-					<td><input name='transactionDetails[0].amount' class='price_per_item' type='text' onChange='onPriceChange(0)'/></td>
-					<td><input name='transactionDetails[0].quantity' class='qty' type='text' onChange='onQtyChange(0)'/></td>
-					<td><input class='total' type='text' readonly='true'/></td>
-				</tr>
+				<c:forEach var="transactionDetail" items="${procurementTransaction.transactionDetails}">
+                    <tr>
+                        <form:hidden path="transactionDetails[0].detailsId"/>
+                        <td><input type='checkbox' name='chk' class='item_select'/></td>
+                        <td>
+                            <form:select path='transactionDetails[0].item.itemCode' class='item_name'  onChange='itemSelected(0);'>
+                                <form:options items="${items}" itemLabel="itemName" itemValue="itemCode"/>
+                            </form:select>
+                        </td>
+                        <td><form:input path='transactionDetails[0].dateOfPublishing' class='date_of_publish' type='text'/></td>
+                        <td><form:input path='transactionDetails[0].amount' class='price_per_item' type='text' onChange='onPriceChange(0)'/></td>
+                        <td><form:input path='transactionDetails[0].quantity' class='qty' type='text' onChange='onQtyChange(0)'/></td>
+                    </tr>
+				</c:forEach>
 			</TABLE>
 			<INPUT type="button" value="Add Row" onclick="addRow('dataTable')" />
 		 	<INPUT type="button" value="Delete Row" onclick="deleteRow('dataTable')" />

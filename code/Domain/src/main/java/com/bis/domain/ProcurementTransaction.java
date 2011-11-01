@@ -1,5 +1,8 @@
 package com.bis.domain;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.Predicate;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -73,7 +76,15 @@ public class ProcurementTransaction implements java.io.Serializable {
         this.setTotalAmount(totalAmount);
     }
 
-    public PtDetails getPtDetails(PtDetails details) {
-        return transactionDetails.get(transactionDetails.indexOf(details));
+    public PtDetails getPtDetails(final Integer transactionDetailId) {
+        if(transactionDetailId == null) return null;
+        return (PtDetails) CollectionUtils.find(transactionDetails, new Predicate() {
+            @Override
+            public boolean evaluate(Object object) {
+                PtDetails details = (PtDetails) object;
+                if(details.getDetailsId()==null) return false;
+                return details.getDetailsId().intValue() == transactionDetailId.intValue();
+            }
+        });
     }
 }

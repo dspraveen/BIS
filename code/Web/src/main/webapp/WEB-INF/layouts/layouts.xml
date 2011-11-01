@@ -10,6 +10,8 @@
        <put-attribute name="footer" value="/views/footer.jsp"/>
     </definition>
 
+    <definition name="ajaxSection" template="/views/ajaxSection.jsp"/>
+
     <definition name="master" extends="default">
        <put-attribute name="context-menu" value="/views/masterMenu.jsp"/>
     </definition>

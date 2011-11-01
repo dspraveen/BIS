@@ -32,8 +32,8 @@
                     <tr>
                       <td>${transactionDetail.item.itemName}</td>
                       <td>${transactionDetail.dateOfPublishing}</td>
-                      <td>${transactionDetail.quantity}</td>
                       <td>${transactionDetail.amount}</td>
+                      <td>${transactionDetail.quantity}</td>
                     </tr>
                  </c:forEach>
 			</TABLE>

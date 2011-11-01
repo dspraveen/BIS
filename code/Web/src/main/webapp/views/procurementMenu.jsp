@@ -9,7 +9,7 @@
       <a href="/procurement/createForm">New Transaction</a>
     </li>
     <li>
-      <a href="#">Transaction Details</a>
+      <a href="/procurement/list">Transaction Details</a>
     </li>
     <li>
       <a href="#">Generate Bill</a>

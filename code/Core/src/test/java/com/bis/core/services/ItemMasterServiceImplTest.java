@@ -67,4 +67,5 @@ public class ItemMasterServiceImplTest {
         Mockito.when(itemRepository.getPrice(itemCode)).thenReturn(price);
         Assert.assertTrue(price==itemMasterService.getItemPrice(itemCode));
     }
+
 }

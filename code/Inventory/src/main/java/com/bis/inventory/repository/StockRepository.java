@@ -28,11 +28,11 @@ public class StockRepository extends BaseRepository<Stock> {
     }
 
     public Stock getStock(int itemCode, Date dateOfPublishing) {
-        return (Stock) getSession().createCriteria(Stock.class)
+        List stock = getSession().createCriteria(Stock.class)
                 .add(Restrictions.eq("itemCode", itemCode))
                 .add(Restrictions.eq("dateOfPublishing", dateOfPublishing))
-                .list().get(0);
-
+                .list();
+        return stock.isEmpty() ? null : (Stock) stock.get(0);
     }
 }
     

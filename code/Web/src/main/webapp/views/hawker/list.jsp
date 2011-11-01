@@ -60,7 +60,7 @@
                     <span class="right"><label>
                       <c:choose>
                         <c:when test="${hawkerList.selectedHawker.alternatePhone != ''}">
-                            ${hawkerList.selectedHawker.address}
+                            ${hawkerList.selectedHawker.alternatePhone}
                         </c:when>
                         <c:otherwise>
                             Not Provided

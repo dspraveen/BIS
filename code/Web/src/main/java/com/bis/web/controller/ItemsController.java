@@ -74,12 +74,18 @@ public class ItemsController extends BaseController{
     @RequestMapping(value = "/list")
     public ModelAndView list(@RequestParam(value = "selectedItemCode", defaultValue = "0", required = false) int selectedItemCode) {
         List<Item> all = itemMasterService.getAll();
+        if(all.isEmpty()){
+            return new ModelAndView("item/list", "itemList", new ItemList(selectedItemCode, new ArrayList<ItemViewForm>()));
+        }
         Collections.sort(all, new Comparator<Item>() {
             @Override
             public int compare(Item o1, Item o2) {
                 return o1.getItemName().compareToIgnoreCase(o2.getItemName());
             }
         });
+        if(selectedItemCode == 0){
+            selectedItemCode = all.get(0).getItemCode();
+        }
         List<ItemViewForm> itemViewForms = new ArrayList<ItemViewForm>();
         for (Item item : all) {
             float itemPrice = 0f;

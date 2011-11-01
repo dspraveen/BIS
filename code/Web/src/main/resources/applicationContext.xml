@@ -28,9 +28,11 @@
             </list>
         </property>
         <property name="hibernateProperties">
-            <value>
-                hibernate.dialect=org.hibernate.dialect.HSQLDialect
-            </value>
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="connection.pool_size">10</prop>
+            </props>
         </property>
     </bean>
 

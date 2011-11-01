@@ -19,7 +19,7 @@
 					<TD>Price Per Item</TD>
 					<TD>Qty</TD>
 				 </thead>
-                <c:forEach var="transactionDetail" items="${procurementTransactions.transactionDetails}">
+                <c:forEach var="transactionDetail" items="${procurementTransaction.transactionDetails}">
                     <tr>
                       <td>${transactionDetail.item.itemName}</td>
                       <td>${transactionDetail.dateOfPublishing}</td>

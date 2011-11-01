@@ -115,7 +115,7 @@
 		var row = table.insertRow(rowCount);
 		var firstRowHtml = document.getElementById(tableID).rows[0].innerHTML;
 		row.innerHTML = firstRowHtml.replace(/[0]/g,rowCount).replace(/(0)/g,rowCount);
-        $($('.date_of_publish')[rowCount]).datepicker({dateFormat: 'dd-mm-yy' });
+        $($('.date_of_publish')[rowCount]).removeClass('hasDatepicker').datepicker({dateFormat: 'dd-mm-yy' });
 	}
 
 	function deleteRow(tableID) {

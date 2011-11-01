@@ -25,15 +25,15 @@
 				 <thead>
 					<TD>Item</TD>
 					<TD>Date Of Publishing</TD>
-					<TD>Price Per Item</TD>
 					<TD>Qty</TD>
+					<TD>Total Amount</TD>
 				 </thead>
                  <c:forEach var="transactionDetail" items="${procurementTransaction.transactionDetails}">
                     <tr>
                       <td>${transactionDetail.item.itemName}</td>
                       <td>${transactionDetail.dateOfPublishing}</td>
-                      <td>${transactionDetail.amount}</td>
                       <td>${transactionDetail.quantity}</td>
+                      <td>${transactionDetail.amount}</td>
                     </tr>
                  </c:forEach>
 			</TABLE>

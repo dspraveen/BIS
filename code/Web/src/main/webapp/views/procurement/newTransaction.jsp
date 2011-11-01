@@ -180,9 +180,9 @@
 					<td><input name='transactionDetails[0].dateOfPublishing' class='date_of_publish' type='text'/></td>
 					<td><input class='mrp' type='text' readonly='true'/></td>
 					<td><input class='discount' type='text' onChange='onDiscountChange(0)'/></td>
-					<td><input name='transactionDetails[0].amount' class='price_per_item' type='text' onChange='onPriceChange(0)'/></td>
+					<td><input name='price_per_item' class='price_per_item' type='text' onChange='onPriceChange(0)'/></td>
 					<td><input name='transactionDetails[0].quantity' class='qty' type='text' onChange='onQtyChange(0)'/></td>
-					<td><input class='total' type='text' readonly='true'/></td>
+					<td><input name='transactionDetails[0].amount' class='total' type='text' readonly='true'/></td>
 				</tr>
 			</TABLE>
 			<INPUT type="button" value="Add Row" onclick="addRow('dataTable')" />

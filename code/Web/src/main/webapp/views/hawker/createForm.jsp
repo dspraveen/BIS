@@ -21,35 +21,35 @@
         return true;
     }
 </script>
-<form:form commandName="hawker" method="POST" action="create"  onsubmit="return validateForm();">
+<form method="POST" action="<%=request.getContextPath()%>/hawker/create"  onsubmit="return validateForm();">
     <div>
         <div class="section">
             <span class="left"><label>Hawker Name:</label></span
-            <span class="right"><form:input path="hawkerName" class="hawker_name"/>*</span>
+            <span class="right"><form:input path="hawker.hawkerName" class="hawker_name"/>*</span>
         </div>
         <div class="section">
             <span class="left"><label>Hawker Default Discount:</label></span
-            <span class="right"><form:input path="hawkerDiscount" class="hawker_discount" />*</span>
+            <span class="right"><form:input path="hawker.hawkerDiscount" class="hawker_discount" />*</span>
         </div>
         <div class="section">
             <span class="left"><label>Hawker Billing Cycle:</label></span
-            <span class="right"><form:select path="billingCycle" items="${billingCycles}" /></span>
+            <span class="right"><form:select path="hawker.billingCycle" items="${billingCycles}" /></span>
         </div>
         <div class="section">
             <span class="left"><label>Hawker Address:</label></span
-            <span class="right"><form:input path="address" /></span>
+            <span class="right"><form:input path="hawker.address" /></span>
         </div>
         <div class="section">
             <span class="left"><label>Hawker Primary Phone Number:</label></span
-            <span class="right"><form:input path="phoneNumber" /></span>
+            <span class="right"><form:input path="hawker.phoneNumber" /></span>
         </div>
         <div class="section">
             <span class="left"><label>Hawker Alternate Phone Number:</label></span
-            <span class="right"><form:input path="alternatePhone" /></span>
+            <span class="right"><form:input path="hawker.alternatePhone" /></span>
         </div>
 
         <div class="section">
             <span class="center"><input type="submit" value="Submit"/> <input type="reset" value="Clear"/></span>
         </div>
     </div>
-</form:form>
+</form>

@@ -5,13 +5,13 @@
 <div id="nav">
   <ul>
     <li>
-      <a href="/item/createForm">Master</a>
+      <a href="<%=request.getContextPath()%>/item/createForm">Master</a>
     </li>
     <li>
-      <a href="/procurement/createForm">Procurement</a>
+      <a href="<%=request.getContextPath()%>/procurement/createForm">Procurement</a>
     </li>
     <li>
-      <a href="/procurement/createForm">Sales</a>
+      <a href="<%=request.getContextPath()%>/procurement/createForm">Sales</a>
     </li>
     <li>
       <a href="#">Inventory</a>

@@ -74,7 +74,7 @@
 	
 	function itemSelected(rowId){
 	    var mrpElement = $('.mrp')[rowId];
-        var itemPriceUrl = "/item/price?selectedItemCode="+$($('.item_name')[rowId]).val();
+        var itemPriceUrl = "<%=request.getContextPath()%>/item/price?selectedItemCode="+$($('.item_name')[rowId]).val();
         $.ajax({
             url : itemPriceUrl,
             processData : true,
@@ -83,7 +83,7 @@
             }
         })
 
-        var vendorDiscountUrl = "/vendor/discount?selectedVendorId="+$('.vendor_name').val();
+        var vendorDiscountUrl = "<%=request.getContextPath()%>/vendor/discount?selectedVendorId="+$('.vendor_name').val();
 		var discountElement = $('.discount')[rowId];
         $.ajax({
             url : vendorDiscountUrl,
@@ -96,7 +96,7 @@
     }
 	
 	function updateDiscount(){
-	    var vendorDiscountUrl = "/vendor/discount?selectedVendorId="+$('.vendor_name').val();
+	    var vendorDiscountUrl = "<%=request.getContextPath()%>/vendor/discount?selectedVendorId="+$('.vendor_name').val();
         $.ajax({
             url : vendorDiscountUrl,
             processData : true,
@@ -138,12 +138,12 @@
 		}
     }
 </script>
-<form:form commandName="procurementTransaction" method="POST" action="addProcurementTransaction"  onsubmit="return validateForm();">
+<form method="POST" action="<%=request.getContextPath()%>/procurement/addProcurementTransaction"  onsubmit="return validateForm();">
     <div>
         <div class="section">
             <span class="left"><label>Select Vendor:</label></span
             <span class="right">
-				<form:select path="vendor.vendorId" class="vendor_name" onChange="updateDiscount();">
+				<form:select path="procurementTransaction.vendor.vendorId" class="vendor_name" onChange="updateDiscount();">
 					<form:option value="-1" label="--Please Select"/>
 					<form:options items="${vendors}" itemLabel="vendorName" itemValue="vendorId" />
 				</form:select>
@@ -151,11 +151,11 @@
         </div>
         <div class="section">
             <span class="left"><label>Transaction Date:</label></span
-            <span class="right"><input name="date" class="transaction_date"/></span>
+            <span class="right"><input name="procurementTransaction.date" class="transaction_date"/></span>
         </div>
         <div class="section">
             <span class="left"><label>Transaction Type:</label></span
-            <span class="right"><form:select path="transactionType" items="${procurementTransactionType}" /></span>
+            <span class="right"><form:select path="procurementTransaction.transactionType" items="${procurementTransactionType}" /></span>
         </div>
         <div>
 		 	<TABLE id="dataTable" width="350px" border="1">
@@ -172,17 +172,17 @@
 				<tr>
 					<td><input type='checkbox' name='chk' class='item_select'/></td>
 					<td>
-						<form:select path='transactionDetails[0].item.itemCode' class='item_name'  onChange='itemSelected(0);'>
+						<form:select path='procurementTransaction.transactionDetails[0].item.itemCode' class='item_name'  onChange='itemSelected(0);'>
 							<form:option value="-" label="--Please Select"/>
 							<form:options items="${items}" itemLabel="itemName" itemValue="itemCode"/>
 						</form:select>
 					</td>
-					<td><input name='transactionDetails[0].dateOfPublishing' class='date_of_publish' type='text'/></td>
+					<td><input name='procurementTransaction.transactionDetails[0].dateOfPublishing' class='date_of_publish' type='text'/></td>
 					<td><input class='mrp' type='text' readonly='true'/></td>
 					<td><input class='discount' type='text' onChange='onDiscountChange(0)'/></td>
-					<td><input name='price_per_item' class='price_per_item' type='text' onChange='onPriceChange(0)'/></td>
-					<td><input name='transactionDetails[0].quantity' class='qty' type='text' onChange='onQtyChange(0)'/></td>
-					<td><input name='transactionDetails[0].amount' class='total' type='text' readonly='true'/></td>
+					<td><input name='procurementTransaction.price_per_item' class='price_per_item' type='text' onChange='onPriceChange(0)'/></td>
+					<td><input name='procurementTransaction.transactionDetails[0].quantity' class='qty' type='text' onChange='onQtyChange(0)'/></td>
+					<td><input name='procurementTransaction.transactionDetails[0].amount' class='total' type='text' readonly='true'/></td>
 				</tr>
 			</TABLE>
 			<INPUT type="button" value="Add Row" onclick="addRow('dataTable')" />
@@ -192,7 +192,7 @@
             <span class="center"><input type="submit" value="Submit"/> <input type="reset" value="Clear"/></span>
         </div>
     </div>
-</form:form>
+</form>
 
 
 

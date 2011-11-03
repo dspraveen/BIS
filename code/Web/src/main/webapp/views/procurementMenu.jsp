@@ -6,10 +6,10 @@
   <h3>Procurement Menu</h3>
   <ul class="sidemenu">
     <li>
-      <a href="/procurement/createForm">New Transaction</a>
+      <a href="<%=request.getContextPath()%>/procurement/createForm">New Transaction</a>
     </li>
     <li>
-      <a href="/procurement/list">Transaction Details</a>
+      <a href="<%=request.getContextPath()%>/procurement/list">Transaction Details</a>
     </li>
     <li>
       <a href="#">Generate Bill</a>

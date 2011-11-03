@@ -4,11 +4,11 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
     <head>
-        <link rel="stylesheet" href="/styles/bis-styles.css" type="text/css" />
-        <link rel="stylesheet" href="/styles/bis-panel.css" type="text/css" />
-        <link rel="stylesheet" href="/styles/jquery-ui-1.8.16.custom.css" type="text/css" />
-        <script type="text/javascript" src="/js/ThirdParty/jquery-1.6.4.min.js"></script>
-        <script type="text/javascript" src="/js/ThirdParty/jquery-ui-1.8.16.custom.min.js"></script>
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/styles/bis-styles.css" type="text/css" />
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/styles/bis-panel.css" type="text/css" />
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/styles/jquery-ui-1.8.16.custom.css" type="text/css" />
+        <script type="text/javascript" src="<%=request.getContextPath()%>/js/ThirdParty/jquery-1.6.4.min.js"></script>
+        <script type="text/javascript" src="<%=request.getContextPath()%>/js/ThirdParty/jquery-ui-1.8.16.custom.min.js"></script>
         <title>BIS</title>
     </head>
     <body>

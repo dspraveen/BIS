@@ -2,7 +2,7 @@
 * { margin: 0; padding: 0; outline: 0 }
 
 body {
-	background: url("/images/bg.jpg") no-repeat scroll center top #E2DDD9;
+	background: url("../images/bg.jpg") no-repeat scroll center top #E2DDD9;
 	font: 70%/1.5em Verdana, Tahoma, arial, sans-serif;
 	color: #6B4F2E; 
 	text-align: center;		
@@ -183,7 +183,7 @@ input.button {
 	width: 100%;
 	position: relative;
 	height: 104px;
-	background: #FFF url(/images/headerbg.jpg) repeat-x;
+	background: #FFF url(../images/headerbg.jpg) repeat-x;
 	padding: 0;	
 	color: #FFF;	
 }
@@ -241,7 +241,7 @@ input.button {
 }
 #nav #light-brown-line {
 	position: absolute;
-	background: url(/images/light-brown-line.jpg) no-repeat;
+	background: url(../images/light-brown-line.jpg) no-repeat;
 	height: 10px; width: 240px;
 	top: 0; left: 0;
 }
@@ -269,10 +269,10 @@ input.button {
 }
 #nav ul li a:hover, 
 #nav ul li a:active {
-	background: url(/images/menupointer.jpg) no-repeat center bottom;	
+	background: url(../images/menupointer.jpg) no-repeat center bottom;	
 }
 #nav ul li#current a {	
-	background: url(/images/menupointer.jpg) no-repeat center bottom;
+	background: url(../images/menupointer.jpg) no-repeat center bottom;
 	color: #F2EFBA;	
 }
 
@@ -324,7 +324,7 @@ input.button {
 }
 #sidebar ul.sidemenu li {
 	list-style: none;
-	background: url(/images/dots.jpg) repeat-x left bottom;
+	background: url(../images/dots.jpg) repeat-x left bottom;
 	padding: 5px 0 5px 5px;
 	margin: 0 2px;		
 }
@@ -348,7 +348,7 @@ input.button {
 	float: left;
 	width: 830px;
 	padding: 18px 0 50px 0;		
-	background: #A0B70D url(/images/footercolbg.jpg) repeat-x left bottom;		
+	background: #A0B70D url(../images/footercolbg.jpg) repeat-x left bottom;		
 	border-bottom: 2px solid #FFF;
 }
 #column-wrap a {
@@ -377,10 +377,10 @@ input.button {
 	list-style: none;
 	margin: 10px 0 0 0;
 	padding: 0;	
-	background: url(/images/footer-dots.gif) repeat-x left top;	
+	background: url(../images/footer-dots.gif) repeat-x left top;	
 }
 #columns li {
-	background: url(/images/footer-dots.gif) repeat-x left bottom;		
+	background: url(../images/footer-dots.gif) repeat-x left bottom;		
 }
 #columns li a {
 	display: block;

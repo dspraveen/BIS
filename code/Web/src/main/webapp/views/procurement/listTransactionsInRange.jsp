@@ -28,7 +28,7 @@
                     </tr>
                 </c:forEach>
             </TABLE>
-            <a href="/procurement/updateForm/${procurementTransaction.transactionId}"> Update this transaction</a>
+            <a href="<%=request.getContextPath()%>/procurement/updateForm/${procurementTransaction.transactionId}"> Update this transaction</a>
          </div>
      </c:forEach>
 </div>

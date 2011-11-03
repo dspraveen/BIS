@@ -17,36 +17,36 @@
         return true;
     }
 </script>
-<form:form commandName="vendor" method="POST" action="/vendor/update" onsubmit="return validateForm();">
-    <form:hidden path="vendorId"/>
+<form method="POST" action="<%=request.getContextPath()%>/vendor/update" onsubmit="return validateForm();">
+    <form:hidden path="vendor.vendorId"/>
     <div>
         <div class="section">
             <span class="left"><label>Vendor Name:</label></span>
-            <span class="right"><form:input path="vendorName" class="vendor_name" readonly="true"/>*</span>
+            <span class="right"><form:input path="vendor.vendorName" class="vendor_name" readonly="true"/>*</span>
         </div>
         <div class="section">
             <span class="left"><label>Vendor Default Discount:</label></span
-            <span class="right"><form:input path="vendorDiscount" class="vendor_discount" />*</span>
+            <span class="right"><form:input path="vendor.vendorDiscount" class="vendor_discount" />*</span>
         </div>
         <div class="section">
             <span class="left"><label>Vendor Billing Cycle:</label></span
-            <span class="right"><form:select path="billingCycle" items="${billingCycles}" /></span>
+            <span class="right"><form:select path="vendor.billingCycle" items="${billingCycles}" /></span>
         </div>
         <div class="section">
             <span class="left"><label>Vendor Address:</label></span
-            <span class="right"><form:input path="address" /></span>
+            <span class="right"><form:input path="vendor.address" /></span>
         </div>
         <div class="section">
             <span class="left"><label>Vendor Primary Phone Number:</label></span
-            <span class="right"><form:input path="phoneNumber" /></span>
+            <span class="right"><form:input path="vendor.phoneNumber" /></span>
         </div>
         <div class="section">
             <span class="left"><label>Vendor Alternate Phone Number:</label></span
-            <span class="right"><form:input path="alternatePhone" /></span>
+            <span class="right"><form:input path="vendor.alternatePhone" /></span>
         </div>
         <div class="section">
             <span class="center"><input type="submit" value="Update"/></span>
         </div>
     </div>
-</form:form>
+</form>
 

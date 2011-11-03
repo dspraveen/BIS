@@ -17,36 +17,36 @@
         return true;
     }
 </script>
-<form:form commandName="hawker" method="POST" action="/hawker/update" onsubmit="return validateForm();">
-    <form:hidden path="hawkerId"/>
+<form method="POST" action="<%=request.getContextPath()%>/hawker/update" onsubmit="return validateForm();">
+    <form:hidden path="hawker.hawkerId"/>
     <div>
         <div class="section">
             <span class="left"><label>Hawker Name:</label></span>
-            <span class="right"><form:input path="hawkerName" class="hawker_name" readonly="true"/>*</span>
+            <span class="right"><form:input path="hawker.hawkerName" class="hawker_name" readonly="true"/>*</span>
         </div>
         <div class="section">
             <span class="left"><label>Hawker Default Discount:</label></span
-            <span class="right"><form:input path="hawkerDiscount" class="hawker_discount" />*</span>
+            <span class="right"><form:input path="hawker.hawkerDiscount" class="hawker_discount" />*</span>
         </div>
         <div class="section">
             <span class="left"><label>Hawker Billing Cycle:</label></span
-            <span class="right"><form:select path="billingCycle" items="${billingCycles}" /></span>
+            <span class="right"><form:select path="hawker.billingCycle" items="${billingCycles}" /></span>
         </div>
         <div class="section">
             <span class="left"><label>Hawker Address:</label></span
-            <span class="right"><form:input path="address" /></span>
+            <span class="right"><form:input path="hawker.address" /></span>
         </div>
         <div class="section">
             <span class="left"><label>Hawker Primary Phone Number:</label></span
-            <span class="right"><form:input path="phoneNumber" /></span>
+            <span class="right"><form:input path="hawker.phoneNumber" /></span>
         </div>
         <div class="section">
             <span class="left"><label>Hawker Alternate Phone Number:</label></span
-            <span class="right"><form:input path="alternatePhone" /></span>
+            <span class="right"><form:input path="hawker.alternatePhone" /></span>
         </div>
         <div class="section">
             <span class="center"><input type="submit" value="Update"/></span>
         </div>
     </div>
-</form:form>
+</form>
 

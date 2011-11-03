@@ -7,7 +7,7 @@
         $('.from_date').datepicker({dateFormat: 'dd-mm-yy' });
         $('.to_date').datepicker({dateFormat: 'dd-mm-yy' });
         $('.fetch_transactions').bind("click",function(){
-            var transactionInRangeUrl = "/procurement/transactionsInRange?fromDate="+$('.from_date').val()+"&toDate="+$('.to_date').val();
+            var transactionInRangeUrl = "<%=request.getContextPath()%>/procurement/transactionsInRange?fromDate="+$('.from_date').val()+"&toDate="+$('.to_date').val();
             $.ajax({
                 url : transactionInRangeUrl,
                 processData : true,

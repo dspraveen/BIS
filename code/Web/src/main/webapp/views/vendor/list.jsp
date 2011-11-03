@@ -8,7 +8,7 @@
     }
 </script>
 <div>
-    <form method="POST" action="/vendor/list" id="vendor_list">
+    <form method="POST" action="<%=request.getContextPath()%>/vendor/list" id="vendor_list">
         <c:if test="${vendorList.count != '0'}">
             <h1>Vendor Details</h1>
                 <div class="section">
@@ -69,7 +69,7 @@
                     </label></span>
                 </div>
                 <div class="section">
-                    <span class="left"><a href="/vendor/updateForm/${vendorList.selectedVendor.vendorId}">Update Vendor</a></span>
+                    <span class="left"><a href="<%=request.getContextPath()%>/vendor/updateForm/${vendorList.selectedVendor.vendorId}">Update Vendor</a></span>
                 </div>
         </c:if>
         <c:if test="${vendorList.count == '0'}">

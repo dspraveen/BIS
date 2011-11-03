@@ -34,6 +34,6 @@
         <span class="right"><label>${itemForm.item.returnable}</label></span>
     </div>
     <div class="section">
-        <span class="left"><a href="/item/updateForm/${itemForm.item.itemCode}">Update Item</a></span>
+        <span class="left"><a href="<%=request.getContextPath()%>/item/updateForm/${itemForm.item.itemCode}">Update Item</a></span>
     </div>
 </div>

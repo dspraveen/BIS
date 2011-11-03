@@ -26,7 +26,7 @@ public class ItemList {
                 this.selectedItemPrice = itemViewForm.getItemPrice();
             }
         }
-        if (this.selectedItem == null) {
+        if (this.selectedItem == null && !itemViewForms.isEmpty()) {
             this.selectedItem = itemViewForms.get(0).getItem();
             this.selectedItemPrice = itemViewForms.get(0).getItemPrice();
         }

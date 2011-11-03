@@ -56,6 +56,6 @@
         </label></span>
     </div>
     <div class="section">
-        <span class="left"><a href="/hawker/updateForm/${hawker.hawkerId}">Update Hawker</a></span>
+        <span class="left"><a href="<%=request.getContextPath()%>/hawker/updateForm/${hawker.hawkerId}">Update Hawker</a></span>
     </div>
 </div>

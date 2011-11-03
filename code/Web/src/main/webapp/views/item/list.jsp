@@ -8,7 +8,7 @@
     }
 </script>
 <div>
-    <form method="POST" action="/item/list" id="item_list">
+    <form method="POST" action="<%=request.getContextPath()%>/item/list" id="item_list">
         <c:if test="${itemList.count != '0'}">
             <h1>Item Details</h1>
                 <div class="section">
@@ -47,7 +47,7 @@
                     <span class="right"><label>${itemList.selectedItem.returnable}</label></span>
                 </div>
                 <div class="section">
-                    <span class="left"><a href="/item/updateForm/${itemList.selectedItem.itemCode}">Update Item</a></span>
+                    <span class="left"><a href="<%=request.getContextPath()%>/item/updateForm/${itemList.selectedItem.itemCode}">Update Item</a></span>
                 </div>
         </c:if>
         <c:if test="${itemList.count == '0'}">

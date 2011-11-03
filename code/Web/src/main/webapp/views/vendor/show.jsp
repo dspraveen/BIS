@@ -56,6 +56,6 @@
         </label></span>
     </div>
     <div class="section">
-        <span class="left"><a href="/vendor/updateForm/${vendor.vendorId}">Update Vendor</a></span>
+        <span class="left"><a href="<%=request.getContextPath()%>/vendor/updateForm/${vendor.vendorId}">Update Vendor</a></span>
     </div>
 </div>

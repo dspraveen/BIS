@@ -139,13 +139,13 @@
 		}
     }
 </script>
-<form:form commandName="procurementTransaction" method="POST" action="/procurement/updateProcurementTransaction"  onsubmit="return validateForm();">
+<form method="POST" action="<%=request.getContextPath()%>/procurement/updateProcurementTransaction"  onsubmit="return validateForm();">
     <div>
-		<form:hidden path="transactionId"/>
+		<form:hidden path="procurementTransaction.transactionId"/>
         <div class="section">
             <span class="left"><label>Select Vendor:</label></span
             <span class="right">
-				<form:select path="vendor.vendorId" class="vendor_name" onChange="updateDiscount();">
+				<form:select path="procurementTransaction.vendor.vendorId" class="vendor_name" onChange="updateDiscount();">
 					<form:option value="-1" label="--Please Select"/>
 					<form:options items="${vendors}" itemLabel="vendorName" itemValue="vendorId" />
 				</form:select>
@@ -153,11 +153,11 @@
         </div>
         <div class="section">
             <span class="left"><label>Transaction Date:</label></span
-            <span class="right"><form:input path="date" class="transaction_date"/></span>
+            <span class="right"><form:input path="procurementTransaction.date" class="transaction_date"/></span>
         </div>
         <div class="section">
             <span class="left"><label>Transaction Type:</label></span
-            <span class="right"><form:select path="transactionType" items="${procurementTransactionType}" /></span>
+            <span class="right"><form:select path="procurementTransaction.transactionType" items="${procurementTransactionType}" /></span>
         </div>
         <div>
 		 	<TABLE id="dataTable" width="350px" border="1">
@@ -190,7 +190,7 @@
             <span class="center"><input type="submit" value="Submit"/> <input type="reset" value="Clear"/></span>
         </div>
     </div>
-</form:form>
+</form>
 
 
 

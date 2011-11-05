@@ -1,5 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <script type="text/javascript">
@@ -7,6 +8,10 @@
     $(document).ready(function(){
         $('.transaction_date').datepicker({dateFormat: 'dd-mm-yy' });
         $('.date_of_publish').datepicker({dateFormat: 'dd-mm-yy' });
+        $('.template_row').each(function(index){
+            itemSelected(index);
+			$($('.price_per_item')[index]).val($($('.amount')[index]).val/$($('.qty')[index]).val)
+        });
     });
 
     function validateForm(){
@@ -55,7 +60,7 @@
         var qty = $($('.qty')[rowId]).val();
         var calculatedPrice = mrp * (100 - discount) / 100;
         $($('.price_per_item')[rowId]).val(calculatedPrice);
-        $($('.total')[rowId]).val(qty * calculatedPrice);
+        $($('.amount')[rowId]).val(qty * calculatedPrice);
     }
 
     function onPriceChange(rowId){
@@ -63,18 +68,18 @@
         var price = $($('.price_per_item')[rowId]).val();
         var qty = $($('.qty')[rowId]).val();
         $($('.discount')[rowId]).val((mrp-price)*100/mrp);
-        $($('.total')[rowId]).val(qty * price);
+        $($('.amount')[rowId]).val(qty * price);
     }
 
     function onQtyChange(rowId){
         var price = $($('.price_per_item')[rowId]).val();
         var qty = $($('.qty')[rowId]).val();
-        $($('.total')[rowId]).val(qty * price);
+        $($('.amount')[rowId]).val(qty * price);
     }
 	
 	function itemSelected(rowId){
 	    var mrpElement = $('.mrp')[rowId];
-        var itemPriceUrl = "/item/price?selectedItemCode="+$($('.item_name')[rowId]).val();
+        var itemPriceUrl = "<%=request.getContextPath()%>/item/price?selectedItemCode="+$($('.item_name')[rowId]).val();
         $.ajax({
             url : itemPriceUrl,
             processData : true,
@@ -83,7 +88,7 @@
             }
         })
 
-        var vendorDiscountUrl = "/vendor/discount?selectedVendorId="+$('.vendor_name').val();
+        var vendorDiscountUrl = "<%=request.getContextPath()%>/vendor/discount?selectedVendorId="+$('.vendor_name').val();
 		var discountElement = $('.discount')[rowId];
         $.ajax({
             url : vendorDiscountUrl,
@@ -96,7 +101,7 @@
     }
 	
 	function updateDiscount(){
-	    var vendorDiscountUrl = "/vendor/discount?selectedVendorId="+$('.vendor_name').val();
+	    var vendorDiscountUrl = "<%=request.getContextPath()%>/vendor/discount?selectedVendorId="+$('.vendor_name').val();
         $.ajax({
             url : vendorDiscountUrl,
             processData : true,
@@ -113,10 +118,17 @@
 		var table = document.getElementById(tableID);
 		var rowCount = table.rows.length;
 		var row = table.insertRow(rowCount);
-		var firstRowHtml = document.getElementById(tableID).rows[0].innerHTML;
+		var firstRowHtml = $($(".template_row")[0]).html();
 		row.innerHTML = firstRowHtml.replace(/[0]/g,rowCount).replace(/(0)/g,rowCount);
+        $($('.date_of_publish')[rowCount]).removeClass('hasDatepicker').datepicker({dateFormat: 'dd-mm-yy' });
+		
+		$($('.item_name')[rowCount]).val("-1");
 		$($('.date_of_publish')[rowCount]).val("");
-        $($('.date_of_publish')[rowCount]).datepicker({dateFormat: 'dd-mm-yy' });
+		$($('.mrp')[rowCount]).val("");
+		$($('.discount')[rowCount]).val("");
+		$($('.price_per_item')[rowCount]).val("");
+		$($('.qty')[rowCount]).val("");
+		$($('.amount')[rowCount]).val("");
 	}
 
 	function deleteRow(tableID) {
@@ -165,21 +177,28 @@
 					<TD></TD>
 					<TD>Item</TD>
 					<TD>Date Of Publishing</TD>
+					<TD>MRP</TD>
+					<TD>Discount</TD>
 					<TD>Price Per Item</TD>
 					<TD>Qty</TD>
+					<TD>Total</TD>
 				</thead>
-				<c:forEach var="transactionDetail" items="${procurementTransaction.transactionDetails}">
-                    <tr>
-                        <form:hidden path="transactionDetails[0].detailsId"/>
+				<c:forEach var="index" begin="1" end="${fn:length(procurementTransaction.transactionDetails)}" step="1">
+					<form:hidden path="procurementTransaction.transactionDetails[${index-1}].detailsId"/>
+                    <tr class="template_row">
                         <td><input type='checkbox' name='chk' class='item_select'/></td>
                         <td>
-                            <form:select path='transactionDetails[0].item.itemCode' class='item_name'  onChange='itemSelected(0);'>
-                                <form:options items="${items}" itemLabel="itemName" itemValue="itemCode"/>
+                            <form:select path='procurementTransaction.transactionDetails[${index-1}].item.itemCode' class='item_name'  onChange='itemSelected(0);'>
+								<form:option value="-1" label="--Please Select"/>
+								<form:options items="${items}" itemLabel="itemName" itemValue="itemCode"/>
                             </form:select>
                         </td>
-                        <td><form:input path='transactionDetails[0].dateOfPublishing' class='date_of_publish' type='text'/></td>
-                        <td><form:input path='transactionDetails[0].amount' class='price_per_item' type='text' onChange='onPriceChange(0)'/></td>
-                        <td><form:input path='transactionDetails[0].quantity' class='qty' type='text' onChange='onQtyChange(0)'/></td>
+                        <td><form:input path='procurementTransaction.transactionDetails[${index-1}].dateOfPublishing' class='date_of_publish' type='text'/></td>
+                        <td><input class='mrp' type='text' readonly='true'/></td>
+					    <td><input class='discount' type='text' onChange='onDiscountChange(0)'/></td>
+						<td><input class='price_per_item' type='text' onChange='onPriceChange(0)'/></td>
+                        <td><form:input path='procurementTransaction.transactionDetails[${index-1}].quantity' class='qty' type='text' onChange='onQtyChange(0)'/></td>
+                        <td><form:input path='procurementTransaction.transactionDetails[${index-1}].amount' class='amount' type='text' readonly='true'/></td>
                     </tr>
 				</c:forEach>
 			</TABLE>

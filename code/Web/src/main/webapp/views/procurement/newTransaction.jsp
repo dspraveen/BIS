@@ -55,7 +55,7 @@
         var qty = $($('.qty')[rowId]).val();
         var calculatedPrice = mrp * (100 - discount) / 100;
         $($('.price_per_item')[rowId]).val(calculatedPrice);
-        $($('.total')[rowId]).val(qty * calculatedPrice);
+        $($('.amount')[rowId]).val(qty * calculatedPrice);
     }
 
     function onPriceChange(rowId){
@@ -63,13 +63,13 @@
         var price = $($('.price_per_item')[rowId]).val();
         var qty = $($('.qty')[rowId]).val();
         $($('.discount')[rowId]).val((mrp-price)*100/mrp);
-        $($('.total')[rowId]).val(qty * price);
+        $($('.amount')[rowId]).val(qty * price);
     }
 
     function onQtyChange(rowId){
         var price = $($('.price_per_item')[rowId]).val();
         var qty = $($('.qty')[rowId]).val();
-        $($('.total')[rowId]).val(qty * price);
+        $($('.amount')[rowId]).val(qty * price);
     }
 	
 	function itemSelected(rowId){
@@ -151,7 +151,7 @@
         </div>
         <div class="section">
             <span class="left"><label>Transaction Date:</label></span
-            <span class="right"><input name="procurementTransaction.date" class="transaction_date"/></span>
+            <span class="right"><form:input name="procurementTransaction.date" class="transaction_date"/></span>
         </div>
         <div class="section">
             <span class="left"><label>Transaction Type:</label></span
@@ -177,12 +177,12 @@
 							<form:options items="${items}" itemLabel="itemName" itemValue="itemCode"/>
 						</form:select>
 					</td>
-					<td><input name='procurementTransaction.transactionDetails[0].dateOfPublishing' class='date_of_publish' type='text'/></td>
+					<td><form:input name='procurementTransaction.transactionDetails[0].dateOfPublishing' class='date_of_publish' type='text'/></td>
 					<td><input class='mrp' type='text' readonly='true'/></td>
 					<td><input class='discount' type='text' onChange='onDiscountChange(0)'/></td>
 					<td><input class='price_per_item' type='text' onChange='onPriceChange(0)'/></td>
-					<td><input name='procurementTransaction.transactionDetails[0].quantity' class='qty' type='text' onChange='onQtyChange(0)'/></td>
-					<td><input name='procurementTransaction.transactionDetails[0].amount' class='total' type='text' readonly='true'/></td>
+					<td><form:input name='procurementTransaction.transactionDetails[0].quantity' class='qty' type='text' onChange='onQtyChange(0)'/></td>
+					<td><form:input name='procurementTransaction.transactionDetails[0].amount' class='total' type='text' readonly='true'/></td>
 				</tr>
 			</TABLE>
 			<INPUT type="button" value="Add Row" onclick="addRow('dataTable')" />

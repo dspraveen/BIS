@@ -122,7 +122,10 @@
 		try {
 		var table = document.getElementById(tableID);
 		var rowCount = table.rows.length;
-
+		if(rowCount==1){
+		    alert("Cannot delete all rows");
+		    return;
+		}
 		for(var i=0; i<rowCount; i++) {
 			var row = table.rows[i];
 			var chkbox = row.cells[0].childNodes[0];
@@ -151,7 +154,7 @@
         </div>
         <div class="section">
             <span class="left"><label>Transaction Date:</label></span
-            <span class="right"><form:input name="procurementTransaction.date" class="transaction_date"/></span>
+            <span class="right"><form:input path="procurementTransaction.date" class="transaction_date"/></span>
         </div>
         <div class="section">
             <span class="left"><label>Transaction Type:</label></span
@@ -177,12 +180,12 @@
 							<form:options items="${items}" itemLabel="itemName" itemValue="itemCode"/>
 						</form:select>
 					</td>
-					<td><form:input name='procurementTransaction.transactionDetails[0].dateOfPublishing' class='date_of_publish' type='text'/></td>
+					<td><form:input path='procurementTransaction.transactionDetails[0].dateOfPublishing' class='date_of_publish' type='text'/></td>
 					<td><input class='mrp' type='text' readonly='true'/></td>
 					<td><input class='discount' type='text' onChange='onDiscountChange(0)'/></td>
 					<td><input class='price_per_item' type='text' onChange='onPriceChange(0)'/></td>
-					<td><form:input name='procurementTransaction.transactionDetails[0].quantity' class='qty' type='text' onChange='onQtyChange(0)'/></td>
-					<td><form:input name='procurementTransaction.transactionDetails[0].amount' class='total' type='text' readonly='true'/></td>
+					<td><form:input path='procurementTransaction.transactionDetails[0].quantity' class='qty' type='text' onChange='onQtyChange(0)'/></td>
+					<td><form:input path='procurementTransaction.transactionDetails[0].amount' class='amount' type='text' readonly='true'/></td>
 				</tr>
 			</TABLE>
 			<INPUT type="button" value="Add Row" onclick="addRow('dataTable')" />

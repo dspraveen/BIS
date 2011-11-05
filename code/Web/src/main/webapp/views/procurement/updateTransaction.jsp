@@ -135,7 +135,10 @@
 		try {
 		var table = document.getElementById(tableID);
 		var rowCount = table.rows.length;
-
+        if(rowCount==1){
+            alert("Cannot delete all rows");
+            return;
+        }
 		for(var i=0; i<rowCount; i++) {
 			var row = table.rows[i];
 			var chkbox = row.cells[0].childNodes[0];

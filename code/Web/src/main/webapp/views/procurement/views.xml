@@ -17,4 +17,10 @@
     <definition name="procurement/transactionsInRange" extends="ajaxSection">
         <put-attribute name="content" value="/views/procurement/listTransactionsInRange.jsp"/>
     </definition>
+    <definition name="procurementPayment/createProcurementPayment" extends="procurement">
+        <put-attribute name="main-content" value="/views/procurement/createProcurementPayment.jsp"/>
+    </definition>
+    <definition name="procurementPayment/show" extends="procurement">
+        <put-attribute name="main-content" value="/views/procurement/showProcurementPayment.jsp"/>
+    </definition>
 </tiles-definitions>

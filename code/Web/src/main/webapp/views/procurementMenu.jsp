@@ -17,5 +17,9 @@
     <li>
       <a href="#">Billing Details</a>
     </li>
+    <li>
+      <a href="<%=request.getContextPath()%>/procurementPayment/createProcurementPayment">Create Payment</a>
+    </li>
+
   </ul>
 </div>

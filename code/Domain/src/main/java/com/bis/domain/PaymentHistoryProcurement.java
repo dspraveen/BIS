@@ -5,28 +5,14 @@ import java.util.Date;
 public class PaymentHistoryProcurement implements java.io.Serializable {
 
 	private Integer paymentId;
-	private int vendorId;
 	private Date date;
 	private Float amount;
 	private String receiptNum;
 	private Character mode;
 	private String remarks;
+    private Vendor vendor = new Vendor();
 
 	public PaymentHistoryProcurement() {
-	}
-
-	public PaymentHistoryProcurement(int vendorId) {
-		this.vendorId = vendorId;
-	}
-
-	public PaymentHistoryProcurement(int vendorId, Date date, Float amount,
-			String receiptNum, Character mode, String remarks) {
-		this.vendorId = vendorId;
-		this.date = date;
-		this.amount = amount;
-		this.receiptNum = receiptNum;
-		this.mode = mode;
-		this.remarks = remarks;
 	}
 
 	public Integer getPaymentId() {
@@ -35,14 +21,6 @@ public class PaymentHistoryProcurement implements java.io.Serializable {
 
 	public void setPaymentId(Integer paymentId) {
 		this.paymentId = paymentId;
-	}
-
-	public int getVendorId() {
-		return this.vendorId;
-	}
-
-	public void setVendorId(int vendorId) {
-		this.vendorId = vendorId;
 	}
 
 	public Date getDate() {
@@ -85,4 +63,11 @@ public class PaymentHistoryProcurement implements java.io.Serializable {
 		this.remarks = remarks;
 	}
 
+    public Vendor getVendor() {
+        return vendor;
+    }
+
+    public void setVendor(Vendor vendor) {
+        this.vendor = vendor;
+    }
 }

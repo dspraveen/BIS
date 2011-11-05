@@ -7,7 +7,7 @@
     <h1>Payment Details</h1>
     <div class="section">
         <span class="left"><label>Vendor name:</label></span>
-        <span class="right"><label>${PaymentHistoryProcurement.vendorId}</label></span>
+        <span class="right"><label>${PaymentHistoryProcurement.vendor.vendorName}</label></span>
     </div>
     <div class="section">
         <span class="left"><label>Date:</label></span>

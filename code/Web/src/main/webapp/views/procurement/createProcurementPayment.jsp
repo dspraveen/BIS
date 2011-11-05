@@ -33,7 +33,7 @@
         <div class="section">
             <span class="left"><label>Select Vendor:</label></span>
             <span class="right">
-				<form:select path="PaymentHistoryProcurement.vendorId" class="vendor_name">
+				<form:select path="PaymentHistoryProcurement.vendor.vendorId" class="vendor_name">
 					<form:option value="-1" label="--Please Select"/>
 					<form:options items="${vendors}" itemLabel="vendorName" itemValue="vendorId" />
 				</form:select>

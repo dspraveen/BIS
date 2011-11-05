@@ -113,7 +113,7 @@
 		var table = document.getElementById(tableID);
 		var rowCount = table.rows.length;
 		var row = table.insertRow(rowCount);
-		var firstRowHtml = document.getElementById(tableID).rows[0].innerHTML;
+		var firstRowHtml = $($(".template_row")[0]).html();
 		row.innerHTML = firstRowHtml.replace(/[0]/g,rowCount).replace(/(0)/g,rowCount);
         $($('.date_of_publish')[rowCount]).removeClass('hasDatepicker').datepicker({dateFormat: 'dd-mm-yy' });
 	}
@@ -169,7 +169,7 @@
 					<TD>Qty</TD>
 					<TD>Total</TD>
 				</thead>
-				<tr>
+				<tr class='template_row'>
 					<td><input type='checkbox' name='chk' class='item_select'/></td>
 					<td>
 						<form:select path='procurementTransaction.transactionDetails[0].item.itemCode' class='item_name'  onChange='itemSelected(0);'>
@@ -180,7 +180,7 @@
 					<td><input name='procurementTransaction.transactionDetails[0].dateOfPublishing' class='date_of_publish' type='text'/></td>
 					<td><input class='mrp' type='text' readonly='true'/></td>
 					<td><input class='discount' type='text' onChange='onDiscountChange(0)'/></td>
-					<td><input name='procurementTransaction.price_per_item' class='price_per_item' type='text' onChange='onPriceChange(0)'/></td>
+					<td><input class='price_per_item' type='text' onChange='onPriceChange(0)'/></td>
 					<td><input name='procurementTransaction.transactionDetails[0].quantity' class='qty' type='text' onChange='onQtyChange(0)'/></td>
 					<td><input name='procurementTransaction.transactionDetails[0].amount' class='total' type='text' readonly='true'/></td>
 				</tr>

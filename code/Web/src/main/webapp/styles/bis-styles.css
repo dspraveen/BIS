@@ -280,9 +280,10 @@ input.button {
 #main {
 	float: left;
 	width: 68%;
-	padding: 0; margin: 30px 10px 0 30px;
+	padding: 30px 10px 0 30px;
 	display: inline;
     min-height: 600px;
+    border-left: 2px solid;
 }
 #main h2 {
 	margin-top: 10px;
@@ -306,7 +307,6 @@ input.button {
 	width: 14.8%;
 	padding: 0; 
 	margin-left: 15px;
-	border-right: 2px solid;
 	display: inline;
 	min-height: 610px;
 }	

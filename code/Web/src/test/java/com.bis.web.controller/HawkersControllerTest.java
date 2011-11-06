@@ -107,4 +107,9 @@ public class HawkersControllerTest {
         assertEquals(hawkerOne, hawkerList.getHawkers().get(1));
         assertEquals(hawkerTwo, hawkerList.getSelectedHawker());
     }
+    @Test
+    public void sample(){
+        Float a = null;
+        a = 12f;
+    }
 }

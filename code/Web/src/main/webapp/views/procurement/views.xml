@@ -23,4 +23,7 @@
     <definition name="procurementPayment/show" extends="procurement">
         <put-attribute name="main-content" value="/views/procurement/showProcurementPayment.jsp"/>
     </definition>
+    <definition name="procurementPayment/updateForm" extends="procurement">
+        <put-attribute name="main-content" value="/views/procurement/updateProcurementPayment.jsp"/>
+    </definition>
 </tiles-definitions>

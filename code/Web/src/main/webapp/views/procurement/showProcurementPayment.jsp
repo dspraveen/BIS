@@ -29,4 +29,7 @@
         <span class="left"><label>Remarks:</label></span>
         <span class="right"><label>${PaymentHistoryProcurement.remarks}</label></span>
     </div>
+    <div class="section">
+        <span class="left"><a href="<%=request.getContextPath()%>/procurementPayment/updateForm/${PaymentHistoryProcurement.paymentId}">Update Payment</a></span>
+    </div>
 </div>

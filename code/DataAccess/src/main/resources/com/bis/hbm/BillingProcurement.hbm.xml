@@ -7,9 +7,7 @@
             <column name="Bill_ID" />
             <generator class="identity" />
         </id>
-        <property name="vendorId" type="int">
-            <column name="Vendor_ID" not-null="true" />
-        </property>
+        <many-to-one name="vendor" class="com.bis.domain.Vendor" column="Vendor_ID" cascade="none" not-null="true" lazy="false"/>
         <property name="startDate" type="timestamp">
             <column name="Start_Date" length="19" />
         </property>

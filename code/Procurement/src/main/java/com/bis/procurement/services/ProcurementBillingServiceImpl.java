@@ -74,7 +74,7 @@ public class ProcurementBillingServiceImpl implements ProcurementBillingService{
         }
         // get the total payment made during this cycle
         totalAmount -= this.getTotalAmountForCycle(vendor.getVendorId(),billingProcurement.getEndDate(),DateUtils.currentDate());
-        BillingProcurement billingProcurementNew = new BillingProcurement(vendor.getVendorId(),billingProcurement.getEndDate(), DateUtils.currentDate(),totalAmount);
+        BillingProcurement billingProcurementNew = new BillingProcurement(billingProcurement.getEndDate(), DateUtils.currentDate(),totalAmount, vendor);
         procurementBillingRepository.save(billingProcurementNew);
     }
 }

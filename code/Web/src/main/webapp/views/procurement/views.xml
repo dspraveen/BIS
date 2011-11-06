@@ -26,4 +26,10 @@
     <definition name="procurementPayment/updateForm" extends="procurement">
         <put-attribute name="main-content" value="/views/procurement/updateProcurementPayment.jsp"/>
     </definition>
+    <definition name="procurementPayment/list" extends="procurement">
+        <put-attribute name="main-content" value="/views/procurement/listPayments.jsp"/>
+    </definition>
+    <definition name="procurementPayment/paymentsInRange" extends="ajaxSection">
+        <put-attribute name="content" value="/views/procurement/listPaymentsInRange.jsp"/>
+    </definition>
 </tiles-definitions>

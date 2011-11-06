@@ -11,13 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -69,6 +67,17 @@ public class ProcurementPaymentController {
         uiModel.asMap().clear();
         procurementPaymentService.updateProcurementPayment(paymentHistoryProcurement);
         return "redirect:/procurementPayment/show/" + paymentHistoryProcurement.getPaymentId();
+    }
+
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public ModelAndView list() {
+        return new ModelAndView("procurementPayment/list");
+    }
+
+    @RequestMapping(value = "/paymentsInRange", method = RequestMethod.GET)
+    public ModelAndView transactionsBetween(@RequestParam(value = "fromDate", required = true)Date fromDate, @RequestParam(value = "toDate", required = true)Date toDate ) {
+        List<PaymentHistoryProcurement> paymentHistoryProcurements = procurementPaymentService.getProcurementPayments(fromDate, toDate);
+        return new ModelAndView("procurementPayment/paymentsInRange","paymentHistoryProcurements",paymentHistoryProcurements);
     }
 
     @ModelAttribute("PaymentMode")

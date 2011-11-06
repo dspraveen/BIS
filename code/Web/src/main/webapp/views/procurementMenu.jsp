@@ -20,6 +20,8 @@
     <li>
       <a href="<%=request.getContextPath()%>/procurementPayment/createProcurementPayment">Create Payment</a>
     </li>
-
+    <li>
+      <a href="<%=request.getContextPath()%>/procurementPayment/list">Payment Details</a>
+    </li>
   </ul>
 </div>

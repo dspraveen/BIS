@@ -2,6 +2,8 @@ package com.bis.web.viewmodel;
 
 import com.bis.domain.ProcurementTransaction;
 import com.bis.domain.PtDetails;
+import com.bis.domain.SalesTransaction;
+import com.bis.domain.StDetails;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -31,6 +33,13 @@ public class TransactionDetailGrid {
         targetId = procurementTransaction.getVendor().getVendorId();
         transactionDate = procurementTransaction.getDate();
         type = procurementTransaction.getTransactionType();
+    }
+
+    public TransactionDetailGrid(SalesTransaction salesTransaction) {
+        transactionId = salesTransaction.getTransactionId();
+        targetId = salesTransaction.getHawker().getHawkerId();
+        transactionDate = salesTransaction.getDate();
+        type = salesTransaction.getTransactionType();
     }
 
     public Integer getTransactionId() {
@@ -132,5 +141,25 @@ public class TransactionDetailGrid {
         }
         procurementTransaction.calculateAndSetTotalAmount();
         return procurementTransaction;
+    }
+
+    public SalesTransaction buildSalesTransaction() {
+        SalesTransaction salesTransaction = new SalesTransaction();
+        salesTransaction.setTransactionId(transactionId);
+        salesTransaction.setDate(transactionDate);
+        salesTransaction.setTransactionType(type);
+        salesTransaction.getHawker().setHawkerId(targetId);
+        for (TransactionDetailRow row : transactionDetails) {
+            StDetails stDetails = new StDetails();
+            stDetails.setDetailsId(row.getDetailsId());
+            stDetails.setTransactionId(row.getTransactionId());
+            stDetails.setDateOfPublishing(row.getDateOfPublishing());
+            stDetails.setAmount(row.getAmount());
+            stDetails.setQuantity(row.getQuantity());
+            stDetails.getItem().setItemCode(row.getItemCode());
+            salesTransaction.getTransactionDetails().add(stDetails);
+        }
+        salesTransaction.calculateAndSetTotalAmount();
+        return salesTransaction;
     }
 }

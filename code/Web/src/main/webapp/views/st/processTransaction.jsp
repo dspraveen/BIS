@@ -3,27 +3,27 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/transactionDetails.js"></script>
-<form method="POST" action="<%=request.getContextPath()%>/procurement/addProcurementTransaction"  onsubmit="return validateForm();">
+<form method="POST" action="<%=request.getContextPath()%>/sales/addSalesTransaction"  onsubmit="return validateForm();">
     <div>
-        <form:hidden path="procurementTransaction.transactionId"/>
-        <form:hidden path="procurementTransaction.effectedRowId" id="effectedRowId"/>
-        <form:hidden path="procurementTransaction.changeType" id="changeType"/>
+        <form:hidden path="salesTransaction.transactionId"/>
+        <form:hidden path="salesTransaction.effectedRowId" id="effectedRowId"/>
+        <form:hidden path="salesTransaction.changeType" id="changeType"/>
         <div class="section">
-            <span class="left"><label>Select Vendor:</label></span
+            <span class="left"><label>Select Hawker:</label></span
             <span class="right">
-				<form:select path="procurementTransaction.targetId" class="vendor_name">
+				<form:select path="salesTransaction.targetId" class="hawker_name">
 					<form:option value="-1" label="--Please Select"/>
-					<form:options items="${vendors}" itemLabel="vendorName" itemValue="vendorId" />
+					<form:options items="${hawkers}" itemLabel="hawkerName" itemValue="hawkerId" />
 				</form:select>
 			</span>
         </div>
         <div class="section">
             <span class="left"><label>Transaction Date:</label></span
-            <span class="right"><form:input path="procurementTransaction.transactionDate" class="transaction_date"/></span>
+            <span class="right"><form:input path="salesTransaction.transactionDate" class="transaction_date"/></span>
         </div>
         <div class="section">
             <span class="left"><label>Transaction Type:</label></span
-            <span class="right"><form:select path="procurementTransaction.type" items="${procurementTransactionType}" /></span>
+            <span class="right"><form:select path="salesTransaction.type" items="${salesTransactionType}" /></span>
         </div>
         <div>
              <div class="transaction_details"></div>
@@ -39,7 +39,7 @@
     $(document).ready(function(){
         $('.transaction_date').datepicker({dateFormat: 'dd-mm-yy' });
         $('.date_of_publish').datepicker({dateFormat: 'dd-mm-yy' });
-        $('.transaction_details').transactionDetails({contextPath:'<%=request.getContextPath()%>',type:'procurement'});
+        $('.transaction_details').transactionDetails({contextPath:'<%=request.getContextPath()%>',type:'sales'});
     });
 </script>
 

@@ -1,5 +1,8 @@
 package com.bis.domain;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.Predicate;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -7,25 +10,13 @@ import java.util.List;
 public class SalesTransaction implements java.io.Serializable {
 
     private Integer transactionId;
-    private int hawkerId;
+    private Hawker hawker = new Hawker();
     private Date date;
     private Character transactionType;
     private Float totalAmount;
     private List<StDetails> transactionDetails = new ArrayList<StDetails>();
 
     public SalesTransaction() {
-    }
-
-    public SalesTransaction(int hawkerId) {
-        this.hawkerId = hawkerId;
-    }
-
-    public SalesTransaction(int hawkerId, Date date, Character transactionType,
-                            Float totalAmount) {
-        this.hawkerId = hawkerId;
-        this.date = date;
-        this.transactionType = transactionType;
-        this.totalAmount = totalAmount;
     }
 
     public Integer getTransactionId() {
@@ -36,12 +27,12 @@ public class SalesTransaction implements java.io.Serializable {
         this.transactionId = transactionId;
     }
 
-    public int getHawkerId() {
-        return this.hawkerId;
+    public Hawker getHawker() {
+        return hawker;
     }
 
-    public void setHawkerId(int hawkerId) {
-        this.hawkerId = hawkerId;
+    public void setHawker(Hawker hawker) {
+        this.hawker = hawker;
     }
 
     public Date getDate() {
@@ -83,5 +74,17 @@ public class SalesTransaction implements java.io.Serializable {
             totalAmount += details.getAmount();
         }
         this.setTotalAmount(totalAmount);
+    }
+
+    public StDetails getStDetails(final Integer transactionDetailId) {
+        if (transactionDetailId == null) return null;
+        return (StDetails) CollectionUtils.find(transactionDetails, new Predicate() {
+            @Override
+            public boolean evaluate(Object object) {
+                StDetails details = (StDetails) object;
+                if (details.getDetailsId() == null) return false;
+                return details.getDetailsId().intValue() == transactionDetailId.intValue();
+            }
+        });
     }
 }

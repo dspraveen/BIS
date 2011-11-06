@@ -9,7 +9,6 @@ import com.bis.procurement.services.ProcurementTransactionService;
 import com.bis.web.ProcurementTransactionHandler;
 import com.bis.web.viewmodel.TransactionDetailGrid;
 import com.bis.web.viewmodel.TransactionDetailRow;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,12 +26,9 @@ import java.util.Map;
 @RequestMapping("/procurement")
 public class ProcurementTransactionController {
 
-    protected final Logger logger = Logger.getLogger(getClass());
-
     private ProcurementTransactionService procurementTransactionService;
     private ItemMasterService itemMasterService;
     private VendorMasterService vendorMasterService;
-    private StockService stockService;
     private ProcurementTransactionHandler procurementTransactionHandler;
 
     @Autowired
@@ -40,16 +36,14 @@ public class ProcurementTransactionController {
         this.procurementTransactionService = procurementTransactionService;
         this.itemMasterService = itemMasterService;
         this.vendorMasterService = vendorMasterService;
-        this.stockService = stockService;
         this.procurementTransactionHandler = new ProcurementTransactionHandler(procurementTransactionService, stockService);
     }
 
 
-    ProcurementTransactionController(ProcurementTransactionService procurementTransactionService, ItemMasterService itemMasterService, VendorMasterService vendorMasterService, StockService stockService, ProcurementTransactionHandler procurementTransactionHandler) {
+    ProcurementTransactionController(ProcurementTransactionService procurementTransactionService, ItemMasterService itemMasterService, VendorMasterService vendorMasterService, ProcurementTransactionHandler procurementTransactionHandler) {
         this.procurementTransactionService = procurementTransactionService;
         this.itemMasterService = itemMasterService;
         this.vendorMasterService = vendorMasterService;
-        this.stockService = stockService;
         this.procurementTransactionHandler = procurementTransactionHandler;
     }
 

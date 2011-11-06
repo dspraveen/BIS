@@ -1,20 +1,21 @@
 $(function() {
-    $.widget("bis.procurementTransactionDetails", {
+    $.widget("bis.transactionDetails", {
         options: {
-            contextPath:'bis'
+            contextPath:'bis',
+            type:null
         },
 
         _create: function() {
-            this._updateGrid(this.options.contextPath+"/procurement/fetchTransactionDetails");
+            this._updateGrid(this.options.contextPath+"/"+type+"/fetchTransactionDetails");
             this._bindEvents();
         },
 
         _addItem : function(){
-            var addItemUrl = this.options.contextPath+"/procurement/addItem";
+            var addItemUrl = this.options.contextPath+"/"+type+"/addItem";
             this._updateGrid(addItemUrl);
         },
         _deleteItem : function(){
-            var deleteItemUrl = this.options.contextPath+"/procurement/deleteItem";
+            var deleteItemUrl = this.options.contextPath+"/"+type+"/deleteItem";
             this._updateGrid(deleteItemUrl);
         },
         _updateGrid:function(url){
@@ -35,26 +36,26 @@ $(function() {
             $('.item_name').each(function(index){
                 $(this).bind('change',function(){
                     $('#effectedRowId').val(index);
-                    self._updateGrid(self.options.contextPath+"/procurement/itemChanged");
+                    self._updateGrid(self.options.contextPath+"/"+type+"/itemChanged");
                 });
             });
             $('.discount').each(function(index){
                 $(this).bind('change',function(){
                     $('#effectedRowId').val(index);
-                    self._updateGrid(self.options.contextPath+"/procurement/itemDiscountChanged");
+                    self._updateGrid(self.options.contextPath+"/"+type+"/itemDiscountChanged");
                 });
             });
             $('.price_per_item').each(function(index){
                 $(this).bind('change',function(){
                     $('#effectedRowId').val(index);
-                    self._updateGrid(self.options.contextPath+"/procurement/itemPriceChanged");
+                    self._updateGrid(self.options.contextPath+"/"+type+"/itemPriceChanged");
                 });
             });
 
             $('.quantity').each(function(index){
                 $(this).bind('change',function(){
                     $('#effectedRowId').val(index);
-                    self._updateGrid(self.options.contextPath+"/procurement/itemQuantityChanged");
+                    self._updateGrid(self.options.contextPath+"/"+type+"/itemQuantityChanged");
                 });
             });
         },
@@ -68,7 +69,7 @@ $(function() {
                 self._deleteItem();
             });
             $('.vendor_name').bind('change',function(){
-                self._updateGrid(self.options.contextPath+"/procurement/vendorChanged");
+                self._updateGrid(self.options.contextPath+"/"+type+"/vendorChanged");
             });
         }
     });

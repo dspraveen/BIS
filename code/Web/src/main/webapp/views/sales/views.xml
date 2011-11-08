@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+        "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+
+    <definition name="salesPayment/createForm" extends="sales">
+        <put-attribute name="main-content" value="/views/sales/createForm.jsp"/>
+    </definition>
+     <definition name="salesPayment/show" extends="sales">
+        <put-attribute name="main-content" value="/views/sales/showSalesTransaction.jsp"/>
+    </definition>
+    <definition name="salesPayment/updateForm" extends="sales">
+        <put-attribute name="main-content" value="/views/sales/updateSalesPayment.jsp"/>
+    </definition>
+    <definition name="salesPayment/list" extends="sales">
+        <put-attribute name="main-content" value="/views/sales/listSalesPayments.jsp"/>
+    </definition>
+    <definition name="salesPayment/transactionsInRange" extends="ajaxSection">
+        <put-attribute name="content" value="/views/sales/listSalesPaymentsInRange.jsp"/>
+    </definition>
+
+</tiles-definitions>

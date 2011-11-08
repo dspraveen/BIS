@@ -1,22 +1,23 @@
 package com.bis.web.controller;
 
 import com.bis.common.DateUtils;
-import com.bis.domain.PaymentHistorySales;
-import com.bis.domain.PaymentMode;
+import com.bis.core.services.HawkerMasterService;
+import com.bis.core.services.VendorMasterService;
+import com.bis.domain.*;
 import com.bis.sales.services.SalesPaymentService;
+import com.bis.sales.services.SalesTransactionService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -26,10 +27,12 @@ public class SalesPaymentController{
     protected final Logger logger = Logger.getLogger(getClass());
 
     private SalesPaymentService salesPaymentService;
+    private HawkerMasterService hawkerMasterService;
 
     @Autowired
-    public SalesPaymentController(SalesPaymentService salesPaymentService) {
+    public SalesPaymentController(SalesPaymentService salesPaymentService, HawkerMasterService hawkerMasterService) {
         this.salesPaymentService = salesPaymentService;
+        this.hawkerMasterService = hawkerMasterService;
     }
 
     @RequestMapping(value = "/show/{id}",method = RequestMethod.GET)
@@ -45,6 +48,7 @@ public class SalesPaymentController{
         paymentHistorySales.setDate(DateUtils.currentDate());
         return new ModelAndView("salesPayment/createForm", "PaymentHistorySales", paymentHistorySales);
     }
+
 
     @RequestMapping(value = "/updateForm/{id}",method = RequestMethod.GET)
     public ModelAndView updateForm(@PathVariable("id") int paymentId) {
@@ -66,6 +70,19 @@ public class SalesPaymentController{
         return "redirect:/salesPayment/show/" + paymentHistorySales.getPaymentId();
     }
 
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public ModelAndView list() {
+        return new ModelAndView("salesPayment/list");
+    }
+
+    @RequestMapping(value = "/transactionsInRange", method = RequestMethod.GET)
+    public ModelAndView transactionsBetween(@RequestParam(value = "fromDate", required = true)Date fromDate, @RequestParam(value = "toDate", required = true)Date toDate ) {
+        List<PaymentHistorySales> salesPayments = salesPaymentService.getSalesPayments(fromDate, toDate);
+        return new ModelAndView("salesPayment/transactionsInRange","paymentHistorySales",salesPayments);
+    }
+
+
+
     @ModelAttribute("PaymentMode")
     public Map<Character,String> paymentMode(){
         Map<Character,String> paymentModes = new HashMap<Character,String>();
@@ -73,5 +90,10 @@ public class SalesPaymentController{
             paymentModes.put(paymentMode.getCode(), paymentMode.toString());
         }
         return paymentModes;
+    }
+
+    @ModelAttribute("hawkers")
+    public List<Hawker> hawkers() {
+        return hawkerMasterService.getAll();
     }
 }

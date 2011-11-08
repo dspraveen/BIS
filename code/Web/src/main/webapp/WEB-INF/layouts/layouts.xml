@@ -20,7 +20,7 @@
        <put-attribute name="context-menu" value="/views/procurementMenu.jsp"/>
     </definition>
 
-    <definition name="services" extends="default">
+    <definition name="sales" extends="default">
        <put-attribute name="context-menu" value="/views/salesMenu.jsp"/>
     </definition>
 

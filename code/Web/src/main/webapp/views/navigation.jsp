@@ -11,7 +11,7 @@
       <a href="<%=request.getContextPath()%>/procurement/createForm">Procurement</a>
     </li>
     <li>
-      <a href="<%=request.getContextPath()%>/procurement/createForm">Sales</a>
+      <a href="<%=request.getContextPath()%>/salesPayment/createForm">Sales</a>
     </li>
     <li>
       <a href="#">Inventory</a>

@@ -12,10 +12,10 @@
       <a href="#">Transaction Details</a>
     </li>
     <li>
-      <a href="#">Generate Bill</a>
+      <a href="<%=request.getContextPath()%>/salesPayment/createForm">Create Payment</a>
     </li>
     <li>
-      <a href="#">Billing Details</a>
+      <a href="<%=request.getContextPath()%>/salesPayment/list">Billing Details</a>
     </li>
   </ul>
 </div>

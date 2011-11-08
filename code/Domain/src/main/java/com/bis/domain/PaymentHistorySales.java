@@ -5,7 +5,7 @@ import java.util.Date;
 public class PaymentHistorySales implements java.io.Serializable {
 
 	private Integer paymentId;
-	private int hawkerId;
+	private Hawker hawker = new Hawker();
 	private Date date;
 	private Float amount;
 	private String receiptNum;
@@ -13,20 +13,6 @@ public class PaymentHistorySales implements java.io.Serializable {
 	private String remarks;
 
 	public PaymentHistorySales() {
-	}
-
-	public PaymentHistorySales(int hawkerId) {
-		this.hawkerId = hawkerId;
-	}
-
-	public PaymentHistorySales(int hawkerId, Date date, Float amount,
-			String receiptNum, Character mode, String remarks) {
-		this.hawkerId = hawkerId;
-		this.date = date;
-		this.amount = amount;
-		this.receiptNum = receiptNum;
-		this.mode = mode;
-		this.remarks = remarks;
 	}
 
 	public Integer getPaymentId() {
@@ -37,15 +23,15 @@ public class PaymentHistorySales implements java.io.Serializable {
 		this.paymentId = paymentId;
 	}
 
-	public int getHawkerId() {
-		return this.hawkerId;
-	}
+    public Hawker getHawker() {
+        return hawker;
+    }
 
-	public void setHawkerId(int hawkerId) {
-		this.hawkerId = hawkerId;
-	}
+    public void setHawker(Hawker hawker) {
+        this.hawker = hawker;
+    }
 
-	public Date getDate() {
+    public Date getDate() {
 		return this.date;
 	}
 

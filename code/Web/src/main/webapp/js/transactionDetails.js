@@ -6,19 +6,19 @@ $(function() {
         },
 
         _create: function() {
-            this._updateGrid(this.options.contextPath+"/"+type+"/fetchTransactionDetails");
+            this.updateGrid(this.options.contextPath+"/"+this.options.type+"/fetchTransactionDetails");
             this._bindEvents();
         },
 
         _addItem : function(){
-            var addItemUrl = this.options.contextPath+"/"+type+"/addItem";
-            this._updateGrid(addItemUrl);
+            var addItemUrl = this.options.contextPath+"/"+this.options.type+"/addItem";
+            this.updateGrid(addItemUrl);
         },
         _deleteItem : function(){
-            var deleteItemUrl = this.options.contextPath+"/"+type+"/deleteItem";
-            this._updateGrid(deleteItemUrl);
+            var deleteItemUrl = this.options.contextPath+"/"+this.options.type+"/deleteItem";
+            this.updateGrid(deleteItemUrl);
         },
-        _updateGrid:function(url){
+        updateGrid:function(url){
             var self = this;
             var formData = $('form').serialize();
             $.ajax({
@@ -36,26 +36,26 @@ $(function() {
             $('.item_name').each(function(index){
                 $(this).bind('change',function(){
                     $('#effectedRowId').val(index);
-                    self._updateGrid(self.options.contextPath+"/"+type+"/itemChanged");
+                    self.updateGrid(self.options.contextPath+"/"+self.options.type+"/itemChanged");
                 });
             });
             $('.discount').each(function(index){
                 $(this).bind('change',function(){
                     $('#effectedRowId').val(index);
-                    self._updateGrid(self.options.contextPath+"/"+type+"/itemDiscountChanged");
+                    self.updateGrid(self.options.contextPath+"/"+self.options.type+"/itemDiscountChanged");
                 });
             });
             $('.price_per_item').each(function(index){
                 $(this).bind('change',function(){
                     $('#effectedRowId').val(index);
-                    self._updateGrid(self.options.contextPath+"/"+type+"/itemPriceChanged");
+                    self.updateGrid(self.options.contextPath+"/"+self.options.type+"/itemPriceChanged");
                 });
             });
 
             $('.quantity').each(function(index){
                 $(this).bind('change',function(){
                     $('#effectedRowId').val(index);
-                    self._updateGrid(self.options.contextPath+"/"+type+"/itemQuantityChanged");
+                    self.updateGrid(self.options.contextPath+"/"+self.options.type+"/itemQuantityChanged");
                 });
             });
         },
@@ -68,9 +68,12 @@ $(function() {
             $('.remove_item').bind('click',function(){
                 self._deleteItem();
             });
-            $('.vendor_name').bind('change',function(){
-                self._updateGrid(self.options.contextPath+"/"+type+"/vendorChanged");
-            });
+			$('.hawker_name').bind('change',function(){
+				self.updateGrid(self.options.contextPath+"/sales/hawkerChanged");
+			});
+			$('.vendor_name').bind('change',function(){
+				self.updateGrid(self.options.contextPath+"/procurement/vendorChanged");
+			});
         }
     });
 });

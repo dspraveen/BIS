@@ -157,8 +157,8 @@ public class SalesTransactionController {
         return new ModelAndView("sales/editSalesTransactionDetails", "salesTransactionGrid", salesTransactionGrid);
     }
 
-    @RequestMapping(value = "/vendorChanged", method = RequestMethod.POST)
-    public ModelAndView vendorChanged(@Valid TransactionDetailGrid salesTransactionGrid, BindingResult bindingResult, Model uiModel) {
+    @RequestMapping(value = "/hawkerChanged", method = RequestMethod.POST)
+    public ModelAndView hawkerChanged(@Valid TransactionDetailGrid salesTransactionGrid, BindingResult bindingResult, Model uiModel) {
         for (TransactionDetailRow row : salesTransactionGrid.getTransactionDetails()) {
             row.updateVendorDiscount(hawkerMasterService.get(salesTransactionGrid.getTargetId()).getHawkerDiscount());
         }

@@ -6,10 +6,16 @@
   <h3>Sales Menu</h3>
   <ul class="sidemenu">
     <li>
-      <a href="#">Add New Transaction</a>
+      <a href="<%=request.getContextPath()%>/sales/createForm">Add New Transaction</a>
     </li>
     <li>
-      <a href="#">Transaction Details</a>
+      <a href="<%=request.getContextPath()%>/sales/list">Transaction Details</a>
+    </li>
+    <li>
+      <a href="#">Generate Bill</a>
+    </li>
+    <li>
+      <a href="#">Billing Details</a>
     </li>
     <li>
       <a href="<%=request.getContextPath()%>/salesPayment/createForm">Create Payment</a>

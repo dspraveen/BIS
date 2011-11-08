@@ -10,7 +10,7 @@ public class StDetails implements java.io.Serializable {
     private Date dateOfPublishing;
     private Integer quantity;
     private Float amount;
-    private Item item;
+    private Item item = new Item();
 
     public StDetails() {
     }

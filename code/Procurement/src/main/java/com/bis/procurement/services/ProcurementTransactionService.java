@@ -11,4 +11,5 @@ public interface ProcurementTransactionService {
     void updateProcurementTransaction(ProcurementTransaction procurementTransaction);
     ProcurementTransaction getProcurementTransaction(int transactionId);
     List<ProcurementTransaction> getProcurementTransactions(Date fromDate, Date toDate);
+    List<ProcurementTransaction> getProcurementTransactions(Date fromDate, Date toDate, int vendorId);
 }

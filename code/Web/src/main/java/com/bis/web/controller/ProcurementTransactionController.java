@@ -65,9 +65,9 @@ public class ProcurementTransactionController {
     public String addProcurementTransaction(@Valid TransactionDetailGrid transactionDetailGrid, BindingResult bindingResult, Model uiModel) {
         uiModel.asMap().clear();
         ProcurementTransaction procurementTransaction = transactionDetailGrid.buildProcurementTransaction();
-        if(procurementTransaction.getTransactionId() == null || procurementTransaction.getTransactionId() < 1){
+        if (procurementTransaction.getTransactionId() == null || procurementTransaction.getTransactionId() < 1) {
             procurementTransactionHandler.addNewTransaction(procurementTransaction);
-        }else {
+        } else {
             procurementTransactionHandler.updateTransaction(procurementTransaction);
         }
         return "redirect:/procurement/show/" + procurementTransaction.getTransactionId();
@@ -86,8 +86,14 @@ public class ProcurementTransactionController {
     }
 
     @RequestMapping(value = "/transactionsInRange", method = RequestMethod.GET)
-    public ModelAndView transactionsBetween(@RequestParam(value = "fromDate", required = true) Date fromDate, @RequestParam(value = "toDate", required = true) Date toDate) {
-        List<ProcurementTransaction> procurementTransactions = procurementTransactionService.getProcurementTransactions(fromDate, toDate);
+    public ModelAndView transactionsBetween(@RequestParam(value = "fromDate", required = true) Date fromDate, @RequestParam(value = "toDate", required = true) Date toDate, @RequestParam(value = "vendorId", required = false, defaultValue = "-1") int vendorId) {
+
+        List<ProcurementTransaction> procurementTransactions;
+        if (vendorId < 0) {
+            procurementTransactions = procurementTransactionService.getProcurementTransactions(fromDate, toDate);
+        } else {
+            procurementTransactions = procurementTransactionService.getProcurementTransactions(fromDate, toDate, vendorId);
+        }
         return new ModelAndView("procurement/transactionsInRange", "procurementTransactions", procurementTransactions);
     }
 
@@ -96,17 +102,8 @@ public class ProcurementTransactionController {
         if (procurementTransactionGrid.getTransactionId() != null && procurementTransactionGrid.getTransactionId() > 0) {
             ProcurementTransaction procurementTransaction = procurementTransactionService.getProcurementTransaction(procurementTransactionGrid.getTransactionId());
             for (PtDetails ptDetails : procurementTransaction.getTransactionDetails()) {
-                TransactionDetailRow row = new TransactionDetailRow();
-                row.setDetailsId(ptDetails.getDetailsId());
-                row.setTransactionId(ptDetails.getTransactionId());
-                row.setDateOfPublishing(ptDetails.getDateOfPublishing());
-                row.setAmount(ptDetails.getAmount());
-                row.setQuantity(ptDetails.getQuantity());
-                row.setItemCode(ptDetails.getItem().getItemCode());
-                row.setMrp(itemMasterService.getItemPrice(ptDetails.getItem().getItemCode()));
-                row.setPricePerItem(ptDetails.getPricePerItem());
-                row.setDiscount((row.getMrp()-row.getPricePerItem())*100/row.getMrp());
-                procurementTransactionGrid.getTransactionDetails().add(row);
+                float itemPrice = itemMasterService.getItemPrice(ptDetails.getItem().getItemCode());
+                procurementTransactionGrid.addProcurementTransactionDetail(ptDetails, itemPrice);
             }
         } else {
             Float vendorDiscount = procurementTransactionGrid.getTargetId() != null && procurementTransactionGrid.getTargetId() > 0 ? vendorMasterService.get(procurementTransactionGrid.getTargetId()).getVendorDiscount() : null;
@@ -114,6 +111,7 @@ public class ProcurementTransactionController {
         }
         return new ModelAndView("procurement/editProcurementTransactionDetails", "procurementTransactionGrid", procurementTransactionGrid);
     }
+
 
     @RequestMapping(value = "/addItem", method = RequestMethod.POST)
     public ModelAndView addNewItem(@Valid TransactionDetailGrid procurementTransactionGrid, BindingResult bindingResult, Model uiModel) {

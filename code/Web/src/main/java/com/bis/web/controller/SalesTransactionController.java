@@ -87,8 +87,13 @@ public class SalesTransactionController {
     }
 
     @RequestMapping(value = "/transactionsInRange", method = RequestMethod.GET)
-    public ModelAndView transactionsBetween(@RequestParam(value = "fromDate", required = true) Date fromDate, @RequestParam(value = "toDate", required = true) Date toDate) {
-        List<SalesTransaction> salesTransactions = salesTransactionService.getSalesTransactions(fromDate, toDate);
+    public ModelAndView transactionsBetween(@RequestParam(value = "fromDate", required = true) Date fromDate, @RequestParam(value = "toDate", required = true) Date toDate,@RequestParam(value = "hawkerId", required = false,defaultValue = "-1") int hawkerId) {
+        List<SalesTransaction> salesTransactions;
+        if(hawkerId < 0){
+            salesTransactions = salesTransactionService.getSalesTransactions(fromDate, toDate);
+        }else {
+            salesTransactions = salesTransactionService.getSalesTransactions(fromDate,toDate,hawkerId);
+        }
         return new ModelAndView("sales/transactionsInRange", "salesTransactions", salesTransactions);
     }
 
@@ -97,17 +102,8 @@ public class SalesTransactionController {
         if (salesTransactionGrid.getTransactionId() != null && salesTransactionGrid.getTransactionId() > 0) {
             SalesTransaction salesTransaction = salesTransactionService.getSalesTransaction(salesTransactionGrid.getTransactionId());
             for (StDetails stDetails : salesTransaction.getTransactionDetails()) {
-                TransactionDetailRow row = new TransactionDetailRow();
-                row.setDetailsId(stDetails.getDetailsId());
-                row.setTransactionId(stDetails.getTransactionId());
-                row.setDateOfPublishing(stDetails.getDateOfPublishing());
-                row.setAmount(stDetails.getAmount());
-                row.setQuantity(stDetails.getQuantity());
-                row.setItemCode(stDetails.getItem().getItemCode());
-                row.setMrp(itemMasterService.getItemPrice(stDetails.getItem().getItemCode()));
-                row.setPricePerItem(stDetails.getPricePerItem());
-                row.setDiscount((row.getMrp() - row.getPricePerItem()) * 100 / row.getMrp());
-                salesTransactionGrid.getTransactionDetails().add(row);
+                float itemPrice = itemMasterService.getItemPrice(stDetails.getItem().getItemCode());
+                salesTransactionGrid.addSalesTransactionDetail(stDetails, itemPrice);
             }
         } else {
             Float hawkerDiscount = salesTransactionGrid.getTargetId() != null && salesTransactionGrid.getTargetId() > 0 ? hawkerMasterService.get(salesTransactionGrid.getTargetId()).getHawkerDiscount() : null;
@@ -115,6 +111,8 @@ public class SalesTransactionController {
         }
         return new ModelAndView("sales/editSalesTransactionDetails", "salesTransactionGrid", salesTransactionGrid);
     }
+
+
 
     @RequestMapping(value = "/addItem", method = RequestMethod.POST)
     public ModelAndView addNewItem(@Valid TransactionDetailGrid salesTransactionGrid, BindingResult bindingResult, Model uiModel) {

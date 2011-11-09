@@ -162,4 +162,32 @@ public class TransactionDetailGrid {
         salesTransaction.calculateAndSetTotalAmount();
         return salesTransaction;
     }
+
+    public void addProcurementTransactionDetail(PtDetails ptDetails, float itemPrice) {
+        TransactionDetailRow row = new TransactionDetailRow();
+        row.setDetailsId(ptDetails.getDetailsId());
+        row.setTransactionId(ptDetails.getTransactionId());
+        row.setDateOfPublishing(ptDetails.getDateOfPublishing());
+        row.setAmount(ptDetails.getAmount());
+        row.setQuantity(ptDetails.getQuantity());
+        row.setItemCode(ptDetails.getItem().getItemCode());
+        row.setMrp(itemPrice);
+        row.setPricePerItem(ptDetails.getPricePerItem());
+        row.setDiscount((row.getMrp()-row.getPricePerItem())*100/row.getMrp());
+        transactionDetails.add(row);
+    }
+
+     public void addSalesTransactionDetail(StDetails stDetails, float itemPrice) {
+        TransactionDetailRow row = new TransactionDetailRow();
+        row.setDetailsId(stDetails.getDetailsId());
+        row.setTransactionId(stDetails.getTransactionId());
+        row.setDateOfPublishing(stDetails.getDateOfPublishing());
+        row.setAmount(stDetails.getAmount());
+        row.setQuantity(stDetails.getQuantity());
+        row.setItemCode(stDetails.getItem().getItemCode());
+        row.setMrp(itemPrice);
+        row.setPricePerItem(stDetails.getPricePerItem());
+        row.setDiscount((row.getMrp() - row.getPricePerItem()) * 100 / row.getMrp());
+        transactionDetails.add(row);
+    }
 }

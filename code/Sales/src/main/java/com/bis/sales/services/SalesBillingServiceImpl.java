@@ -63,7 +63,7 @@ public class SalesBillingServiceImpl implements SalesBillingService {
         // this amount should include the balance amount of the previous bill
         totalAmount = billingSales.getBalanceAmount();
         // fetch all the transactions between today and last endDate
-        List<SalesTransaction> salesTransactions = salesTransactionRepository.getSalesTransactions(hawker, billingSales.getEndDate(), DateUtils.currentDate());
+        List<SalesTransaction> salesTransactions = salesTransactionRepository.getSalesTransactions(hawker.getHawkerId(), billingSales.getEndDate(), DateUtils.currentDate());
         // generate Bill
         for (SalesTransaction salesTransaction : salesTransactions) {
             if (salesTransaction.getTransactionType().equals(SalesTransactionType.SALES)

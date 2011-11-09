@@ -38,6 +38,6 @@
 .total{
     width:70px;
 }
-#procurement_transactions_accordion{
+#procurement_transactions_accordion,#sales_transactions_accordion{
     margin-top:80px
 }

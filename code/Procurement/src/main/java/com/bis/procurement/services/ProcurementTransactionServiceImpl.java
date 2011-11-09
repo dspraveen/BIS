@@ -38,4 +38,9 @@ public class ProcurementTransactionServiceImpl implements ProcurementTransaction
     public List<ProcurementTransaction> getProcurementTransactions(Date fromDate, Date toDate) {
         return procurementTransactionRepository.getProcurementTransactions(fromDate, toDate);
     }
+
+    @Override
+    public List<ProcurementTransaction> getProcurementTransactions(Date fromDate, Date toDate, int vendorId) {
+        return procurementTransactionRepository.getProcurementTransactions(vendorId,fromDate, toDate);
+    }
 }

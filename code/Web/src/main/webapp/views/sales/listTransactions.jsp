@@ -7,7 +7,11 @@
         $('.from_date').datepicker({dateFormat: 'dd-mm-yy' });
         $('.to_date').datepicker({dateFormat: 'dd-mm-yy' });
         $('.fetch_transactions').bind("click",function(){
-            var transactionInRangeUrl = "<%=request.getContextPath()%>/sales/transactionsInRange?fromDate="+$('.from_date').val()+"&toDate="+$('.to_date').val();
+            if(!$('.from_date').val() || !$('.to_date').val()){
+                alert("Please Enter Date Range");
+                return;
+            }
+            var transactionInRangeUrl = "<%=request.getContextPath()%>/sales/transactionsInRange?fromDate="+$('.from_date').val()+"&toDate="+$('.to_date').val()+"&hawkerId="+$('.hawker_name').val();
             $.ajax({
                 url : transactionInRangeUrl,
                 processData : true,
@@ -29,7 +33,18 @@
         <span class="right"><input type="text" class="to_date"/></span>
     </div>
     <div class="section">
-        <span class="left"><input type="button" value="Fetch Transactions" class="fetch_transactions"/></span
+        <span class="left"><label>Select Hawker:</label></span
+        <span class="right">
+            <select class="hawker_name">
+                <option value="-1">--Please Select</option>
+                <c:forEach var="hawker" items="${hawkers}">
+                    <option value="${hawker.hawkerId}">${hawker.hawkerName}</option>
+                </c:forEach>
+            </select>
+        </span>
+    </div>
+    <div class="section">
+        <span class="left"><input type="button" value="Fetch Transactions" class="fetch_transactions"/></span>
     </div>
     <div class="transactions">
     </div>

@@ -62,7 +62,7 @@ public class ProcurementBillingServiceImpl implements ProcurementBillingService{
         // this amount should include the balance amount of the previous bill
         totalAmount = billingProcurement.getBalanceAmount();
         // fetch all the transactions between today and last endDate
-        List<ProcurementTransaction> procurementTransactions = procurementTransactionRepository.getProcurementTransactions(vendor, billingProcurement.getEndDate(), DateUtils.currentDate());
+        List<ProcurementTransaction> procurementTransactions = procurementTransactionRepository.getProcurementTransactions(vendor.getVendorId(), billingProcurement.getEndDate(), DateUtils.currentDate());
         // generate bill
         for(ProcurementTransaction procurementTransaction : procurementTransactions){
             if(procurementTransaction.getTransactionType().equals(ProcurementTransactionType.PURCHASE)){

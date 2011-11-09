@@ -10,4 +10,5 @@ public interface SalesTransactionService {
     void updateSalesTransaction(SalesTransaction salesTransaction);
     SalesTransaction getSalesTransaction(int transactionId);
     List<SalesTransaction> getSalesTransactions(Date fromDate, Date toDate);
+    List<SalesTransaction> getSalesTransactions(Date fromDate, Date toDate, int hawkerId);
 }

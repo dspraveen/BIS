@@ -41,3 +41,20 @@
 #procurement_transactions_accordion,#sales_transactions_accordion{
     margin-top:80px
 }
+.simple_overlay {
+    background-color: #FFFFC6;
+    border: 4px solid #674C2C;
+    display: none;
+    width: 675px;
+    z-index: 10000;
+}
+.simple_overlay .close {
+    background: url("../images/overlay_close.png") repeat scroll 0 0 transparent;
+    cursor: pointer;
+    height: 35px;
+    position: absolute;
+    right: -15px;
+    top: -15px;
+    width: 35px;
+}
+

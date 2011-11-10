@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="<%=request.getContextPath()%>/styles/jquery-ui-1.8.16.custom.css" type="text/css" />
         <script type="text/javascript" src="<%=request.getContextPath()%>/js/ThirdParty/jquery-1.6.4.min.js"></script>
         <script type="text/javascript" src="<%=request.getContextPath()%>/js/ThirdParty/jquery-ui-1.8.16.custom.min.js"></script>
+        <script type="text/javascript" src="<%=request.getContextPath()%>/js/ThirdParty/jquery.overlay.min.js"></script>
         <title>BIS</title>
     </head>
     <body>

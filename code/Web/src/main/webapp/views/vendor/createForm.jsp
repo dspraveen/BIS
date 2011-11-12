@@ -23,6 +23,7 @@
 </script>
 <form commandName="vendor" method="POST" action="<%=request.getContextPath()%>/vendor/create"  onsubmit="return validateForm();">
     <div>
+        <div class="content_header">Vendor Creation Form</div>
         <div class="section">
             <span class="left"><label>Vendor Name:</label></span
             <span class="right"><form:input path="vendor.vendorName" class="vendor_name"/>*</span>

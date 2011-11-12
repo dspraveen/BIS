@@ -19,6 +19,7 @@
 </script>
 <form method="POST" action="<%=request.getContextPath()%>/hawker/update" onsubmit="return validateForm();">
     <form:hidden path="hawker.hawkerId"/>
+    <div class="content_header">Hawker Update Form</div>
     <div>
         <div class="section">
             <span class="left"><label>Hawker Name:</label></span>

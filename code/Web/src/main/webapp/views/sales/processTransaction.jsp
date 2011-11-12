@@ -4,6 +4,7 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/transactionDetails.js"></script>
 <form method="POST" action="<%=request.getContextPath()%>/sales/addSalesTransaction"  onsubmit="return validateForm();">
+    <div class="content_header">Sales Transaction Process Form</div>
     <div>
         <form:hidden path="salesTransaction.transactionId"/>
         <form:hidden path="salesTransaction.effectedRowId" id="effectedRowId"/>

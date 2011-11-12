@@ -4,7 +4,7 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 
 <div>
-    <h1>Payment Details</h1>
+    <div class="content_header">Payment Details</div>
     <div class="section">
         <span class="left"><label>Vendor name:</label></span>
         <span class="right"><label>${PaymentHistoryProcurement.vendor.vendorName}</label></span>

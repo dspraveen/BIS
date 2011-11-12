@@ -7,10 +7,10 @@
 		$('#vendor_list').submit();
     }
 </script>
+<div class="content_header">Vendor Details</div>
 <div>
     <form method="POST" action="<%=request.getContextPath()%>/vendor/list" id="vendor_list">
         <c:if test="${vendorList.count != '0'}">
-            <h1>Vendor Details</h1>
                 <div class="section">
                     <span class="left"><label>Select Vendor:</label></span
                     <span class="right">

@@ -5,7 +5,7 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <div>
     <TABLE id="dataTable" width="350px" border="1">
-        <thead>
+        <thead class="table_header">
             <TD></TD>
             <TD>Item</TD>
             <TD>Date Of Publishing</TD>

@@ -3,6 +3,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <form method="POST" action="<%=request.getContextPath()%>/item/update">
+    <div class="content_header">Item Update Form</div>
     <form:hidden path="itemForm.item.itemCode"/>
     <div>
         <div class="section">

@@ -29,6 +29,7 @@
 </script>
 
 <form  method="POST" action="<%=request.getContextPath()%>/salesPayment/addSalesPayment" onsubmit="return validateForm();">
+    <div class="content_header">Sales Payment Entry Form</div>
     <div>
         <div class="section">
             <span class="left"><label>Select Hawker:</label></span>

@@ -7,10 +7,10 @@
 		$('#hawker_list').submit();
     }
 </script>
+<div class="content_header">Hawker Details</div>
 <div>
     <form method="POST" action="<%=request.getContextPath()%>/hawker/list" id="hawker_list">
         <c:if test="${hawkerList.count != '0'}">
-            <h1>Hawker Details</h1>
                 <div class="section">
                     <span class="left"><label>Select Hawker:</label></span
                     <span class="right">

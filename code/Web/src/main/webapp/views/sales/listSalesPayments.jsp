@@ -20,7 +20,7 @@
     });
 </script>
 <div>
-    <h1>Please select date range</h1>
+    <h1>Sales Payment Search Form</h1>
     <div class="section">
         <span class="left"><label>From Date:</label></span
         <span class="right"><input type="text" class="from_date"/></span>

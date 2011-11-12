@@ -29,6 +29,7 @@
 </script>
 
 <form  method="POST" action="<%=request.getContextPath()%>/procurementPayment/createProcurementPayment" onsubmit="return validateForm();">
+    <div class="content_header">Procurement Payment Entry Form</div>
     <div>
         <div class="section">
             <span class="left"><label>Select Vendor:</label></span>

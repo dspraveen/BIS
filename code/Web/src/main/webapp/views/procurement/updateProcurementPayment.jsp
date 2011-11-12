@@ -25,6 +25,7 @@
 </script>
 
 <form  method="POST" action="<%=request.getContextPath()%>/procurementPayment/updateProcurementPayment" onsubmit="return validateForm();">
+    <div class="content_header">Procurement Payment Entry Update Form</div>
     <form:hidden path="PaymentHistoryProcurement.paymentId"/>
     <div>
         <div class="section">

@@ -7,10 +7,10 @@
 		$('#item_list').submit();	
     }
 </script>
+<div class="content_header">Item Details</div>
 <div>
     <form method="POST" action="<%=request.getContextPath()%>/item/list" id="item_list">
         <c:if test="${itemList.count != '0'}">
-            <h1>Item Details</h1>
                 <div class="section">
                     <span class="left"><label>Select Item:</label></span
                     <span class="right">

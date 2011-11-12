@@ -3,7 +3,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <div>
-    <h1>Transaction Details</h1>
+    <div class="content_header">Transaction Details</div>
     <div class="section">
         <span class="left"><label>Vendor Name:</label></span
         <span class="right"><label>${salesTransaction.hawker.hawkerName}</label></span>
@@ -22,7 +22,7 @@
     </div>
     <div class="section">
         <TABLE id="dataTable" width="350px" border="1">
-				 <thead>
+				 <thead class="table_header">
 					<TD>Item</TD>
 					<TD>Date Of Publishing</TD>
 					<TD>Qty</TD>

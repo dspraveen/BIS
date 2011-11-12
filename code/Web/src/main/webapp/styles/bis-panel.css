@@ -57,4 +57,15 @@
     top: -15px;
     width: 35px;
 }
-
+.table_header{
+	background-color: #638EA8;
+	color:white;
+}
+.content_header {
+    display: block;
+    font-size: 2.7em;
+    margin-top: 5px;
+    padding-bottom: 25px;
+    text-align: center;
+    width: 100%;
+}

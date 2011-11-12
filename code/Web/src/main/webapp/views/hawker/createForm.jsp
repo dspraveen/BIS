@@ -22,7 +22,9 @@
     }
 </script>
 <form method="POST" action="<%=request.getContextPath()%>/hawker/create"  onsubmit="return validateForm();">
+    <div class="content_header">Hawker Creation Form</div>
     <div>
+
         <div class="section">
             <span class="left"><label>Hawker Name:</label></span
             <span class="right"><form:input path="hawker.hawkerName" class="hawker_name"/>*</span>

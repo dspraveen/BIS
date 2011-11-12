@@ -13,7 +13,7 @@
          <h3>
          <div>
             <TABLE  width="350px" border="1">
-				 <thead>
+				 <thead class="table_header">
 					<TD>Item</TD>
 					<TD>Date Of Publishing</TD>
 					<TD>Price Per Item</TD>

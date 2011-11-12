@@ -12,6 +12,7 @@
     }
 </script>
 <form  method="POST" action="<%=request.getContextPath()%>/item/create"  onsubmit="return validateForm();">
+    <div class="content_header">Item Creation Form</div>
     <div>
         <div class="section">
             <span class="left"><label>Item Name:</label></span

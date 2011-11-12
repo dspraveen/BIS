@@ -18,6 +18,7 @@
     }
 </script>
 <form method="POST" action="<%=request.getContextPath()%>/vendor/update" onsubmit="return validateForm();">
+    <div class="content_header">Vendor Update Form</div>
     <form:hidden path="vendor.vendorId"/>
     <div>
         <div class="section">

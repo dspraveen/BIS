@@ -29,8 +29,16 @@ public class ProcurementBillingRepository extends BaseRepository<BillingProcurem
     }
 
     public BillingProcurement getLastBill(Vendor vendor) {
-        return (BillingProcurement) getSession().createCriteria(BillingProcurement.class)
-                .add(Restrictions.eq("VendorID", vendor.getVendorId()))
-                .addOrder(Order.desc("endDate")).list().get(0);
+
+        List<BillingProcurement> billingProcurements = getSession().createCriteria(BillingProcurement.class)
+                .add(Restrictions.eq("vendor", vendor))
+                .addOrder(Order.desc("endDate")).list();
+
+        if(billingProcurements.isEmpty()){
+            return null;
+        }
+        else{
+            return billingProcurements.get(0);
+        }
     }
 }

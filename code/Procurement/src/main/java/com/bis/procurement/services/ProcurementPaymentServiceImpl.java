@@ -1,6 +1,7 @@
 package com.bis.procurement.services;
 
 import com.bis.domain.PaymentHistoryProcurement;
+import com.bis.domain.Vendor;
 import com.bis.procurement.repository.ProcurementPaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,8 +38,7 @@ public class ProcurementPaymentServiceImpl implements ProcurementPaymentService 
         return procurementPaymentRepository.getProcurementPayments(fromDate, toDate);
     }
 
-    @Override
-    public List<PaymentHistoryProcurement> getProcurementPayments(int vendorId, Date fromDate, Date toDate) {
-        return procurementPaymentRepository.getProcurementPayments(vendorId, fromDate, toDate);
+    public List<PaymentHistoryProcurement> getProcurementPayments(Vendor vendor, Date fromDate, Date toDate) {
+        return procurementPaymentRepository.getProcurementPayments(vendor, fromDate, toDate);
     }
 }

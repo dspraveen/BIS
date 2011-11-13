@@ -2,6 +2,7 @@ package com.bis.procurement.repository;
 
 
 import com.bis.domain.PaymentHistoryProcurement;
+import com.bis.domain.Vendor;
 import com.bis.repository.BaseRepository;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -27,9 +28,9 @@ public class ProcurementPaymentRepository extends BaseRepository<PaymentHistoryP
     }
 
 
-    public List<PaymentHistoryProcurement> getProcurementPayments(int vendorId, Date fromDate, Date toDate) {
+    public List<PaymentHistoryProcurement> getProcurementPayments(Vendor vendor, Date fromDate, Date toDate) {
         return getSession().createCriteria(PaymentHistoryProcurement.class)
-                .add(Restrictions.eq("vendorId",vendorId))
+                .add(Restrictions.eq("vendor",vendor))
                 .add(Restrictions.ge("date", fromDate))
                 .add(Restrictions.le("date",toDate)).list();
     }

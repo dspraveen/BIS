@@ -4,6 +4,19 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 
 <script type="text/javascript">
+    $(document).ready(function(){
+
+        $('.generate_bill').bind("click",function(){
+            var transactionInRangeUrl = "<%=request.getContextPath()%>/procurementBilling/generateBill?vendorId="+$('.vendorId').val();
+            $.ajax({
+                url : transactionInRangeUrl,
+                processData : true,
+                success : function(data) {
+                    $(".currentBill").html(data);
+                }
+            })
+        });
+    });
 
     function validateForm(){
 		var errors=new Array();
@@ -23,11 +36,17 @@
         <div class="section">
             <span class="left"><label>Select Vendor:</label></span>
             <span class="right">
-				<form:select path="BillingProcurement.vendor.vendorId" class="vendor_name">
+				<form:select path="BillingProcurement.vendor.vendorId" class="vendorId">
 					<form:option value="-1" label="--Please Select"/>
 					<form:options items="${vendors}" itemLabel="vendorName" itemValue="vendorId" />
 				</form:select>
 			</span>
+        </div>
+        <div class="section">
+            <span class="left"><input type="button" value="Generate Bill" class="generate_bill"/></span
+        </div>
+        </br></br>
+        <div class="currentBill">
         </div>
     </div>
 </form>

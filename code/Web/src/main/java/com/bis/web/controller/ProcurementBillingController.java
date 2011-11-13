@@ -7,9 +7,7 @@ import com.bis.procurement.services.ProcurementBillingService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -32,6 +30,14 @@ public class ProcurementBillingController {
     public ModelAndView list() {
         BillingProcurement billingProcurement = new BillingProcurement();
         return new ModelAndView("procurementBilling/billSelectVendor","BillingProcurement",billingProcurement);
+    }
+
+    @RequestMapping(value = "/generateBill",method = RequestMethod.GET)
+    public ModelAndView generateBill(@RequestParam(value = "vendorId", required = true)int vendorId) {
+        Vendor vendor = vendorMasterService.get(vendorId);
+        BillingProcurement billingProcurement = procurementBillingService.generateProcurementBill(vendor);
+        procurementBillingService.addProcurementBill(billingProcurement);
+        return new ModelAndView("procurementBilling/showBill","BillingProcurement",billingProcurement);
     }
 
     @ModelAttribute("vendors")

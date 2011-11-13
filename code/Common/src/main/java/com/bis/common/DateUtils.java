@@ -15,4 +15,13 @@ public class DateUtils {
         instance.add(Calendar.MINUTE,minutes);
         return instance.getTime();
     }
+
+    public static Date getNowDate(){
+        Calendar instance = Calendar.getInstance();
+        instance.set(Calendar.HOUR_OF_DAY, 0);
+        instance.set(Calendar.MINUTE, 0);
+        instance.set(Calendar.SECOND, 0);
+        instance.set(Calendar.MILLISECOND, 0);
+        return instance.getTime();
+    }
 }

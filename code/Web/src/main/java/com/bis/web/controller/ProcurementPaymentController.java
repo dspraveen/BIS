@@ -75,8 +75,8 @@ public class ProcurementPaymentController {
     }
 
     @RequestMapping(value = "/paymentsInRange", method = RequestMethod.GET)
-    public ModelAndView transactionsBetween(@RequestParam(value = "fromDate", required = true)Date fromDate, @RequestParam(value = "toDate", required = true)Date toDate ) {
-        List<PaymentHistoryProcurement> paymentHistoryProcurements = procurementPaymentService.getProcurementPayments(fromDate, toDate);
+    public ModelAndView transactionsBetween(@RequestParam(value = "fromDate", required = true)Date fromDate, @RequestParam(value = "toDate", required = true)Date toDate, @RequestParam(value = "vendorId", required = true)int vendorId ) {
+        List<PaymentHistoryProcurement> paymentHistoryProcurements = procurementPaymentService.getProcurementPayments(vendorMasterService.get(vendorId),fromDate, toDate);
         return new ModelAndView("procurementPayment/paymentsInRange","paymentHistoryProcurements",paymentHistoryProcurements);
     }
 

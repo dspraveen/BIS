@@ -40,6 +40,14 @@ public class ProcurementBillingController {
         return new ModelAndView("procurementBilling/showBill","BillingProcurement",billingProcurement);
     }
 
+    @RequestMapping(value = "/showLastBill",method = RequestMethod.GET)
+    public ModelAndView showLastBill(@RequestParam(value = "vendorId", required = true)int vendorId) {
+        Vendor vendor = vendorMasterService.get(vendorId);
+        BillingProcurement billingProcurement = procurementBillingService.getLastBill(vendor);
+        procurementBillingService.addProcurementBill(billingProcurement);
+        return new ModelAndView("procurementBilling/showBill","BillingProcurement",billingProcurement);
+    }
+
     @ModelAttribute("vendors")
     public List<Vendor> vendors() {
         return vendorMasterService.getAll();

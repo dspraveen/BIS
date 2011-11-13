@@ -43,9 +43,8 @@
 			</span>
         </div>
         <div class="section">
-            <span class="left"><input type="button" value="Generate Bill" class="generate_bill"/></span
+            <span class="left"><input type="button" value="Generate Bill" class="generate_bill"/></span>
         </div>
-        </br></br>
         <div class="currentBill">
         </div>
     </div>

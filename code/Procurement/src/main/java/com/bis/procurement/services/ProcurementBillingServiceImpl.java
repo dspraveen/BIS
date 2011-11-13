@@ -95,4 +95,9 @@ public class ProcurementBillingServiceImpl implements ProcurementBillingService 
         totalAmount -= getTotalAmountForCycle(vendor, fromDate, DateUtils.getNowDate());
         return new BillingProcurement(fromDate, DateUtils.getNowDate(), totalAmount, vendor);
     }
+
+    @Override
+    public BillingProcurement getLastBill(Vendor vendor) {
+        return procurementBillingRepository.getLastBill(vendor);
+    }
 }

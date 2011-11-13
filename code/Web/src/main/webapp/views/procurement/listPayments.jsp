@@ -8,7 +8,7 @@
         $('.from_date').datepicker({dateFormat: 'dd-mm-yy' });
         $('.to_date').datepicker({dateFormat: 'dd-mm-yy' });
         $('.fetch_payments').bind("click",function(){
-            var paymentInRangeUrl = "<%=request.getContextPath()%>/procurementPayment/paymentsInRange?fromDate="+$('.from_date').val()+"&toDate="+$('.to_date').val();
+            var paymentInRangeUrl = "<%=request.getContextPath()%>/procurementPayment/paymentsInRange?fromDate="+$('.from_date').val()+"&toDate="+$('.to_date').val()+"&vendorId="+$('.vendor_name').val();
             $.ajax({
                 url : paymentInRangeUrl,
                 processData : true,
@@ -29,9 +29,20 @@
         <span class="left"><label>To Date:</label></span
         <span class="right"><input type="text" class="to_date"/></span>
     </div>
-    <div class="section">
-        <span class="left"><input type="button" value="Fetch Payments" class="fetch_payments"/></span
+        <div class="section">
+        <span class="left"><label>Select Vendor:</label></span
+        <span class="right">
+            <select class="vendor_name">
+			    <option value="-1">--Please Select</option>
+			    <c:forEach var="vendor" items="${vendors}">
+				    <option value="${vendor.vendorId}">${vendor.vendorName}</option>
+				</c:forEach>
+			</select>
+        </span>
     </div>
+    <div class="section">
+        <span class="left"><input type="button" value="Fetch Payments" class="fetch_payments"/></span>
+    </div></br></br>
     <div class="payments">
     </div>
 </div>

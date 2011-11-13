@@ -92,7 +92,8 @@ public class ProcurementTransactionController {
         if (vendorId < 0) {
             procurementTransactions = procurementTransactionService.getProcurementTransactions(fromDate, toDate);
         } else {
-            procurementTransactions = procurementTransactionService.getProcurementTransactions(fromDate, toDate, vendorId);
+            Vendor vendor = vendorMasterService.get(vendorId);
+            procurementTransactions = procurementTransactionService.getProcurementTransactions(fromDate, toDate, vendor);
         }
         return new ModelAndView("procurement/transactionsInRange", "procurementTransactions", procurementTransactions);
     }

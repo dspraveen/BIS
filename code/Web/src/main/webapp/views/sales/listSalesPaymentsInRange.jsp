@@ -7,7 +7,7 @@
      <c:forEach var="paymentHistorySales" items="${paymentHistorySales}">
         <h3>
             <a href="">
-                <label>Vendor : ${paymentHistorySales.hawker.hawkerName}</label>
+                <label>Hawker : ${paymentHistorySales.hawker.hawkerName}</label>
                 <label>Date : ${paymentHistorySales.date}</label>
                 <label>Amount : ${paymentHistorySales.amount}</label>
             </a>

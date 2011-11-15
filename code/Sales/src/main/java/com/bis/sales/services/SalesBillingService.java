@@ -12,5 +12,6 @@ public interface SalesBillingService {
     void updateSalesBill(BillingSales billingSales);
     BillingSales getSalesBill(int billId);
     List<BillingSales> getSalesBillList(Date fromDate, Date toDate);
-    void generateBill(Hawker hawker);
+    BillingSales generateSalesBill(Hawker hawker);
+    BillingSales getLastBill(Hawker hawker);
 }

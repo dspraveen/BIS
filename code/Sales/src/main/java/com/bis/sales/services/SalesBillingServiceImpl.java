@@ -19,19 +19,10 @@ public class SalesBillingServiceImpl implements SalesBillingService {
     private SalesTransactionRepository salesTransactionRepository;
 
     @Autowired
-    public SalesBillingServiceImpl(SalesPaymentRepository salesPaymentRepository, SalesBillingRepository salesBillingRepository) {
+    public SalesBillingServiceImpl(SalesPaymentRepository salesPaymentRepository, SalesBillingRepository salesBillingRepository, SalesTransactionRepository salesTransactionRepository) {
         this.salesPaymentRepository = salesPaymentRepository;
         this.salesBillingRepository = salesBillingRepository;
-    }
-
-
-    private Float getTotalAmountForCycle(int hawkerId, Date fromDate, Date toDate) {
-        Float totalAmount = null;
-        List<PaymentHistorySales> salesPayments = salesPaymentRepository.getSalesPayments(hawkerId, fromDate, toDate);
-        for (PaymentHistorySales salesPayment : salesPayments) {
-            totalAmount += salesPayment.getAmount();
-        }
-        return totalAmount;
+        this.salesTransactionRepository = salesTransactionRepository;
     }
 
     @Override
@@ -54,29 +45,57 @@ public class SalesBillingServiceImpl implements SalesBillingService {
         return salesBillingRepository.getSalesBillList(fromDate, toDate);
     }
 
-    @Override
-    public void generateBill(Hawker hawker) {
+    private Float getTotalAmountForCycle(Hawker hawker, Date fromDate, Date toDate) {
+        Float totalAmount = 0F;
+        List<PaymentHistorySales> salesPayments = salesPaymentRepository.getSalesPayments(hawker, fromDate, toDate);
+        System.out.println("shashi Payments");
+        for (PaymentHistorySales salesPayment : salesPayments) {
+            totalAmount = totalAmount + salesPayment.getAmount();
+        }
+        return totalAmount;
+    }
+
+    public BillingSales generateSalesBill(Hawker hawker) {
         // Steps
-        Float totalAmount = null;
+        Float totalAmount = 0f;
+        Date fromDate = null;
+        List<SalesTransaction> salesTransactions = null;
         // get the last bill endDate
         BillingSales billingSales = salesBillingRepository.getLastBill(hawker);
+            System.out.println("shashi enters");
         // this amount should include the balance amount of the previous bill
-        totalAmount = billingSales.getBalanceAmount();
-        // fetch all the transactions between today and last endDate
-        List<SalesTransaction> salesTransactions = salesTransactionRepository.getSalesTransactions(hawker.getHawkerId(), billingSales.getEndDate(), DateUtils.currentDate());
-        // generate Bill
-        for (SalesTransaction salesTransaction : salesTransactions) {
-            if (salesTransaction.getTransactionType().equals(SalesTransactionType.SALES)
-                    || salesTransaction.getTransactionType().equals(SalesTransactionType.SCRAP)) {
-                totalAmount += salesTransaction.getTotalAmount();
+        if (billingSales != null) {
+            totalAmount = billingSales.getBalanceAmount();
+            fromDate = billingSales.getEndDate();
+            salesTransactions = salesTransactionRepository.getSalesTransactions(hawker, fromDate, DateUtils.getNowDate());
+            System.out.println("shashi first");
+        } else {
+            // fetch all the transactions till today
+            salesTransactions = salesTransactionRepository.getSalesTransactions(hawker, DateUtils.getNowDate());
+            System.out.println("shashi second");
+            if (salesTransactions != null) {
+                fromDate = salesTransactions.get(0).getDate();
             }
-            if (salesTransaction.getTransactionType().equals(SalesTransactionType.RETURNS)) {
-                totalAmount -= salesTransaction.getTotalAmount();
+        }
+        // generate Bill
+        if (salesTransactions != null) {
+            for (SalesTransaction salesTransaction : salesTransactions) {
+                if (salesTransaction.getTransactionType().equals('S')
+                        || salesTransaction.getTransactionType().equals('C')) {
+                    totalAmount += salesTransaction.getTotalAmount();
+                }
+                if (salesTransaction.getTransactionType().equals('R')) {
+                    totalAmount -= salesTransaction.getTotalAmount();
+                }
             }
         }
         // check if any payments were made for this time span and reduce that amount
-        totalAmount -= this.getTotalAmountForCycle(hawker.getHawkerId(), billingSales.getEndDate(), DateUtils.currentDate());
-        BillingSales billingSalesNew = new BillingSales(hawker.getHawkerId(), billingSales.getEndDate(), DateUtils.currentDate(), totalAmount);
-        salesBillingRepository.save(billingSalesNew);
+        totalAmount -= this.getTotalAmountForCycle(hawker, fromDate, DateUtils.getNowDate());
+        return new BillingSales(fromDate, DateUtils.getNowDate(), totalAmount, hawker);
+    }
+
+    @Override
+    public BillingSales getLastBill(Hawker hawker) {
+        return salesBillingRepository.getLastBill(hawker);
     }
 }

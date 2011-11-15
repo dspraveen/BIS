@@ -1,5 +1,6 @@
 package com.bis.sales.services;
 
+import com.bis.domain.Hawker;
 import com.bis.domain.PaymentHistorySales;
 
 import java.util.Date;
@@ -15,6 +16,6 @@ public interface SalesPaymentService {
 
     List<PaymentHistorySales> getSalesPayments(Date fromDate, Date toDate);
 
-    List<PaymentHistorySales> getSalesPayments(int hawkerId, Date fromDate, Date toDate);
+    List<PaymentHistorySales> getSalesPayments(Hawker hawker, Date fromDate, Date toDate);
 
 }

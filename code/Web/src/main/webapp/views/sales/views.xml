@@ -32,4 +32,10 @@
     <definition name="salesPayment/transactionsInRange" extends="ajaxSection">
         <put-attribute name="content" value="/views/sales/listSalesPaymentsInRange.jsp"/>
     </definition>
+    <definition name="salesBilling/billSelectHawker" extends="sales">
+        <put-attribute name="main-content" value="/views/sales/billSelectHawker.jsp"/>
+    </definition>
+    <definition name="salesBilling/showBill" extends="ajaxSection">
+        <put-attribute name="content" value="/views/sales/showSalesBill.jsp"/>
+    </definition>
 </tiles-definitions>

@@ -7,7 +7,7 @@
     $(document).ready(function(){
 
         $('.generate_bill').bind("click",function(){
-            var transactionInRangeUrl = "<%=request.getContextPath()%>/procurementBilling/generateBill?vendorId="+$('.vendorId').val();
+            var transactionInRangeUrl = "<%=request.getContextPath()%>/salesBilling/generateBill?hawkerId="+$('.hawkerId').val();
             $.ajax({
                 url : transactionInRangeUrl,
                 processData : true,
@@ -17,12 +17,11 @@
             })
         });
     });
-
     function validateForm(){
 		var errors=new Array();
 		var errorCount =0;
-		if($('.vendorId').val()==-1){
-			errors[errorCount++]="Please select vendor";
+		if($('.hawkerId').val()==-1){
+			errors[errorCount++]="Please select hawker";
 		}
 		if(errorCount >0){
 			alert(errors.join('\n'));
@@ -34,11 +33,11 @@
 <form  method="POST" action="#" onsubmit="return validateForm();">
     <div>
         <div class="section">
-            <span class="left"><label>Select Vendor:</label></span>
+            <span class="left"><label>Select Hawker:</label></span>
             <span class="right">
-				<form:select path="BillingProcurement.vendor.vendorId" class="vendorId">
+				<form:select path="BillingSales.hawker.hawkerId" class="hawkerId">
 					<form:option value="-1" label="--Please Select"/>
-					<form:options items="${vendors}" itemLabel="vendorName" itemValue="vendorId" />
+					<form:options items="${hawkers}" itemLabel="hawkerName" itemValue="hawkerId" />
 				</form:select>
 			</span>
         </div>

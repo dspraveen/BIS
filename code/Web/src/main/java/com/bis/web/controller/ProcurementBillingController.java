@@ -44,7 +44,6 @@ public class ProcurementBillingController {
     public ModelAndView showLastBill(@RequestParam(value = "vendorId", required = true)int vendorId) {
         Vendor vendor = vendorMasterService.get(vendorId);
         BillingProcurement billingProcurement = procurementBillingService.getLastBill(vendor);
-        procurementBillingService.addProcurementBill(billingProcurement);
         return new ModelAndView("procurementBilling/showBill","BillingProcurement",billingProcurement);
     }
 

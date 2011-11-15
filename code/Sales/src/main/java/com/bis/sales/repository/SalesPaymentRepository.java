@@ -1,5 +1,6 @@
 package com.bis.sales.repository;
 
+import com.bis.domain.Hawker;
 import com.bis.domain.PaymentHistorySales;
 import com.bis.repository.BaseRepository;
 import org.hibernate.SessionFactory;
@@ -26,9 +27,9 @@ public class SalesPaymentRepository extends BaseRepository<PaymentHistorySales>{
                 .add(Restrictions.le("date", toDate)).list();
     }
 
-    public List<PaymentHistorySales> getSalesPayments(int hawkerId, Date fromDate, Date toDate) {
+    public List<PaymentHistorySales> getSalesPayments(Hawker hawker, Date fromDate, Date toDate) {
         return getSession().createCriteria(PaymentHistorySales.class)
-                .add(Restrictions.eq("hawkerId",hawkerId))
+                .add(Restrictions.eq("hawker",hawker))
                 .add(Restrictions.ge("date",fromDate))
                 .add(Restrictions.le("date", toDate)).list();
     }

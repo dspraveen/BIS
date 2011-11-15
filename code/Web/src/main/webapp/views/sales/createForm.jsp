@@ -7,6 +7,17 @@
 <script type="text/javascript">
     $(document).ready(function(){
         $('.payment_date').datepicker({dateFormat: 'dd-mm-yy' });
+
+        $('.Lastest_bill').bind("click",function(){
+            var transactionInRangeUrl = "<%=request.getContextPath()%>/salesBilling/showLastBill?hawkerId="+$('.hawker_name').val();
+            $.ajax({
+                url : transactionInRangeUrl,
+                processData : true,
+                success : function(data) {
+                    $(".lastBill").html(data);
+                }
+            })
+        });
     });
 
     function validateForm(){
@@ -63,7 +74,9 @@
             <span class="right"><form:input path="PaymentHistorySales.remarks" class="remarks"/></span>
         </div>
         <div class="section">
-            <span class="center"><input type="submit" value="Submit"/> <input type="reset" value="Clear"/></span>
+            <span class="center"><input type="submit" value="Submit"/> <input type="reset" value="Clear"/><input type="button" value="Lastest Bill" class="Lastest_bill"/></span>
+        </div></br></br></br>
+        <div class="lastBill">
         </div>
     </div>
 </form>

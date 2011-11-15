@@ -30,8 +30,15 @@ public class SalesBillingRepository extends BaseRepository<BillingSales> {
     }
 
     public BillingSales getLastBill(Hawker hawker) {
-        return (BillingSales) getSession().createCriteria(BillingSales.class)
-                .add(Restrictions.eq("hawkerId", hawker.getHawkerId()))
-                .addOrder(Order.desc("endDate")).list().get(0);
+        List<BillingSales> billingSales = getSession().createCriteria(BillingSales.class)
+                .add(Restrictions.eq("hawker", hawker))
+                .addOrder(Order.desc("endDate")).list();
+
+        if(billingSales.isEmpty()){
+            return null;
+        }
+        else{
+            return billingSales.get(0);
+        }
     }
 }

@@ -92,7 +92,7 @@ public class SalesTransactionController {
         if(hawkerId < 0){
             salesTransactions = salesTransactionService.getSalesTransactions(fromDate, toDate);
         }else {
-            salesTransactions = salesTransactionService.getSalesTransactions(fromDate,toDate,hawkerId);
+            salesTransactions = salesTransactionService.getSalesTransactions(fromDate,toDate,hawkerMasterService.get(hawkerId));
         }
         return new ModelAndView("sales/transactionsInRange", "salesTransactions", salesTransactions);
     }

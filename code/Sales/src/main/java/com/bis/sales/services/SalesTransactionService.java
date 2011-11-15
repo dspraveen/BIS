@@ -1,5 +1,6 @@
 package com.bis.sales.services;
 
+import com.bis.domain.Hawker;
 import com.bis.domain.SalesTransaction;
 
 import java.util.Date;
@@ -10,5 +11,5 @@ public interface SalesTransactionService {
     void updateSalesTransaction(SalesTransaction salesTransaction);
     SalesTransaction getSalesTransaction(int transactionId);
     List<SalesTransaction> getSalesTransactions(Date fromDate, Date toDate);
-    List<SalesTransaction> getSalesTransactions(Date fromDate, Date toDate, int hawkerId);
+    List<SalesTransaction> getSalesTransactions(Date fromDate, Date toDate, Hawker hawker);
 }

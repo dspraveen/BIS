@@ -1,6 +1,7 @@
 package com.bis.sales.services;
 
 
+import com.bis.domain.Hawker;
 import com.bis.domain.SalesTransaction;
 import com.bis.sales.repository.SalesTransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,9 +42,8 @@ public class SalesTransactionServiceImpl implements SalesTransactionService {
         return salesRepository.getSalesTransactions(fromDate, toDate);
     }
 
-    @Override
-    public List<SalesTransaction> getSalesTransactions(Date fromDate, Date toDate, int hawkerId) {
-        return salesRepository.getSalesTransactions(hawkerId,fromDate,toDate);
+    public List<SalesTransaction> getSalesTransactions(Date fromDate, Date toDate, Hawker hawker) {
+        return salesRepository.getSalesTransactions(hawker,fromDate,toDate);
     }
 
 }

@@ -1,5 +1,6 @@
 package com.bis.sales.services;
 
+import com.bis.domain.Hawker;
 import com.bis.domain.PaymentHistorySales;
 import com.bis.sales.repository.SalesPaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,8 +39,7 @@ public class SalesPaymentServiceImpl implements SalesPaymentService {
         return salesPaymentRepository.getSalesPayments(fromDate, toDate);
     }
 
-    @Override
-    public List<PaymentHistorySales> getSalesPayments(int hawkerId, Date fromDate, Date toDate) {
-        return salesPaymentRepository.getSalesPayments(hawkerId, fromDate, toDate);
+    public List<PaymentHistorySales> getSalesPayments( Hawker hawker, Date fromDate, Date toDate) {
+        return salesPaymentRepository.getSalesPayments(hawker, fromDate, toDate);
     }
 }

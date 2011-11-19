@@ -8,7 +8,7 @@
         $('.from_date').datepicker({dateFormat: 'dd-mm-yy' });
         $('.to_date').datepicker({dateFormat: 'dd-mm-yy' });
         $('.fetch_payments').bind("click",function(){
-            var paymentInRangeUrl = "<%=request.getContextPath()%>/salesPayment/transactionsInRange?fromDate="+$('.from_date').val()+"&toDate="+$('.to_date').val();
+            var paymentInRangeUrl = "<%=request.getContextPath()%>/salesPayment/transactionsInRange?fromDate="+$('.from_date').val()+"&toDate="+$('.to_date').val()+"&hawkerId="+$('.hawker_name').val();
             $.ajax({
                 url : paymentInRangeUrl,
                 processData : true,
@@ -20,7 +20,7 @@
     });
 </script>
 <div>
-    <h1>Sales Payment Search Form</h1>
+    <div class="content_header">Sales Payment Search Form</div>
     <div class="section">
         <span class="left"><label>From Date:</label></span
         <span class="right"><input type="text" class="from_date"/></span>
@@ -28,6 +28,17 @@
     <div class="section">
         <span class="left"><label>To Date:</label></span
         <span class="right"><input type="text" class="to_date"/></span>
+    </div>
+    <div class="section">
+        <span class="left"><label>Select Hawker:</label></span
+        <span class="right">
+            <select class="hawker_name">
+                <option value="-1">--Please Select</option>
+                <c:forEach var="hawker" items="${hawkers}">
+                    <option value="${hawker.hawkerId}">${hawker.hawkerName}</option>
+                </c:forEach>
+            </select>
+        </span>
     </div>
     <div class="section">
         <span class="left"><input type="button" value="Fetch Payments" class="fetch_payments"/></span

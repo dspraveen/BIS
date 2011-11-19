@@ -74,6 +74,10 @@ public class Hawker implements java.io.Serializable {
         return this.billingCycle;
     }
 
+    public String getBillingCycleDescription() {
+        return BillingCycle.getNameByCode(this.billingCycle);
+    }
+
     public void setBillingCycle(Character billingCycle) {
         this.billingCycle = billingCycle;
     }

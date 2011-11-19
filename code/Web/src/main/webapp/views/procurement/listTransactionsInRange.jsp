@@ -1,6 +1,7 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <div id="procurement_transactions_accordion">
     <TABLE  width="350px" border="1">
@@ -16,8 +17,9 @@
             <tr>
                 <td>${counter.count}</td>
                 <td>${procurementTransaction.vendor.vendorName}</td>
-                <td>${procurementTransaction.date}</td>
-                <td>${procurementTransaction.transactionType}</td>
+				<c:set var="date" value="${procurementTransaction.date}" />
+				<td><fmt:formatDate pattern="yyyy-MM-dd" value="${date}" /></td>
+                <td>${procurementTransaction.transactionTypeDescription}</td>
                 <td>${procurementTransaction.totalAmount}</td>
                 <td><a href="#" rel="#transaction_details${counter.count}">Show Details</a></td>
             </tr>

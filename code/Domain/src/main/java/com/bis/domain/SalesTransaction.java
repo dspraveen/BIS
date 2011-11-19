@@ -47,6 +47,10 @@ public class SalesTransaction implements java.io.Serializable {
         return this.transactionType;
     }
 
+    public String getTransactionTypeDescription() {
+        return SalesTransactionType.getNameByCode(this.transactionType);
+    }
+
     public void setTransactionType(Character transactionType) {
         this.transactionType = transactionType;
     }

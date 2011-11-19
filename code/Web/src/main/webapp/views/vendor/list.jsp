@@ -27,7 +27,7 @@
                 </div>
                 <div class="section">
                     <span class="left"><label>Vendor Billing Cycle:</label></span
-                    <span class="right"><label>${vendorList.selectedVendor.billingCycle}</label></span>
+                    <span class="right"><label>${vendorList.selectedVendor.billingCycleDescription}</label></span>
                 </div>
                 <div class="section">
                     <span class="left"><label>Vendor Address:</label></span>

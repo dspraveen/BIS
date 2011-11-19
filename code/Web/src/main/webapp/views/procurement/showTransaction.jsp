@@ -15,7 +15,7 @@
     </div>
     <div class="section">
         <span class="left"><label>Transaction Type:</label></span
-        <span class="right"><label>${procurementTransaction.transactionType}</label></span>
+        <span class="right"><label>${procurementTransaction.transactionTypeDescription}</label></span>
     </div>
     <div class="section">
         <span class="left"><label>Transaction Total:</label></span

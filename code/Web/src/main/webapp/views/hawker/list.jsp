@@ -27,7 +27,7 @@
                 </div>
                 <div class="section">
                     <span class="left"><label>Hawker Billing Cycle:</label></span
-                    <span class="right"><label>${hawkerList.selectedHawker.billingCycle}</label></span>
+                    <span class="right"><label>${hawkerList.selectedHawker.billingCycleDescription}</label></span>
                 </div>
                 <div class="section">
                     <span class="left"><label>Hawker Address:</label></span>

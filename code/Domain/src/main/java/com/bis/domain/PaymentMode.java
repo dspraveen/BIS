@@ -14,4 +14,13 @@ public enum PaymentMode {
     public char getCode() {
         return code;
     }
+
+    public static String  getNameByCode(char code){
+        for (PaymentMode paymentMode : PaymentMode.values()) {
+            if(paymentMode.getCode()==code){
+                return paymentMode.name();
+            }
+        }
+        throw new RuntimeException("Invalid code");
+    }
 }

@@ -89,7 +89,7 @@ public class SalesTransactionController {
     @RequestMapping(value = "/transactionsInRange", method = RequestMethod.GET)
     public ModelAndView transactionsBetween(@RequestParam(value = "fromDate", required = true) Date fromDate, @RequestParam(value = "toDate", required = true) Date toDate,@RequestParam(value = "hawkerId", required = false,defaultValue = "-1") int hawkerId) {
         List<SalesTransaction> salesTransactions;
-        if(hawkerId < 0){
+        if(hawkerId < 1){
             salesTransactions = salesTransactionService.getSalesTransactions(fromDate, toDate);
         }else {
             salesTransactions = salesTransactionService.getSalesTransactions(fromDate,toDate,hawkerMasterService.get(hawkerId));

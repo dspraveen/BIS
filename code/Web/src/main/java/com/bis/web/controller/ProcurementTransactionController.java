@@ -89,7 +89,7 @@ public class ProcurementTransactionController {
     public ModelAndView transactionsBetween(@RequestParam(value = "fromDate", required = true) Date fromDate, @RequestParam(value = "toDate", required = true) Date toDate, @RequestParam(value = "vendorId", required = false, defaultValue = "-1") int vendorId) {
 
         List<ProcurementTransaction> procurementTransactions;
-        if (vendorId < 0) {
+        if (vendorId < 1) {
             procurementTransactions = procurementTransactionService.getProcurementTransactions(fromDate, toDate);
         } else {
             Vendor vendor = vendorMasterService.get(vendorId);

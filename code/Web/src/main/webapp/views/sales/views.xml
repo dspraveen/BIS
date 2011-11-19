@@ -21,7 +21,7 @@
         <put-attribute name="main-content" value="/views/sales/createForm.jsp"/>
     </definition>
     <definition name="salesPayment/show" extends="sales">
-        <put-attribute name="main-content" value="/views/sales/showSalesTransaction.jsp"/>
+        <put-attribute name="main-content" value="/views/sales/showSalesPayment.jsp"/>
     </definition>
     <definition name="salesPayment/updateForm" extends="sales">
         <put-attribute name="main-content" value="/views/sales/updateSalesPayment.jsp"/>

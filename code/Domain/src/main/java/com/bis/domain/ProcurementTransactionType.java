@@ -12,4 +12,13 @@ public enum ProcurementTransactionType {
     public char getCode() {
         return code;
     }
+
+    public static String  getNameByCode(char code){
+        for (ProcurementTransactionType procurementTransactionType : ProcurementTransactionType.values()) {
+            if(procurementTransactionType.getCode()==code){
+                return procurementTransactionType.name();
+            }
+        }
+        throw new RuntimeException("Invalid code");
+    }
 }

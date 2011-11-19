@@ -8,7 +8,7 @@
             <a href="">
                 <label>Hawker : ${salesTransaction.hawker.hawkerName}</label>
                 <label>Date : ${salesTransaction.date}</label>
-                <label>Type : ${salesTransaction.transactionType}</label>
+                <label>Type : ${salesTransaction.transactionTypeDescription}</label>
             </a>
          <h3>
          <div>

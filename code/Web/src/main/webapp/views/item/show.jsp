@@ -27,11 +27,11 @@
     </div>
     <div class="section">
         <span class="left"><label>Item Type:</label></span
-        <span class="right"><label>${itemForm.item.itemLife}</label></span>
+        <span class="right"><label>${itemForm.item.itemLifeDescription}</label></span>
     </div>
     <div class="section">
         <span class="left"><label>Item Returnable:</label></span
-        <span class="right"><label>${itemForm.item.returnable}</label></span>
+        <span class="right"><label>${itemForm.item.returnableDescription}</label></span>
     </div>
     <div class="section">
         <span class="left"><a href="<%=request.getContextPath()%>/item/updateForm/${itemForm.item.itemCode}">Update Item</a></span>

@@ -20,7 +20,7 @@
     });
 </script>
 <div>
-    <div class="content_header">Procurement Transaction Search Form</div>
+    <div class="content_header">Procurement Payment Search Form</div>
     <div class="section">
         <span class="left"><label>From Date:</label></span
         <span class="right"><input type="text" class="from_date"/></span>

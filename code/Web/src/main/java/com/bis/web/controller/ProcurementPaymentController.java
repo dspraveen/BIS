@@ -35,13 +35,13 @@ public class ProcurementPaymentController {
         this.vendorMasterService = vendorMasterService;
     }
 
-    @RequestMapping(value = "/show/{id}",method = RequestMethod.GET)
+    @RequestMapping(value = "/show/{id}", method = RequestMethod.GET)
     public ModelAndView show(@PathVariable("id") int paymentId) {
         PaymentHistoryProcurement paymentHistoryProcurement = procurementPaymentService.getProcurementPayment(paymentId);
         return new ModelAndView("procurementPayment/show", "PaymentHistoryProcurement", paymentHistoryProcurement);
     }
 
-    @RequestMapping(value = "/createProcurementPayment",method = RequestMethod.GET)
+    @RequestMapping(value = "/createProcurementPayment", method = RequestMethod.GET)
     public ModelAndView createForm() {
         PaymentHistoryProcurement paymentHistoryProcurement = new PaymentHistoryProcurement();
         paymentHistoryProcurement.setMode('C');
@@ -49,20 +49,20 @@ public class ProcurementPaymentController {
         return new ModelAndView("procurementPayment/createProcurementPayment", "PaymentHistoryProcurement", paymentHistoryProcurement);
     }
 
-    @RequestMapping(value = "/updateForm/{id}",method = RequestMethod.GET)
+    @RequestMapping(value = "/updateForm/{id}", method = RequestMethod.GET)
     public ModelAndView updateForm(@PathVariable("id") int paymentId) {
         PaymentHistoryProcurement paymentHistoryProcurement = procurementPaymentService.getProcurementPayment(paymentId);
         return new ModelAndView("procurementPayment/updateForm", "PaymentHistoryProcurement", paymentHistoryProcurement);
     }
 
-    @RequestMapping(value = "/createProcurementPayment",method = RequestMethod.POST)
+    @RequestMapping(value = "/createProcurementPayment", method = RequestMethod.POST)
     public String addProcurementPayment(@Valid PaymentHistoryProcurement paymentHistoryProcurement, BindingResult bindingResult, Model uiModel) {
         uiModel.asMap().clear();
         procurementPaymentService.addProcurementPayment(paymentHistoryProcurement);
         return "redirect:/procurementPayment/show/" + paymentHistoryProcurement.getPaymentId();
     }
 
-    @RequestMapping(value = "/updateProcurementPayment",method = RequestMethod.POST)
+    @RequestMapping(value = "/updateProcurementPayment", method = RequestMethod.POST)
     public String updateProcurementPayment(@Valid PaymentHistoryProcurement paymentHistoryProcurement, BindingResult bindingResult, Model uiModel) {
         uiModel.asMap().clear();
         procurementPaymentService.updateProcurementPayment(paymentHistoryProcurement);
@@ -75,15 +75,20 @@ public class ProcurementPaymentController {
     }
 
     @RequestMapping(value = "/paymentsInRange", method = RequestMethod.GET)
-    public ModelAndView transactionsBetween(@RequestParam(value = "fromDate", required = true)Date fromDate, @RequestParam(value = "toDate", required = true)Date toDate, @RequestParam(value = "vendorId", required = true)int vendorId ) {
-        List<PaymentHistoryProcurement> paymentHistoryProcurements = procurementPaymentService.getProcurementPayments(vendorMasterService.get(vendorId),fromDate, toDate);
-        return new ModelAndView("procurementPayment/paymentsInRange","paymentHistoryProcurements",paymentHistoryProcurements);
+    public ModelAndView transactionsBetween(@RequestParam(value = "fromDate", required = true) Date fromDate, @RequestParam(value = "toDate", required = true) Date toDate, @RequestParam(value = "vendorId", required = false, defaultValue = "-1") int vendorId) {
+        List<PaymentHistoryProcurement> paymentHistoryProcurements;
+        if (vendorId < 1) {
+            paymentHistoryProcurements = procurementPaymentService.getProcurementPayments(fromDate, toDate);
+        } else {
+            paymentHistoryProcurements = procurementPaymentService.getProcurementPayments(vendorMasterService.get(vendorId), fromDate, toDate);
+        }
+        return new ModelAndView("procurementPayment/paymentsInRange", "paymentHistoryProcurements", paymentHistoryProcurements);
     }
 
     @ModelAttribute("PaymentMode")
-    public Map<Character,String> paymentMode(){
-        Map<Character,String> paymentModes = new HashMap<Character,String>();
-        for(PaymentMode paymentMode: PaymentMode.values()){
+    public Map<Character, String> paymentMode() {
+        Map<Character, String> paymentModes = new HashMap<Character, String>();
+        for (PaymentMode paymentMode : PaymentMode.values()) {
             paymentModes.put(paymentMode.getCode(), paymentMode.toString());
         }
         return paymentModes;

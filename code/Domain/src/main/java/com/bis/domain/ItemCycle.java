@@ -14,4 +14,13 @@ public enum ItemCycle {
     public char getCode() {
         return code;
     }
+
+    public static String  getNameByCode(char code){
+        for (ItemCycle itemCycle : ItemCycle.values()) {
+            if(itemCycle.getCode()==code){
+                return itemCycle.name();
+            }
+        }
+        throw new RuntimeException("Invalid code");
+    }
 }

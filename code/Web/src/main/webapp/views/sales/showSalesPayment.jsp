@@ -23,7 +23,7 @@
     </div>
     <div class="section">
         <span class="left"><label>Mode:</label></span>
-        <span class="right"><label>${PaymentHistorySales.mode}</label></span>
+        <span class="right"><label>${PaymentHistorySales.modeDescription}</label></span>
     </div>
     <div class="section">
         <span class="left"><label>Remarks:</label></span>

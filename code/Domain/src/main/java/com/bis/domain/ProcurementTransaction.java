@@ -47,6 +47,10 @@ public class ProcurementTransaction implements java.io.Serializable {
         return this.transactionType;
     }
 
+    public String getTransactionTypeDescription() {
+        return ProcurementTransactionType.getNameByCode(this.transactionType);
+    }
+
     public void setTransactionType(Character transactionType) {
         this.transactionType = transactionType;
     }

@@ -40,11 +40,11 @@
                 </div>
                 <div class="section">
                     <span class="left"><label>Item Type:</label></span
-                    <span class="right"><label>${itemList.selectedItem.itemLife}</label></span>
+                    <span class="right"><label>${itemList.selectedItem.itemLifeDescription}</label></span>
                 </div>
                 <div class="section">
                     <span class="left"><label>Item Returnable:</label></span
-                    <span class="right"><label>${itemList.selectedItem.returnable}</label></span>
+                    <span class="right"><label>${itemList.selectedItem.returnableDescription}</label></span>
                 </div>
                 <div class="section">
                     <span class="left"><a href="<%=request.getContextPath()%>/item/updateForm/${itemList.selectedItem.itemCode}">Update Item</a></span>

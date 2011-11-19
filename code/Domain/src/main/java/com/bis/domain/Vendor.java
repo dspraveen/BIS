@@ -86,6 +86,10 @@ public class Vendor implements java.io.Serializable {
 		this.alternatePhone = alternatePhone;
 	}
 
+    public String getBillingCycleDescription(){
+        return BillingCycle.getNameByCode(getBillingCycle());
+    }
+
     @Override
     public int hashCode() {
         return HashCodeBuilder.reflectionHashCode(this);

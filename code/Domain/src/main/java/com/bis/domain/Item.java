@@ -53,12 +53,20 @@ public class Item implements java.io.Serializable {
 		return this.itemLife;
 	}
 
+    public String getItemLifeDescription() {
+        return ItemCycle.getNameByCode(this.itemLife);
+	}
+
 	public void setItemLife(char itemLife) {
 		this.itemLife = itemLife;
 	}
 
 	public char getReturnable() {
 		return this.returnable;
+	}
+
+    public String getReturnableDescription() {
+		return ItemReturnType.getNameByCode(this.returnable);
 	}
 
 	public void setReturnable(char returnable) {

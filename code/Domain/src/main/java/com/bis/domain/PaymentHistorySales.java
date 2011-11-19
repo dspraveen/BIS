@@ -59,6 +59,10 @@ public class PaymentHistorySales implements java.io.Serializable {
 		return this.mode;
 	}
 
+    public String getModeDescription() {
+		return PaymentMode.getNameByCode(this.mode);
+	}
+
 	public void setMode(Character mode) {
 		this.mode = mode;
 	}

@@ -4,54 +4,37 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <div id="procurement_transactions_accordion">
-    <TABLE  width="350px" border="1">
-        <thead class="table_header">
-            <TD>Sl.No</TD>
-		    <TD>Vendor</TD>
-			<TD>Date</TD>
-			<TD>TransactionType</TD>
-			<TD>Total</TD>
-			<TD>Action</TD>
-		</thead>
-        <c:forEach var="procurementTransaction" items="${procurementTransactions}" varStatus="counter">
-            <tr>
-                <td>${counter.count}</td>
-                <td>${procurementTransaction.vendor.vendorName}</td>
-				<c:set var="date" value="${procurementTransaction.date}" />
-				<td><fmt:formatDate pattern="yyyy-MM-dd" value="${date}" /></td>
-                <td>${procurementTransaction.transactionTypeDescription}</td>
-                <td>${procurementTransaction.totalAmount}</td>
-                <td><a href="#" rel="#transaction_details${counter.count}">Show Details</a></td>
-            </tr>
-        </c:forEach>
-     </TABLE>
-    <c:forEach var="procurementTransaction" items="${procurementTransactions}" varStatus="counter">
-        <div class="simple_overlay" id="transaction_details${counter.count}">
-              <h2>Transaction Details for line : ${counter.count}</h2>
-             <TABLE  width="350px" border="1">
-                         <thead class="table_header">
-                            <TD>Item</TD>
-                            <TD>Date Of Publishing</TD>
-                            <TD>Price Per Item</TD>
-                            <TD>Qty</TD>
-                         </thead>
-                        <c:forEach var="transactionDetail" items="${procurementTransaction.transactionDetails}">
-                            <tr>
-                              <td>${transactionDetail.item.itemName}</td>
-                              <td>${transactionDetail.dateOfPublishing}</td>
-                              <td>${transactionDetail.amount}</td>
-                              <td>${transactionDetail.quantity}</td>
-                            </tr>
-                        </c:forEach>
-              </TABLE>
-         </div>
+    <c:forEach var="procurementTransaction" items="${procurementTransactions}">
+       <h3>
+           <a href="">
+               <label>Vendor : ${procurementTransaction.vendor.vendorName}</label>
+               <label>Date : <fmt:formatDate pattern="dd-MM-yyyy" value="${procurementTransaction.date}"/></label>
+               <label>Type : ${procurementTransaction.transactionType}</label>
+           </a>
+        <h3>
+        <div>
+           <TABLE  width="350px" border="1">
+             <thead>
+                <TD>Item</TD>
+                <TD>Date Of Publishing</TD>
+                <TD>Price Per Item</TD>
+                <TD>Qty</TD>
+             </thead>
+               <c:forEach var="transactionDetail" items="${procurementTransaction.transactionDetails}">
+                   <tr>
+                     <td>${transactionDetail.item.itemName}</td>
+                     <td><fmt:formatDate pattern="dd-MM-yyyy" value="${transactionDetail.dateOfPublishing}"/></td>
+                     <td>${transactionDetail.amount}</td>
+                     <td>${transactionDetail.quantity}</td>
+                   </tr>
+               </c:forEach>
+           </TABLE>
+           <a href="<%=request.getContextPath()%>/procurement/updateForm/${procurementTransaction.transactionId}"> Update this transaction</a>
+        </div>
     </c:forEach>
 </div>
 <script>
-    $(function() {
-        $("a[rel]").overlay({
-			top:'25%',
-			left:'1100px'
-		});
-    });
+   $(function() {
+       $( "#procurement_transactions_accordion" ).accordion();
+   });
 </script>

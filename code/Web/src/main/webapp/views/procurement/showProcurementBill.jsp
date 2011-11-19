@@ -40,7 +40,7 @@
             <c:forEach var="procurementPayment" items="${ProcurementBillingDetails.procurementPayments}" varStatus="counter">
                 <tr>
                     <td>${counter.count}</td>
-                    <td><fmt:formatDate pattern="dd-MMM-yyyy" value="${procurementPayment.date}" /></td>
+                    <td><fmt:formatDate pattern="dd-MM-yyyy" value="${procurementPayment.date}" /></td>
                     <td>${procurementPayment.modeDescription}</td>
                     <td>${procurementPayment.receiptNum}</td>
                     <td>${procurementPayment.amount}</td>

@@ -1,6 +1,7 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 
 <div id="sales_payments_accordion">
@@ -8,7 +9,7 @@
         <h3>
             <a href="">
                 <label>Hawker : ${paymentHistorySales.hawker.hawkerName}</label>
-                <label>Date : ${paymentHistorySales.date}</label>
+                <label>Date : <fmt:formatDate pattern="dd-MM-yyyy" value="${paymentHistorySales.date}" /></label>
                 <label>Amount : ${paymentHistorySales.amount}</label>
             </a>
          <h3>

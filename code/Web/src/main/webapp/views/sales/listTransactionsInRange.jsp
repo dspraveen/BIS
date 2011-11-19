@@ -1,13 +1,14 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <div id="sales_transactions_accordion">
      <c:forEach var="salesTransaction" items="${salesTransactions}">
         <h3>
             <a href="">
                 <label>Hawker : ${salesTransaction.hawker.hawkerName}</label>
-                <label>Date : ${salesTransaction.date}</label>
+                <label>Date : <fmt:formatDate pattern="dd-MM-yyyy" value="${salesTransaction.date}" /></label>
                 <label>Type : ${salesTransaction.transactionTypeDescription}</label>
             </a>
          <h3>
@@ -22,7 +23,7 @@
                 <c:forEach var="transactionDetail" items="${salesTransaction.transactionDetails}">
                     <tr>
                       <td>${transactionDetail.item.itemName}</td>
-                      <td>${transactionDetail.dateOfPublishing}</td>
+                      <td><fmt:formatDate pattern="dd-MM-yyyy" value="${transactionDetail.dateOfPublishing}" /></td>
                       <td>${transactionDetail.amount}</td>
                       <td>${transactionDetail.quantity}</td>
                     </tr>

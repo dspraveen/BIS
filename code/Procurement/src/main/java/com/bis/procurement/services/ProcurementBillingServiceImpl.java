@@ -100,4 +100,21 @@ public class ProcurementBillingServiceImpl implements ProcurementBillingService 
     public BillingProcurement getLastBill(Vendor vendor) {
         return procurementBillingRepository.getLastBill(vendor);
     }
+
+    @Override
+    public Date getNextBillDate(Vendor vendor) {
+        Date nextBillDate = null;
+        List<ProcurementTransaction> procurementTransactions = null;
+        BillingProcurement billingProcurement = procurementBillingRepository.getLastBill(vendor);
+        if (billingProcurement != null) {
+            nextBillDate = billingProcurement.getEndDate();
+            nextBillDate = DateUtils.addSecond(nextBillDate,1);
+        } else {
+            procurementTransactions = procurementTransactionRepository.getProcurementTransactions(vendor, DateUtils.getNowDate());
+            if (procurementTransactions != null) {
+                nextBillDate = procurementTransactions.get(0).getDate();
+            }
+        }
+        return nextBillDate;
+    }
 }

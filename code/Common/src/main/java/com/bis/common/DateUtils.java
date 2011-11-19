@@ -24,4 +24,11 @@ public class DateUtils {
         instance.set(Calendar.MILLISECOND, 0);
         return instance.getTime();
     }
+
+    public static Date addSecond(Date date,int seconds) {
+        Calendar instance = Calendar.getInstance();
+        instance.setTime(date);
+        instance.add(Calendar.SECOND,seconds);
+        return instance.getTime();
+    }
 }

@@ -67,11 +67,11 @@ public class SalesBillingServiceImpl implements SalesBillingService {
         if (billingSales != null) {
             totalAmount = billingSales.getBalanceAmount();
             fromDate = billingSales.getEndDate();
-            salesTransactions = salesTransactionRepository.getSalesTransactions(hawker, fromDate, DateUtils.getNowDate());
+            salesTransactions = salesTransactionRepository.getSalesTransactions(hawker, fromDate, DateUtils.currentDate());
             System.out.println("shashi first");
         } else {
             // fetch all the transactions till today
-            salesTransactions = salesTransactionRepository.getSalesTransactions(hawker, DateUtils.getNowDate());
+            salesTransactions = salesTransactionRepository.getSalesTransactions(hawker, DateUtils.currentDate());
             System.out.println("shashi second");
             if (salesTransactions != null) {
                 fromDate = salesTransactions.get(0).getDate();
@@ -90,8 +90,8 @@ public class SalesBillingServiceImpl implements SalesBillingService {
             }
         }
         // check if any payments were made for this time span and reduce that amount
-        totalAmount -= this.getTotalAmountForCycle(hawker, fromDate, DateUtils.getNowDate());
-        return new BillingSales(fromDate, DateUtils.getNowDate(), totalAmount, hawker);
+        totalAmount -= this.getTotalAmountForCycle(hawker, fromDate, DateUtils.currentDate());
+        return new BillingSales(fromDate, DateUtils.currentDate(), totalAmount, hawker);
     }
 
     @Override

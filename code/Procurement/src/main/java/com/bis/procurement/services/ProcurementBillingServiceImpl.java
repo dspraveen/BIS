@@ -73,10 +73,10 @@ public class ProcurementBillingServiceImpl implements ProcurementBillingService 
             totalAmount = billingProcurement.getBalanceAmount();
             fromDate = billingProcurement.getEndDate();
             // fetch all the transactions between today and last endDate
-            procurementTransactions = procurementTransactionRepository.getProcurementTransactions(vendor, fromDate, DateUtils.getNowDate());
+            procurementTransactions = procurementTransactionRepository.getProcurementTransactions(vendor, fromDate, DateUtils.currentDate());
         } else {
             // fetch all the transactions till today
-            procurementTransactions = procurementTransactionRepository.getProcurementTransactions(vendor, DateUtils.getNowDate());
+            procurementTransactions = procurementTransactionRepository.getProcurementTransactions(vendor, DateUtils.currentDate());
             if (procurementTransactions != null) {
                 fromDate = procurementTransactions.get(0).getDate();
             }
@@ -92,8 +92,8 @@ public class ProcurementBillingServiceImpl implements ProcurementBillingService 
             }
         }
         // get the total payment made during this cycle
-        totalAmount -= getTotalAmountForCycle(vendor, fromDate, DateUtils.getNowDate());
-        return new BillingProcurement(fromDate, DateUtils.getNowDate(), totalAmount, vendor);
+        totalAmount -= getTotalAmountForCycle(vendor, fromDate, DateUtils.currentDate());
+        return new BillingProcurement(fromDate, DateUtils.currentDate(), totalAmount, vendor);
     }
 
     @Override

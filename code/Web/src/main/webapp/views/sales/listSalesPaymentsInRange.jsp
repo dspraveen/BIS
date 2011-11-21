@@ -4,32 +4,29 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 
-<div id="sales_payments_accordion">
-     <c:forEach var="paymentHistorySales" items="${paymentHistorySales}">
-        <h3>
-            <a href="">
-                <label>Hawker : ${paymentHistorySales.hawker.hawkerName}</label>
-                <label>Date : <fmt:formatDate pattern="dd-MM-yyyy" value="${paymentHistorySales.date}" /></label>
-                <label>Amount : ${paymentHistorySales.amount}</label>
-            </a>
-         <h3>
-		<div class="section">
-			<span class="left"><label>Receipt No.:</label></span>
-			<span class="right"><label>${paymentHistorySales.receiptNum}</label></span>
-		</div>
-		<div class="section">
-			<span class="left"><label>Mode:</label></span>
-			<span class="right"><label>${paymentHistorySales.modeDescription}</label></span>
-		</div>
-		<div class="section">
-			<span class="left"><label>Remarks:</label></span>
-			<span class="right"><label>${paymentHistorySales.remarks}</label></span>
-		</div>
-		<a href="<%=request.getContextPath()%>/salesPayment/updateForm/${paymentHistorySales.paymentId}"></br><h4> Update this Payment</h4></a>
-	</c:forEach>
-</div>
-<script>
-    $(function() {
-        $( "#sales_payments_accordion" ).accordion();
-    });
-</script>
+<div class="sales_transactions" id="sales_payments_accordion">
+	<TABLE  width="350px" border="1">
+		<thead class="table_header">
+			<TD>Hawker</TD>
+			<TD>Date</TD>
+			<TD>Amount</TD>
+			<TD>Receipt Number</TD>
+			 <TD>Mode</TD>
+			 <TD>Remarks</TD>
+			 <TD>Action</TD>
+		</thead>
+		<c:forEach var="paymentHistorySales" items="${paymentHistorySales}">
+			<tr>
+				<td>${paymentHistorySales.hawker.hawkerName}</td>
+				<td><fmt:formatDate pattern="dd-MM-yyyy" value="${paymentHistorySales.date}" /></td>
+				<td>${paymentHistorySales.amount}</td>
+				<td>${paymentHistorySales.receiptNum}</td>
+				<td>${paymentHistorySales.modeDescription}</td>
+				<td>${paymentHistorySales.remarks}</td>
+				<td><a href="<%=request.getContextPath()%>/salesPayment/updateForm/${paymentHistorySales.paymentId}"></br>Update</a></td>
+			</tr>
+		</c:forEach>
+	 </TABLE>
+ </div>
+
+

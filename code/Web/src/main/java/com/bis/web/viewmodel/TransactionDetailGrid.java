@@ -1,5 +1,6 @@
 package com.bis.web.viewmodel;
 
+import com.bis.common.MathUtils;
 import com.bis.domain.ProcurementTransaction;
 import com.bis.domain.PtDetails;
 import com.bis.domain.SalesTransaction;
@@ -173,11 +174,11 @@ public class TransactionDetailGrid {
         row.setItemCode(ptDetails.getItem().getItemCode());
         row.setMrp(itemPrice);
         row.setPricePerItem(ptDetails.getPricePerItem());
-        row.setDiscount((row.getMrp()-row.getPricePerItem())*100/row.getMrp());
+        row.setDiscount((row.getMrp() - row.getPricePerItem()) * 100 / row.getMrp());
         transactionDetails.add(row);
     }
 
-     public void addSalesTransactionDetail(StDetails stDetails, float itemPrice) {
+    public void addSalesTransactionDetail(StDetails stDetails, float itemPrice) {
         TransactionDetailRow row = new TransactionDetailRow();
         row.setDetailsId(stDetails.getDetailsId());
         row.setTransactionId(stDetails.getTransactionId());
@@ -189,5 +190,13 @@ public class TransactionDetailGrid {
         row.setPricePerItem(stDetails.getPricePerItem());
         row.setDiscount((row.getMrp() - row.getPricePerItem()) * 100 / row.getMrp());
         transactionDetails.add(row);
+    }
+
+    public double getGrandTotal() {
+        double grandTotal = 0;
+        for (TransactionDetailRow transactionDetail : transactionDetails) {
+            if(transactionDetail.getAmount()!=null) grandTotal += transactionDetail.getAmount();
+        }
+        return MathUtils.roundTwoDecimals(grandTotal);
     }
 }

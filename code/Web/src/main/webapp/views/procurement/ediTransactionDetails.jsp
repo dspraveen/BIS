@@ -34,6 +34,10 @@
                 <td><form:input path='procurementTransactionGrid.transactionDetails[${index-1}].amount' class='amount' type='text' readonly='true'/></td>
             </tr>
         </c:forEach>
+        <tr class="transaction_details_count">
+            <td colspan="7">Total</td>
+            <td><form:input type="text" readonly="true" path='salesTransactionGrid.grandTotal' class="grand_total"/></td>
+        </tr>
     </TABLE>
 </div>
 

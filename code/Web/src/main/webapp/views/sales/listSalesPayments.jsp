@@ -42,7 +42,7 @@
     </div>
     <div class="section">
         <span class="left"><input type="button" value="Fetch Payments" class="fetch_payments"/></span
-    </div>
+    </div></br></br>
     <div class="payments">
     </div>
 </div>

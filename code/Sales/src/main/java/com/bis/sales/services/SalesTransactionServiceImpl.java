@@ -1,6 +1,7 @@
 package com.bis.sales.services;
 
 
+import com.bis.common.DateUtils;
 import com.bis.domain.Hawker;
 import com.bis.domain.SalesTransaction;
 import com.bis.sales.repository.SalesTransactionRepository;
@@ -22,6 +23,7 @@ public class SalesTransactionServiceImpl implements SalesTransactionService {
 
     @Override
     public void addSalesTransaction(SalesTransaction salesTransaction) {
+       salesTransaction.setDate(DateUtils.addTimeToDate(salesTransaction.getDate()));
         salesTransaction.calculateAndSetTotalAmount();
         salesRepository.save(salesTransaction);
     }

@@ -23,16 +23,18 @@ public class StockRepository extends BaseRepository<Stock> {
         setSessionFactory(sessionFactory);
     }
 
-    public List<Stock> getAllStock(int itemCode) {
-        return getSession().createCriteria(Stock.class).add(Restrictions.eq("itemCode", itemCode)).list();
-    }
-
     public Stock getStock(int itemCode, Date dateOfPublishing) {
         List stock = getSession().createCriteria(Stock.class)
-                .add(Restrictions.eq("itemCode", itemCode))
+                .add(Restrictions.eq("item.itemCode", itemCode))
                 .add(Restrictions.eq("dateOfPublishing", dateOfPublishing))
                 .list();
         return stock.isEmpty() ? null : (Stock) stock.get(0);
+    }
+
+     public List<Stock> getAllStock() {
+        return getSession().createCriteria(Stock.class)
+                .add(Restrictions.gt("quantity", 0))
+                .list();
     }
 }
     

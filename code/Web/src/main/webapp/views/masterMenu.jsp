@@ -6,10 +6,10 @@
   <h3>Master Menu</h3>
   <ul class="sidemenu">
     <li>
-      <a href="<%=request.getContextPath()%>/vendor/createForm">Add New Vendor</a>
+      <a href="<%=request.getContextPath()%>/item/createForm">Add New Item</a>
     </li>
     <li>
-      <a href="<%=request.getContextPath()%>/item/createForm">Add New Item</a>
+      <a href="<%=request.getContextPath()%>/vendor/createForm">Add New Vendor</a>
     </li>
     <li>
       <a href="<%=request.getContextPath()%>/hawker/createForm">Add New Hawker</a>

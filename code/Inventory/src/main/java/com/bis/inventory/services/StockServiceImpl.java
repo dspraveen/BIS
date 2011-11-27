@@ -25,8 +25,8 @@ public class StockServiceImpl implements StockService{
     }
 
     @Override
-    public List<Stock> getAllStock(int itemCode) {
-        return stockRepository.getAllStock(itemCode);
+    public List<Stock> getAllStock() {
+        return stockRepository.getAllStock();
     }
 
     @Override

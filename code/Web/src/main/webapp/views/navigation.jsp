@@ -14,7 +14,7 @@
       <a href="<%=request.getContextPath()%>/sales/createForm">Sales</a>
     </li>
     <li>
-      <a href="#">Inventory</a>
+      <a href="<%=request.getContextPath()%>/inventory/show">Inventory</a>
     </li>
     <li>
       <a href="#">Reports</a>

@@ -6,7 +6,10 @@
   <h3>Inventory Menu</h3>
   <ul class="sidemenu">
     <li>
-      <a href="#">Stock Details</a>
+      <a href="<%=request.getContextPath()%>/inventory/show">Stock Details</a>
+    </li>
+    <li>
+      <a href="<%=request.getContextPath()%>/inventory/showExpiredStock">Expired Stock Details</a>
     </li>
   </ul>
 </div>

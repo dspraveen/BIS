@@ -1,5 +1,6 @@
 package com.bis.procurement.services;
 
+import com.bis.common.DateUtils;
 import com.bis.domain.ProcurementTransaction;
 import com.bis.domain.Vendor;
 import com.bis.procurement.repository.ProcurementTransactionRepository;
@@ -21,6 +22,7 @@ public class ProcurementTransactionServiceImpl implements ProcurementTransaction
 
     @Override
     public void addProcurementTransaction(ProcurementTransaction procurementTransaction) {
+        procurementTransaction.setDate(DateUtils.addTimeToDate(procurementTransaction.getDate()));
         procurementTransaction.calculateAndSetTotalAmount();
         procurementTransactionRepository.save(procurementTransaction);
     }

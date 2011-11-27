@@ -5,20 +5,15 @@ import java.util.Date;
 public class Stock implements java.io.Serializable {
 
 	private Integer stockId;
-	private int itemCode;
+	private Item item;
 	private Date dateOfPublishing;
 	private Integer quantity;
 
 	public Stock() {
 	}
 
-	public Stock(int itemCode, Date dateOfPublishing) {
-		this.itemCode = itemCode;
-		this.dateOfPublishing = dateOfPublishing;
-	}
-
-	public Stock(int itemCode, Date dateOfPublishing, Integer quantity) {
-		this.itemCode = itemCode;
+    public Stock(int itemCode, Date dateOfPublishing, Integer quantity) {
+		this.item = new Item(itemCode);
 		this.dateOfPublishing = dateOfPublishing;
 		this.quantity = quantity;
 	}
@@ -31,15 +26,15 @@ public class Stock implements java.io.Serializable {
 		this.stockId = stockId;
 	}
 
-	public int getItemCode() {
-		return this.itemCode;
-	}
+    public Item getItem() {
+        return item;
+    }
 
-	public void setItemCode(int itemCode) {
-		this.itemCode = itemCode;
-	}
+    public void setItem(Item item) {
+        this.item = item;
+    }
 
-	public Date getDateOfPublishing() {
+    public Date getDateOfPublishing() {
 		return this.dateOfPublishing;
 	}
 

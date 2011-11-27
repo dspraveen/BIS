@@ -6,7 +6,7 @@
 <script type="text/javascript">
     $(document).ready(function(){
 
-        $('.generate_bill').bind("click",function(){
+        $('.vendorId').bind("change",function(){
             var transactionInRangeUrl = "<%=request.getContextPath()%>/procurementBilling/generateBill?vendorId="+$('.vendorId').val();
             $.ajax({
                 url : transactionInRangeUrl,
@@ -31,19 +31,16 @@
     }
 </script>
 
-<form  method="POST" action="#" onsubmit="return validateForm();">
+<form  method="POST" action="<%=request.getContextPath()%>/procurementBilling//saveProcurementBill" onsubmit="return validateForm();">
     <div>
         <div class="section">
             <span class="left"><label>Select Vendor:</label></span>
             <span class="right">
-				<form:select path="BillingProcurement.vendor.vendorId" class="vendorId">
+				<form:select path="ProcurementBillingDetails.vendor.vendorId" class="vendorId">
 					<form:option value="-1" label="--Please Select"/>
 					<form:options items="${vendors}" itemLabel="vendorName" itemValue="vendorId" />
 				</form:select>
 			</span>
-        </div>
-        <div class="section">
-            <span class="left"><input type="button" value="Generate Bill" class="generate_bill"/></span>
         </div>
         <div class="currentBill">
         </div>

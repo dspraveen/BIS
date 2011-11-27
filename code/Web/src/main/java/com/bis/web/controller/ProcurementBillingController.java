@@ -69,15 +69,10 @@ public class ProcurementBillingController {
         uiModel.asMap().clear();
         Date nextBillDate = procurementBillingService.getNextBillDate(procurementBillingDetails.getVendor());
         Date currentDate = DateUtils.currentDate();
-        List<ProcurementTransaction> procurementTransactions = procurementTransactionService.getProcurementTransactions(nextBillDate, currentDate, procurementBillingDetails.getVendor());
-        if (procurementTransactions != null) {
-            procurementBillingDetails.setProcurementTransactions(procurementTransactions);
-        }
-        List<PaymentHistoryProcurement> procurementPayments = procurementPaymentService.getProcurementPayments(procurementBillingDetails.getVendor(), nextBillDate, currentDate);
-        if (procurementPayments != null) {
-            procurementBillingDetails.setProcurementPayments(procurementPayments);
-        }
+        procurementBillingDetails.setProcurementTransactions(procurementTransactionService.getProcurementTransactions(nextBillDate, currentDate, procurementBillingDetails.getVendor()));
+        procurementBillingDetails.setProcurementPayments(procurementPaymentService.getProcurementPayments(procurementBillingDetails.getVendor(), nextBillDate, currentDate));
         balanceAmount = procurementBillingDetails.getBillAmount();
+
         if(procurementBillingDetails.getPaymentAmount() != null){
             balanceAmount = balanceAmount - procurementBillingDetails.getPaymentAmount();
         }

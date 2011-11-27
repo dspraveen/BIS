@@ -48,7 +48,6 @@ public class SalesBillingServiceImpl implements SalesBillingService {
     private Float getTotalAmountForCycle(Hawker hawker, Date fromDate, Date toDate) {
         Float totalAmount = 0F;
         List<PaymentHistorySales> salesPayments = salesPaymentRepository.getSalesPayments(hawker, fromDate, toDate);
-        System.out.println("shashi Payments");
         for (PaymentHistorySales salesPayment : salesPayments) {
             totalAmount = totalAmount + salesPayment.getAmount();
         }
@@ -62,17 +61,14 @@ public class SalesBillingServiceImpl implements SalesBillingService {
         List<SalesTransaction> salesTransactions = null;
         // get the last bill endDate
         BillingSales billingSales = salesBillingRepository.getLastBill(hawker);
-            System.out.println("shashi enters");
         // this amount should include the balance amount of the previous bill
         if (billingSales != null) {
             totalAmount = billingSales.getBalanceAmount();
             fromDate = billingSales.getEndDate();
             salesTransactions = salesTransactionRepository.getSalesTransactions(hawker, fromDate, DateUtils.currentDate());
-            System.out.println("shashi first");
         } else {
             // fetch all the transactions till today
             salesTransactions = salesTransactionRepository.getSalesTransactions(hawker, DateUtils.currentDate());
-            System.out.println("shashi second");
             if (salesTransactions != null) {
                 fromDate = salesTransactions.get(0).getDate();
             }
@@ -97,5 +93,22 @@ public class SalesBillingServiceImpl implements SalesBillingService {
     @Override
     public BillingSales getLastBill(Hawker hawker) {
         return salesBillingRepository.getLastBill(hawker);
+    }
+
+    @Override
+    public Date getNextBillDate(Hawker hawker) {
+        Date nextBillDate = null;
+        List<SalesTransaction> salesTransactions = null;
+        BillingSales billingSales = salesBillingRepository.getLastBill(hawker);
+        if (billingSales != null) {
+            nextBillDate = billingSales.getEndDate();
+            nextBillDate = DateUtils.addSecond(nextBillDate,1);
+        } else {
+            salesTransactions = salesTransactionRepository.getSalesTransactions(hawker, DateUtils.currentDate());
+            if (salesTransactions != null) {
+                nextBillDate = salesTransactions.get(0).getDate();
+            }
+        }
+        return nextBillDate;
     }
 }

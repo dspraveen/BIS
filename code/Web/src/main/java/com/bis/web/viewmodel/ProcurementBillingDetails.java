@@ -1,41 +1,33 @@
 package com.bis.web.viewmodel;
 
-import com.bis.domain.PaymentHistoryProcurement;
-import com.bis.domain.ProcurementTransaction;
-import com.bis.domain.ProcurementTransactionType;
-import com.bis.domain.Vendor;
+import com.bis.domain.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProcurementBillingDetails {
 
-    private Float paymentAmount;
+    private Float paymentAmount = 0f;
     private String receiptNum;
 	private Character mode;
 	private String remarks;
     private Vendor vendor = new Vendor();
+    private BillingProcurement lastBill;
 
     private List<ProcurementTransaction> procurementTransactions = new ArrayList<ProcurementTransaction>();
 
     private List<PaymentHistoryProcurement> procurementPayments = new ArrayList<PaymentHistoryProcurement>();
 
-    public ProcurementBillingDetails(List<ProcurementTransaction> procurementTransactions, List<PaymentHistoryProcurement> procurementPayments) {
+    public ProcurementBillingDetails(List<ProcurementTransaction> procurementTransactions, List<PaymentHistoryProcurement> procurementPayments, BillingProcurement lastBill) {
         this.procurementTransactions = procurementTransactions;
         this.procurementPayments = procurementPayments;
+        this.lastBill = lastBill;
     }
 
     public ProcurementBillingDetails() {
 
     }
 
-    public void setProcurementTransactions(List<ProcurementTransaction> procurementTransactions){
-        this.procurementTransactions = procurementTransactions;
-    }
-
-    public void setProcurementPayments(List<PaymentHistoryProcurement> procurementPayments){
-        this.procurementPayments = procurementPayments;
-    }
     public double getBillAmount() {
         return getPurchaseTransactionTotal() - (getReturnTransactionTotal()+getPaymentTotal());
     }
@@ -64,14 +56,6 @@ public class ProcurementBillingDetails {
             total += payment.getAmount();
         }
         return total;
-    }
-
-    public List<ProcurementTransaction> getProcurementTransactions() {
-        return procurementTransactions;
-    }
-
-    public List<PaymentHistoryProcurement> getProcurementPayments() {
-        return procurementPayments;
     }
 
     public Float getPaymentAmount() {

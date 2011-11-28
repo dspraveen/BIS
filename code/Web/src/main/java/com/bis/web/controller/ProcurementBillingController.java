@@ -49,10 +49,11 @@ public class ProcurementBillingController {
     public ModelAndView generateBill(@RequestParam(value = "vendorId", required = true) int vendorId) {
         Vendor vendor = vendorMasterService.get(vendorId);
         Date nextBillDate = procurementBillingService.getNextBillDate(vendor);
+        BillingProcurement billingProcurement = procurementBillingService.getLastBill(vendor);
         Date currentDate = DateUtils.currentDate();
         List<ProcurementTransaction> procurementTransactions = procurementTransactionService.getProcurementTransactions(nextBillDate, currentDate, vendor);
         List<PaymentHistoryProcurement> procurementPayments = procurementPaymentService.getProcurementPayments(vendor, nextBillDate, currentDate);
-        ProcurementBillingDetails procurementBillingDetails = new ProcurementBillingDetails(procurementTransactions, procurementPayments);
+        ProcurementBillingDetails procurementBillingDetails = new ProcurementBillingDetails(procurementTransactions, procurementPayments, billingProcurement);
         return new ModelAndView("procurementBilling/showBill", "ProcurementBillingDetails", procurementBillingDetails);
     }
 
@@ -65,19 +66,9 @@ public class ProcurementBillingController {
 
     @RequestMapping(value = "/saveProcurementBill", method = RequestMethod.POST)
     public String addProcurementBill(@Valid ProcurementBillingDetails procurementBillingDetails, BindingResult bindingResult, Model uiModel) {
-        double balanceAmount = 0f;
         uiModel.asMap().clear();
-        Date nextBillDate = procurementBillingService.getNextBillDate(procurementBillingDetails.getVendor());
         Date currentDate = DateUtils.currentDate();
-        procurementBillingDetails.setProcurementTransactions(procurementTransactionService.getProcurementTransactions(nextBillDate, currentDate, procurementBillingDetails.getVendor()));
-        procurementBillingDetails.setProcurementPayments(procurementPaymentService.getProcurementPayments(procurementBillingDetails.getVendor(), nextBillDate, currentDate));
-        balanceAmount = procurementBillingDetails.getBillAmount();
-
-        if(procurementBillingDetails.getPaymentAmount() != null){
-            balanceAmount = balanceAmount - procurementBillingDetails.getPaymentAmount();
-        }
-
-        BillingProcurement billingProcurement = new BillingProcurement(nextBillDate, currentDate, (float) balanceAmount, procurementBillingDetails.getVendor());
+        BillingProcurement billingProcurement = procurementBillingService.generateProcurementBill(procurementBillingDetails.getVendor());
         if (procurementBillingDetails.getPaymentAmount() != null) {
             PaymentHistoryProcurement paymentHistoryProcurement = new PaymentHistoryProcurement();
             paymentHistoryProcurement.setAmount(procurementBillingDetails.getPaymentAmount());
@@ -88,6 +79,7 @@ public class ProcurementBillingController {
             paymentHistoryProcurement.setVendor(procurementBillingDetails.getVendor());
             procurementPaymentService.addProcurementPayment(paymentHistoryProcurement);
         }
+        billingProcurement.setBalanceAmount(billingProcurement.getBalanceAmount() - procurementBillingDetails.getPaymentAmount());
         procurementBillingService.addProcurementBill(billingProcurement);
         return "redirect:/procurementBilling/show/" + billingProcurement.getBillId();
     }

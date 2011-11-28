@@ -6,7 +6,7 @@
 <script type="text/javascript">
     $(document).ready(function(){
 
-        $('.generate_bill').bind("click",function(){
+        $('.hawkerId').bind("change",function(){
             var transactionInRangeUrl = "<%=request.getContextPath()%>/salesBilling/generateBill?hawkerId="+$('.hawkerId').val();
             $.ajax({
                 url : transactionInRangeUrl,
@@ -17,6 +17,7 @@
             })
         });
     });
+
     function validateForm(){
 		var errors=new Array();
 		var errorCount =0;
@@ -30,19 +31,16 @@
     }
 </script>
 
-<form  method="POST" action="#" onsubmit="return validateForm();">
+<form  method="POST" action="<%=request.getContextPath()%>/salesBilling/saveSalesBill" onsubmit="return validateForm();">
     <div>
         <div class="section">
             <span class="left"><label>Select Hawker:</label></span>
             <span class="right">
-				<form:select path="BillingSales.hawker.hawkerId" class="hawkerId">
+				<form:select path="SalesBillingDetails.hawker.hawkerId" class="hawkerId">
 					<form:option value="-1" label="--Please Select"/>
 					<form:options items="${hawkers}" itemLabel="hawkerName" itemValue="hawkerId" />
 				</form:select>
 			</span>
-        </div>
-        <div class="section">
-            <span class="left"><input type="button" value="Generate Bill" class="generate_bill"/></span>
         </div>
         <div class="currentBill">
         </div>

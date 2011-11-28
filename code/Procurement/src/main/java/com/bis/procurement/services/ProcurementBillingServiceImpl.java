@@ -51,7 +51,7 @@ public class ProcurementBillingServiceImpl implements ProcurementBillingService 
         return procurementBillingRepository.getProcurementBillList(fromDate, toDate);
     }
 
-    private Float getTotalAmountForCycle(Vendor vendor, Date fromDate, Date toDate) {
+    private Float getPaymentAmountForCycle(Vendor vendor, Date fromDate, Date toDate) {
         Float totalAmount = 0F;
         List<PaymentHistoryProcurement> procurementPayments = procurementPaymentRepository.getProcurementPayments(vendor, fromDate, toDate);
         for (PaymentHistoryProcurement paymentHistoryProcurement : procurementPayments) {
@@ -62,26 +62,20 @@ public class ProcurementBillingServiceImpl implements ProcurementBillingService 
 
     @Override
     public BillingProcurement generateProcurementBill(Vendor vendor) {
-        // Steps
         Float totalAmount = 0f;
         Date fromDate = null;
         List<ProcurementTransaction> procurementTransactions = null;
-        // get last bill end date
         BillingProcurement billingProcurement = procurementBillingRepository.getLastBill(vendor);
-        // this amount should include the balance amount of the previous bill
         if (billingProcurement != null) {
             totalAmount = billingProcurement.getBalanceAmount();
             fromDate = billingProcurement.getEndDate();
-            // fetch all the transactions between today and last endDate
             procurementTransactions = procurementTransactionRepository.getProcurementTransactions(vendor, fromDate, DateUtils.currentDate());
         } else {
-            // fetch all the transactions till today
             procurementTransactions = procurementTransactionRepository.getProcurementTransactions(vendor, DateUtils.currentDate());
             if (procurementTransactions != null) {
-                fromDate = procurementTransactions.get(0).getDate();
+                fromDate = DateUtils.addSecond(procurementTransactions.get(0).getDate(), 1);
             }
         }
-        // generate bill
         if (procurementTransactions != null) {
             for (ProcurementTransaction procurementTransaction : procurementTransactions) {
                 if (procurementTransaction.getTransactionType().equals('S')) {
@@ -91,8 +85,7 @@ public class ProcurementBillingServiceImpl implements ProcurementBillingService 
                 }
             }
         }
-        // get the total payment made during this cycle
-        totalAmount -= getTotalAmountForCycle(vendor, fromDate, DateUtils.currentDate());
+        totalAmount -= getPaymentAmountForCycle(vendor, fromDate, DateUtils.currentDate());
         return new BillingProcurement(fromDate, DateUtils.currentDate(), totalAmount, vendor);
     }
 

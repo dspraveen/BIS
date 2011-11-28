@@ -31,7 +31,7 @@
     }
 </script>
 
-<form  method="POST" action="<%=request.getContextPath()%>/procurementBilling//saveProcurementBill" onsubmit="return validateForm();">
+<form  method="POST" action="<%=request.getContextPath()%>/procurementBilling/saveProcurementBill" onsubmit="return validateForm();">
     <div>
         <div class="section">
             <span class="left"><label>Select Vendor:</label></span>

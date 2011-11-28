@@ -55,25 +55,20 @@ public class SalesBillingServiceImpl implements SalesBillingService {
     }
 
     public BillingSales generateSalesBill(Hawker hawker) {
-        // Steps
         Float totalAmount = 0f;
         Date fromDate = null;
         List<SalesTransaction> salesTransactions = null;
-        // get the last bill endDate
         BillingSales billingSales = salesBillingRepository.getLastBill(hawker);
-        // this amount should include the balance amount of the previous bill
         if (billingSales != null) {
             totalAmount = billingSales.getBalanceAmount();
             fromDate = billingSales.getEndDate();
             salesTransactions = salesTransactionRepository.getSalesTransactions(hawker, fromDate, DateUtils.currentDate());
         } else {
-            // fetch all the transactions till today
             salesTransactions = salesTransactionRepository.getSalesTransactions(hawker, DateUtils.currentDate());
             if (salesTransactions != null) {
-                fromDate = salesTransactions.get(0).getDate();
+                fromDate = DateUtils.addSecond(salesTransactions.get(0).getDate(), 1);
             }
         }
-        // generate Bill
         if (salesTransactions != null) {
             for (SalesTransaction salesTransaction : salesTransactions) {
                 if (salesTransaction.getTransactionType().equals('S')
@@ -85,7 +80,6 @@ public class SalesBillingServiceImpl implements SalesBillingService {
                 }
             }
         }
-        // check if any payments were made for this time span and reduce that amount
         totalAmount -= this.getTotalAmountForCycle(hawker, fromDate, DateUtils.currentDate());
         return new BillingSales(fromDate, DateUtils.currentDate(), totalAmount, hawker);
     }

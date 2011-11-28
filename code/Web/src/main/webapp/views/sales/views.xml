@@ -36,6 +36,9 @@
         <put-attribute name="main-content" value="/views/sales/billSelectHawker.jsp"/>
     </definition>
     <definition name="salesBilling/showBill" extends="ajaxSection">
-        <put-attribute name="content" value="/views/sales/showSalesBill.jsp"/>
+        <put-attribute name="content" value="/views/sales/showGeneratedBill.jsp"/>
+    </definition>
+    <definition name="salesBilling/show" extends="ajaxSection">
+        <put-attribute name="main-content" value="/views/sales/showSalesBill.jsp"/>
     </definition>
 </tiles-definitions>

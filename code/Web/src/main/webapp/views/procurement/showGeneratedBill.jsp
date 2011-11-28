@@ -25,8 +25,14 @@
              </tr>
          </c:forEach>
       </TABLE>
-      <p>Purchase Transactions Total:${ProcurementBillingDetails.purchaseTransactionTotal}</p>
-      <p>Return Transactions Total:${ProcurementBillingDetails.returnTransactionTotal}</p>
+        <div class="section">
+            <span class="left"><label>Purchase Transactions Total:</label></span>
+            <span class="right"><label>${ProcurementBillingDetails.purchaseTransactionTotal}</label></span>
+        </div>
+        <div class="section">
+            <span class="left"><label>Return Transactions Total:</label></span>
+            <span class="right"><label>${ProcurementBillingDetails.returnTransactionTotal}</label></span>
+        </div>			
   </div>
   <div class="payment_details">
      <TABLE  width="500px" border="1">
@@ -49,8 +55,11 @@
       </TABLE>
       <p>Payment Transactions Total:${ProcurementBillingDetails.paymentTotal}</p>
   </div>
-  <p>Payment Transactions Total:${ProcurementBillingDetails.billAmount}</p>
+  <p>Bill Total:${ProcurementBillingDetails.billAmount}</p>
  <div>
+    <div>
+    <h3>Quick Payment</h3></br>
+    </div>
     <div class="section">
          <span class="left"><label>Amount:</label></span>
          <span class="right"><form:input path="ProcurementBillingDetails.paymentAmount" class="amount"/></span>
@@ -69,6 +78,6 @@
      </div>
  </div>
  <div class="section">
-    <span class="left"><input type="submit" value="Save" class="generate_bill"/></span>
+    <span class="left"><input type="submit" value="Save Bill" class="generate_bill"/></span>
  </div>
 </div>

@@ -5,6 +5,8 @@
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/transactionDetails.js"></script>
 <form method="POST" action="<%=request.getContextPath()%>/sales/addSalesTransaction"  onsubmit="return validateForm();">
     <div class="content_header">Sales Transaction Process Form</div>
+    <div class="errors">
+    </div>
     <div>
         <form:hidden path="salesTransaction.transactionId"/>
         <form:hidden path="salesTransaction.effectedRowId" id="effectedRowId"/>
@@ -32,7 +34,7 @@
              <INPUT type="button" value="Delete Row" class="remove_item"/>
          </div>
         <div class="section">
-            <span class="center"><input type="submit" value="Submit"/> <input type="reset" value="Clear"/></span>
+            <span class="center"><input type="submit" value="Submit" class="submit"/> <input type="reset" value="Clear"/></span>
         </div>
     </div>
 </form>

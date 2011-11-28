@@ -6,8 +6,7 @@ import com.bis.inventory.repository.StockRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class StockServiceImpl implements StockService{
@@ -61,5 +60,17 @@ public class StockServiceImpl implements StockService{
     @Override
     public List<Stock> readExpiredStock(int itemCode) {
         return null;
+    }
+
+    @Override
+    public List<Stock> getAllStock(int itemCode, Date fromDateOfPublish, Date endDateOfPublish) {
+        List<Stock> stocks = stockRepository.getItemStock(itemCode, fromDateOfPublish, endDateOfPublish);
+        Collections.sort(stocks, new Comparator<Stock>() {
+            @Override
+            public int compare(Stock stockOne, Stock stockTwo) {
+                return stockTwo.getDateOfPublishing().compareTo(stockOne.getDateOfPublishing());
+            }
+        });
+        return stocks;
     }
 }

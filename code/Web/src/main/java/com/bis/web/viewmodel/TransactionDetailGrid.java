@@ -24,7 +24,9 @@ public class TransactionDetailGrid {
 
     private String changeType;
 
-    List<TransactionDetailRow> transactionDetails = new ArrayList<TransactionDetailRow>();
+    private List<TransactionDetailRow> transactionDetails = new ArrayList<TransactionDetailRow>();
+
+    private List<String> errors = new ArrayList<String>();
 
     public TransactionDetailGrid() {
     }
@@ -96,6 +98,10 @@ public class TransactionDetailGrid {
         return transactionDetails;
     }
 
+    public List<String> getErrors() {
+        return errors;
+    }
+
     public void addNewItem(Float vendorDiscount) {
         TransactionDetailRow transactionDetailRow = new TransactionDetailRow();
         transactionDetailRow.setDiscount(vendorDiscount);
@@ -112,9 +118,9 @@ public class TransactionDetailGrid {
         transactionDetails.removeAll(rowsToDelete);
     }
 
-    public TransactionDetailRow getEffectedRow(TransactionDetailGrid procurementTransactionGrid) {
-        for (TransactionDetailRow row : procurementTransactionGrid.getTransactionDetails()) {
-            if (procurementTransactionGrid.getEffectedRowId() == procurementTransactionGrid.getTransactionDetails().indexOf(row)) {
+    public TransactionDetailRow getEffectedRow() {
+        for (TransactionDetailRow row : this.getTransactionDetails()) {
+            if (this.getEffectedRowId() == this.getTransactionDetails().indexOf(row)) {
                 Integer itemCode = row.getItemCode();
                 if (itemCode != null && itemCode > 0) {
                     return row;
@@ -195,7 +201,7 @@ public class TransactionDetailGrid {
     public double getGrandTotal() {
         double grandTotal = 0;
         for (TransactionDetailRow transactionDetail : transactionDetails) {
-            if(transactionDetail.getAmount()!=null) grandTotal += transactionDetail.getAmount();
+            if (transactionDetail.getAmount() != null) grandTotal += transactionDetail.getAmount();
         }
         return MathUtils.roundTwoDecimals(grandTotal);
     }

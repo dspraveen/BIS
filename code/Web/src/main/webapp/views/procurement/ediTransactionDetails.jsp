@@ -26,7 +26,15 @@
                         <form:options items="${items}" itemLabel="itemName" itemValue="itemCode"/>
                     </form:select>
                 </td>
-                <td><form:input path='procurementTransactionGrid.transactionDetails[${index-1}].dateOfPublishing' class='date_of_publish' type='text'/></td>
+                <td>
+                    <select class="date_of_publish_select">
+						<c:forEach var="issue" items="${procurementTransactionGrid.transactionDetails[index-1].issueDates}">
+							<option value="${issue.key}">${issue.value}</option>
+						</c:forEach>
+						<option value="-1">Other</option>
+					</select>
+					<form:input path='procurementTransactionGrid.transactionDetails[${index-1}].dateOfPublishing' class='date_of_publish' type='text' display="none"/>
+                </td>
                 <td><form:input class='mrp' type='text' readonly='true' path="procurementTransactionGrid.transactionDetails[${index-1}].mrp"/></td>
                 <td><form:input class='discount' type='text' path="procurementTransactionGrid.transactionDetails[${index-1}].discount"/></td>
                 <td><form:input class='price_per_item' type='text' path="procurementTransactionGrid.transactionDetails[${index-1}].pricePerItem"/></td>
@@ -36,7 +44,7 @@
         </c:forEach>
         <tr class="transaction_details_count">
             <td colspan="7">Total</td>
-            <td><form:input type="text" readonly="true" path='salesTransactionGrid.grandTotal' class="grand_total"/></td>
+            <td><form:input type="text" readonly="true" path='procurementTransactionGrid.grandTotal' class="grand_total"/></td>
         </tr>
     </TABLE>
 </div>

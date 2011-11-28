@@ -72,3 +72,10 @@
 .transaction_details_count{
     text-align:center;
 }
+.date_of_publish_select{
+    margin-top:5px;
+}
+.date_of_publish{
+    margin-top:5px;
+    margin-bottom:5px;
+}

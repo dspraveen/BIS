@@ -1,12 +1,17 @@
 package com.bis.web;
 
-import com.bis.domain.ProcurementTransaction;
-import com.bis.domain.PtDetails;
+import com.bis.common.DateUtils;
+import com.bis.domain.*;
 import com.bis.inventory.services.StockService;
 import com.bis.procurement.services.ProcurementTransactionService;
+import com.bis.web.viewmodel.ListElement;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import static com.bis.common.DateUtils.defaultFormat;
 
 public class ProcurementTransactionHandler {
 
@@ -51,6 +56,28 @@ public class ProcurementTransactionHandler {
             }
         }
         procurementTransactionService.updateProcurementTransaction(procurementTransaction);
+    }
+
+    public List<ListElement> getStockDetails(Item item) {
+        Date currentDate = DateUtils.currentDate();
+        List<Stock> stockList = stockService.getAllStock(item.getItemCode(), DateUtils.addMonth(currentDate, -1), currentDate);
+        List<ListElement> stockDetails = new ArrayList<ListElement>();
+        if (stockList.isEmpty()) return stockDetails;
+        Date date = getNextDateOfPublish(stockList.get(0).getDateOfPublishing(), item.getItemLife());
+        stockDetails.add(new ListElement(defaultFormat(date), defaultFormat(date)));
+        for (Stock stock : stockList) {
+            String dateString = defaultFormat(stock.getDateOfPublishing());
+            stockDetails.add(new ListElement(dateString, dateString + ":" + stock.getQuantity()));
+        }
+        return stockDetails;
+    }
+
+    private Date getNextDateOfPublish(Date dateOfPublishing, char itemLife) {
+        if (ItemCycle.FORTNIGHT.getCode() == itemLife) return DateUtils.addDays(dateOfPublishing, 15);
+        if (ItemCycle.MONTHLY.getCode() == itemLife) return DateUtils.addMonth(dateOfPublishing, 1);
+        if (ItemCycle.WEEKLY.getCode() == itemLife) return DateUtils.addDays(dateOfPublishing, 7);
+        if (ItemCycle.DAILY.getCode() == itemLife) return DateUtils.addDays(dateOfPublishing, 1);
+        throw new RuntimeException("Invalid item life");
     }
 
 }

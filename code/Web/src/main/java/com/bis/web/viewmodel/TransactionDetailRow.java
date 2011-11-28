@@ -1,6 +1,8 @@
 package com.bis.web.viewmodel;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class TransactionDetailRow {
     private Float mrp;
@@ -13,6 +15,7 @@ public class TransactionDetailRow {
     private Integer quantity;
     private Float amount;
     private boolean checked;
+    List<ListElement> issueDates = new ArrayList<ListElement>();
 
     public TransactionDetailRow() {
     }
@@ -135,5 +138,13 @@ public class TransactionDetailRow {
         if (pricePerItem != null) {
             amount = pricePerItem * quantity;
         }
+    }
+
+    public List<ListElement> getIssueDates() {
+        return issueDates;
+    }
+
+    public void setIssueDates(List<ListElement> issueDates) {
+        this.issueDates = issueDates;
     }
 }

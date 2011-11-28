@@ -87,12 +87,12 @@ public class SalesTransactionController {
     }
 
     @RequestMapping(value = "/transactionsInRange", method = RequestMethod.GET)
-    public ModelAndView transactionsBetween(@RequestParam(value = "fromDate", required = true) Date fromDate, @RequestParam(value = "toDate", required = true) Date toDate,@RequestParam(value = "hawkerId", required = false,defaultValue = "-1") int hawkerId) {
+    public ModelAndView transactionsBetween(@RequestParam(value = "fromDate", required = true) Date fromDate, @RequestParam(value = "toDate", required = true) Date toDate, @RequestParam(value = "hawkerId", required = false, defaultValue = "-1") int hawkerId) {
         List<SalesTransaction> salesTransactions;
-        if(hawkerId < 1){
+        if (hawkerId < 1) {
             salesTransactions = salesTransactionService.getSalesTransactions(fromDate, toDate);
-        }else {
-            salesTransactions = salesTransactionService.getSalesTransactions(fromDate,toDate,hawkerMasterService.get(hawkerId));
+        } else {
+            salesTransactions = salesTransactionService.getSalesTransactions(fromDate, toDate, hawkerMasterService.get(hawkerId));
         }
         return new ModelAndView("sales/transactionsInRange", "salesTransactions", salesTransactions);
     }
@@ -109,50 +109,49 @@ public class SalesTransactionController {
             Float hawkerDiscount = salesTransactionGrid.getTargetId() != null && salesTransactionGrid.getTargetId() > 0 ? hawkerMasterService.get(salesTransactionGrid.getTargetId()).getHawkerDiscount() : null;
             salesTransactionGrid.addNewItem(hawkerDiscount);
         }
-        return new ModelAndView("sales/editSalesTransactionDetails", "salesTransactionGrid", salesTransactionGrid);
+        return modelAndViewForSalesTransactionDetails(salesTransactionGrid);
     }
-
 
 
     @RequestMapping(value = "/addItem", method = RequestMethod.POST)
     public ModelAndView addNewItem(@Valid TransactionDetailGrid salesTransactionGrid, BindingResult bindingResult, Model uiModel) {
         Float salesDiscount = salesTransactionGrid.getTargetId() != null && salesTransactionGrid.getTargetId() > 0 ? hawkerMasterService.get(salesTransactionGrid.getTargetId()).getHawkerDiscount() : null;
         salesTransactionGrid.addNewItem(salesDiscount);
-        return new ModelAndView("sales/editSalesTransactionDetails", "salesTransactionGrid", salesTransactionGrid);
+        return modelAndViewForSalesTransactionDetails(salesTransactionGrid);
     }
 
     @RequestMapping(value = "/deleteItem", method = RequestMethod.POST)
     public ModelAndView deleteItem(@Valid TransactionDetailGrid salesTransactionGrid, BindingResult bindingResult, Model uiModel) {
         salesTransactionGrid.deleteItems();
-        return new ModelAndView("sales/editSalesTransactionDetails", "salesTransactionGrid", salesTransactionGrid);
+        return modelAndViewForSalesTransactionDetails(salesTransactionGrid);
     }
 
     @RequestMapping(value = "/itemChanged", method = RequestMethod.POST)
     public ModelAndView itemChanged(@Valid TransactionDetailGrid salesTransactionGrid, BindingResult bindingResult, Model uiModel) {
-        TransactionDetailRow effectedRow = salesTransactionGrid.getEffectedRow(salesTransactionGrid);
+        TransactionDetailRow effectedRow = salesTransactionGrid.getEffectedRow();
         if (effectedRow != null) effectedRow.updateItemPrice(itemMasterService.getItemPrice(effectedRow.getItemCode()));
-        return new ModelAndView("sales/editSalesTransactionDetails", "salesTransactionGrid", salesTransactionGrid);
+        return modelAndViewForSalesTransactionDetails(salesTransactionGrid);
     }
 
     @RequestMapping(value = "/itemDiscountChanged", method = RequestMethod.POST)
     public ModelAndView itemDiscountChanged(@Valid TransactionDetailGrid salesTransactionGrid, BindingResult bindingResult, Model uiModel) {
-        TransactionDetailRow effectedRow = salesTransactionGrid.getEffectedRow(salesTransactionGrid);
+        TransactionDetailRow effectedRow = salesTransactionGrid.getEffectedRow();
         if (effectedRow != null) effectedRow.updateDiscount();
-        return new ModelAndView("sales/editSalesTransactionDetails", "salesTransactionGrid", salesTransactionGrid);
+        return modelAndViewForSalesTransactionDetails(salesTransactionGrid);
     }
 
     @RequestMapping(value = "/itemPriceChanged", method = RequestMethod.POST)
     public ModelAndView itemPriceChanged(@Valid TransactionDetailGrid salesTransactionGrid, BindingResult bindingResult, Model uiModel) {
-        TransactionDetailRow effectedRow = salesTransactionGrid.getEffectedRow(salesTransactionGrid);
+        TransactionDetailRow effectedRow = salesTransactionGrid.getEffectedRow();
         if (effectedRow != null) effectedRow.updateDiscount();
-        return new ModelAndView("sales/editSalesTransactionDetails", "salesTransactionGrid", salesTransactionGrid);
+        return modelAndViewForSalesTransactionDetails(salesTransactionGrid);
     }
 
     @RequestMapping(value = "/itemQuantityChanged", method = RequestMethod.POST)
     public ModelAndView itemQuantityChanged(@Valid TransactionDetailGrid salesTransactionGrid, BindingResult bindingResult, Model uiModel) {
-        TransactionDetailRow effectedRow = salesTransactionGrid.getEffectedRow(salesTransactionGrid);
-        if (effectedRow != null) effectedRow.updateDiscount();
-        return new ModelAndView("sales/editSalesTransactionDetails", "salesTransactionGrid", salesTransactionGrid);
+        TransactionDetailRow effectedRow = salesTransactionGrid.getEffectedRow();
+        if (effectedRow != null) effectedRow.updateQuantity();
+        return modelAndViewForSalesTransactionDetails(salesTransactionGrid);
     }
 
     @RequestMapping(value = "/hawkerChanged", method = RequestMethod.POST)
@@ -160,7 +159,7 @@ public class SalesTransactionController {
         for (TransactionDetailRow row : salesTransactionGrid.getTransactionDetails()) {
             row.updateVendorDiscount(hawkerMasterService.get(salesTransactionGrid.getTargetId()).getHawkerDiscount());
         }
-        return new ModelAndView("sales/editSalesTransactionDetails", "salesTransactionGrid", salesTransactionGrid);
+        return modelAndViewForSalesTransactionDetails(salesTransactionGrid);
     }
 
 
@@ -174,7 +173,6 @@ public class SalesTransactionController {
         return hawkerMasterService.getAll();
     }
 
-
     @ModelAttribute("salesTransactionType")
     public Map<Character, String> salesTransactionType() {
         Map<Character, String> salesTransactionTypes = new HashMap<Character, String>();
@@ -182,5 +180,13 @@ public class SalesTransactionController {
             salesTransactionTypes.put(salesTransactionType.getCode(), salesTransactionType.toString());
         }
         return salesTransactionTypes;
+    }
+
+    private ModelAndView modelAndViewForSalesTransactionDetails(TransactionDetailGrid salesTransactionGrid) {
+        for (TransactionDetailRow transactionDetailRow : salesTransactionGrid.getTransactionDetails()) {
+            if (transactionDetailRow.getItemCode() != null && transactionDetailRow.getItemCode() > 0)
+                transactionDetailRow.setIssueDates(salesTransactionHandler.getStockDetails(transactionDetailRow.getItemCode()));
+        }
+        return new ModelAndView("sales/editSalesTransactionDetails", "salesTransactionGrid", salesTransactionGrid);
     }
 }

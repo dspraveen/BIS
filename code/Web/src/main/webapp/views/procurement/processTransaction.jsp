@@ -3,8 +3,10 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/transactionDetails.js"></script>
-<form method="POST" action="<%=request.getContextPath()%>/procurement/addProcurementTransaction"  onsubmit="return validateForm();">
+<form method="POST" action="<%=request.getContextPath()%>/procurement/addProcurementTransaction">
     <div class="content_header">Procurement Transaction Process Form</div>
+    <div class="errors">
+    </div>
     <div>
         <form:hidden path="procurementTransaction.transactionId"/>
         <form:hidden path="procurementTransaction.effectedRowId" id="effectedRowId"/>
@@ -32,7 +34,7 @@
              <INPUT type="button" value="Delete Row" class="remove_item"/>
          </div>
         <div class="section">
-            <span class="center"><input type="submit" value="Submit"/> <input type="reset" value="Clear"/></span>
+            <span class="center"><input type="submit" value="Submit" class="submit"/> <input type="reset" value="Clear"/></span>
         </div>
     </div>
 </form>

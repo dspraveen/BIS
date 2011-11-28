@@ -3,7 +3,7 @@ package com.bis.domain;
 
 public enum ItemCycle {
 
-    WEEKLY('W'),MONTHLY('M'),FORTNIGHT('F');
+    WEEKLY('W'),MONTHLY('M'),FORTNIGHT('F'),DAILY('D');
 
     private char code;
 

@@ -1,12 +1,15 @@
 package com.bis.web;
 
+import com.bis.common.DateUtils;
 import com.bis.domain.SalesTransaction;
 import com.bis.domain.StDetails;
+import com.bis.domain.Stock;
 import com.bis.inventory.services.StockService;
 import com.bis.sales.services.SalesTransactionService;
+import com.bis.web.viewmodel.ListElement;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.util.*;
 
 public class SalesTransactionHandler {
 
@@ -53,4 +56,14 @@ public class SalesTransactionHandler {
         salesTransactionService.updateSalesTransaction(salesTransaction);
     }
 
+    public List<ListElement> getStockDetails(int itemCode) {
+        Date currentDate = DateUtils.currentDate();
+        List<Stock> stockList = stockService.getAllStock(itemCode, DateUtils.addMonth(currentDate, -1), currentDate);
+        List<ListElement> stockDetails = new ArrayList<ListElement>();
+        for (Stock stock : stockList) {
+            String dateString = DateUtils.defaultFormat(stock.getDateOfPublishing());
+            stockDetails.add(new ListElement(dateString,dateString + ":" + stock.getQuantity()));
+        }
+        return stockDetails;
+    }
 }

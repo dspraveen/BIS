@@ -26,7 +26,14 @@
                         <form:options items="${items}" itemLabel="itemName" itemValue="itemCode"/>
                     </form:select>
                 </td>
-                <td><form:input path='salesTransactionGrid.transactionDetails[${index-1}].dateOfPublishing' class='date_of_publish' type='text'/></td>
+                <td>
+					<select class="date_of_publish_select">
+						<c:forEach var="issue" items="${salesTransactionGrid.transactionDetails[index-1].issueDates}">
+							<option value="${issue.key}">${issue.value}</option>
+						</c:forEach>
+					</select>
+					<form:input path='salesTransactionGrid.transactionDetails[${index-1}].quantity' class='date_of_publish' type='text' display="none"/>
+				</td>
                 <td><form:input class='mrp' type='text' readonly='true' path="salesTransactionGrid.transactionDetails[${index-1}].mrp"/></td>
                 <td><form:input class='discount' type='text' path="salesTransactionGrid.transactionDetails[${index-1}].discount"/></td>
                 <td><form:input class='price_per_item' type='text' path="salesTransactionGrid.transactionDetails[${index-1}].pricePerItem"/></td>

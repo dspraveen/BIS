@@ -2,27 +2,19 @@ package com.bis.web.controller;
 
 import com.bis.common.DateUtils;
 import com.bis.core.services.ItemMasterService;
-import com.bis.core.services.VendorMasterService;
-import com.bis.domain.*;
+import com.bis.domain.ItemCycle;
+import com.bis.domain.Stock;
 import com.bis.inventory.services.StockService;
-import com.bis.web.viewmodel.TransactionDetailGrid;
-import com.bis.web.viewmodel.VendorList;
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.collections.Predicate;
-import org.apache.commons.httpclient.util.DateUtil;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import sun.util.calendar.BaseCalendar;
 
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
-import java.awt.event.ItemListener;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Controller
 @RequestMapping("/inventory")
@@ -60,7 +52,7 @@ public class InventoryController {
                     expiredStock.add(stock);
                 }
             } else if (stock.getItem().getItemLife() == ItemCycle.MONTHLY.getCode()) {
-                Date nextDateOfPublish = DateUtils.addMonths(stock.getDateOfPublishing());
+                Date nextDateOfPublish = DateUtils.addMonth(stock.getDateOfPublishing(),1);
                 if (DateUtils.isGreaterOrEqual(DateUtils.currentDate(), nextDateOfPublish)) {
                     expiredStock.add(stock);
                 }

@@ -39,7 +39,6 @@ public class ProcurementTransactionController {
         this.procurementTransactionHandler = new ProcurementTransactionHandler(procurementTransactionService, stockService);
     }
 
-
     ProcurementTransactionController(ProcurementTransactionService procurementTransactionService, ItemMasterService itemMasterService, VendorMasterService vendorMasterService, ProcurementTransactionHandler procurementTransactionHandler) {
         this.procurementTransactionService = procurementTransactionService;
         this.itemMasterService = itemMasterService;
@@ -110,7 +109,7 @@ public class ProcurementTransactionController {
             Float vendorDiscount = procurementTransactionGrid.getTargetId() != null && procurementTransactionGrid.getTargetId() > 0 ? vendorMasterService.get(procurementTransactionGrid.getTargetId()).getVendorDiscount() : null;
             procurementTransactionGrid.addNewItem(vendorDiscount);
         }
-        return new ModelAndView("procurement/editProcurementTransactionDetails", "procurementTransactionGrid", procurementTransactionGrid);
+        return modelAndViewForProcurementTransactionDetails(procurementTransactionGrid);
     }
 
 
@@ -118,41 +117,41 @@ public class ProcurementTransactionController {
     public ModelAndView addNewItem(@Valid TransactionDetailGrid procurementTransactionGrid, BindingResult bindingResult, Model uiModel) {
         Float vendorDiscount = procurementTransactionGrid.getTargetId() != null && procurementTransactionGrid.getTargetId() > 0 ? vendorMasterService.get(procurementTransactionGrid.getTargetId()).getVendorDiscount() : null;
         procurementTransactionGrid.addNewItem(vendorDiscount);
-        return new ModelAndView("procurement/editProcurementTransactionDetails", "procurementTransactionGrid", procurementTransactionGrid);
+        return modelAndViewForProcurementTransactionDetails(procurementTransactionGrid);
     }
 
     @RequestMapping(value = "/deleteItem", method = RequestMethod.POST)
     public ModelAndView deleteItem(@Valid TransactionDetailGrid procurementTransactionGrid, BindingResult bindingResult, Model uiModel) {
         procurementTransactionGrid.deleteItems();
-        return new ModelAndView("procurement/editProcurementTransactionDetails", "procurementTransactionGrid", procurementTransactionGrid);
+        return modelAndViewForProcurementTransactionDetails(procurementTransactionGrid);
     }
 
     @RequestMapping(value = "/itemChanged", method = RequestMethod.POST)
     public ModelAndView itemChanged(@Valid TransactionDetailGrid procurementTransactionGrid, BindingResult bindingResult, Model uiModel) {
-        TransactionDetailRow effectedRow = procurementTransactionGrid.getEffectedRow(procurementTransactionGrid);
+        TransactionDetailRow effectedRow = procurementTransactionGrid.getEffectedRow();
         if (effectedRow != null) effectedRow.updateItemPrice(itemMasterService.getItemPrice(effectedRow.getItemCode()));
-        return new ModelAndView("procurement/editProcurementTransactionDetails", "procurementTransactionGrid", procurementTransactionGrid);
+        return modelAndViewForProcurementTransactionDetails(procurementTransactionGrid);
     }
 
     @RequestMapping(value = "/itemDiscountChanged", method = RequestMethod.POST)
     public ModelAndView itemDiscountChanged(@Valid TransactionDetailGrid procurementTransactionGrid, BindingResult bindingResult, Model uiModel) {
-        TransactionDetailRow effectedRow = procurementTransactionGrid.getEffectedRow(procurementTransactionGrid);
+        TransactionDetailRow effectedRow = procurementTransactionGrid.getEffectedRow();
         if (effectedRow != null) effectedRow.updateDiscount();
-        return new ModelAndView("procurement/editProcurementTransactionDetails", "procurementTransactionGrid", procurementTransactionGrid);
+        return modelAndViewForProcurementTransactionDetails(procurementTransactionGrid);
     }
 
     @RequestMapping(value = "/itemPriceChanged", method = RequestMethod.POST)
     public ModelAndView itemPriceChanged(@Valid TransactionDetailGrid procurementTransactionGrid, BindingResult bindingResult, Model uiModel) {
-        TransactionDetailRow effectedRow = procurementTransactionGrid.getEffectedRow(procurementTransactionGrid);
+        TransactionDetailRow effectedRow = procurementTransactionGrid.getEffectedRow();
         if (effectedRow != null) effectedRow.updatePricePerItem();
-        return new ModelAndView("procurement/editProcurementTransactionDetails", "procurementTransactionGrid", procurementTransactionGrid);
+        return modelAndViewForProcurementTransactionDetails(procurementTransactionGrid);
     }
 
     @RequestMapping(value = "/itemQuantityChanged", method = RequestMethod.POST)
     public ModelAndView itemQuantityChanged(@Valid TransactionDetailGrid procurementTransactionGrid, BindingResult bindingResult, Model uiModel) {
-        TransactionDetailRow effectedRow = procurementTransactionGrid.getEffectedRow(procurementTransactionGrid);
+        TransactionDetailRow effectedRow = procurementTransactionGrid.getEffectedRow();
         if (effectedRow != null) effectedRow.updateQuantity();
-        return new ModelAndView("procurement/editProcurementTransactionDetails", "procurementTransactionGrid", procurementTransactionGrid);
+        return modelAndViewForProcurementTransactionDetails(procurementTransactionGrid);
     }
 
     @RequestMapping(value = "/vendorChanged", method = RequestMethod.POST)
@@ -160,9 +159,8 @@ public class ProcurementTransactionController {
         for (TransactionDetailRow row : procurementTransactionGrid.getTransactionDetails()) {
             row.updateVendorDiscount(vendorMasterService.get(procurementTransactionGrid.getTargetId()).getVendorDiscount());
         }
-        return new ModelAndView("procurement/editProcurementTransactionDetails", "procurementTransactionGrid", procurementTransactionGrid);
+        return modelAndViewForProcurementTransactionDetails(procurementTransactionGrid);
     }
-
 
     @ModelAttribute("procurementTransactionType")
     public Map<Character, String> procurementTransactionType() {
@@ -181,5 +179,13 @@ public class ProcurementTransactionController {
     @ModelAttribute("vendors")
     public List<Vendor> vendors() {
         return vendorMasterService.getAll();
+    }
+
+    private ModelAndView modelAndViewForProcurementTransactionDetails(TransactionDetailGrid procurementTransactionGrid) {
+        for (TransactionDetailRow transactionDetailRow : procurementTransactionGrid.getTransactionDetails()) {
+            if (transactionDetailRow.getItemCode() != null && transactionDetailRow.getItemCode() > 0)
+                transactionDetailRow.setIssueDates(procurementTransactionHandler.getStockDetails(itemMasterService.get(transactionDetailRow.getItemCode())));
+        }
+        return new ModelAndView("procurement/editProcurementTransactionDetails", "procurementTransactionGrid", procurementTransactionGrid);
     }
 }

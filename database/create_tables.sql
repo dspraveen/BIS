@@ -16,6 +16,7 @@ CREATE TABLE Item (
   Description VARCHAR(255)  NULL  ,
   Item_Life CHAR(1)  NOT NULL   COMMENT 'Frequency of the Item.' ,
   Returnable CHAR(1)  NOT NULL    ,
+  Default_Price FLOAT(6,2)  NOT NULL  ,
 PRIMARY KEY(Item_Code));
 
 
@@ -94,21 +95,6 @@ INDEX Sales_Transaction_FKIndex1(Hawker_ID),
 
 
 
-CREATE TABLE Item_Price (
-  Price_ID INTEGER UNSIGNED  NOT NULL   AUTO_INCREMENT,
-  Item_Code INT(5) UNSIGNED  NOT NULL  ,
-  Price FLOAT(6,2)  NOT NULL  ,
-  Start_Date DATETIME  NOT NULL  ,
-  End_Time DATETIME  NULL    ,
-PRIMARY KEY(Price_ID)  ,
-INDEX Item_Price_FKIndex1(Item_Code),
-  FOREIGN KEY(Item_Code)
-    REFERENCES Item(Item_Code)
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION);
-
-
-
 CREATE TABLE Billing_Sales (
   Bill_ID INTEGER UNSIGNED  NOT NULL   AUTO_INCREMENT,
   Hawker_ID INT(5) UNSIGNED  NOT NULL  ,
@@ -163,6 +149,7 @@ CREATE TABLE ST_Details (
   Date_Of_Publishing DATETIME  NOT NULL  ,
   Quantity INT UNSIGNED  NULL  ,
   Amount FLOAT(12,2)  NULL    ,
+  Mrp FLOAT(6,2)  NOT NULL  ,
 PRIMARY KEY(Details_ID)  ,
 INDEX ST_Details_FKIndex1(Item_Code)  ,
 INDEX ST_Details_FKIndex2(Transaction_ID),
@@ -184,6 +171,7 @@ CREATE TABLE PT_Details (
   Date_Of_Publishing DATETIME  NOT NULL  ,
   Quantity INT UNSIGNED  NULL  ,
   Amount FLOAT(12,2)  NULL    ,
+  Mrp FLOAT(6,2)  NOT NULL  ,
 PRIMARY KEY(Details_ID)  ,
 INDEX PT_Details_FKIndex1(Transaction_ID)  ,
 INDEX PT_Details_FKIndex2(Item_Code),

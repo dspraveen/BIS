@@ -4,7 +4,6 @@ DELETE FROM ST_Details;
 DELETE FROM Payment_History_Procurement;
 DELETE FROM Billing_Procurement;
 DELETE FROM Billing_Sales;
-DELETE FROM Item_Price;
 DELETE FROM Sales_Transaction;
 DELETE FROM Stock;
 DELETE FROM Payment_History_Sales;

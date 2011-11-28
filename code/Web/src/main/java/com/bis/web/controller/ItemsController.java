@@ -5,7 +5,6 @@ import com.bis.domain.Item;
 import com.bis.domain.ItemCycle;
 import com.bis.domain.ItemReturnType;
 import com.bis.web.viewmodel.ItemList;
-import com.bis.web.viewmodel.ItemViewForm;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +19,7 @@ import java.util.*;
 
 @Controller
 @RequestMapping("/item")
-public class ItemsController extends BaseController{
+public class ItemsController extends BaseController {
 
     protected final Logger logger = Logger.getLogger(getClass());
 
@@ -34,8 +33,7 @@ public class ItemsController extends BaseController{
     @RequestMapping(value = "/show/{id}", method = RequestMethod.GET)
     public ModelAndView show(@PathVariable("id") int itemCode) {
         Item item = itemMasterService.get(itemCode);
-        float itemPrice = itemMasterService.getItemPrice(item.getItemCode());
-        return new ModelAndView("item/show", "itemForm", new ItemViewForm(item, itemPrice));
+        return new ModelAndView("item/show", "item", item);
     }
 
     @RequestMapping(value = "/createForm", method = RequestMethod.GET)
@@ -43,39 +41,34 @@ public class ItemsController extends BaseController{
         Item item = new Item();
         item.setReturnable('Y');
         item.setItemLife('W');
-        return new ModelAndView("item/createForm", "itemForm", new ItemViewForm(item, 0f));
+        return new ModelAndView("item/createForm", "item", item);
     }
 
     @RequestMapping(value = "/updateForm/{id}", method = RequestMethod.GET)
     public ModelAndView updateForm(@PathVariable("id") int itemCode) {
         Item item = itemMasterService.get(itemCode);
-        float itemPrice = itemMasterService.getItemPrice(item.getItemCode());
-        return new ModelAndView("item/updateForm", "itemForm", new ItemViewForm(item, itemPrice));
+        return new ModelAndView("item/updateForm", "item", item);
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String create(@Valid ItemViewForm itemForm, BindingResult bindingResult, Model uiModel) {
+    public String create(@Valid Item item, BindingResult bindingResult, Model uiModel) {
         uiModel.asMap().clear();
-        Item item = itemForm.getItem();
         itemMasterService.create(item);
-        itemMasterService.setItemPrice(item.getItemCode(), itemForm.getItemPrice());
         return "redirect:/item/show/" + item.getItemCode();
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String update(@Valid ItemViewForm itemForm, BindingResult bindingResult, Model uiModel) {
+    public String update(@Valid Item item, BindingResult bindingResult, Model uiModel) {
         uiModel.asMap().clear();
-        Item item = itemForm.getItem();
         itemMasterService.update(item);
-        itemMasterService.setItemPrice(item.getItemCode(), itemForm.getItemPrice());
         return "redirect:/item/show/" + item.getItemCode();
     }
 
     @RequestMapping(value = "/list")
     public ModelAndView list(@RequestParam(value = "selectedItemCode", defaultValue = "0", required = false) int selectedItemCode) {
         List<Item> all = itemMasterService.getAll();
-        if(all.isEmpty()){
-            return new ModelAndView("item/list", "itemList", new ItemList(selectedItemCode, new ArrayList<ItemViewForm>()));
+        if (all.isEmpty()) {
+            return new ModelAndView("item/list", "itemList", new ItemList(selectedItemCode, new ArrayList<Item>()));
         }
         Collections.sort(all, new Comparator<Item>() {
             @Override
@@ -83,26 +76,18 @@ public class ItemsController extends BaseController{
                 return o1.getItemName().compareToIgnoreCase(o2.getItemName());
             }
         });
-        if(selectedItemCode == 0){
+        if (selectedItemCode == 0) {
             selectedItemCode = all.get(0).getItemCode();
         }
-        List<ItemViewForm> itemViewForms = new ArrayList<ItemViewForm>();
-        for (Item item : all) {
-            float itemPrice = 0f;
-            if (selectedItemCode == item.getItemCode()) {
-                itemPrice = itemMasterService.getItemPrice(item.getItemCode());
-            }
-            itemViewForms.add(new ItemViewForm(item, itemPrice));
-        }
-        return new ModelAndView("item/list", "itemList", new ItemList(selectedItemCode, itemViewForms));
+        return new ModelAndView("item/list", "itemList", new ItemList(selectedItemCode, all));
     }
 
     @RequestMapping(value = "/price", method = RequestMethod.GET)
     public ModelAndView getItemPrice(@RequestParam(value = "selectedItemCode", defaultValue = "0", required = false) int selectedItemCode, HttpServletResponse response) {
-        float itemPrice = itemMasterService.getItemPrice(selectedItemCode);
+        Item item = itemMasterService.get(selectedItemCode);
         Map<String, Float> price = new HashMap<String, Float>();
-        price.put("price", itemPrice);
-        return json(price,response);
+        price.put("price", item.getDefaultPrice());
+        return json(price, response);
     }
 
     @ModelAttribute("itemTypes")

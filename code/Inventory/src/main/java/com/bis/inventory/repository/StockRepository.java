@@ -38,7 +38,7 @@ public class StockRepository extends BaseRepository<Stock> {
 
     public List<Stock> getItemStock(int itemCode, Date fromDateOfPublish, Date endDateOfPublish) {
         return getSession().createCriteria(Stock.class)
-                .add(Restrictions.eq("itemCode", itemCode))
+                .add(Restrictions.eq("item.itemCode", itemCode))
                 .add(Restrictions.between("dateOfPublishing", fromDateOfPublish, endDateOfPublish))
                 .list();
     }

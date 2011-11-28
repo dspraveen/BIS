@@ -10,6 +10,7 @@ public class PtDetails implements java.io.Serializable {
     private Date dateOfPublishing;
     private Integer quantity;
     private Float amount;
+    private Float mrp;
 
     public PtDetails() {
     }
@@ -53,6 +54,14 @@ public class PtDetails implements java.io.Serializable {
 
     public void setAmount(Float amount) {
         this.amount = amount;
+    }
+
+    public Float getMrp() {
+        return mrp;
+    }
+
+    public void setMrp(Float mrp) {
+        this.mrp = mrp;
     }
 
     public Item getItem() {

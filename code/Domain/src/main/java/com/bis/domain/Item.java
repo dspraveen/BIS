@@ -10,6 +10,7 @@ public class Item implements java.io.Serializable {
 	private String description;
 	private char itemLife;
 	private char returnable;
+    private Float defaultPrice;
 
 	public Item() {
 	}
@@ -72,6 +73,14 @@ public class Item implements java.io.Serializable {
 	public void setReturnable(char returnable) {
 		this.returnable = returnable;
 	}
+
+    public Float getDefaultPrice() {
+        return defaultPrice;
+    }
+
+    public void setDefaultPrice(Float defaultPrice) {
+        this.defaultPrice = defaultPrice;
+    }
 
     @Override
     public int hashCode() {

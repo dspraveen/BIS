@@ -32,9 +32,9 @@ $(function() {
                     $(".transaction_details").html(data);
                 }
             });
+			$('.date_of_publish').datepicker({dateFormat: 'dd-mm-yy' });
+            $('.date_of_publish').hide();
             $('.date_of_publish_select').each(function(index){
-				var dop = $($('.date_of_publish')[index]);
-                dop.val($(this).val());
 				$(this).bind('change',function(){
                     if($(this).val()==-1){
                         var dop = $($('.date_of_publish')[index]);
@@ -46,9 +46,15 @@ $(function() {
                         dop.hide();
                     }
                 });
+				var dop = $($('.date_of_publish')[index]);
+				if(dop.val())
+					$(this).val(dop.val());
+				else	
+					$(this).val(-1);
+				if($(this).val()==-1)
+					dop.show();
             });
-            $('.date_of_publish').datepicker({dateFormat: 'dd-mm-yy' });
-            $('.date_of_publish').hide();
+            
             $('.item_name').each(function(index){
                 $(this).bind('change',function(){
                     $('#effectedRowId').val(index);

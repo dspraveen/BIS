@@ -6,7 +6,6 @@ import com.bis.domain.ItemCycle;
 import com.bis.domain.ItemReturnType;
 import com.bis.testcommon.ItemBuilder;
 import com.bis.web.viewmodel.ItemList;
-import com.bis.web.viewmodel.ItemViewForm;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,7 +21,6 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -48,19 +46,17 @@ public class ItemsControllerTest {
         Item item = new Item();
         item.setItemCode(itemCode);
         when(itemMasterService.get(itemCode)).thenReturn(item);
-        when(itemMasterService.getItemPrice(itemCode)).thenReturn(10f);
         ModelAndView modelAndView = controller.show(itemCode);
-        ItemViewForm itemViewForm = (ItemViewForm) modelAndView.getModel().get("itemForm");
-        assertEquals(item, itemViewForm.getItem());
-        assertTrue(itemViewForm.getItemPrice()==10f);
+        Item itemModel = (Item) modelAndView.getModel().get("item");
+        Assert.assertEquals(item, itemModel);
         assertEquals("item/show", modelAndView.getViewName());
     }
 
     @Test
     public void shouldGetCreateItemForm() {
         ModelAndView modelAndView = controller.createForm();
-        ItemViewForm itemViewForm = (ItemViewForm) modelAndView.getModel().get("itemForm");
-        Assert.assertNull(itemViewForm.getItem().getItemCode());
+        Item item = (Item) modelAndView.getModel().get("item");
+        Assert.assertNull(item.getItemCode());
         assertEquals("item/createForm", modelAndView.getViewName());
     }
 
@@ -71,27 +67,25 @@ public class ItemsControllerTest {
         item.setItemCode(itemCode);
         when(itemMasterService.get(itemCode)).thenReturn(item);
         ModelAndView modelAndView = controller.updateForm(itemCode);
-        ItemViewForm itemViewForm = (ItemViewForm) modelAndView.getModel().get("itemForm");
-        assertEquals(item, itemViewForm.getItem());
+        Item itemModel = (Item) modelAndView.getModel().get("item");
+        assertEquals(item, itemModel);
         assertEquals("item/updateForm", modelAndView.getViewName());
     }
 
     @Test
     public void shouldCreateNewItem() {
-        ItemViewForm itemViewForm = new ItemViewForm(new Item(),0f);
-        itemViewForm.getItem().setItemCode(12);
-        Item item = itemViewForm.getItem();
-        String result = controller.create(itemViewForm, bindingResult, model);
+        Item item = new Item();
+        item.setItemCode(12);
+        String result = controller.create(item, bindingResult, model);
         assertEquals("redirect:/item/show/12", result);
         verify(itemMasterService).create(item);
     }
 
     @Test
     public void shouldUpdateItem() {
-        ItemViewForm itemViewForm = new ItemViewForm(new Item(),0f);
-        itemViewForm.getItem().setItemCode(12);
-        Item item = itemViewForm.getItem();
-        String result = controller.update(itemViewForm, bindingResult, model);
+        Item item = new Item();
+        item.setItemCode(12);
+        String result = controller.update(item, bindingResult, model);
         assertEquals("redirect:/item/show/12", result);
         verify(itemMasterService).update(item);
     }
@@ -123,15 +117,17 @@ public class ItemsControllerTest {
         ItemList itemList = (ItemList) modelAndView.getModel().get("itemList");
         assertEquals(2, itemList.getCount());
         assertEquals(1, itemList.getSelectedItemCode());
-        assertEquals(itemTwo.getItemName(), itemList.getItemNames().get(itemTwo.getItemCode()));
-        assertEquals(itemOne.getItemName(), itemList.getItemNames().get(itemOne.getItemCode()));
+        assertEquals(itemTwo.getItemName(), itemList.getItems().get(0).getItemName());
+        assertEquals(itemOne.getItemName(), itemList.getItems().get(1).getItemName());
         assertEquals(itemTwo, itemList.getSelectedItem());
     }
 
     @Test
     public void shouldGetItemPriceJson() throws IOException {
         MockHttpServletResponse response = new MockHttpServletResponse();
-        when(itemMasterService.getItemPrice(1)).thenReturn(10f);
+        Item item = new Item();
+        item.setDefaultPrice(10f);
+        when(itemMasterService.get(1)).thenReturn(item);
         controller.getItemPrice(1,response);
         Assert.assertEquals("{\"price\":10.0}",response.getContentAsString());
     }

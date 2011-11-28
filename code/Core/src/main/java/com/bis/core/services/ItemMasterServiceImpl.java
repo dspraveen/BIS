@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ItemMasterServiceImpl implements ItemMasterService{
+public class ItemMasterServiceImpl implements ItemMasterService {
 
     private ItemRepository itemRepository;
 
@@ -35,15 +35,5 @@ public class ItemMasterServiceImpl implements ItemMasterService{
     @Override
     public List<Item> getAll() {
         return itemRepository.getAll();
-    }
-
-    @Override
-    public float setItemPrice(int itemCode, float price) {
-        return itemRepository.setItemPrice(itemCode,price);
-    }
-
-    @Override
-    public float getItemPrice(int itemCode) {
-        return itemRepository.getPrice(itemCode);
     }
 }

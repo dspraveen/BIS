@@ -102,8 +102,7 @@ public class ProcurementTransactionController {
         if (procurementTransactionGrid.getTransactionId() != null && procurementTransactionGrid.getTransactionId() > 0) {
             ProcurementTransaction procurementTransaction = procurementTransactionService.getProcurementTransaction(procurementTransactionGrid.getTransactionId());
             for (PtDetails ptDetails : procurementTransaction.getTransactionDetails()) {
-                float itemPrice = itemMasterService.getItemPrice(ptDetails.getItem().getItemCode());
-                procurementTransactionGrid.addProcurementTransactionDetail(ptDetails, itemPrice);
+                procurementTransactionGrid.addProcurementTransactionDetail(ptDetails);
             }
         } else {
             Float vendorDiscount = procurementTransactionGrid.getTargetId() != null && procurementTransactionGrid.getTargetId() > 0 ? vendorMasterService.get(procurementTransactionGrid.getTargetId()).getVendorDiscount() : null;
@@ -129,7 +128,7 @@ public class ProcurementTransactionController {
     @RequestMapping(value = "/itemChanged", method = RequestMethod.POST)
     public ModelAndView itemChanged(@Valid TransactionDetailGrid procurementTransactionGrid, BindingResult bindingResult, Model uiModel) {
         TransactionDetailRow effectedRow = procurementTransactionGrid.getEffectedRow();
-        if (effectedRow != null) effectedRow.updateItemPrice(itemMasterService.getItemPrice(effectedRow.getItemCode()));
+        if (effectedRow != null) effectedRow.updateItemPrice(itemMasterService.get(effectedRow.getItemCode()).getDefaultPrice());
         return modelAndViewForProcurementTransactionDetails(procurementTransactionGrid);
     }
 

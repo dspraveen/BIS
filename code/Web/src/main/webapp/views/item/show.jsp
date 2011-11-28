@@ -6,14 +6,14 @@
 <div>
     <div class="section">
         <span class="left"><label>Item Name:</label></span
-        <span class="right"><label>${itemForm.item.itemName}</label></span>
+        <span class="right"><label>${item.itemName}</label></span>
     </div>
     <div class="section">
         <span class="left"><label>Item Description:</label></span>
         <span class="right"><label>
           <c:choose>
-            <c:when test="${itemForm.item.description != ''}">
-                ${itemForm.item.description}
+            <c:when test="${item.description != ''}">
+                ${item.description}
             </c:when>
             <c:otherwise>
                 Not Provided
@@ -23,17 +23,17 @@
     </div>
     <div class="section">
         <span class="left"><label>Item Price:</label></span
-        <span class="right"><label>${itemForm.itemPrice}</label></span>
+        <span class="right"><label>${item.defaultPrice}</label></span>
     </div>
     <div class="section">
         <span class="left"><label>Item Type:</label></span
-        <span class="right"><label>${itemForm.item.itemLifeDescription}</label></span>
+        <span class="right"><label>${item.itemLifeDescription}</label></span>
     </div>
     <div class="section">
         <span class="left"><label>Item Returnable:</label></span
-        <span class="right"><label>${itemForm.item.returnableDescription}</label></span>
+        <span class="right"><label>${item.returnableDescription}</label></span>
     </div>
     <div class="section">
-        <span class="left"><a href="<%=request.getContextPath()%>/item/updateForm/${itemForm.item.itemCode}">Update Item</a></span>
+        <span class="left"><a href="<%=request.getContextPath()%>/item/updateForm/${item.itemCode}">Update Item</a></span>
     </div>
 </div>

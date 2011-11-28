@@ -3,7 +3,6 @@ package com.bis.core.repository;
 import com.bis.domain.Item;
 import com.bis.testcommon.BaseIntTest;
 import com.bis.testcommon.ItemBuilder;
-import junit.framework.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -45,24 +44,6 @@ public class ItemRepositoryIntTest extends BaseIntTest {
         assertTrue(all.contains(itemTwo));
         itemRepository.delete(itemOne);
         itemRepository.delete(itemTwo);
-    }
-
-    @Test
-    public void shouldSetItemPrice(){
-        Item item = new ItemBuilder().withDefaults().build();
-        itemRepository.save(item);
-        itemRepository.setItemPrice(item.getItemCode(), 12);
-        float updatedPrice = itemRepository.setItemPrice(item.getItemCode(), 24);
-        Assert.assertEquals(24f,updatedPrice);
-    }
-
-    @Test
-    public void shouldGetItemPrice(){
-        Item item = new ItemBuilder().withDefaults().build();
-        itemRepository.save(item);
-        itemRepository.setItemPrice(item.getItemCode(), 24);
-        float price = itemRepository.getPrice(item.getItemCode());
-        Assert.assertEquals(24f,price);
     }
 
 }

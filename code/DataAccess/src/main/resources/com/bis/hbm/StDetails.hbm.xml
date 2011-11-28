@@ -20,5 +20,8 @@
         <property name="amount" type="java.lang.Float">
             <column name="Amount" precision="12" />
         </property>
+        <property name="mrp" type="java.lang.Float">
+            <column name="Mrp" precision="12" />
+        </property>
     </class>
 </hibernate-mapping>

@@ -10,8 +10,6 @@ DROP TABLE IF EXISTS Billing_Procurement;
 
 DROP TABLE IF EXISTS Billing_Sales;
 
-DROP TABLE IF EXISTS Item_Price;
-
 DROP TABLE IF EXISTS Sales_Transaction;
 
 DROP TABLE IF EXISTS Stock;

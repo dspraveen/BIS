@@ -21,5 +21,8 @@
         <property name="returnable" type="char">
             <column name="Returnable" length="1" not-null="true" />
         </property>
+        <property name="defaultPrice" type="java.lang.Float">
+            <column name="Default_Price" length="1" not-null="true" />
+        </property>
     </class>
 </hibernate-mapping>

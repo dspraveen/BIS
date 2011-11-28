@@ -142,6 +142,7 @@ public class TransactionDetailGrid {
             ptDetails.setTransactionId(row.getTransactionId());
             ptDetails.setDateOfPublishing(row.getDateOfPublishing());
             ptDetails.setAmount(row.getAmount());
+            ptDetails.setMrp(row.getMrp());
             ptDetails.setQuantity(row.getQuantity());
             ptDetails.getItem().setItemCode(row.getItemCode());
             procurementTransaction.getTransactionDetails().add(ptDetails);
@@ -162,6 +163,7 @@ public class TransactionDetailGrid {
             stDetails.setTransactionId(row.getTransactionId());
             stDetails.setDateOfPublishing(row.getDateOfPublishing());
             stDetails.setAmount(row.getAmount());
+            stDetails.setMrp(row.getMrp());
             stDetails.setQuantity(row.getQuantity());
             stDetails.getItem().setItemCode(row.getItemCode());
             salesTransaction.getTransactionDetails().add(stDetails);
@@ -170,7 +172,7 @@ public class TransactionDetailGrid {
         return salesTransaction;
     }
 
-    public void addProcurementTransactionDetail(PtDetails ptDetails, float itemPrice) {
+    public void addProcurementTransactionDetail(PtDetails ptDetails) {
         TransactionDetailRow row = new TransactionDetailRow();
         row.setDetailsId(ptDetails.getDetailsId());
         row.setTransactionId(ptDetails.getTransactionId());
@@ -178,13 +180,13 @@ public class TransactionDetailGrid {
         row.setAmount(ptDetails.getAmount());
         row.setQuantity(ptDetails.getQuantity());
         row.setItemCode(ptDetails.getItem().getItemCode());
-        row.setMrp(itemPrice);
+        row.setMrp(ptDetails.getMrp());
         row.setPricePerItem(ptDetails.getPricePerItem());
         row.setDiscount((row.getMrp() - row.getPricePerItem()) * 100 / row.getMrp());
         transactionDetails.add(row);
     }
 
-    public void addSalesTransactionDetail(StDetails stDetails, float itemPrice) {
+    public void addSalesTransactionDetail(StDetails stDetails) {
         TransactionDetailRow row = new TransactionDetailRow();
         row.setDetailsId(stDetails.getDetailsId());
         row.setTransactionId(stDetails.getTransactionId());
@@ -192,7 +194,7 @@ public class TransactionDetailGrid {
         row.setAmount(stDetails.getAmount());
         row.setQuantity(stDetails.getQuantity());
         row.setItemCode(stDetails.getItem().getItemCode());
-        row.setMrp(itemPrice);
+        row.setMrp(stDetails.getMrp());
         row.setPricePerItem(stDetails.getPricePerItem());
         row.setDiscount((row.getMrp() - row.getPricePerItem()) * 100 / row.getMrp());
         transactionDetails.add(row);

@@ -102,8 +102,8 @@ public class SalesTransactionController {
         if (salesTransactionGrid.getTransactionId() != null && salesTransactionGrid.getTransactionId() > 0) {
             SalesTransaction salesTransaction = salesTransactionService.getSalesTransaction(salesTransactionGrid.getTransactionId());
             for (StDetails stDetails : salesTransaction.getTransactionDetails()) {
-                float itemPrice = itemMasterService.getItemPrice(stDetails.getItem().getItemCode());
-                salesTransactionGrid.addSalesTransactionDetail(stDetails, itemPrice);
+                float itemPrice = itemMasterService.get(stDetails.getItem().getItemCode()).getDefaultPrice();
+                salesTransactionGrid.addSalesTransactionDetail(stDetails);
             }
         } else {
             Float hawkerDiscount = salesTransactionGrid.getTargetId() != null && salesTransactionGrid.getTargetId() > 0 ? hawkerMasterService.get(salesTransactionGrid.getTargetId()).getHawkerDiscount() : null;
@@ -129,7 +129,7 @@ public class SalesTransactionController {
     @RequestMapping(value = "/itemChanged", method = RequestMethod.POST)
     public ModelAndView itemChanged(@Valid TransactionDetailGrid salesTransactionGrid, BindingResult bindingResult, Model uiModel) {
         TransactionDetailRow effectedRow = salesTransactionGrid.getEffectedRow();
-        if (effectedRow != null) effectedRow.updateItemPrice(itemMasterService.getItemPrice(effectedRow.getItemCode()));
+        if (effectedRow != null) effectedRow.updateItemPrice(itemMasterService.get(effectedRow.getItemCode()).getDefaultPrice());
         return modelAndViewForSalesTransactionDetails(salesTransactionGrid);
     }
 

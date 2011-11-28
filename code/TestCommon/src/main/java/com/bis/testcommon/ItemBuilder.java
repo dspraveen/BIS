@@ -15,6 +15,7 @@ public class ItemBuilder {
         item.setDescription("description");
         item.setItemLife('W');
         item.setReturnable('Y');
+        item.setDefaultPrice(10f);
         return this;
     }
 

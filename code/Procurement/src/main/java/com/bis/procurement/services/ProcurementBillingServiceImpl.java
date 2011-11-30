@@ -63,6 +63,7 @@ public class ProcurementBillingServiceImpl implements ProcurementBillingService 
     @Override
     public BillingProcurement generateProcurementBill(Vendor vendor) {
         Float totalAmount = 0f;
+        Float purchaseAmount = 0f;
         Date fromDate = null;
         List<ProcurementTransaction> procurementTransactions = null;
         BillingProcurement billingProcurement = procurementBillingRepository.getLastBill(vendor);
@@ -79,14 +80,15 @@ public class ProcurementBillingServiceImpl implements ProcurementBillingService 
         if (procurementTransactions != null) {
             for (ProcurementTransaction procurementTransaction : procurementTransactions) {
                 if (procurementTransaction.getTransactionType().equals('S')) {
-                    totalAmount += procurementTransaction.getTotalAmount();
+                    purchaseAmount += procurementTransaction.getTotalAmount();
                 } else if (procurementTransaction.getTransactionType().equals('R')) {
-                    totalAmount -= procurementTransaction.getTotalAmount();
+                    purchaseAmount -= procurementTransaction.getTotalAmount();
                 }
             }
         }
+        totalAmount += purchaseAmount;
         totalAmount -= getPaymentAmountForCycle(vendor, fromDate, DateUtils.currentDate());
-        return new BillingProcurement(fromDate, DateUtils.currentDate(), totalAmount, vendor);
+        return new BillingProcurement(fromDate, DateUtils.currentDate(), totalAmount, vendor, purchaseAmount);
     }
 
     @Override

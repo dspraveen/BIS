@@ -14,6 +14,9 @@
         <property name="endDate" type="timestamp">
             <column name="End_Date" length="19" />
         </property>
+        <property name="salesAmount" type="java.lang.Float">
+            <column name="Sales_Total" precision="12" />
+        </property>
         <property name="balanceAmount" type="java.lang.Float">
             <column name="Balance_Amount" precision="12" />
         </property>

@@ -6,18 +6,21 @@ public class BillingProcurement implements java.io.Serializable {
 	private Integer billId;
 	private Date startDate;
 	private Date endDate;
+	private Float procurementAmount;
 	private Float balanceAmount;
     private Vendor vendor = new Vendor();
 
-    public BillingProcurement(Date startDate, Date endDate, Float balanceAmount, Vendor vendor) {
+    public BillingProcurement(Date startDate, Date endDate, Float balanceAmount, Vendor vendor, Float procurementAmount) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.balanceAmount = balanceAmount;
         this.vendor = vendor;
+        this.procurementAmount = procurementAmount;
     }
 
-    public BillingProcurement() {
+    public BillingProcurement(Float procurementAmount) {
 
+        this.procurementAmount = procurementAmount;
     }
     public BillingProcurement(Vendor vendor) {
         this.vendor = vendor;
@@ -61,5 +64,13 @@ public class BillingProcurement implements java.io.Serializable {
 
     public void setVendor(Vendor vendor) {
         this.vendor = vendor;
+    }
+
+    public Float getProcurementAmount() {
+        return procurementAmount;
+    }
+
+    public void setProcurementAmount(Float procurementAmount) {
+        this.procurementAmount = procurementAmount;
     }
 }

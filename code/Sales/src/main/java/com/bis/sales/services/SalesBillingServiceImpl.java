@@ -56,6 +56,7 @@ public class SalesBillingServiceImpl implements SalesBillingService {
 
     public BillingSales generateSalesBill(Hawker hawker) {
         Float totalAmount = 0f;
+        Float salesAmount = 0f;
         Date fromDate = null;
         List<SalesTransaction> salesTransactions = null;
         BillingSales billingSales = salesBillingRepository.getLastBill(hawker);
@@ -73,15 +74,16 @@ public class SalesBillingServiceImpl implements SalesBillingService {
             for (SalesTransaction salesTransaction : salesTransactions) {
                 if (salesTransaction.getTransactionType().equals('S')
                         || salesTransaction.getTransactionType().equals('C')) {
-                    totalAmount += salesTransaction.getTotalAmount();
+                    salesAmount += salesTransaction.getTotalAmount();
                 }
                 if (salesTransaction.getTransactionType().equals('R')) {
-                    totalAmount -= salesTransaction.getTotalAmount();
+                    salesAmount -= salesTransaction.getTotalAmount();
                 }
             }
         }
+        totalAmount += salesAmount;
         totalAmount -= this.getTotalAmountForCycle(hawker, fromDate, DateUtils.currentDate());
-        return new BillingSales(fromDate, DateUtils.currentDate(), totalAmount, hawker);
+        return new BillingSales(fromDate, DateUtils.currentDate(), totalAmount, hawker, salesAmount);
     }
 
     @Override

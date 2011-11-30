@@ -7,18 +7,20 @@ public class BillingSales implements java.io.Serializable {
 	private Integer billId;
 	private Date startDate;
 	private Date endDate;
+	private Float salesAmount;
 	private Float balanceAmount;
     private Hawker hawker = new Hawker();
 
-    public BillingSales(Date startDate, Date endDate, Float balanceAmount, Hawker hawker) {
+    public BillingSales(Date startDate, Date endDate, Float balanceAmount, Hawker hawker, Float salesAmount) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.balanceAmount = balanceAmount;
         this.hawker = hawker;
+        this.salesAmount = salesAmount;
     }
 
     public BillingSales() {
-	}
+    }
 
 	public Integer getBillId() {
 		return this.billId;
@@ -58,5 +60,13 @@ public class BillingSales implements java.io.Serializable {
 
     public void setHawker(Hawker hawker) {
         this.hawker = hawker;
+    }
+
+    public Float getSalesAmount() {
+        return salesAmount;
+    }
+
+    public void setSalesAmount(Float salesAmount) {
+        this.salesAmount = salesAmount;
     }
 }

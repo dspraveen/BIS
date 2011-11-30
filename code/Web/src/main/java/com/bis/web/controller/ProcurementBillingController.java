@@ -23,7 +23,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/procurementBilling")
-public class ProcurementBillingController {
+public class ProcurementBillingController extends BaseController{
 
     protected final Logger logger = Logger.getLogger(getClass());
     private ProcurementBillingService procurementBillingService;
@@ -88,6 +88,22 @@ public class ProcurementBillingController {
     public ModelAndView showBill(@PathVariable("id") int billId) {
         BillingProcurement billingProcurement = procurementBillingService.getProcurementBill(billId);
         return new ModelAndView("procurementBilling/show", "BillingProcurement", billingProcurement);
+    }
+
+    @RequestMapping(value = "/listBills", method = RequestMethod.GET)
+    public ModelAndView listBills() {
+        return new ModelAndView("procurementBilling/listBills");
+    }
+
+    @RequestMapping(value = "/billsInRange", method = RequestMethod.GET)
+    public ModelAndView transactionsBetween(@RequestParam(value = "fromDate", required = true) Date fromDate, @RequestParam(value = "toDate", required = true) Date toDate, @RequestParam(value = "vendorId", required = false, defaultValue = "-1") int vendorId) {
+        List<BillingProcurement> billingProcurements;
+        if (vendorId < 1) {
+            billingProcurements = procurementBillingService.getProcurementBillList(fromDate, toDate);
+        } else {
+            billingProcurements = procurementBillingService.getProcurementBillList(vendorMasterService.get(vendorId), fromDate, toDate);
+        }
+        return new ModelAndView("procurementBilling/billsInRange", "billingProcurements", billingProcurements);
     }
 
     @ModelAttribute("vendors")

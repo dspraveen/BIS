@@ -28,6 +28,30 @@ public class ProcurementBillingDetails {
 
     }
 
+    public BillingProcurement getLastBill() {
+        return lastBill;
+    }
+
+    public void setLastBill(BillingProcurement lastBill) {
+        this.lastBill = lastBill;
+    }
+
+    public List<ProcurementTransaction> getProcurementTransactions() {
+        return procurementTransactions;
+    }
+
+    public void setProcurementTransactions(List<ProcurementTransaction> procurementTransactions) {
+        this.procurementTransactions = procurementTransactions;
+    }
+
+    public List<PaymentHistoryProcurement> getProcurementPayments() {
+        return procurementPayments;
+    }
+
+    public void setProcurementPayments(List<PaymentHistoryProcurement> procurementPayments) {
+        this.procurementPayments = procurementPayments;
+    }
+
     public double getBillAmount() {
         return getPurchaseTransactionTotal() - (getReturnTransactionTotal()+getPaymentTotal());
     }

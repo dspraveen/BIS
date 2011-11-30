@@ -110,4 +110,9 @@ public class ProcurementBillingServiceImpl implements ProcurementBillingService 
         }
         return nextBillDate;
     }
+
+    @Override
+    public List<BillingProcurement> getProcurementBillList(Vendor vendor, Date fromDate, Date toDate) {
+        return procurementBillingRepository.getProcurementBillList(vendor, fromDate, toDate);
+    }
 }

@@ -15,4 +15,5 @@ public interface ProcurementBillingService {
     BillingProcurement generateProcurementBill(Vendor vendor);
     BillingProcurement getLastBill(Vendor vendor);
     Date getNextBillDate(Vendor vendor);
+    List<BillingProcurement> getProcurementBillList(Vendor vendor, Date fromDate, Date toDate);
 }

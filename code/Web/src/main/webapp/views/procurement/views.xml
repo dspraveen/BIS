@@ -41,4 +41,10 @@
     <definition name="procurementBilling/show" extends="procurement">
         <put-attribute name="main-content" value="/views/procurement/showProcurementBill.jsp"/>
     </definition>
+    <definition name="procurementBilling/listBills" extends="procurement">
+        <put-attribute name="main-content" value="/views/procurement/listPurchaseBills.jsp"/>
+    </definition>
+    <definition name="procurementBilling/billsInRange" extends="ajaxSection">
+        <put-attribute name="content" value="/views/procurement/listBillsInRange.jsp"/>
+    </definition>
 </tiles-definitions>

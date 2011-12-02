@@ -5,18 +5,20 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 
 <div class="procurement_transactions" id="procurement_payments_accordion">
-	<TABLE  width="700px" border="1">
+	<TABLE  width="800px" border="1">
 		<thead class="table_header">
 			<TD>Vendor</TD>
 			<TD>Start Date</TD>
 			<TD>End Date</TD>
-			<TD>Amount</TD>
+			<TD>Total Bill Amount</TD>
+			<TD>Balance Amount</TD>
 		</thead>
 		<c:forEach var="billingProcurements" items="${billingProcurements}">
 			<tr>
 				<td>${billingProcurements.vendor.vendorName}</td>
 				<td><fmt:formatDate pattern="dd-MM-yyyy" value="${billingProcurements.startDate}" /></td>
 				<td><fmt:formatDate pattern="dd-MM-yyyy" value="${billingProcurements.endDate}" /></td>
+				<td>${billingProcurements.procurementAmount}</td>
 				<td>${billingProcurements.balanceAmount}</td>
 			</tr>
 		</c:forEach>

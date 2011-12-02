@@ -70,7 +70,7 @@ public class SalesBillingController {
 
     @Transactional
     @RequestMapping(value = "/saveSalesBill", method = RequestMethod.POST)
-    public String addProcurementBill(@Valid SalesBillingDetails salesBillingDetails, BindingResult bindingResult, Model uiModel) {
+    public String addSalesBill(@Valid SalesBillingDetails salesBillingDetails, BindingResult bindingResult, Model uiModel) {
         uiModel.asMap().clear();
         Date currentDate = DateUtils.currentDate();
         BillingSales billingSales = salesBillingService.generateSalesBill(salesBillingDetails.getHawker());

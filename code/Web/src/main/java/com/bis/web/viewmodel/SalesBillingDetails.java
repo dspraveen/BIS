@@ -102,4 +102,12 @@ public class SalesBillingDetails {
     public void setHawker(Hawker hawker) {
         this.hawker = hawker;
     }
+
+    public void setLastBill(BillingSales lastBill) {
+        this.lastBill = lastBill;
+    }
+
+    public BillingSales getLastBill() {
+        return lastBill;
+    }
 }

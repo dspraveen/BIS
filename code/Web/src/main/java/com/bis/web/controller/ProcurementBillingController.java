@@ -75,7 +75,7 @@ public class ProcurementBillingController extends BaseController{
         uiModel.asMap().clear();
         Date currentDate = DateUtils.currentDate();
         BillingProcurement billingProcurement = procurementBillingService.generateProcurementBill(procurementBillingDetails.getVendor());
-        if (procurementBillingDetails.getPaymentAmount() != null) {
+        if ( procurementBillingDetails.getPaymentAmount() != 0f) {
             PaymentHistoryProcurement paymentHistoryProcurement = new PaymentHistoryProcurement();
             paymentHistoryProcurement.setAmount(procurementBillingDetails.getPaymentAmount());
             paymentHistoryProcurement.setDate(currentDate);
@@ -93,6 +93,8 @@ public class ProcurementBillingController extends BaseController{
     @RequestMapping(value = "/show/{id}", method = RequestMethod.GET)
     public ModelAndView showBill(@PathVariable("id") int billId) {
         BillingProcurement billingProcurement = procurementBillingService.getProcurementBill(billId);
+        billingProcurement.setStartDate(DateUtils.setTimeToZero(billingProcurement.getStartDate()));
+        billingProcurement.setEndDate(DateUtils.setTimeToZero(DateUtils.setTimeToZero(billingProcurement.getEndDate())));
         return new ModelAndView("procurementBilling/show", "BillingProcurement", billingProcurement);
     }
 

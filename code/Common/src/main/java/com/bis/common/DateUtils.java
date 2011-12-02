@@ -80,5 +80,16 @@ public class DateUtils {
         return new SimpleDateFormat("dd-MM-yyyy").format(date);
     }
 
+    public static Date setTimeToZero(Date date) {
+
+        Calendar dateValue = Calendar.getInstance();
+        dateValue.setTime(date);
+        dateValue.set(Calendar.HOUR_OF_DAY, 0);
+        dateValue.set(Calendar.MINUTE, 0);
+        dateValue.set(Calendar.SECOND, 0);
+        dateValue.set(Calendar.MILLISECOND, 0);
+
+        return dateValue.getTime();
+    }
 
 }

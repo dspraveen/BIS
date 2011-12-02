@@ -9,16 +9,20 @@
 </div>
 <div>
     <div class="section">
+        <span class="left"><label>Bill Id:</label></span>
+        <span class="right"><label>${BillingProcurement.billId}</label></span>
+    </div>
+    <div class="section">
         <span class="left"><label>Vendor name:</label></span>
         <span class="right"><label>${BillingProcurement.vendor.vendorName}</label></span>
     </div>
     <div class="section">
         <span class="left"><label>Start Date:</label></span>
-        <span class="right"><label>${BillingProcurement.startDate}</label></span>
+		<span class="right"><label><fmt:formatDate pattern="dd-MM-yyyy" value="${BillingProcurement.startDate}" /></span>
     </div>
     <div class="section">
         <span class="left"><label>End Date:</label></span>
-        <span class="right"><label>${BillingProcurement.endDate}</label></span>
+		<span class="right"><label><fmt:formatDate pattern="dd-MM-yyyy" value="${BillingProcurement.endDate}" /></span>
     </div>
     <div class="section">
         <span class="left"><label>Outstanding Amount</label></span>

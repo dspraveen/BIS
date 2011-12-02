@@ -53,6 +53,9 @@ public class ProcurementBillingDetails {
     }
 
     public double getBillAmount() {
+        if(lastBill != null){
+            return lastBill.getBalanceAmount() + getPurchaseTransactionTotal() - (getReturnTransactionTotal()+getPaymentTotal());
+        }
         return getPurchaseTransactionTotal() - (getReturnTransactionTotal()+getPaymentTotal());
     }
 

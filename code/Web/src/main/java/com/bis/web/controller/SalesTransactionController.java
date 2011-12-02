@@ -6,6 +6,7 @@ import com.bis.core.services.HawkerMasterService;
 import com.bis.core.services.ItemMasterService;
 import com.bis.domain.*;
 import com.bis.inventory.services.StockService;
+import com.bis.sales.services.SalesBillingService;
 import com.bis.sales.services.SalesTransactionService;
 import com.bis.web.SalesTransactionHandler;
 import com.bis.web.viewmodel.TransactionDetailGrid;
@@ -17,26 +18,26 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping("/sales")
-public class SalesTransactionController {
+public class SalesTransactionController extends BaseController {
 
     private SalesTransactionService salesTransactionService;
     private ItemMasterService itemMasterService;
     private HawkerMasterService hawkerMasterService;
+    private SalesBillingService salesBillingService;
     private SalesTransactionHandler salesTransactionHandler;
 
     @Autowired
-    public SalesTransactionController(SalesTransactionService salesTransactionService, ItemMasterService itemMasterService, HawkerMasterService hawkerMasterService, StockService stockService) {
+    public SalesTransactionController(SalesTransactionService salesTransactionService, ItemMasterService itemMasterService, HawkerMasterService hawkerMasterService, StockService stockService, SalesBillingService salesBillingService) {
         this.salesTransactionService = salesTransactionService;
         this.itemMasterService = itemMasterService;
         this.hawkerMasterService = hawkerMasterService;
+        this.salesBillingService = salesBillingService;
         this.salesTransactionHandler = new SalesTransactionHandler(salesTransactionService, stockService);
     }
 
@@ -63,7 +64,12 @@ public class SalesTransactionController {
     }
 
     @RequestMapping(value = "/addSalesTransaction", method = RequestMethod.POST)
-    public String addSalesTransaction(@Valid TransactionDetailGrid transactionDetailGrid, BindingResult bindingResult, Model uiModel) {
+    public ModelAndView addSalesTransaction(@Valid TransactionDetailGrid transactionDetailGrid, BindingResult bindingResult, Model uiModel) {
+        List<String> errors = validateGrid(transactionDetailGrid);
+        if (!errors.isEmpty()) {
+            transactionDetailGrid.getErrors().addAll(errors);
+            return new ModelAndView("sales/processTransaction", "salesTransaction", transactionDetailGrid);
+        }
         uiModel.asMap().clear();
         SalesTransaction salesTransaction = transactionDetailGrid.buildSalesTransaction();
         if (salesTransaction.getTransactionId() == null || salesTransaction.getTransactionId() < 1) {
@@ -71,13 +77,18 @@ public class SalesTransactionController {
         } else {
             salesTransactionHandler.updateTransaction(salesTransaction);
         }
-        return "redirect:/sales/show/" + salesTransaction.getTransactionId();
+        return new ModelAndView("redirect:/sales/show/" + salesTransaction.getTransactionId());
     }
 
     @RequestMapping(value = "/updateForm/{id}", method = RequestMethod.GET)
     public ModelAndView updateForm(@PathVariable("id") int transactionId) {
         SalesTransaction salesTransaction = salesTransactionService.getSalesTransaction(transactionId);
         TransactionDetailGrid transactionDetailGrid = new TransactionDetailGrid(salesTransaction);
+        BillingSales lastBill = salesBillingService.getLastBill(salesTransaction.getHawker());
+        if (lastBill!=null &&  DateUtils.isGreaterOrEqual(lastBill.getEndDate(), salesTransaction.getDate())) {
+            transactionDetailGrid.setEditable(false);
+            transactionDetailGrid.getErrors().add("This transaction has already been billed, hence cannot be edited");
+        }
         return new ModelAndView("sales/processTransaction", "salesTransaction", transactionDetailGrid);
     }
 
@@ -129,7 +140,8 @@ public class SalesTransactionController {
     @RequestMapping(value = "/itemChanged", method = RequestMethod.POST)
     public ModelAndView itemChanged(@Valid TransactionDetailGrid salesTransactionGrid, BindingResult bindingResult, Model uiModel) {
         TransactionDetailRow effectedRow = salesTransactionGrid.getEffectedRow();
-        if (effectedRow != null) effectedRow.updateItemPrice(itemMasterService.get(effectedRow.getItemCode()).getDefaultPrice());
+        if (effectedRow != null)
+            effectedRow.updateItemPrice(itemMasterService.get(effectedRow.getItemCode()).getDefaultPrice());
         return modelAndViewForSalesTransactionDetails(salesTransactionGrid);
     }
 
@@ -162,6 +174,11 @@ public class SalesTransactionController {
         return modelAndViewForSalesTransactionDetails(salesTransactionGrid);
     }
 
+    @RequestMapping(value = "/validateGrid", method = RequestMethod.POST)
+    public ModelAndView validateGrid(@Valid TransactionDetailGrid transactionDetailGrid, BindingResult bindingResult, Model uiModel, HttpServletResponse response) {
+        return json(validateGrid(transactionDetailGrid), response);
+    }
+
 
     @ModelAttribute("items")
     public List<Item> items() {
@@ -188,5 +205,15 @@ public class SalesTransactionController {
                 transactionDetailRow.setIssueDates(salesTransactionHandler.getStockDetails(transactionDetailRow.getItemCode()));
         }
         return new ModelAndView("sales/editSalesTransactionDetails", "salesTransactionGrid", salesTransactionGrid);
+    }
+
+    private List<String> validateGrid(TransactionDetailGrid grid) {
+        List<String> errors = new ArrayList<String>();
+        Hawker hawker = hawkerMasterService.get(grid.getTargetId());
+        BillingSales lastBill = salesBillingService.getLastBill(hawker);
+        if (lastBill!=null &&  DateUtils.isGreaterOrEqual(lastBill.getEndDate(), grid.getTransactionDate())) {
+            errors.add("Invalid transaction date, Bill has already been generated.");
+        }
+        return errors;
     }
 }

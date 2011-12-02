@@ -34,12 +34,12 @@
                                     <option value="${issue.key}">${issue.value}</option>
                                 </c:forEach>
                             </select>
-                            <form:input path='salesTransactionGrid.transactionDetails[${index-1}].quantity' class='date_of_publish' type='text' display="none"/>
+                            <form:input path='salesTransactionGrid.transactionDetails[${index-1}].dateOfPublishing' class='date_of_publish' type='text' display="none"/>
                         </td>
                      </c:when>
                      <c:otherwise>
                         <td>
-                            <form:hidden path="alesTransactionGrid.transactionDetails[${index-1}].itemCode"/>
+                            <form:hidden path="salesTransactionGrid.transactionDetails[${index-1}].itemCode"/>
                             <form:select path='salesTransactionGrid.transactionDetails[${index-1}].itemCode' class='item_name' disabled="true">
                                 <form:option value="-1" label="--Please Select"/>
                                 <form:options items="${items}" itemLabel="itemName" itemValue="itemCode"/>
@@ -51,11 +51,11 @@
                                     <option value="${issue.key}">${issue.value}</option>
                                 </c:forEach>
                             </select>
-                            <form:input path='salesTransactionGrid.transactionDetails[${index-1}].quantity' class='date_of_publish' type='text' display="none"/>
+                            <form:input path='salesTransactionGrid.transactionDetails[${index-1}].dateOfPublishing' class='date_of_publish' type='text' display="none"/>
                         </td>
                      </c:otherwise>
                 </c:choose>
-                <td><form:input class='mrp' type='text' readonly='true' path="salesTransactionGrid.transactionDetails[${index-1}].mrp"/></td>
+                <td><form:input class='mrp' type='text' path="salesTransactionGrid.transactionDetails[${index-1}].mrp"/></td>
                 <td><form:input class='discount' type='text' path="salesTransactionGrid.transactionDetails[${index-1}].discount"/></td>
                 <td><form:input class='price_per_item' type='text' path="salesTransactionGrid.transactionDetails[${index-1}].pricePerItem"/></td>
                 <td><form:input path='salesTransactionGrid.transactionDetails[${index-1}].quantity' class='quantity' type='text'/></td>

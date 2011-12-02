@@ -28,6 +28,8 @@ public class TransactionDetailGrid {
 
     private List<String> errors = new ArrayList<String>();
 
+    private boolean editable = true;
+
     public TransactionDetailGrid() {
     }
 
@@ -96,6 +98,14 @@ public class TransactionDetailGrid {
 
     public List<TransactionDetailRow> getTransactionDetails() {
         return transactionDetails;
+    }
+
+    public boolean isEditable() {
+        return editable;
+    }
+
+    public void setEditable(boolean editable) {
+        this.editable = editable;
     }
 
     public List<String> getErrors() {

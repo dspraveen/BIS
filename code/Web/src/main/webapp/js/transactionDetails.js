@@ -49,8 +49,9 @@ $(function() {
 				var dop = $($('.date_of_publish')[index]);
 				if(dop.val())
 					$(this).val(dop.val());
-				else	
-					$(this).val(-1);
+				else if($(this).val()!=-1){
+						$(dop).val($(this).val());
+				}	
 				if($(this).val()==-1)
 					dop.show();
             });
@@ -141,6 +142,21 @@ $(function() {
                 var quantity = $(this).find('.quantity');
                 if( !quantity.val() || !canParseNumber(quantity.val())){
                     errors[errorCount++] = "Please enter valid quantity for row"+index;
+                }
+            });
+            var self = this;
+            var formData = $('form').serialize();
+            $.ajax({
+                type: 'POST',
+                url : self.options.contextPath+"/"+self.options.type+"/validateGrid",
+                processData : true,
+                async: false,
+                timeout:3000,
+                data:formData,
+                success : function(data) {
+					$(data).each(function(){
+						errors[errorCount++]=this;
+					});
                 }
             });
             return errors;

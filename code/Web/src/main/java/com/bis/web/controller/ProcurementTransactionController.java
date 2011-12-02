@@ -5,6 +5,7 @@ import com.bis.core.services.ItemMasterService;
 import com.bis.core.services.VendorMasterService;
 import com.bis.domain.*;
 import com.bis.inventory.services.StockService;
+import com.bis.procurement.services.ProcurementBillingService;
 import com.bis.procurement.services.ProcurementTransactionService;
 import com.bis.web.ProcurementTransactionHandler;
 import com.bis.web.viewmodel.TransactionDetailGrid;
@@ -16,26 +17,26 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping("/procurement")
-public class ProcurementTransactionController {
+public class ProcurementTransactionController extends BaseController {
 
     private ProcurementTransactionService procurementTransactionService;
     private ItemMasterService itemMasterService;
     private VendorMasterService vendorMasterService;
     private ProcurementTransactionHandler procurementTransactionHandler;
+    private ProcurementBillingService procurementBillingService;
 
     @Autowired
-    public ProcurementTransactionController(ProcurementTransactionService procurementTransactionService, ItemMasterService itemMasterService, VendorMasterService vendorMasterService, StockService stockService) {
+    public ProcurementTransactionController(ProcurementTransactionService procurementTransactionService, ItemMasterService itemMasterService, VendorMasterService vendorMasterService, StockService stockService, ProcurementBillingService procurementBillingService) {
         this.procurementTransactionService = procurementTransactionService;
         this.itemMasterService = itemMasterService;
         this.vendorMasterService = vendorMasterService;
+        this.procurementBillingService = procurementBillingService;
         this.procurementTransactionHandler = new ProcurementTransactionHandler(procurementTransactionService, stockService);
     }
 
@@ -61,7 +62,13 @@ public class ProcurementTransactionController {
     }
 
     @RequestMapping(value = "/addProcurementTransaction", method = RequestMethod.POST)
-    public String addProcurementTransaction(@Valid TransactionDetailGrid transactionDetailGrid, BindingResult bindingResult, Model uiModel) {
+    public ModelAndView addProcurementTransaction(@Valid TransactionDetailGrid transactionDetailGrid, BindingResult bindingResult, Model uiModel) {
+        BillingProcurement lastBill = procurementBillingService.getLastBill(vendorMasterService.get(transactionDetailGrid.getTargetId()));
+        List<String> errors = validateGrid(transactionDetailGrid);
+        if (!errors.isEmpty()) {
+            transactionDetailGrid.getErrors().addAll(errors);
+            return new ModelAndView("procurement/processTransaction", "procurementTransaction", transactionDetailGrid);
+        }
         uiModel.asMap().clear();
         ProcurementTransaction procurementTransaction = transactionDetailGrid.buildProcurementTransaction();
         if (procurementTransaction.getTransactionId() == null || procurementTransaction.getTransactionId() < 1) {
@@ -69,13 +76,18 @@ public class ProcurementTransactionController {
         } else {
             procurementTransactionHandler.updateTransaction(procurementTransaction);
         }
-        return "redirect:/procurement/show/" + procurementTransaction.getTransactionId();
+        return new ModelAndView("redirect:/procurement/show/" + procurementTransaction.getTransactionId());
     }
 
     @RequestMapping(value = "/updateForm/{id}", method = RequestMethod.GET)
     public ModelAndView updateForm(@PathVariable("id") int transactionId) {
         ProcurementTransaction procurementTransaction = procurementTransactionService.getProcurementTransaction(transactionId);
         TransactionDetailGrid transactionDetailGrid = new TransactionDetailGrid(procurementTransaction);
+        BillingProcurement lastBill = procurementBillingService.getLastBill(procurementTransaction.getVendor());
+        if (DateUtils.isGreaterOrEqual(lastBill.getEndDate(), procurementTransaction.getDate())) {
+            transactionDetailGrid.setEditable(false);
+            transactionDetailGrid.getErrors().add("This transaction has already been billed, hence cannot be edited");
+        }
         return new ModelAndView("procurement/processTransaction", "procurementTransaction", transactionDetailGrid);
     }
 
@@ -128,7 +140,8 @@ public class ProcurementTransactionController {
     @RequestMapping(value = "/itemChanged", method = RequestMethod.POST)
     public ModelAndView itemChanged(@Valid TransactionDetailGrid procurementTransactionGrid, BindingResult bindingResult, Model uiModel) {
         TransactionDetailRow effectedRow = procurementTransactionGrid.getEffectedRow();
-        if (effectedRow != null) effectedRow.updateItemPrice(itemMasterService.get(effectedRow.getItemCode()).getDefaultPrice());
+        if (effectedRow != null)
+            effectedRow.updateItemPrice(itemMasterService.get(effectedRow.getItemCode()).getDefaultPrice());
         return modelAndViewForProcurementTransactionDetails(procurementTransactionGrid);
     }
 
@@ -161,6 +174,11 @@ public class ProcurementTransactionController {
         return modelAndViewForProcurementTransactionDetails(procurementTransactionGrid);
     }
 
+    @RequestMapping(value = "/validateGrid", method = RequestMethod.POST)
+    public ModelAndView validateGrid(@Valid TransactionDetailGrid procurementTransactionGrid, BindingResult bindingResult, Model uiModel, HttpServletResponse response) {
+        return json(validateGrid(procurementTransactionGrid), response);
+    }
+
     @ModelAttribute("procurementTransactionType")
     public Map<Character, String> procurementTransactionType() {
         Map<Character, String> procurementTransactionTypes = new HashMap<Character, String>();
@@ -186,5 +204,15 @@ public class ProcurementTransactionController {
                 transactionDetailRow.setIssueDates(procurementTransactionHandler.getStockDetails(itemMasterService.get(transactionDetailRow.getItemCode())));
         }
         return new ModelAndView("procurement/editProcurementTransactionDetails", "procurementTransactionGrid", procurementTransactionGrid);
+    }
+
+    private List<String> validateGrid(TransactionDetailGrid grid) {
+        List<String> errors = new ArrayList<String>();
+        Vendor vendor = vendorMasterService.get(grid.getTargetId());
+        BillingProcurement lastBill = procurementBillingService.getLastBill(vendor);
+        if (DateUtils.isGreaterOrEqual(lastBill.getEndDate(), grid.getTransactionDate())) {
+            errors.add("Invalid transaction date, Bill has already been generated.");
+        }
+        return errors;
     }
 }

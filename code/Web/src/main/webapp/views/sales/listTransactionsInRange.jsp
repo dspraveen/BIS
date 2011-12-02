@@ -35,6 +35,9 @@
 </div>
 <script>
     $(function() {
-        $( "#sales_transactions_accordion" ).accordion();
+        $( "#sales_transactions_accordion" ).accordion({
+            collapsible:true,
+			active:false
+        });
     });
 </script>

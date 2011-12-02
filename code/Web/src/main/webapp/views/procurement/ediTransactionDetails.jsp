@@ -57,7 +57,7 @@
                         </td>
                     </c:otherwise>
                 </c:choose>
-                <td><form:input class='mrp' type='text' readonly='true' path="procurementTransactionGrid.transactionDetails[${index-1}].mrp"/></td>
+                <td><form:input class='mrp' type='text' path="procurementTransactionGrid.transactionDetails[${index-1}].mrp"/></td>
                 <td><form:input class='discount' type='text' path="procurementTransactionGrid.transactionDetails[${index-1}].discount"/></td>
                 <td><form:input class='price_per_item' type='text' path="procurementTransactionGrid.transactionDetails[${index-1}].pricePerItem"/></td>
                 <td><form:input path='procurementTransactionGrid.transactionDetails[${index-1}].quantity' class='quantity' type='text'/></td>

@@ -9,6 +9,7 @@ import com.bis.sales.services.SalesPaymentService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +29,9 @@ public class SalesPaymentController {
 
     private SalesPaymentService salesPaymentService;
     private HawkerMasterService hawkerMasterService;
+
+    protected SalesPaymentController() {
+    }
 
     @Autowired
     public SalesPaymentController(SalesPaymentService salesPaymentService, HawkerMasterService hawkerMasterService) {
@@ -56,6 +60,7 @@ public class SalesPaymentController {
         return new ModelAndView("salesPayment/updateForm", "PaymentHistorySales", paymentHistorySales);
     }
 
+    @Transactional
     @RequestMapping(value = "/addSalesPayment", method = RequestMethod.POST)
     public String addSalesPayment(@Valid PaymentHistorySales paymentHistorySales, BindingResult bindingResult, Model uiModel) {
         uiModel.asMap().clear();
@@ -63,6 +68,7 @@ public class SalesPaymentController {
         return "redirect:/salesPayment/show/" + paymentHistorySales.getPaymentId();
     }
 
+    @Transactional
     @RequestMapping(value = "/updateSalesPayment", method = RequestMethod.POST)
     public String updateSalesPayment(@Valid PaymentHistorySales paymentHistorySales, BindingResult bindingResult, Model uiModel) {
         uiModel.asMap().clear();

@@ -7,6 +7,7 @@ import com.bis.web.viewmodel.VendorList;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,9 @@ public class VendorsController extends BaseController {
     protected final Logger logger = Logger.getLogger(getClass());
 
     private VendorMasterService vendorMasterService;
+
+    protected VendorsController() {
+    }
 
     @Autowired
     public VendorsController(VendorMasterService vendorMasterService) {
@@ -48,6 +52,7 @@ public class VendorsController extends BaseController {
         return new ModelAndView("vendor/updateForm", "vendor", vendor);
     }
 
+    @Transactional
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String create(@Valid Vendor vendor, BindingResult bindingResult, Model uiModel) {
         uiModel.asMap().clear();
@@ -55,6 +60,7 @@ public class VendorsController extends BaseController {
         return "redirect:/vendor/show/" + vendor.getVendorId();
     }
 
+    @Transactional
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String update(@Valid Vendor vendor, BindingResult bindingResult, Model uiModel) {
         uiModel.asMap().clear();

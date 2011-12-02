@@ -9,6 +9,7 @@ import com.bis.procurement.services.ProcurementPaymentService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +29,9 @@ public class ProcurementPaymentController {
 
     private ProcurementPaymentService procurementPaymentService;
     private VendorMasterService vendorMasterService;
+
+    protected ProcurementPaymentController() {
+    }
 
     @Autowired
     public ProcurementPaymentController(ProcurementPaymentService procurementPaymentService, VendorMasterService vendorMasterService) {
@@ -55,6 +59,7 @@ public class ProcurementPaymentController {
         return new ModelAndView("procurementPayment/updateForm", "PaymentHistoryProcurement", paymentHistoryProcurement);
     }
 
+    @Transactional
     @RequestMapping(value = "/createProcurementPayment", method = RequestMethod.POST)
     public String addProcurementPayment(@Valid PaymentHistoryProcurement paymentHistoryProcurement, BindingResult bindingResult, Model uiModel) {
         uiModel.asMap().clear();
@@ -62,6 +67,7 @@ public class ProcurementPaymentController {
         return "redirect:/procurementPayment/show/" + paymentHistoryProcurement.getPaymentId();
     }
 
+    @Transactional
     @RequestMapping(value = "/updateProcurementPayment", method = RequestMethod.POST)
     public String updateProcurementPayment(@Valid PaymentHistoryProcurement paymentHistoryProcurement, BindingResult bindingResult, Model uiModel) {
         uiModel.asMap().clear();

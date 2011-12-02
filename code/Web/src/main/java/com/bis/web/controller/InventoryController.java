@@ -26,6 +26,9 @@ public class InventoryController {
     private ItemMasterService itemMasterService;
     private Stock stocksService;
 
+    protected InventoryController() {
+    }
+
     @Autowired
     public InventoryController(StockService stockService) {
         this.stockService = stockService;

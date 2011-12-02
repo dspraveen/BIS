@@ -10,6 +10,7 @@ import com.bis.web.viewmodel.SalesBillingDetails;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -30,6 +31,9 @@ public class SalesBillingController {
     private HawkerMasterService hawkerMasterService;
     private SalesTransactionService salesTransactionService;
     private SalesPaymentService salesPaymentService;
+
+    protected SalesBillingController() {
+    }
 
     @Autowired
     public SalesBillingController(HawkerMasterService hawkerMasterService, SalesBillingService salesBillingService, SalesTransactionService salesTransactionService, SalesPaymentService salesPaymentService) {
@@ -64,6 +68,7 @@ public class SalesBillingController {
         return new ModelAndView("salesBilling/showBill","BillingSales",billingSales);
     }
 
+    @Transactional
     @RequestMapping(value = "/saveSalesBill", method = RequestMethod.POST)
     public String addProcurementBill(@Valid SalesBillingDetails salesBillingDetails, BindingResult bindingResult, Model uiModel) {
         uiModel.asMap().clear();

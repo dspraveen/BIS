@@ -12,6 +12,7 @@ import com.bis.web.viewmodel.TransactionDetailGrid;
 import com.bis.web.viewmodel.TransactionDetailRow;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -30,6 +31,9 @@ public class ProcurementTransactionController extends BaseController {
     private VendorMasterService vendorMasterService;
     private ProcurementTransactionHandler procurementTransactionHandler;
     private ProcurementBillingService procurementBillingService;
+
+    protected ProcurementTransactionController() {
+    }
 
     @Autowired
     public ProcurementTransactionController(ProcurementTransactionService procurementTransactionService, ItemMasterService itemMasterService, VendorMasterService vendorMasterService, StockService stockService, ProcurementBillingService procurementBillingService) {
@@ -61,6 +65,7 @@ public class ProcurementTransactionController extends BaseController {
         return new ModelAndView("procurement/processTransaction", "procurementTransaction", procurementTransaction);
     }
 
+    @Transactional
     @RequestMapping(value = "/addProcurementTransaction", method = RequestMethod.POST)
     public ModelAndView addProcurementTransaction(@Valid TransactionDetailGrid transactionDetailGrid, BindingResult bindingResult, Model uiModel) {
         BillingProcurement lastBill = procurementBillingService.getLastBill(vendorMasterService.get(transactionDetailGrid.getTargetId()));

@@ -13,6 +13,7 @@ import com.bis.web.viewmodel.TransactionDetailGrid;
 import com.bis.web.viewmodel.TransactionDetailRow;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -31,6 +32,9 @@ public class SalesTransactionController extends BaseController {
     private HawkerMasterService hawkerMasterService;
     private SalesBillingService salesBillingService;
     private SalesTransactionHandler salesTransactionHandler;
+
+    protected SalesTransactionController() {
+    }
 
     @Autowired
     public SalesTransactionController(SalesTransactionService salesTransactionService, ItemMasterService itemMasterService, HawkerMasterService hawkerMasterService, StockService stockService, SalesBillingService salesBillingService) {
@@ -63,6 +67,7 @@ public class SalesTransactionController extends BaseController {
         return new ModelAndView("sales/processTransaction", "salesTransaction", salesTransaction);
     }
 
+    @Transactional
     @RequestMapping(value = "/addSalesTransaction", method = RequestMethod.POST)
     public ModelAndView addSalesTransaction(@Valid TransactionDetailGrid transactionDetailGrid, BindingResult bindingResult, Model uiModel) {
         List<String> errors = validateGrid(transactionDetailGrid);

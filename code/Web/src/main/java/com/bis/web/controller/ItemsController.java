@@ -8,6 +8,7 @@ import com.bis.web.viewmodel.ItemList;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +25,9 @@ public class ItemsController extends BaseController {
     protected final Logger logger = Logger.getLogger(getClass());
 
     private ItemMasterService itemMasterService;
+
+    protected ItemsController() {
+    }
 
     @Autowired
     public ItemsController(ItemMasterService itemMasterService) {
@@ -50,6 +54,7 @@ public class ItemsController extends BaseController {
         return new ModelAndView("item/updateForm", "item", item);
     }
 
+    @Transactional
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String create(@Valid Item item, BindingResult bindingResult, Model uiModel) {
         uiModel.asMap().clear();
@@ -57,6 +62,7 @@ public class ItemsController extends BaseController {
         return "redirect:/item/show/" + item.getItemCode();
     }
 
+    @Transactional
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String update(@Valid Item item, BindingResult bindingResult, Model uiModel) {
         uiModel.asMap().clear();

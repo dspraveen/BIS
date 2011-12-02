@@ -7,6 +7,7 @@ import com.bis.web.viewmodel.HawkerList;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +23,9 @@ public class HawkersController {
     protected final Logger logger = Logger.getLogger(getClass());
 
     private HawkerMasterService hawkerMasterService;
+
+    protected HawkersController() {
+    }
 
     @Autowired
     public HawkersController(HawkerMasterService hawkerMasterService) {
@@ -46,6 +50,7 @@ public class HawkersController {
         return new ModelAndView("hawker/updateForm", "hawker", hawker);
     }
 
+    @Transactional
     @RequestMapping(value = "/create",method = RequestMethod.POST)
     public String create(@Valid Hawker hawker, BindingResult bindingResult, Model uiModel) {
         uiModel.asMap().clear();
@@ -53,6 +58,8 @@ public class HawkersController {
         return "redirect:/hawker/show/"+hawker.getHawkerId();
     }
 
+
+    @Transactional
     @RequestMapping(value = "/update",method = RequestMethod.POST)
     public String update(@Valid Hawker hawker, BindingResult bindingResult, Model uiModel) {
         uiModel.asMap().clear();

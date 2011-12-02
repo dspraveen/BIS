@@ -10,6 +10,7 @@ import com.bis.web.viewmodel.ProcurementBillingDetails;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -31,6 +32,9 @@ public class ProcurementBillingController extends BaseController{
     private ProcurementTransactionService procurementTransactionService;
     private ProcurementPaymentService procurementPaymentService;
 
+    protected ProcurementBillingController() {
+    }
+
     @Autowired
     public ProcurementBillingController(ProcurementBillingService procurementBillingService, VendorMasterService vendorMasterService, ProcurementTransactionService procurementTransactionService, ProcurementPaymentService procurementPaymentService) {
         this.procurementBillingService = procurementBillingService;
@@ -44,6 +48,7 @@ public class ProcurementBillingController extends BaseController{
         ProcurementBillingDetails procurementBillingDetails = new ProcurementBillingDetails();
         return new ModelAndView("procurementBilling/billSelectVendor", "ProcurementBillingDetails", procurementBillingDetails);
     }
+
 
     @RequestMapping(value = "/generateBill", method = RequestMethod.GET)
     public ModelAndView generateBill(@RequestParam(value = "vendorId", required = true) int vendorId) {
@@ -64,6 +69,7 @@ public class ProcurementBillingController extends BaseController{
         return new ModelAndView("procurementBilling/showBill", "BillingProcurement", billingProcurement);
     }
 
+    @Transactional
     @RequestMapping(value = "/saveProcurementBill", method = RequestMethod.POST)
     public String addProcurementBill(@Valid ProcurementBillingDetails procurementBillingDetails, BindingResult bindingResult, Model uiModel) {
         uiModel.asMap().clear();

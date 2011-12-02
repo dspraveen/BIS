@@ -58,7 +58,7 @@ public class SalesTransactionHandler {
 
     public List<ListElement> getStockDetails(int itemCode) {
         Date currentDate = DateUtils.currentDate();
-        List<Stock> stockList = stockService.getAllStock(itemCode, DateUtils.addMonth(currentDate, -1), currentDate);
+        List<Stock> stockList = stockService.getAllStock(itemCode, DateUtils.addMonth(currentDate, -1), DateUtils.infinityDate());
         List<ListElement> stockDetails = new ArrayList<ListElement>();
         for (Stock stock : stockList) {
             String dateString = DateUtils.defaultFormat(stock.getDateOfPublishing());

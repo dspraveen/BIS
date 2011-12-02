@@ -10,6 +10,17 @@ public class DateUtils {
         return Calendar.getInstance().getTime();
     }
 
+    public static Date infinityDate() {
+        Calendar instance = Calendar.getInstance();
+        instance.set(Calendar.YEAR,9999);
+        instance.set(Calendar.MONTH,12);
+        instance.set(Calendar.DATE,31);
+        instance.set(Calendar.HOUR_OF_DAY,23);
+        instance.set(Calendar.MINUTE,59);
+        instance.set(Calendar.SECOND,59);
+        return instance.getTime();
+    }
+
     public static Date addMinutes(Date date, int minutes) {
         Calendar instance = Calendar.getInstance();
         instance.setTime(date);

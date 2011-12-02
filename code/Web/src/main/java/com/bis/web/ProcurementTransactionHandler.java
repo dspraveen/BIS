@@ -60,11 +60,14 @@ public class ProcurementTransactionHandler {
 
     public List<ListElement> getStockDetails(Item item) {
         Date currentDate = DateUtils.currentDate();
-        List<Stock> stockList = stockService.getAllStock(item.getItemCode(), DateUtils.addMonth(currentDate, -1), currentDate);
+        List<Stock> stockList = stockService.getAllStock(item.getItemCode(), DateUtils.addMonth(currentDate, -1), DateUtils.infinityDate());
         List<ListElement> stockDetails = new ArrayList<ListElement>();
         if (stockList.isEmpty()) return stockDetails;
-        Date date = getNextDateOfPublish(stockList.get(0).getDateOfPublishing(), item.getItemLife());
-        stockDetails.add(new ListElement(defaultFormat(date), defaultFormat(date)));
+        Date latestPublicationDate = stockList.get(0).getDateOfPublishing();
+        if(!DateUtils.isGreaterOrEqual(latestPublicationDate,currentDate)){
+            Date date = getNextDateOfPublish(latestPublicationDate, item.getItemLife());
+            stockDetails.add(new ListElement(defaultFormat(date), defaultFormat(date)));
+        }
         for (Stock stock : stockList) {
             String dateString = defaultFormat(stock.getDateOfPublishing());
             stockDetails.add(new ListElement(dateString, dateString + ":" + stock.getQuantity()));

@@ -7,6 +7,7 @@ import com.bis.domain.PtDetails;
 import com.bis.inventory.services.StockService;
 import com.bis.procurement.services.ProcurementTransactionService;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -16,6 +17,7 @@ import java.util.Date;
 
 import static org.mockito.Mockito.when;
 
+@Ignore
 public class ProcurementTransactionHandlerTest {
     @Mock
     private ProcurementTransactionService procurementTransactionService;

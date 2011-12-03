@@ -36,7 +36,7 @@ public class SalesTransactionServiceImpl implements SalesTransactionService {
 
     @Override
     public SalesTransaction getSalesTransaction(int transactionId) {
-        return salesRepository.get(transactionId);
+        return salesRepository.getDetached(transactionId);
     }
 
     @Override

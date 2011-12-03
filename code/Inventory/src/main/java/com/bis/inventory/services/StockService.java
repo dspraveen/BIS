@@ -14,6 +14,7 @@ public interface StockService {
     Stock getStock( int itemCode, Date dateOfPublishing);
     List<Stock> getAllStock();
     void addStock( int itemCode, Date dateOfPublishing, int quantity);
+    void updateStock( int itemCode, Date dateOfPublishing, int quantity);
     void reduceStock(  int itemCode, Date dateOfPublishing, int quantity);
     List<Stock> readExpiredStock( int itemCode);
     List<Stock> getAllStock(int itemCode, Date fromDateOfPublish, Date endDateOfPublish);

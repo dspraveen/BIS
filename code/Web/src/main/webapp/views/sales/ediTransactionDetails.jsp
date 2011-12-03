@@ -19,9 +19,9 @@
             <form:hidden path="salesTransactionGrid.transactionDetails[${index-1}].detailsId"/>
             <form:hidden path="salesTransactionGrid.transactionDetails[${index-1}].transactionId"/>
             <tr class="template_row">
-                <td><form:checkbox  path='salesTransactionGrid.transactionDetails[${index-1}].checked' class='item_select'/></td>
                 <c:choose>
                     <c:when test="${salesTransactionGrid.transactionDetails[index-1].transactionId < 1}">
+                        <td><form:checkbox  path='salesTransactionGrid.transactionDetails[${index-1}].checked' class='item_select'/></td>
                         <td>
                             <form:select path='salesTransactionGrid.transactionDetails[${index-1}].itemCode' class='item_name'>
                                 <form:option value="-1" label="--Please Select"/>
@@ -38,6 +38,7 @@
                         </td>
                      </c:when>
                      <c:otherwise>
+                        <td><form:checkbox  path='salesTransactionGrid.transactionDetails[${index-1}].checked' class='item_select' disabled="true"/></td>
                         <td>
                             <form:hidden path="salesTransactionGrid.transactionDetails[${index-1}].itemCode"/>
                             <form:select path='salesTransactionGrid.transactionDetails[${index-1}].itemCode' class='item_name' disabled="true">
@@ -51,7 +52,8 @@
                                     <option value="${issue.key}">${issue.value}</option>
                                 </c:forEach>
                             </select>
-                            <form:input path='salesTransactionGrid.transactionDetails[${index-1}].dateOfPublishing' class='date_of_publish' type='text' display="none"/>
+                            <form:hidden path="salesTransactionGrid.transactionDetails[${index-1}].dateOfPublishing"/>
+                            <form:input path='salesTransactionGrid.transactionDetails[${index-1}].dateOfPublishing' class='date_of_publish' type='text' display="none" readonly="true" disabled='true'/>
                         </td>
                      </c:otherwise>
                 </c:choose>

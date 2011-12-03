@@ -2,14 +2,19 @@ package com.bis.web;
 
 import com.bis.common.DateUtils;
 import com.bis.domain.SalesTransaction;
+import com.bis.domain.SalesTransactionType;
 import com.bis.domain.StDetails;
 import com.bis.domain.Stock;
 import com.bis.inventory.services.StockService;
 import com.bis.sales.services.SalesTransactionService;
 import com.bis.web.viewmodel.ListElement;
+import org.apache.commons.collections.Closure;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class SalesTransactionHandler {
 
@@ -25,36 +30,25 @@ public class SalesTransactionHandler {
     public void addNewTransaction(SalesTransaction salesTransaction) {
         List<StDetails> transactionDetails = salesTransaction.getTransactionDetails();
         for (StDetails details : transactionDetails) {
-            stockService.reduceStock(details.getItem().getItemCode(), details.getDateOfPublishing(), details.getQuantity());
+            if (SalesTransactionType.SALES.getCode() == salesTransaction.getTransactionType())
+                stockService.reduceStock(details.getItem().getItemCode(), details.getDateOfPublishing(), details.getQuantity());
+            else if (SalesTransactionType.RETURNS.getCode() == salesTransaction.getTransactionType())
+                stockService.addStock(details.getItem().getItemCode(), details.getDateOfPublishing(), details.getQuantity());
         }
         salesTransactionService.addSalesTransaction(salesTransaction);
     }
 
     @Transactional
-    public void updateTransaction(SalesTransaction salesTransaction) {
-        List<StDetails> updatedTransactionDetails = salesTransaction.getTransactionDetails();
-        SalesTransaction originalTransaction = salesTransactionService.getSalesTransaction(salesTransaction.getTransactionId());
-        for (StDetails  updatedDetail : updatedTransactionDetails) {
-            StDetails originalDetail = originalTransaction.getStDetails(updatedDetail.getDetailsId());
-            if (originalDetail != null) {
-                Integer quantity = updatedDetail.getQuantity() - originalDetail.getQuantity();
-                if (quantity > 0) {
-                    stockService.reduceStock(updatedDetail.getItem().getItemCode(), updatedDetail.getDateOfPublishing(), quantity);
-                } else if (quantity < 0) {
-                    stockService.addStock(updatedDetail.getItem().getItemCode(), updatedDetail.getDateOfPublishing(), originalDetail.getQuantity() - updatedDetail.getQuantity());
-                }
-            } else {
-                stockService.addStock(updatedDetail.getItem().getItemCode(), updatedDetail.getDateOfPublishing(), updatedDetail.getQuantity());
-            }
-        }
-        for (StDetails detailsDB : originalTransaction.getTransactionDetails()) {
-            StDetails stDetails = salesTransaction.getStDetails(detailsDB.getDetailsId());
-            if (stDetails == null) {
-                stockService.addStock(detailsDB.getItem().getItemCode(), detailsDB.getDateOfPublishing(), detailsDB.getQuantity());
-            }
+    public void updateTransaction(final SalesTransaction salesTransaction) {
+        final SalesTransaction currentTransaction = salesTransactionService.getSalesTransaction(salesTransaction.getTransactionId());
+        if (SalesTransactionType.SALES.getCode() == salesTransaction.getTransactionType()) {
+            handleSalesTransaction(salesTransaction, currentTransaction);
+        } else if (SalesTransactionType.RETURNS.getCode() == salesTransaction.getTransactionType()) {
+            handleReturnsTransaction(salesTransaction, currentTransaction);
         }
         salesTransactionService.updateSalesTransaction(salesTransaction);
     }
+
 
     public List<ListElement> getStockDetails(int itemCode) {
         Date currentDate = DateUtils.currentDate();
@@ -62,8 +56,40 @@ public class SalesTransactionHandler {
         List<ListElement> stockDetails = new ArrayList<ListElement>();
         for (Stock stock : stockList) {
             String dateString = DateUtils.defaultFormat(stock.getDateOfPublishing());
-            stockDetails.add(new ListElement(dateString,dateString + ":" + stock.getQuantity()));
+            stockDetails.add(new ListElement(dateString, dateString + ":" + stock.getQuantity()));
         }
         return stockDetails;
     }
+
+    private void handleReturnsTransaction(SalesTransaction salesTransaction, final SalesTransaction currentTransaction) {
+        CollectionUtils.forAllDo(salesTransaction.getTransactionDetails(), new Closure() {
+            @Override
+            public void execute(Object input) {
+                StDetails detail = (StDetails) input;
+                StDetails oldDetail = currentTransaction.getStDetails(detail.getDetailsId());
+                if (oldDetail == null) {
+                    stockService.addStock(detail.getItem().getItemCode(), detail.getDateOfPublishing(), detail.getQuantity());
+                } else {
+                    stockService.updateStock(detail.getItem().getItemCode(), detail.getDateOfPublishing(), detail.getQuantity() - oldDetail.getQuantity());
+                }
+            }
+        });
+    }
+
+    private void handleSalesTransaction(SalesTransaction salesTransaction, final SalesTransaction currentTransaction) {
+        CollectionUtils.forAllDo(salesTransaction.getTransactionDetails(), new Closure() {
+            @Override
+            public void execute(Object input) {
+                StDetails detail = (StDetails) input;
+                StDetails oldDetail = currentTransaction.getStDetails(detail.getDetailsId());
+                if (oldDetail == null) {
+                    stockService.reduceStock(detail.getItem().getItemCode(), detail.getDateOfPublishing(), detail.getQuantity());
+                } else {
+                    stockService.updateStock(detail.getItem().getItemCode(), detail.getDateOfPublishing(), oldDetail.getQuantity() - detail.getQuantity());
+                }
+            }
+        });
+    }
+
+
 }

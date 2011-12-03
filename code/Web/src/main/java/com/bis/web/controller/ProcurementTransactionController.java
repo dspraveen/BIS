@@ -89,7 +89,7 @@ public class ProcurementTransactionController extends BaseController {
         ProcurementTransaction procurementTransaction = procurementTransactionService.getProcurementTransaction(transactionId);
         TransactionDetailGrid transactionDetailGrid = new TransactionDetailGrid(procurementTransaction);
         BillingProcurement lastBill = procurementBillingService.getLastBill(procurementTransaction.getVendor());
-        if (DateUtils.isGreaterOrEqual(lastBill.getEndDate(), procurementTransaction.getDate())) {
+        if (lastBill !=null && DateUtils.isGreaterOrEqual(lastBill.getEndDate(), procurementTransaction.getDate())) {
             transactionDetailGrid.setEditable(false);
             transactionDetailGrid.getErrors().add("This transaction has already been billed, hence cannot be edited");
         }
@@ -215,7 +215,7 @@ public class ProcurementTransactionController extends BaseController {
         List<String> errors = new ArrayList<String>();
         Vendor vendor = vendorMasterService.get(grid.getTargetId());
         BillingProcurement lastBill = procurementBillingService.getLastBill(vendor);
-        if (DateUtils.isGreaterOrEqual(lastBill.getEndDate(), grid.getTransactionDate())) {
+        if (lastBill!=null && DateUtils.isGreaterOrEqual(lastBill.getEndDate(), grid.getTransactionDate())) {
             errors.add("Invalid transaction date, Bill has already been generated.");
         }
         return errors;

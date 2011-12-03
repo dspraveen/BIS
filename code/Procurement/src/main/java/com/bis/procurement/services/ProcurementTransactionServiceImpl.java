@@ -35,7 +35,7 @@ public class ProcurementTransactionServiceImpl implements ProcurementTransaction
 
     @Override
     public ProcurementTransaction getProcurementTransaction(int transactionId) {
-        return procurementTransactionRepository.get(transactionId);
+        return procurementTransactionRepository.getDetached(transactionId);
     }
 
     public List<ProcurementTransaction> getProcurementTransactions(Date fromDate, Date toDate) {

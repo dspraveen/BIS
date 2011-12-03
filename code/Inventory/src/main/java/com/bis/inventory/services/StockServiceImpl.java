@@ -42,6 +42,15 @@ public class StockServiceImpl implements StockService{
     }
 
     @Override
+    public void updateStock(int itemCode, Date dateOfPublishing, int quantity) {
+        if(quantity > 0){
+            addStock(itemCode,dateOfPublishing,quantity);
+        }else if(quantity <0){
+            reduceStock(itemCode,dateOfPublishing,Math.abs(quantity));
+        }
+    }
+
+    @Override
     public void reduceStock( int itemCode, Date dateOfPublishing, int quantity) {
         Stock stock = stockRepository.getStock(itemCode, dateOfPublishing);
         if(stock == null){

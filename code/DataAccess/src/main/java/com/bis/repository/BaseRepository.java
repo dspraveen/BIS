@@ -21,6 +21,12 @@ public abstract class BaseRepository<T> extends HibernateDaoSupport {
         return (T) getHibernateTemplate().get(type, id);
     }
 
+    public T getDetached(Serializable id) {
+        T object = (T) getHibernateTemplate().get(type, id);
+        getHibernateTemplate().evict(object);
+        return object;
+    }
+
     public void delete(T object) {
         getHibernateTemplate().delete(object);
     }

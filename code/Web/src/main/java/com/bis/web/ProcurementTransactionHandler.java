@@ -5,6 +5,8 @@ import com.bis.domain.*;
 import com.bis.inventory.services.StockService;
 import com.bis.procurement.services.ProcurementTransactionService;
 import com.bis.web.viewmodel.ListElement;
+import org.apache.commons.collections.Closure;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
@@ -27,36 +29,27 @@ public class ProcurementTransactionHandler {
     public void addNewTransaction(ProcurementTransaction procurementTransaction) {
         List<PtDetails> transactionDetails = procurementTransaction.getTransactionDetails();
         for (PtDetails details : transactionDetails) {
-            stockService.addStock(details.getItem().getItemCode(), details.getDateOfPublishing(), details.getQuantity());
+            if (ProcurementTransactionType.PURCHASE.getCode() == procurementTransaction.getTransactionType())
+                stockService.addStock(details.getItem().getItemCode(), details.getDateOfPublishing(), details.getQuantity());
+            else if (ProcurementTransactionType.RETURNS.getCode() == procurementTransaction.getTransactionType())
+                stockService.reduceStock(details.getItem().getItemCode(), details.getDateOfPublishing(), details.getQuantity());
         }
         procurementTransactionService.addProcurementTransaction(procurementTransaction);
     }
 
     @Transactional
-    public void updateTransaction(ProcurementTransaction procurementTransaction) {
-        List<PtDetails> updatedTransactionDetails = procurementTransaction.getTransactionDetails();
-        ProcurementTransaction originalTransaction = procurementTransactionService.getProcurementTransaction(procurementTransaction.getTransactionId());
-        for (PtDetails updatedDetail : updatedTransactionDetails) {
-            PtDetails originalDetail = originalTransaction.getPtDetails(updatedDetail.getDetailsId());
-            if (originalDetail != null) {
-                Integer quantity = updatedDetail.getQuantity() - originalDetail.getQuantity();
-                if (quantity > 0) {
-                    stockService.addStock(updatedDetail.getItem().getItemCode(), updatedDetail.getDateOfPublishing(), quantity);
-                } else if (quantity < 0) {
-                    stockService.reduceStock(updatedDetail.getItem().getItemCode(), updatedDetail.getDateOfPublishing(), originalDetail.getQuantity() - updatedDetail.getQuantity());
-                }
-            } else {
-                stockService.addStock(updatedDetail.getItem().getItemCode(), updatedDetail.getDateOfPublishing(), updatedDetail.getQuantity());
-            }
-        }
-        for (PtDetails detailsDB : originalTransaction.getTransactionDetails()) {
-            PtDetails ptDetails = procurementTransaction.getPtDetails(detailsDB.getDetailsId());
-            if (ptDetails == null) {
-                stockService.reduceStock(detailsDB.getItem().getItemCode(), detailsDB.getDateOfPublishing(), detailsDB.getQuantity());
-            }
+    public void updateTransaction(final ProcurementTransaction procurementTransaction) {
+        ProcurementTransaction currentTransaction = procurementTransactionService.getProcurementTransaction(procurementTransaction.getTransactionId());
+        if (ProcurementTransactionType.PURCHASE.getCode() == procurementTransaction.getTransactionType()) {
+            handlePurchaseTransaction(procurementTransaction, currentTransaction);
+        } else if (ProcurementTransactionType.RETURNS.getCode() == procurementTransaction.getTransactionType()) {
+            handleReturnsTransaction(procurementTransaction, currentTransaction);
+        } else {
+            throw new RuntimeException("Invalid transaction type");
         }
         procurementTransactionService.updateProcurementTransaction(procurementTransaction);
     }
+
 
     public List<ListElement> getStockDetails(Item item) {
         Date currentDate = DateUtils.currentDate();
@@ -64,7 +57,7 @@ public class ProcurementTransactionHandler {
         List<ListElement> stockDetails = new ArrayList<ListElement>();
         if (stockList.isEmpty()) return stockDetails;
         Date latestPublicationDate = stockList.get(0).getDateOfPublishing();
-        if(!DateUtils.isGreaterOrEqual(latestPublicationDate,currentDate)){
+        if (!DateUtils.isGreaterOrEqual(latestPublicationDate, currentDate)) {
             Date date = getNextDateOfPublish(latestPublicationDate, item.getItemLife());
             stockDetails.add(new ListElement(defaultFormat(date), defaultFormat(date)));
         }
@@ -81,6 +74,35 @@ public class ProcurementTransactionHandler {
         if (ItemCycle.WEEKLY.getCode() == itemLife) return DateUtils.addDays(dateOfPublishing, 7);
         if (ItemCycle.DAILY.getCode() == itemLife) return DateUtils.addDays(dateOfPublishing, 1);
         throw new RuntimeException("Invalid item life");
+    }
+
+    private void handleReturnsTransaction(ProcurementTransaction procurementTransaction, final ProcurementTransaction currentTransaction) {
+        CollectionUtils.forAllDo(procurementTransaction.getTransactionDetails(), new Closure() {
+            @Override
+            public void execute(Object input) {
+                PtDetails detail = (PtDetails) input;
+                PtDetails oldDetail = currentTransaction.getPtDetails(detail.getDetailsId());
+                if (oldDetail == null) {
+                    stockService.reduceStock(detail.getItem().getItemCode(), detail.getDateOfPublishing(), detail.getQuantity());
+                } else {
+                    stockService.updateStock(detail.getItem().getItemCode(), detail.getDateOfPublishing(), oldDetail.getQuantity() - detail.getQuantity());
+                }
+            }
+        });
+    }
+
+    private void handlePurchaseTransaction(ProcurementTransaction procurementTransaction, final ProcurementTransaction currentTransaction) {
+        CollectionUtils.forAllDo(procurementTransaction.getTransactionDetails(), new Closure() {
+            @Override
+            public void execute(Object input) {
+                PtDetails detail = (PtDetails) input;
+                PtDetails oldDetail = currentTransaction.getPtDetails(detail.getDetailsId());
+                if (oldDetail == null)
+                    stockService.addStock(detail.getItem().getItemCode(), detail.getDateOfPublishing(), detail.getQuantity());
+                else
+                    stockService.updateStock(detail.getItem().getItemCode(), detail.getDateOfPublishing(), detail.getQuantity() - oldDetail.getQuantity());
+            }
+        });
     }
 
 }

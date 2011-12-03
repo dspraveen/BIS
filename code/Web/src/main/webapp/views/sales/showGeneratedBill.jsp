@@ -8,7 +8,47 @@
 <h2>Bill Details</h2></br>
 </div>
 <div>
-    <div class="sales_transactions">
+<div>
+    <div>
+		<span class="left"><label>Previous Bill Oustanding Amount</label>	</span>
+		<span class="center"><label>:</label></span>
+          <c:choose>
+            <c:when test="${SalesBillingDetails.lastBill != null}">
+                <span class="right"><label>${SalesBillingDetails.lastBill.balanceAmount}</label></span>
+            </c:when>
+            <c:otherwise>
+                <span class="right"><label>0.0</label></span>
+            </c:otherwise>
+          </c:choose>
+	</div>
+	<div>
+		<span class="left"><label>Sales Transactions Total</label></span>
+		<span class="center"><label>:</label></span>
+		<span class="right"><label>${SalesBillingDetails.salesTransactionTotal}</label></span>
+	</div>
+	<div>	
+		<span class="left"><label>Return Transactions Total</label></span>
+		<span class="center"><label>:</label></span>
+		<span class="right"><label>${SalesBillingDetails.returnTransactionTotal}</label></span>
+	</div>
+	<div> 
+	  <span class="left"><label>Payment Transactions Total</label></span>
+	  <span class="center"><label>:</label></span>
+	  <span class="right"><label>${SalesBillingDetails.paymentTotal}</label></span>
+	</div>
+	<div> 
+	  <span class="left"><label>Total Bill Amount</label></span>
+	  <span class="center"><label>:</label></span>
+	  <span class="right"><label>${SalesBillingDetails.billAmount}</label></span>
+	</div>		
+</div>
+    <div id="sales_payments_accordion" class="sales_transactions">
+		<h3>
+		   <a href="">
+				<label>Sales Transactions</label>
+		   </a>
+		</h3>	
+		<div>
         <TABLE  width="500px" border="1">
             <thead class="table_header">
                 <TD>Sl.No</TD>
@@ -25,10 +65,14 @@
                 </tr>
             </c:forEach>
          </TABLE>
-         <p>Sales Transactions Total:${SalesBillingDetails.salesTransactionTotal}</p>
-         <p>Return Transactions Total:${SalesBillingDetails.returnTransactionTotal}</p>
-     </div>
-     <div class="payment_details">
+		</div>
+		
+		<h3>
+		   <a href="">
+				<label>Payment Transactions </label>
+		   </a>
+		</h3>  		
+		<div>
         <TABLE  width="500px" border="1">
             <thead class="table_header">
                 <TD>Sl.No</TD>
@@ -47,31 +91,39 @@
                 </tr>
             </c:forEach>
          </TABLE>
-         <p>Payment Transactions Total:${SalesBillingDetails.paymentTotal}</p>
+		</div> 
      </div>
-     <p>Bill Total:${SalesBillingDetails.billAmount}</p>
-      <div>
-    <div>
-    <h3>Quick Payment</h3></br>
-    </div>
+	 
+<div>
+	<div>
+	<h3>Quick Payment</h3></br>
+	</div>
     <div class="section">
          <span class="left"><label>Amount:</label></span>
          <span class="right"><form:input path="SalesBillingDetails.paymentAmount" class="amount"/></span>
-     </div>
+    </div>
     <div class="section">
          <span class="left"><label>Receipt Number:</label></span>
          <span class="right"><form:input path="SalesBillingDetails.receiptNum" class="receiptNum"/></span>
-     </div>
-         <div class="section">
+    </div>
+    <div class="section">
          <span class="left"><label>Mode:</label></span>
          <span class="right"><form:select path="SalesBillingDetails.mode" items="${PaymentMode}"/></span>
-     </div>
-     <div class="section">
+    </div>
+    <div class="section">
          <span class="left"><label>Remarks:</label></span>
          <span class="right"><form:input path="SalesBillingDetails.remarks" class="receiptNum"/></span>
-     </div>
- </div>
- <div class="section">
-    <span class="left"><input type="submit" value="Save Bill" class="generate_bill"/></span>
- </div>
+    </div>
 </div>
+<div class="section">
+    <span class="left"><input type="submit" value="Save Sales Bill" class="generate_bill"/></span>
+</div>
+</div>
+<script>
+   $(function() {
+       $( "#sales_payments_accordion" ).accordion({
+			collapsible: true,
+			active: false
+	   });	   
+   });
+</script>

@@ -20,6 +20,9 @@ public class SalesBillingDetails {
     }
 
     public double getBillAmount() {
+        if (lastBill != null) {
+            return lastBill.getBalanceAmount() + getSalesTransactionTotal() - (getReturnTransactionTotal() + getPaymentTotal());
+        }
         return getSalesTransactionTotal() - (getReturnTransactionTotal() + getPaymentTotal());
     }
 

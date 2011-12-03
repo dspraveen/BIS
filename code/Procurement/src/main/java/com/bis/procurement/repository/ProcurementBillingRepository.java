@@ -24,8 +24,8 @@ public class ProcurementBillingRepository extends BaseRepository<BillingProcurem
 
     public List<BillingProcurement> getProcurementBillList(Date fromDate, Date toDate) {
         return getSession().createCriteria(BillingProcurement.class)
-                .add(Restrictions.ge("date", fromDate))
-                .add(Restrictions.le("date", toDate)).list();
+                .add(Restrictions.ge("startDate", fromDate))
+                .add(Restrictions.le("endDate", toDate)).list();
     }
 
     public BillingProcurement getLastBill(Vendor vendor) {

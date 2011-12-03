@@ -38,7 +38,13 @@
     <definition name="salesBilling/showBill" extends="ajaxSection">
         <put-attribute name="content" value="/views/sales/showGeneratedBill.jsp"/>
     </definition>
-    <definition name="salesBilling/show" extends="ajaxSection">
+    <definition name="salesBilling/show" extends="sales">
         <put-attribute name="main-content" value="/views/sales/showSalesBill.jsp"/>
+    </definition>
+    <definition name="salesBilling/listBills" extends="sales">
+        <put-attribute name="main-content" value="/views/sales/listSalesBills.jsp"/>
+    </definition>
+    <definition name="salesBilling/billsInRange" extends="ajaxSection">
+        <put-attribute name="content" value="/views/sales/listBillsInRange.jsp"/>
     </definition>
 </tiles-definitions>

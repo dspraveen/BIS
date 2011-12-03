@@ -12,7 +12,7 @@ public class DateUtils {
 
     public static Date infinityDate() {
         Calendar instance = Calendar.getInstance();
-        instance.set(Calendar.YEAR,9999);
+        instance.set(Calendar.YEAR,9000);
         instance.set(Calendar.MONTH,12);
         instance.set(Calendar.DATE,31);
         instance.set(Calendar.HOUR_OF_DAY,23);

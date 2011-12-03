@@ -50,7 +50,7 @@
 	</h3>
 	<div>	
 		<TABLE  width="500px" border="1">
-			 <thead class="accordian_table">
+			 <thead class="table_header">
 				 <TD>Sl.No</TD>
 				 <TD>Date</TD>
 				 <TD>TransactionType</TD>
@@ -74,7 +74,7 @@
 	</h3>  
 	<div>	
 		 <TABLE  width="500px" border="1">
-			 <thead class="accordian_table">
+			 <thead class="table_header">
 				 <TD>Sl.No</TD>
 				 <TD>Date</TD>
 				 <TD>Mode</TD>

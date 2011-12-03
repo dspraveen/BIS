@@ -74,7 +74,7 @@ public class SalesBillingController {
         uiModel.asMap().clear();
         Date currentDate = DateUtils.currentDate();
         BillingSales billingSales = salesBillingService.generateSalesBill(salesBillingDetails.getHawker());
-        if (salesBillingDetails.getPaymentAmount() != null) {
+        if (salesBillingDetails.getPaymentAmount() != 0f) {
             PaymentHistorySales paymentHistorySales = new PaymentHistorySales();
             paymentHistorySales.setAmount(salesBillingDetails.getPaymentAmount());
             paymentHistorySales.setDate(currentDate);
@@ -92,7 +92,25 @@ public class SalesBillingController {
     @RequestMapping(value = "/show/{id}", method = RequestMethod.GET)
     public ModelAndView showBill(@PathVariable("id") int billId) {
         BillingSales billingSales = salesBillingService.getSalesBill(billId);
+        billingSales.setStartDate(DateUtils.setTimeToZero(billingSales.getStartDate()));
+        billingSales.setEndDate(DateUtils.setTimeToZero(DateUtils.setTimeToZero(billingSales.getEndDate())));
         return new ModelAndView("salesBilling/show", "BillingSales", billingSales);
+    }
+
+    @RequestMapping(value = "/listBills", method = RequestMethod.GET)
+    public ModelAndView listBills() {
+        return new ModelAndView("salesBilling/listBills");
+    }
+
+    @RequestMapping(value = "/billsInRange", method = RequestMethod.GET)
+    public ModelAndView transactionsBetween(@RequestParam(value = "fromDate", required = true) Date fromDate, @RequestParam(value = "toDate", required = true) Date toDate, @RequestParam(value = "hawkerId", required = false, defaultValue = "-1") int hawkerId) {
+        List<BillingSales> billingSales;
+        if (hawkerId < 1) {
+            billingSales = salesBillingService.getSalesBillList(fromDate, toDate);
+        } else {
+            billingSales = salesBillingService.getSalesBillList(hawkerMasterService.get(hawkerId), fromDate, toDate);
+        }
+        return new ModelAndView("salesBilling/billsInRange", "billingSales", billingSales);
     }
 
     @ModelAttribute("hawkers")

@@ -25,6 +25,10 @@
 		<span class="right"><label><fmt:formatDate pattern="dd-MM-yyyy" value="${BillingProcurement.endDate}" /></span>
     </div>
     <div class="section">
+        <span class="left"><label>Total Bill Amount</label></span>
+        <span class="right"><label>${BillingProcurement.procurementAmount}</label></span>
+    </div>
+    <div class="section">
         <span class="left"><label>Outstanding Amount</label></span>
         <span class="right"><label>${BillingProcurement.balanceAmount}</label></span>
     </div>

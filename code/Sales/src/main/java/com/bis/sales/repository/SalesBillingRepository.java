@@ -25,8 +25,8 @@ public class SalesBillingRepository extends BaseRepository<BillingSales> {
 
     public List<BillingSales> getSalesBillList(Date fromDate, Date toDate) {
         return getSession().createCriteria(BillingSales.class)
-                .add(Restrictions.ge("date", fromDate))
-                .add(Restrictions.le("date", toDate)).list();
+                .add(Restrictions.ge("startDate", fromDate))
+                .add(Restrictions.le("endDate", toDate)).list();
     }
 
     public BillingSales getLastBill(Hawker hawker) {
@@ -40,5 +40,12 @@ public class SalesBillingRepository extends BaseRepository<BillingSales> {
         else{
             return billingSales.get(0);
         }
+    }
+
+    public List<BillingSales> getSalesBillList(Hawker hawker, Date fromDate, Date toDate) {
+        return getSession().createCriteria(BillingSales.class)
+                .add(Restrictions.eq("hawker",hawker))
+                .add(Restrictions.ge("startDate", fromDate))
+                .add(Restrictions.le("endDate", toDate)).list();
     }
 }

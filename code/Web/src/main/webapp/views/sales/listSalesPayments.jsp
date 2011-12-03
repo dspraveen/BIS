@@ -8,6 +8,14 @@
         $('.from_date').datepicker({dateFormat: 'dd-mm-yy' });
         $('.to_date').datepicker({dateFormat: 'dd-mm-yy' });
         $('.fetch_payments').bind("click",function(){
+		    if(!($('.from_date').val())){
+				alert("From-Date Not Provided");
+				return false;
+			}
+		    if(!($('.to_date').val())){
+				alert("To-Date Not Provided");
+				return false;
+			}
             var paymentInRangeUrl = "<%=request.getContextPath()%>/salesPayment/transactionsInRange?fromDate="+$('.from_date').val()+"&toDate="+$('.to_date').val()+"&hawkerId="+$('.hawker_name').val();
             $.ajax({
                 url : paymentInRangeUrl,

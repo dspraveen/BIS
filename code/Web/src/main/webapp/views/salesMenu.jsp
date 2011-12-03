@@ -15,7 +15,7 @@
       <a href="<%=request.getContextPath()%>/salesBilling/billSelectHawker">Generate Bill</a>
     </li>
     <li>
-      <a href="#">Billing Details</a>
+      <a href="<%=request.getContextPath()%>/salesBilling/listBills">Billing Details</a>
     </li>
     <li>
       <a href="<%=request.getContextPath()%>/salesPayment/createForm">Create Payment</a>

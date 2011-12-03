@@ -5,7 +5,7 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 
 <div class="sales_transactions" id="sales_payments_accordion">
-	<TABLE  width="350px" border="1">
+	<TABLE  width="900px" border="1">
 		<thead class="table_header">
 			<TD>Hawker</TD>
 			<TD>Date</TD>

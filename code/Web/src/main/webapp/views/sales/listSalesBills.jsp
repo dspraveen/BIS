@@ -16,19 +16,19 @@
 				alert("To-Date Not Provided");
 				return false;
 			}			
-            var BillsInRangeUrl = "<%=request.getContextPath()%>/procurementBilling/billsInRange?fromDate="+$('.from_date').val()+"&toDate="+$('.to_date').val()+"&vendorId="+$('.vendor_name').val();
+            var BillsInRangeUrl = "<%=request.getContextPath()%>/salesBilling/billsInRange?fromDate="+$('.from_date').val()+"&toDate="+$('.to_date').val()+"&hawkerId="+$('.hawker_name').val();
             $.ajax({
                 url : BillsInRangeUrl,
                 processData : true,
                 success : function(data) {
-                    $(".purchase_Bills").html(data);
+                    $(".sales_Bills").html(data);
                 }
             })
         });
     });
 </script>
 <div>
-    <div class="content_header">Procurement Bill Search Form</div>
+    <div class="content_header">Sales Bill Search Form</div>
     <div class="section">
         <span class="left"><label>From Date:</label></span
         <span class="right"><input type="text" class="from_date"/></span>
@@ -40,17 +40,17 @@
         <div class="section">
         <span class="left"><label>Select Vendor:</label></span
         <span class="right">
-            <select class="vendor_name">
+            <select class="hawker_name">
 			    <option value="-1">--Please Select</option>
-			    <c:forEach var="vendor" items="${vendors}">
-				    <option value="${vendor.vendorId}">${vendor.vendorName}</option>
+			    <c:forEach var="hawker" items="${hawkers}">
+				    <option value="${hawker.hawkerId}">${hawker.hawkerName}</option>
 				</c:forEach>
 			</select>
         </span>
     </div>
     <div class="section">
-        <span class="left"><input type="button" value="Fetch Purchase Bills" class="fetch_Bills"/></span>
+        <span class="left"><input type="button" value="Fetch Sales Bills" class="fetch_Bills"/></span>
     </div></br></br>
-    <div class="purchase_Bills">
+    <div class="sales_Bills">
     </div>
 </div>

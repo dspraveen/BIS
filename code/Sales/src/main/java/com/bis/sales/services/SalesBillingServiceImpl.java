@@ -107,4 +107,9 @@ public class SalesBillingServiceImpl implements SalesBillingService {
         }
         return nextBillDate;
     }
+
+    @Override
+    public List<BillingSales> getSalesBillList(Hawker hawker, Date fromDate, Date toDate) {
+         return salesBillingRepository.getSalesBillList(hawker, fromDate, toDate);
+    }
 }

@@ -15,4 +15,5 @@ public interface SalesBillingService {
     BillingSales generateSalesBill(Hawker hawker);
     BillingSales getLastBill(Hawker hawker);
     Date getNextBillDate(Hawker hawker);
+    List<BillingSales> getSalesBillList(Hawker hawker, Date fromDate, Date toDate);
 }

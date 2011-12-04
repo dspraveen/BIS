@@ -19,13 +19,15 @@
                 <TD>Date Of Publishing</TD>
                 <TD>Price Per Item</TD>
                 <TD>Qty</TD>
+                <TD>Amount</TD>
              </thead>
                <c:forEach var="transactionDetail" items="${procurementTransaction.transactionDetails}">
                    <tr>
                      <td>${transactionDetail.item.itemName}</td>
                      <td><fmt:formatDate pattern="dd-MM-yyyy" value="${transactionDetail.dateOfPublishing}"/></td>
-                     <td>${transactionDetail.amount}</td>
+                     <td>${transactionDetail.netPrice}</td>
                      <td>${transactionDetail.quantity}</td>
+                     <td>${transactionDetail.amount}</td>
                    </tr>
                </c:forEach>
            </TABLE>

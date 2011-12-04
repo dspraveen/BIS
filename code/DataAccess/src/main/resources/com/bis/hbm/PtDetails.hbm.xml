@@ -17,8 +17,8 @@
         <property name="quantity" type="java.lang.Integer">
             <column name="Quantity" />
         </property>
-        <property name="amount" type="java.lang.Float">
-            <column name="Amount" precision="12" />
+        <property name="netPrice" type="java.lang.Float">
+            <column name="Net_Price" precision="12" />
         </property>
         <property name="mrp" type="java.lang.Float">
             <column name="Mrp" precision="12" />

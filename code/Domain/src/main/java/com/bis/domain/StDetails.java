@@ -1,6 +1,8 @@
 package com.bis.domain;
 
 
+import com.bis.common.MathUtils;
+
 import java.util.Date;
 
 public class StDetails implements java.io.Serializable {
@@ -9,8 +11,8 @@ public class StDetails implements java.io.Serializable {
     private int transactionId;
     private Date dateOfPublishing;
     private Integer quantity;
-    private Float amount;
     private Float mrp;
+    private Float netPrice;
     private Item item = new Item();
 
     public StDetails() {
@@ -49,11 +51,8 @@ public class StDetails implements java.io.Serializable {
     }
 
     public Float getAmount() {
-        return this.amount;
-    }
-
-    public void setAmount(Float amount) {
-        this.amount = amount;
+        if (quantity == null || netPrice == null) return null;
+        return (float) MathUtils.roundTwoDecimals(quantity * netPrice);
     }
 
     public Float getMrp() {
@@ -64,16 +63,19 @@ public class StDetails implements java.io.Serializable {
         this.mrp = mrp;
     }
 
+    public Float getNetPrice() {
+        return netPrice;
+    }
+
+    public void setNetPrice(Float netPrice) {
+        this.netPrice = netPrice;
+    }
+
     public Item getItem() {
         return item;
     }
 
     public void setItem(Item item) {
         this.item = item;
-    }
-
-    public Float getPricePerItem() {
-        if (quantity == null || amount == null) return null;
-        return quantity != 0 ? amount / quantity : 0;
     }
 }

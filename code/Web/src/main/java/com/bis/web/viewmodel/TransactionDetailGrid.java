@@ -156,7 +156,7 @@ public class TransactionDetailGrid {
             ptDetails.setDetailsId(row.getDetailsId());
             ptDetails.setTransactionId(row.getTransactionId());
             ptDetails.setDateOfPublishing(row.getDateOfPublishing());
-            ptDetails.setAmount(row.getAmount());
+            ptDetails.setNetPrice(row.getPricePerItem());
             ptDetails.setMrp(row.getMrp());
             ptDetails.setQuantity(row.getQuantity());
             ptDetails.getItem().setItemCode(row.getItemCode());
@@ -177,7 +177,7 @@ public class TransactionDetailGrid {
             stDetails.setDetailsId(row.getDetailsId());
             stDetails.setTransactionId(row.getTransactionId());
             stDetails.setDateOfPublishing(row.getDateOfPublishing());
-            stDetails.setAmount(row.getAmount());
+            stDetails.setNetPrice(row.getPricePerItem());
             stDetails.setMrp(row.getMrp());
             stDetails.setQuantity(row.getQuantity());
             stDetails.getItem().setItemCode(row.getItemCode());
@@ -196,7 +196,7 @@ public class TransactionDetailGrid {
         row.setQuantity(ptDetails.getQuantity());
         row.setItemCode(ptDetails.getItem().getItemCode());
         row.setMrp(ptDetails.getMrp());
-        row.setPricePerItem(ptDetails.getPricePerItem());
+        row.setPricePerItem(ptDetails.getNetPrice());
         row.setDiscount((row.getMrp() - row.getPricePerItem()) * 100 / row.getMrp());
         transactionDetails.add(row);
     }
@@ -210,7 +210,7 @@ public class TransactionDetailGrid {
         row.setQuantity(stDetails.getQuantity());
         row.setItemCode(stDetails.getItem().getItemCode());
         row.setMrp(stDetails.getMrp());
-        row.setPricePerItem(stDetails.getPricePerItem());
+        row.setPricePerItem(stDetails.getNetPrice());
         row.setDiscount((row.getMrp() - row.getPricePerItem()) * 100 / row.getMrp());
         transactionDetails.add(row);
     }

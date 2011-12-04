@@ -8,10 +8,10 @@
       <a href="<%=request.getContextPath()%>/item/createForm">Master</a>
     </li>
     <li>
-      <a href="<%=request.getContextPath()%>/procurement/createForm">Procurement</a>
+      <a href="<%=request.getContextPath()%>/procurement/createForm/purchase">Procurement</a>
     </li>
     <li>
-      <a href="<%=request.getContextPath()%>/sales/createForm">Sales</a>
+      <a href="<%=request.getContextPath()%>/sales/createForm/sales">Sales</a>
     </li>
     <li>
       <a href="<%=request.getContextPath()%>/inventory/show">Inventory</a>

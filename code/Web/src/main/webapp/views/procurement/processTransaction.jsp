@@ -18,7 +18,9 @@
                     <span class="left"><label>Select Vendor:</label></span
                     <span class="right">
                         <form:select path="procurementTransaction.targetId" class="vendor_name">
-                            <form:option value="-1" label="--Please Select"/>
+                            <c:if test="${!(procurementTransaction.transactionId>0)}">
+                                <form:option value="-1" label="--Please Select"/>
+                            </c:if>
                             <form:options items="${vendors}" itemLabel="vendorName" itemValue="vendorId" />
                         </form:select>
                     </span>
@@ -29,7 +31,10 @@
                 </div>
                 <div class="section">
                     <span class="left"><label>Transaction Type:</label></span
-                    <span class="right"><form:select path="procurementTransaction.type" items="${procurementTransactionType}" /></span>
+                    <span class="right">
+                        <form:input path="procurementTransaction.procurementTransactionTypeDescription" disabled='true'/>
+                        <form:hidden path="procurementTransaction.type"/>
+                    </span>
                 </div>
                 <div>
                      <div class="transaction_details"></div>

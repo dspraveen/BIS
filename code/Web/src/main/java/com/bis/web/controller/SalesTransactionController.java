@@ -59,12 +59,17 @@ public class SalesTransactionController extends BaseController {
         return new ModelAndView("sales/show", "salesTransaction", salesTransaction);
     }
 
-    @RequestMapping(value = "/createForm", method = RequestMethod.GET)
-    public ModelAndView createForm() {
+    @RequestMapping(value = "/createForm/{type}", method = RequestMethod.GET)
+    public ModelAndView createForm(@PathVariable("type") String transactionType) {
         TransactionDetailGrid salesTransaction = new TransactionDetailGrid();
-        salesTransaction.setType('S');
+        if ("returns".equalsIgnoreCase(transactionType))
+            salesTransaction.setType(SalesTransactionType.RETURNS.getCode());
+        else
+            salesTransaction.setType(SalesTransactionType.SALES.getCode());
         salesTransaction.setTransactionDate(DateUtils.currentDate());
-        return new ModelAndView("sales/processTransaction", "salesTransaction", salesTransaction);
+        ModelAndView modelAndView = new ModelAndView("sales/processTransaction", "salesTransaction", salesTransaction);
+        modelAndView.addObject("hawkers",hawkerMasterService.getAll());
+        return modelAndView;
     }
 
     @Transactional
@@ -90,11 +95,13 @@ public class SalesTransactionController extends BaseController {
         SalesTransaction salesTransaction = salesTransactionService.getSalesTransaction(transactionId);
         TransactionDetailGrid transactionDetailGrid = new TransactionDetailGrid(salesTransaction);
         BillingSales lastBill = salesBillingService.getLastBill(salesTransaction.getHawker());
-        if (lastBill!=null &&  DateUtils.isGreaterOrEqual(lastBill.getEndDate(), salesTransaction.getDate())) {
+        if (lastBill != null && DateUtils.isGreaterOrEqual(lastBill.getEndDate(), salesTransaction.getDate())) {
             transactionDetailGrid.setEditable(false);
             transactionDetailGrid.getErrors().add("This transaction has already been billed, hence cannot be edited");
         }
-        return new ModelAndView("sales/processTransaction", "salesTransaction", transactionDetailGrid);
+        ModelAndView modelAndView = new ModelAndView("sales/processTransaction", "salesTransaction", transactionDetailGrid);
+        modelAndView.addObject("hawkers",Arrays.asList(salesTransaction.getHawker()));
+        return modelAndView;
     }
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -184,17 +191,6 @@ public class SalesTransactionController extends BaseController {
         return json(validateGrid(transactionDetailGrid), response);
     }
 
-
-    @ModelAttribute("items")
-    public List<Item> items() {
-        return itemMasterService.getAll();
-    }
-
-    @ModelAttribute("hawkers")
-    public List<Hawker> vendors() {
-        return hawkerMasterService.getAll();
-    }
-
     @ModelAttribute("salesTransactionType")
     public Map<Character, String> salesTransactionType() {
         Map<Character, String> salesTransactionTypes = new HashMap<Character, String>();
@@ -209,14 +205,20 @@ public class SalesTransactionController extends BaseController {
             if (transactionDetailRow.getItemCode() != null && transactionDetailRow.getItemCode() > 0)
                 transactionDetailRow.setIssueDates(salesTransactionHandler.getStockDetails(transactionDetailRow.getItemCode()));
         }
-        return new ModelAndView("sales/editSalesTransactionDetails", "salesTransactionGrid", salesTransactionGrid);
+        ModelAndView modelAndView = new ModelAndView("sales/editSalesTransactionDetails", "salesTransactionGrid", salesTransactionGrid);
+        if (SalesTransactionType.SALES.getCode() == salesTransactionGrid.getType()) {
+            modelAndView.addObject("items", itemMasterService.getAll());
+        } else if (SalesTransactionType.RETURNS.getCode() == salesTransactionGrid.getType()) {
+            modelAndView.addObject("items", itemMasterService.getAllReturnableItems());
+        }
+        return modelAndView;
     }
 
     private List<String> validateGrid(TransactionDetailGrid grid) {
         List<String> errors = new ArrayList<String>();
         Hawker hawker = hawkerMasterService.get(grid.getTargetId());
         BillingSales lastBill = salesBillingService.getLastBill(hawker);
-        if (lastBill!=null &&  DateUtils.isGreaterOrEqual(lastBill.getEndDate(), grid.getTransactionDate())) {
+        if (lastBill != null && DateUtils.isGreaterOrEqual(lastBill.getEndDate(), DateUtils.addTimeToDate(grid.getTransactionDate()))) {
             errors.add("Invalid transaction date, Bill has already been generated.");
         }
         return errors;

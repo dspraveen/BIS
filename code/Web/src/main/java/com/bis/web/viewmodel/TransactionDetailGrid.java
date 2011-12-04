@@ -1,10 +1,7 @@
 package com.bis.web.viewmodel;
 
 import com.bis.common.MathUtils;
-import com.bis.domain.ProcurementTransaction;
-import com.bis.domain.PtDetails;
-import com.bis.domain.SalesTransaction;
-import com.bis.domain.StDetails;
+import com.bis.domain.*;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -73,6 +70,14 @@ public class TransactionDetailGrid {
 
     public char getType() {
         return type;
+    }
+
+    public String getProcurementTransactionTypeDescription() {
+        return ProcurementTransactionType.getNameByCode(type);
+    }
+
+    public String getSalesTransactionTypeDescription() {
+        return SalesTransactionType.getNameByCode(type);
     }
 
     public void setType(char type) {

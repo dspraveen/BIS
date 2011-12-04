@@ -6,7 +6,10 @@
   <h3>Procurement Menu</h3>
   <ul class="sidemenu">
     <li>
-      <a href="<%=request.getContextPath()%>/procurement/createForm">New Transaction</a>
+      <a href="<%=request.getContextPath()%>/procurement/createForm/purchase">New Purchase Transaction</a>
+    </li>
+    <li>
+      <a href="<%=request.getContextPath()%>/procurement/createForm/returns">New Returns Transaction</a>
     </li>
     <li>
       <a href="<%=request.getContextPath()%>/procurement/list">Transaction Details</a>

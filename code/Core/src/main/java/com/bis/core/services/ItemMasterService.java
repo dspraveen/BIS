@@ -11,4 +11,5 @@ public interface ItemMasterService {
     void update(Item item);
     Item get(int itemCode);
     List<Item> getAll();
+    List<Item> getAllReturnableItems();
 }

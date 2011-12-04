@@ -2,6 +2,9 @@ package com.bis.core.services;
 
 import com.bis.core.repository.ItemRepository;
 import com.bis.domain.Item;
+import com.bis.domain.ItemReturnType;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,5 +38,16 @@ public class ItemMasterServiceImpl implements ItemMasterService {
     @Override
     public List<Item> getAll() {
         return itemRepository.getAll();
+    }
+
+    @Override
+    public List<Item> getAllReturnableItems() {
+        return (List<Item>) CollectionUtils.select(getAll(), new Predicate() {
+            @Override
+            public boolean evaluate(Object object) {
+                Item item = (Item) object;
+                return ItemReturnType.YES.getCode() == item.getReturnable();
+            }
+        });
     }
 }

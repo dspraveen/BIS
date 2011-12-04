@@ -17,7 +17,9 @@
                     <span class="left"><label>Select Hawker:</label></span
                     <span class="right">
                         <form:select path="salesTransaction.targetId" class="hawker_name">
-                            <form:option value="-1" label="--Please Select"/>
+                            <c:if test="${!(salesTransaction.transactionId>0)}">
+                                <form:option value="-1" label="--Please Select"/>
+                            </c:if>
                             <form:options items="${hawkers}" itemLabel="hawkerName" itemValue="hawkerId" />
                         </form:select>
                     </span>
@@ -28,7 +30,10 @@
                 </div>
                 <div class="section">
                     <span class="left"><label>Transaction Type:</label></span
-                    <span class="right"><form:select path="salesTransaction.type" items="${salesTransactionType}" /></span>
+                    <span class="right">
+                        <form:input path="salesTransaction.salesTransactionTypeDescription" disabled='true'/>
+                        <form:hidden path="salesTransaction.type"/>
+                    </span>
                 </div>
                 <div>
                      <div class="transaction_details"></div>

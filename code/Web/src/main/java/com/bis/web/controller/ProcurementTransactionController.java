@@ -57,12 +57,17 @@ public class ProcurementTransactionController extends BaseController {
         return new ModelAndView("procurement/show", "procurementTransaction", procurementTransaction);
     }
 
-    @RequestMapping(value = "/createForm", method = RequestMethod.GET)
-    public ModelAndView createForm() {
+    @RequestMapping(value = "/createForm/{type}", method = RequestMethod.GET)
+    public ModelAndView createForm(@PathVariable("type") String transactionType) {
         TransactionDetailGrid procurementTransaction = new TransactionDetailGrid();
-        procurementTransaction.setType('P');
+        if ("returns".equalsIgnoreCase(transactionType))
+            procurementTransaction.setType(ProcurementTransactionType.RETURNS.getCode());
+        else
+            procurementTransaction.setType(ProcurementTransactionType.PURCHASE.getCode());
         procurementTransaction.setTransactionDate(DateUtils.currentDate());
-        return new ModelAndView("procurement/processTransaction", "procurementTransaction", procurementTransaction);
+        ModelAndView modelAndView = new ModelAndView("procurement/processTransaction", "procurementTransaction", procurementTransaction);
+        modelAndView.addObject("vendors", vendorMasterService.getAll());
+        return modelAndView;
     }
 
     @Transactional
@@ -89,11 +94,13 @@ public class ProcurementTransactionController extends BaseController {
         ProcurementTransaction procurementTransaction = procurementTransactionService.getProcurementTransaction(transactionId);
         TransactionDetailGrid transactionDetailGrid = new TransactionDetailGrid(procurementTransaction);
         BillingProcurement lastBill = procurementBillingService.getLastBill(procurementTransaction.getVendor());
-        if (lastBill !=null && DateUtils.isGreaterOrEqual(lastBill.getEndDate(), procurementTransaction.getDate())) {
+        if (lastBill != null && DateUtils.isGreaterOrEqual(lastBill.getEndDate(), procurementTransaction.getDate())) {
             transactionDetailGrid.setEditable(false);
             transactionDetailGrid.getErrors().add("This transaction has already been billed, hence cannot be edited");
         }
-        return new ModelAndView("procurement/processTransaction", "procurementTransaction", transactionDetailGrid);
+        ModelAndView modelAndView = new ModelAndView("procurement/processTransaction", "procurementTransaction", transactionDetailGrid);
+        modelAndView.addObject("vendors", Arrays.asList(procurementTransaction.getVendor()));
+        return modelAndView;
     }
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -193,29 +200,25 @@ public class ProcurementTransactionController extends BaseController {
         return procurementTransactionTypes;
     }
 
-    @ModelAttribute("items")
-    public List<Item> items() {
-        return itemMasterService.getAll();
-    }
-
-    @ModelAttribute("vendors")
-    public List<Vendor> vendors() {
-        return vendorMasterService.getAll();
-    }
-
     private ModelAndView modelAndViewForProcurementTransactionDetails(TransactionDetailGrid procurementTransactionGrid) {
         for (TransactionDetailRow transactionDetailRow : procurementTransactionGrid.getTransactionDetails()) {
             if (transactionDetailRow.getItemCode() != null && transactionDetailRow.getItemCode() > 0)
                 transactionDetailRow.setIssueDates(procurementTransactionHandler.getStockDetails(itemMasterService.get(transactionDetailRow.getItemCode())));
         }
-        return new ModelAndView("procurement/editProcurementTransactionDetails", "procurementTransactionGrid", procurementTransactionGrid);
+        ModelAndView modelAndView = new ModelAndView("procurement/editProcurementTransactionDetails", "procurementTransactionGrid", procurementTransactionGrid);
+        if (ProcurementTransactionType.PURCHASE.getCode() == procurementTransactionGrid.getType()) {
+            modelAndView.addObject("items", itemMasterService.getAll());
+        } else if (ProcurementTransactionType.RETURNS.getCode() == procurementTransactionGrid.getType()) {
+            modelAndView.addObject("items", itemMasterService.getAllReturnableItems());
+        }
+        return modelAndView;
     }
 
     private List<String> validateGrid(TransactionDetailGrid grid) {
         List<String> errors = new ArrayList<String>();
         Vendor vendor = vendorMasterService.get(grid.getTargetId());
         BillingProcurement lastBill = procurementBillingService.getLastBill(vendor);
-        if (lastBill!=null && DateUtils.isGreaterOrEqual(lastBill.getEndDate(), grid.getTransactionDate())) {
+        if (lastBill != null && DateUtils.isGreaterOrEqual(lastBill.getEndDate(), DateUtils.addTimeToDate(grid.getTransactionDate()))) {
             errors.add("Invalid transaction date, Bill has already been generated.");
         }
         return errors;

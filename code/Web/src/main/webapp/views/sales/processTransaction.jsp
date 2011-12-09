@@ -5,7 +5,7 @@
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/transactionDetails.js"></script>
 <c:choose>
     <c:when test="${salesTransaction.editable}">
-        <form method="POST" action="<%=request.getContextPath()%>/sales/addSalesTransaction"  onsubmit="return validateForm();">
+        <form class="details_table" method="POST" action="<%=request.getContextPath()%>/sales/addSalesTransaction"  onsubmit="return validateForm();">
             <div class="content_header">Sales Transaction Process Form</div>
             <div class="errors">
             </div>
@@ -41,7 +41,7 @@
                      <INPUT type="button" value="Delete Row" class="remove_item"/>
                  </div>
                 <div class="section">
-                    <span class="center"><input type="submit" value="Submit" class="submit"/> <input type="reset" value="Clear"/></span>
+                    <span class="center"><input class="buttons" type="submit" value="Submit" class="submit"/> <input class="buttons" type="reset" value="Clear"/></span>
                 </div>
             </div>
         </form>

@@ -21,7 +21,7 @@
         return true;
     }
 </script>
-<form commandName="vendor" method="POST" action="<%=request.getContextPath()%>/vendor/create"  onsubmit="return validateForm();">
+<form class="vendor_form" commandName="vendor" method="POST" action="<%=request.getContextPath()%>/vendor/create"  onsubmit="return validateForm();">
     <div>
         <div class="content_header">Vendor Creation Form</div>
         <div class="section">
@@ -50,7 +50,7 @@
         </div>
 
         <div class="section">
-            <span class="center"><input type="submit" value="Submit"/> <input type="reset" value="Clear"/></span>
+            <span class="center"><input class="buttons" type="submit" value="Submit"/> <input class="buttons" type="reset" value="Clear"/></span>
         </div>
     </div>
 </form>

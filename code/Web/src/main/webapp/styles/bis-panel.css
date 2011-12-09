@@ -17,9 +17,7 @@
 .item_select{
 }
 
-.item_name{
-    width:200px;
-}
+
 .date_of_publish{
     width:150px;
 }
@@ -29,14 +27,19 @@
 .discount{
     width:70px;
 }
+
+.grand_total{
+	width:80px;
+}
+	
 .price_per_item{
     width:70px;
 }
-.qty{
-    width:70px;
+.quantity{
+    width:50px;
 }
-.total{
-    width:70px;
+.amount{
+    width:80px;
 }
 #procurement_transactions_accordion,#sales_transactions_accordion{
     margin-top:80px
@@ -58,24 +61,83 @@
     width: 35px;
 }
 .table_header{
-	background-color: #638EA8;
+	background-color: #D11919;
 	color:white;
 }
 .content_header {
     display: block;
-    font-size: 2.7em;
+    font-size: 2.0em;
     margin-top: 5px;
-    padding-bottom: 25px;
+    padding-bottom: 5px;
     text-align: center;
     width: 100%;
 }
+
 .transaction_details_count{
     text-align:center;
 }
+
+.transaction_details{
+	align: center;
+}
+
+.transaction_detail
+{
+margin:10px;
+padding: 0;
+border: 2px solid #f2f2f2;
+background-color: #F3F3F3;
+min-height: 330px
+}
+
+.textarea{
+width:207px;
+height:50px;
+}
+
 .date_of_publish_select{
     margin-top:5px;
 }
 .date_of_publish{
     margin-top:5px;
     margin-bottom:5px;
+}
+
+.buttons{
+font: bold 1.2em/1.5em Verdana, 'Bookman Old Style', Helvetica; 
+float:left;
+display:block;
+background: url("../images/right_of_tab.gif") no-repeat right top;
+padding:6px 15px 3px 8px;
+color: #FFF;
+}
+
+.buttons:hover{
+color:#FFF;
+background-position:0% -42px;
+}
+
+table
+{
+border-collapse:collapse;
+font-size:11px;
+}
+
+table, td, th
+{
+border:2px solid gray;
+}
+
+.item_name{
+padding: 2px;
+border:1px solid #eee;
+font: normal 1em Verdana, sans-serif;
+}
+
+#datatable{
+	float:left;
+	margin-left:2%;
+	margin-right:13%;
+	margin-top:10px;
+	margin-bottom:10px;
 }

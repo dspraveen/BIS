@@ -6,7 +6,8 @@
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/transactionDetails.js"></script>
 <c:choose>
     <c:when test="${procurementTransaction.editable}">
-        <form method="POST" action="<%=request.getContextPath()%>/procurement/addProcurementTransaction">
+		<div class="transaction_detail">	
+        <form class="details_table" method="POST" action="<%=request.getContextPath()%>/procurement/addProcurementTransaction">
             <div class="content_header">Procurement Transaction Process Form</div>
             <div class="errors">
             </div>
@@ -42,9 +43,10 @@
                      <INPUT type="button" value="Delete Row" class="remove_item"/>
                  </div>
                 <div class="section">
-                    <span class="center"><input type="submit" value="Submit" class="submit"/> <input type="reset" value="Clear"/></span>
+                    <span class="center"><input class="buttons" type="submit" value="Submit" class="submit"/> <input class="buttons" type="reset" value="Clear"/></span>
                 </div>
             </div>
+			</div>
         </form>
         <script type="text/javascript">
             $(document).ready(function(){

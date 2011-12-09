@@ -21,7 +21,7 @@
         return true;
     }
 </script>
-<form method="POST" action="<%=request.getContextPath()%>/hawker/create"  onsubmit="return validateForm();">
+<form class="hawker_form" method="POST" action="<%=request.getContextPath()%>/hawker/create"  onsubmit="return validateForm();">
     <div class="content_header">Hawker Creation Form</div>
     <div>
 
@@ -51,7 +51,7 @@
         </div>
 
         <div class="section">
-            <span class="center"><input type="submit" value="Submit"/> <input type="reset" value="Clear"/></span>
+            <span class="center"><input class="buttons" type="submit" value="Submit"/> <input class="buttons" type="reset" value="Clear"/></span>
         </div>
     </div>
 </form>

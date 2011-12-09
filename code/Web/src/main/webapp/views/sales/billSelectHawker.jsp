@@ -32,6 +32,7 @@
 </script>
 
 <form  method="POST" action="<%=request.getContextPath()%>/salesBilling/saveSalesBill" onsubmit="return validateForm();">
+<div class="content_header">Generate Sales Bill Form</div>
     <div>
         <div class="section">
             <span class="left"><label>Select Hawker:</label></span>

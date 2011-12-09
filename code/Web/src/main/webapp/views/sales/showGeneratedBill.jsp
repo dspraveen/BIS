@@ -5,11 +5,11 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 
 <div>
-<h2>Bill Details</h2></br>
+<h3>Bill Details</h3>
 </div>
 <div>
 <div>
-    <div>
+    <div class="section">
 		<span class="left"><label>Previous Bill Oustanding Amount</label>	</span>
 		<span class="center"><label>:</label></span>
           <c:choose>
@@ -21,33 +21,81 @@
             </c:otherwise>
           </c:choose>
 	</div>
-	<div>
+	<div class="section">
 		<span class="left"><label>Sales Transactions Total</label></span>
 		<span class="center"><label>:</label></span>
 		<span class="right"><label>${SalesBillingDetails.salesTransactionTotal}</label></span>
 	</div>
-	<div>	
+	<div class="section">
 		<span class="left"><label>Return Transactions Total</label></span>
 		<span class="center"><label>:</label></span>
 		<span class="right"><label>${SalesBillingDetails.returnTransactionTotal}</label></span>
 	</div>
-	<div> 
+	<div class="section">
 	  <span class="left"><label>Payment Transactions Total</label></span>
 	  <span class="center"><label>:</label></span>
 	  <span class="right"><label>${SalesBillingDetails.paymentTotal}</label></span>
 	</div>
-	<div> 
+	<div class="section">
 	  <span class="left"><label>Total Bill Amount</label></span>
 	  <span class="center"><label>:</label></span>
 	  <span class="right"><label>${SalesBillingDetails.billAmount}</label></span>
-	</div>		
+	</div>
 </div>
+</br>
+<div style="border:1px solid black; background:#FFFF99">
+<TABLE  width = "100%" >
+    <tr>
+		<td><h4>Quick Payment</h4></td>
+		<td/>
+	</tr>
+	<tr>
+	<td>
+    <div class="section">
+         <span class="left"><label>Amount:</label></span>
+         <span class="right"><form:input path="SalesBillingDetails.paymentAmount" class="amount"/></span>
+    </div>
+	</td>
+	<td>
+    <div class="section">
+         <span class="left"><label>Receipt Number:</label></span>
+         <span class="right"><form:input path="SalesBillingDetails.receiptNum" class="receiptNum"/></span>
+    </div>
+	</td>
+	</tr>
+	<tr>
+	<td>
+    <div class="section">
+         <span class="left"><label>Mode:</label></span>
+         <span class="right"><form:select path="SalesBillingDetails.mode" items="${PaymentMode}"/></span>
+    </div>
+	</td>
+	<td>
+    <div class="section">
+         <span class="left"><label>Remarks:</label></span>
+         <span class="right"><form:textarea path="SalesBillingDetails.remarks" class="textarea"/></span>
+    </div>
+	</td>
+	</tr>
+	</TABLE>
+	<br/>
+</div>
+<div class="section">
+		<span class="left"><input type="submit" value="Save Sales Bill" class="generate_bill"/></span>
+</div>
+<br/>
+<br/>
+
+<div>
+<h3>Sales and Payment Details</h3>
+</div>
+
     <div id="sales_payments_accordion" class="sales_transactions">
 		<h3>
 		   <a href="">
 				<label>Sales Transactions</label>
 		   </a>
-		</h3>	
+		</h3>
 		<div>
         <TABLE  width="500px" border="1">
             <thead class="table_header">
@@ -66,12 +114,12 @@
             </c:forEach>
          </TABLE>
 		</div>
-		
+
 		<h3>
 		   <a href="">
 				<label>Payment Transactions </label>
 		   </a>
-		</h3>  		
+		</h3>
 		<div>
         <TABLE  width="500px" border="1">
             <thead class="table_header">
@@ -91,39 +139,15 @@
                 </tr>
             </c:forEach>
          </TABLE>
-		</div> 
+		</div>
      </div>
-	 
-<div>
-	<div>
-	<h3>Quick Payment</h3></br>
-	</div>
-    <div class="section">
-         <span class="left"><label>Amount:</label></span>
-         <span class="right"><form:input path="SalesBillingDetails.paymentAmount" class="amount"/></span>
-    </div>
-    <div class="section">
-         <span class="left"><label>Receipt Number:</label></span>
-         <span class="right"><form:input path="SalesBillingDetails.receiptNum" class="receiptNum"/></span>
-    </div>
-    <div class="section">
-         <span class="left"><label>Mode:</label></span>
-         <span class="right"><form:select path="SalesBillingDetails.mode" items="${PaymentMode}"/></span>
-    </div>
-    <div class="section">
-         <span class="left"><label>Remarks:</label></span>
-         <span class="right"><form:input path="SalesBillingDetails.remarks" class="receiptNum"/></span>
-    </div>
-</div>
-<div class="section">
-    <span class="left"><input type="submit" value="Save Sales Bill" class="generate_bill"/></span>
-</div>
+
 </div>
 <script>
    $(function() {
        $( "#sales_payments_accordion" ).accordion({
 			collapsible: true,
 			active: false
-	   });	   
+	   });
    });
 </script>

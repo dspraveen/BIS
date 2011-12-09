@@ -18,10 +18,12 @@
             <tiles:insertAttribute name="header"/>
             <tiles:insertAttribute name="navigation"/>
             <div id="content-wrap">
-                <div id="sidebar">
-                    <tiles:insertAttribute name="context-menu"/>
-                    <tiles:insertAttribute name="quick-links"/>
-                </div>
+				<div id="leftb">
+					<div id="sidemenu">
+						<tiles:insertAttribute name="context-menu"/>
+						<tiles:insertAttribute name="quick-links"/>
+					</div>
+				</div>	
                 <div id="main">
                     <tiles:insertAttribute name="main-content"/>
                 </div>

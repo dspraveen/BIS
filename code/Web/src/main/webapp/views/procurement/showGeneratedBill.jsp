@@ -4,12 +4,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 
-<div class="section"> 
+<div class="section">
 <h2>Bill Details</h2>
 </div>
 <div>
 <div class="section">
-    <div>
+    <div class="section">
 		<span class="left"><label>Previous Bill Oustanding Amount</label>	</span>
 		<span class="center"><label>:</label></span>
           <c:choose>
@@ -21,34 +21,83 @@
             </c:otherwise>
           </c:choose>
 	</div>
-	<div>
+	<div class="section">
 		<span class="left"><label>Purchase Transactions Total</label></span>
 		<span class="center"><label>:</label></span>
 		<span class="right"><label>${ProcurementBillingDetails.purchaseTransactionTotal}</label></span>
 	</div>
-	<div>	
+	<div class="section">
 		<span class="left"><label>Return Transactions Total</label></span>
 		<span class="center"><label>:</label></span>
 		<span class="right"><label>${ProcurementBillingDetails.returnTransactionTotal}</label></span>
 	</div>
-	<div> 
+	<div class="section">
 	  <span class="left"><label>Payment Transactions Total</label></span>
 	  <span class="center"><label>:</label></span>
 	  <span class="right"><label>${ProcurementBillingDetails.paymentTotal}</label></span>
 	</div>
-	<div> 
+	<div class="section">
 	  <span class="left"><label>Total Bill Amount</label></span>
 	  <span class="center"><label>:</label></span>
 	  <span class="right"><label>${ProcurementBillingDetails.billAmount}</label></span>
-	</div>	
+	</div>
 </div>
+
+<br/>
+
+ <div style="border:1px solid black; background:#FFFF99">
+<TABLE  width = "100%" >
+    <tr>
+		<td><h4>Quick Payment</h4></td>
+		<td/>
+	</tr>
+	<tr>
+	<td>
+    <div class="section">
+         <span class="left"><label>Amount:</label></span>
+         <span class="right"><form:input path="ProcurementBillingDetails.paymentAmount" class="amount"/></span>
+    </div>
+	</td>
+	<td>
+    <div class="section">
+         <span class="left"><label>Receipt Number:</label></span>
+         <span class="right"><form:input path="ProcurementBillingDetails.receiptNum" class="receiptNum"/></span>
+    </div>
+	</td>
+	</tr>
+	<tr>
+	<td>
+    <div class="section">
+         <span class="left"><label>Mode:</label></span>
+         <span class="right"><form:select path="ProcurementBillingDetails.mode" items="${PaymentMode}"/></span>
+    </div>
+	</td>
+	<td>
+    <div class="section">
+         <span class="left"><label>Remarks:</label></span>
+         <span class="right"><form:textarea path="ProcurementBillingDetails.remarks" class="textarea"/></span>
+    </div>
+	</td>
+	</tr>
+	</TABLE>
+	<br/>
+</div>
+<div class="section">
+		<span class="left"><input type="submit" value="Save Purchase Bill" class="generate_bill"/></span>
+</div>
+<br/>
+<br/>
+ <div>
+<h3>Purchase and Payment Details</h3>
+</div>
+
 <div id="procurements_payments_accordion" class="procurement_transactions">
 	<h3>
 	   <a href="">
 			<label>Purchase Transactions</label>
 	   </a>
 	</h3>
-	<div>	
+	<div>
 		<TABLE  width="500px" border="1">
 			 <thead class="table_header">
 				 <TD>Sl.No</TD>
@@ -66,13 +115,13 @@
 			 </c:forEach>
 		</TABLE>
 	</div>
- 
+
 	<h3>
 	   <a href="">
 			<label>Payment Transactions </label>
 	   </a>
-	</h3>  
-	<div>	
+	</h3>
+	<div>
 		 <TABLE  width="500px" border="1">
 			 <thead class="table_header">
 				 <TD>Sl.No</TD>
@@ -93,37 +142,14 @@
 		 </TABLE>
 	</div>
 </div>
-</br></br>
-<div>
-    <div>
-    <h3>Quick Payment</h3></br>
-    </div>
-    <div class="section">
-         <span class="left"><label>Amount:</label></span>
-         <span class="right"><form:input path="ProcurementBillingDetails.paymentAmount" class="amount"/></span>
-    </div>
-    <div class="section">
-         <span class="left"><label>Receipt Number:</label></span>
-         <span class="right"><form:input path="ProcurementBillingDetails.receiptNum" class="receiptNum"/></span>
-    </div>
-    <div class="section">
-         <span class="left"><label>Mode:</label></span>
-         <span class="right"><form:select path="ProcurementBillingDetails.mode" items="${PaymentMode}"/></span>
-     </div>
-     <div class="section">
-         <span class="left"><label>Remarks:</label></span>
-         <span class="right"><form:input path="ProcurementBillingDetails.remarks" class="receiptNum"/></span>
-     </div>
- </div>
- <div class="section">
-    <span class="left"><input type="submit" value="Save Purchase Bill" class="generate_bill"/></span>
- </div>
+
+
 </div>
 <script>
    $(function() {
        $( "#procurements_payments_accordion" ).accordion({
 			collapsible: true,
 			active: false
-	   });	   
+	   });
    });
 </script>

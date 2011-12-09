@@ -59,6 +59,11 @@ public class InventoryController {
                 if (DateUtils.isGreaterOrEqual(DateUtils.currentDate(), nextDateOfPublish)) {
                     expiredStock.add(stock);
                 }
+            }else if (stock.getItem().getItemLife() == ItemCycle.DAILY.getCode()) {
+                Date nextDateOfPublish = DateUtils.addDays(stock.getDateOfPublishing(),1);
+                if (DateUtils.isGreaterOrEqual(DateUtils.currentDate(), nextDateOfPublish)) {
+                    expiredStock.add(stock);
+                }
             }
         }
         return new ModelAndView("inventory/showExpiredStock", "stocks", expiredStock);

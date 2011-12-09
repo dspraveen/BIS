@@ -10,12 +10,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
 public class ItemMasterServiceImpl implements ItemMasterService {
 
     private ItemRepository itemRepository;
 
-    @Autowired
     public ItemMasterServiceImpl(ItemRepository itemRepository) {
         this.itemRepository = itemRepository;
     }

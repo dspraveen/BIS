@@ -3,12 +3,10 @@ package com.bis.core.services;
 import com.bis.core.repository.VendorRepository;
 import com.bis.domain.Vendor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
-public class VendorMasterServiceImpl implements VendorMasterService{
+public class VendorMasterServiceImpl implements VendorMasterService {
 
     private VendorRepository vendorRepository;
 

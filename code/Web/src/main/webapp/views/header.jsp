@@ -4,7 +4,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <div id="header">
   <h1 id="logo-text">
-    <a href="index.html" title="">BIS</a>
+    <a href="<%=request.getContextPath()%>/home" title="">BIS</a>
   </h1>
   <div id="header-links">
     <p>

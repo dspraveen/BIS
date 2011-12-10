@@ -5,6 +5,7 @@
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/transactionDetails.js"></script>
 <c:choose>
     <c:when test="${salesTransaction.editable}">
+        <div class="transaction_detail">
         <form class="details_table" method="POST" action="<%=request.getContextPath()%>/sales/addSalesTransaction"  onsubmit="return validateForm();">
             <div class="content_header">Sales Transaction Process Form</div>
             <div class="errors">
@@ -45,6 +46,7 @@
                 </div>
             </div>
         </form>
+        </div>
         <script type="text/javascript">
             $(document).ready(function(){
                 $('.transaction_date').datepicker({dateFormat: 'dd-mm-yy' });

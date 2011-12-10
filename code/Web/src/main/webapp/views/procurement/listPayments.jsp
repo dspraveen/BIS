@@ -7,7 +7,7 @@
     $(document).ready(function(){
         $('.from_date').datepicker({dateFormat: 'dd-mm-yy' });
         $('.to_date').datepicker({dateFormat: 'dd-mm-yy' });
-        $('.fetch_payments').bind("click",function(){
+        $('#fetch_payments').bind("click",function(){
 		    if(!($('.from_date').val())){
 				alert("From-Date Not Provided");
 				return false;
@@ -27,7 +27,7 @@
         });
     });
 </script>
-<div>
+<div class="general_division">
     <div class="content_header">Procurement Payment Search Form</div>
     <div class="section">
         <span class="left"><label>From Date:</label></span
@@ -49,7 +49,7 @@
         </span>
     </div>
     <div class="section">
-        <span class="left"><input type="button" value="Fetch Payments" class="fetch_payments"/></span>
+        <span class="left"><input class="buttons" type="button" value="Fetch Payments" id="fetch_payments"/></span>
     </div></br></br>
     <div class="payments">
     </div>

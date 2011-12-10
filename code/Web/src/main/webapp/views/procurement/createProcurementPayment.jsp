@@ -8,7 +8,7 @@
     $(document).ready(function(){
         $('.payment_date').datepicker({dateFormat: 'dd-mm-yy' });
 
-        $('.Lastest_bill').bind("click",function(){
+        $('#Lastest_bill').bind("click",function(){
             var transactionInRangeUrl = "<%=request.getContextPath()%>/procurementBilling/showLastBill?vendorId="+$('.vendor_name').val();
             $.ajax({
                 url : transactionInRangeUrl,
@@ -39,6 +39,7 @@
     }
 </script>
 
+<div class="general_division">
 <form  method="POST" action="<%=request.getContextPath()%>/procurementPayment/createProcurementPayment" onsubmit="return validateForm();">
     <div class="content_header">Procurement Payment Entry Form</div>
     <div>
@@ -74,9 +75,10 @@
             <span class="right"><form:input path="PaymentHistoryProcurement.remarks" class="remarks"/></span>
         </div>
         <div class="section">
-            <span class="center"><input type="submit" value="Submit"/> <input type="reset" value="Clear"/><input type="button" value="Lastest Bill" class="Lastest_bill"/></span>
+            <span class="center"><input class="buttons" type="submit" value="Submit"/> <input class="buttons" type="reset" value="Clear"/><input class="buttons" type="button" value="Lastest Bill" id="Lastest_bill"/></span>
         </div></br></br>
         <div class="lastBill">
         </div>
     </div>
 </form>
+</div>

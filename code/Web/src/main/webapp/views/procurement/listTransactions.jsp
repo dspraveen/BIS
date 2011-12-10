@@ -22,8 +22,7 @@
         });
     });
 </script>
-<div>
-	<form class="details_table">
+<div class="general_division">
     <div class="content_header">Procurement Transaction Search Form</div>
     <div class="section">
         <span class="left"><label>From Date:</label></span
@@ -49,5 +48,4 @@
     </div>
     <div class="transactions">
     </div>
-	</form>
 </div>

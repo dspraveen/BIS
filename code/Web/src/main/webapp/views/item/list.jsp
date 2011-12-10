@@ -7,8 +7,9 @@
 		$('#item_list').submit();	
     }
 </script>
-<div class="content_header">Item Details</div>
-<div>
+
+<div class="all_list">
+    <div class="content_header">Item Details</div>
     <form method="POST" action="<%=request.getContextPath()%>/item/list" id="item_list">
         <c:if test="${itemList.count != '0'}">
                 <div class="section">

@@ -7,8 +7,9 @@
 		$('#hawker_list').submit();
     }
 </script>
-<div class="content_header">Hawker Details</div>
-<div>
+
+<div class="all_list">
+    <div class="content_header">Hawker Details</div>
     <form method="POST" action="<%=request.getContextPath()%>/hawker/list" id="hawker_list">
         <c:if test="${hawkerList.count != '0'}">
                 <div class="section">

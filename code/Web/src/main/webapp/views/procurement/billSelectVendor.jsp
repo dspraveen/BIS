@@ -31,6 +31,7 @@
     }
 </script>
 
+<div class="general_division">
 <form  method="POST" action="<%=request.getContextPath()%>/procurementBilling/saveProcurementBill" onsubmit="return validateForm();">
 <div class="content_header">Generate Purchase Bill Form</div>
     <div>
@@ -47,3 +48,4 @@
         </div>
     </div>
 </form>
+</div>

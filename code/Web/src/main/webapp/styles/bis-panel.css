@@ -51,6 +51,7 @@
     width: 675px;
     z-index: 10000;
 }
+
 .simple_overlay .close {
     background: url("../images/overlay_close.png") repeat scroll 0 0 transparent;
     cursor: pointer;
@@ -60,10 +61,12 @@
     top: -15px;
     width: 35px;
 }
+
 .table_header{
 	background-color: #D11919;
 	color:white;
 }
+
 .content_header {
     display: block;
     font-size: 2.0em;
@@ -81,13 +84,55 @@
 	align: center;
 }
 
+.item_form{
+margin:10px;
+padding: 0;
+border: 2px solid #f2f2f2;
+background-color: #F3F3F3;
+min-height:300px;
+}
+
+.hawker_form{
+margin:10px;
+padding: 0;
+border: 2px solid #f2f2f2;
+background-color: #F3F3F3;
+min-height:350px;
+}
+
+.vendor_form{
+margin:10px;
+padding: 0;
+border: 2px solid #f2f2f2;
+background-color: #F3F3F3;
+min-height:350px;
+}
+
 .transaction_detail
+{
+margin: 10px 10px 10px 5px;
+padding: 0;
+border: 2px solid #f2f2f2;
+background-color: #F3F3F3;
+min-height: 300px;
+min-width: 760px;
+}
+
+.all_list
 {
 margin:10px;
 padding: 0;
 border: 2px solid #f2f2f2;
 background-color: #F3F3F3;
-min-height: 330px
+min-height:350px;
+}
+
+.general_division
+{
+margin:10px;
+padding: 0;
+border: 2px solid #f2f2f2;
+background-color: #F3F3F3;
 }
 
 .textarea{

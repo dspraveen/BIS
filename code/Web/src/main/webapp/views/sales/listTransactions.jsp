@@ -6,7 +6,7 @@
     $(document).ready(function(){
         $('.from_date').datepicker({dateFormat: 'dd-mm-yy' });
         $('.to_date').datepicker({dateFormat: 'dd-mm-yy' });
-        $('.fetch_transactions').bind("click",function(){
+        $('#fetch_transactions').bind("click",function(){
             if(!$('.from_date').val() || !$('.to_date').val()){
                 alert("Please Enter Date Range");
                 return;
@@ -22,7 +22,7 @@
         });
     });
 </script>
-<div>
+<div class="general_division">
     <div class="content_header">Sales Transaction Search Form</div>
     <div class="section">
         <span class="left"><label>From Date:</label></span
@@ -44,7 +44,7 @@
         </span>
     </div>
     <div class="section">
-        <span class="left"><input type="button" value="Fetch Transactions" class="fetch_transactions"/></span>
+        <span class="left"><input class="buttons" type="button" value="Fetch Transactions" id="fetch_transactions"/></span>
     </div>
     <div class="transactions">
     </div>

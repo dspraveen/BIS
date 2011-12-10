@@ -105,7 +105,7 @@ public class ProcurementBillingServiceImpl implements ProcurementBillingService 
             nextBillDate = billingProcurement.getEndDate();
             nextBillDate = DateUtils.addSecond(nextBillDate,1);
         } else {
-            procurementTransactions = procurementTransactionRepository.getProcurementTransactions(vendor, DateUtils.getNowDate());
+            procurementTransactions = procurementTransactionRepository.getProcurementTransactions(vendor, DateUtils.currentDate());
             if (procurementTransactions != null) {
                 nextBillDate = procurementTransactions.get(0).getDate();
             }

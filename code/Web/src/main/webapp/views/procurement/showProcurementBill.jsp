@@ -4,10 +4,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 
-<div>
-<h2>Bill Details</h2></br>
-</div>
-<div>
+<div class="general_division">
+    <div class="content_header">Bill Details</div>
     <div class="section">
         <span class="left"><label>Bill Id:</label></span>
         <span class="right"><label>${BillingProcurement.billId}</label></span>

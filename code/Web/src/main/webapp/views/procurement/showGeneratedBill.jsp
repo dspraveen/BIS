@@ -45,12 +45,9 @@
 
 <br/>
 
- <div style="border:1px solid black; background:#FFFF99">
+<div class="payment_table">
 <TABLE  width = "100%" >
-    <tr>
-		<td><h4>Quick Payment</h4></td>
-		<td/>
-	</tr>
+    <th class="table_header" colspan="2">Quick Payment</th>
 	<tr>
 	<td>
     <div class="section">
@@ -80,10 +77,10 @@
 	</td>
 	</tr>
 	</TABLE>
-	<br/>
+
 </div>
 <div class="section">
-		<span class="left"><input type="submit" value="Save Purchase Bill" class="generate_bill"/></span>
+		<span class="left"><input class="buttons" type="submit" value="Save Purchase Bill" class="generate_bill"/></span>
 </div>
 <br/>
 <br/>
@@ -98,7 +95,7 @@
 	   </a>
 	</h3>
 	<div>
-		<TABLE  width="500px" border="1">
+		<TABLE  width="610px" border="1">
 			 <thead class="table_header">
 				 <TD>Sl.No</TD>
 				 <TD>Date</TD>
@@ -122,7 +119,7 @@
 	   </a>
 	</h3>
 	<div>
-		 <TABLE  width="500px" border="1">
+		 <TABLE  width="610px" border="1">
 			 <thead class="table_header">
 				 <TD>Sl.No</TD>
 				 <TD>Date</TD>

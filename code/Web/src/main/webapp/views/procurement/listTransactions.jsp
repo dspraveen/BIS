@@ -46,7 +46,6 @@
 </div>
 <div class="button_div">
 	<span class="left"><input class="buttons" type="button" value="Fetch Transactions" id="fetch_transactions"/></span>
-</div>
+</div></br></br>
 <div class="transactions">
 </div>
-

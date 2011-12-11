@@ -7,7 +7,7 @@
 }
 .left {
     float:left;
-    width:30%
+    width:32%
 }.
 .right {
     float:left;
@@ -42,7 +42,7 @@
     width:80px;
 }
 #procurement_transactions_accordion,#sales_transactions_accordion{
-    margin-top:80px
+    margin-top:10px
 }
 .simple_overlay {
     background-color: #FFFFC6;
@@ -88,7 +88,7 @@
 margin:10px;
 padding: 0;
 border: 2px solid #f2f2f2;
-background-color: #F3F3F3;
+background-color: #EBEBEB;
 min-height: 242px;
 }
 
@@ -96,7 +96,7 @@ min-height: 242px;
 margin:10px;
 padding: 0;
 border: 2px solid #f2f2f2;
-background-color: #F3F3F3;
+background-color: #EBEBEB;
 min-height:275px;
 }
 
@@ -105,7 +105,7 @@ min-height:275px;
 margin:10px;
 padding: 0;
 border: 2px solid #f2f2f2;
-background-color: #F3F3F3;
+background-color: #EBEBEB;
 float: left;
 margin: 0 0 0 10px;
 }
@@ -114,7 +114,7 @@ margin: 0 0 0 10px;
 margin:10px;
 padding: 0;
 border: 2px solid #f2f2f2;
-background-color: #F3F3F3;
+background-color: #EBEBEB;
 min-height: 270px;
 }
 
@@ -123,7 +123,7 @@ min-height: 270px;
 margin: 10px 10px 10px 5px;
 padding: 0;
 border: 2px solid #f2f2f2;
-background-color: #F3F3F3;
+background-color: #EBEBEB;
 min-height: 300px;
 min-width: 760px;
 }
@@ -133,7 +133,7 @@ min-width: 760px;
 margin:10px;
 padding: 0;
 border: 2px solid #f2f2f2;
-background-color: #F3F3F3;
+background-color: #EBEBEB;
 min-height:350px;
 }
 
@@ -142,7 +142,7 @@ min-height:350px;
 margin:10px;
 padding: 0;
 border: 2px solid #f2f2f2;
-background-color: #F3F3F3;
+background-color: #EBEBEB;
 }
 
 .textarea{
@@ -195,4 +195,17 @@ font: normal 1em Verdana, sans-serif;
 	margin-right:13%;
 	margin-top:10px;
 	margin-bottom:10px;
+}
+
+#displayTable
+{
+	margin-left:2%;
+	margin-right:13%;
+	margin-top:10px;
+	margin-bottom:10px;
+}
+
+.payment_table{
+border:1px solid black; 
+background:#EBEBEB
 }

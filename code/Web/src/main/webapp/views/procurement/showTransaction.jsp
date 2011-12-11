@@ -3,9 +3,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
-<div>
+<div class="general_division">
     <div class="content_header">Transaction Details</div>
-
     <div class="section">
         <span class="left"><label>Vendor Name:</label></span
         <span class="right"><label>${procurementTransaction.vendor.vendorName}</label></span>
@@ -23,7 +22,7 @@
         <span class="right"><label>${procurementTransaction.totalAmount}</label></span>
     </div>
     <div class="section">
-        <TABLE id="dataTable" width="350px" border="1">
+        <TABLE id="displayTable" width="615px" border="1">
 				 <thead class="table_header">
 					<TD>Item</TD>
 					<TD>Date Of Publishing</TD>

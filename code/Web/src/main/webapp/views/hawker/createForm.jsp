@@ -21,10 +21,9 @@
         return true;
     }
 </script>
-<form class="hawker_form" method="POST" action="<%=request.getContextPath()%>/hawker/create"  onsubmit="return validateForm();">
+<form method="POST" action="<%=request.getContextPath()%>/hawker/create"  onsubmit="return validateForm();">
+    <div class="hawker_form">
     <div class="content_header">Hawker Creation Form</div>
-    <div>
-
         <div class="section">
             <span class="left"><label>Hawker Name:</label></span
             <span class="right"><form:input path="hawker.hawkerName" class="hawker_name"/>*</span>
@@ -49,9 +48,8 @@
             <span class="left"><label>Hawker Alternate Phone Number:</label></span
             <span class="right"><form:input path="hawker.alternatePhone" /></span>
         </div>
-
-        <div class="section">
+    </div>
+        <div class="button_div">
             <span class="center"><input class="buttons" type="submit" value="Submit"/> <input class="buttons" type="reset" value="Clear"/></span>
         </div>
-    </div>
 </form>

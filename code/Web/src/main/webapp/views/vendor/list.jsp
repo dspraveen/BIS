@@ -8,7 +8,7 @@
     }
 </script>
 
-<div class="all_list">
+<div class="vendor_form">
     <div class="content_header">Vendor Details</div>
     <form method="POST" action="<%=request.getContextPath()%>/vendor/list" id="vendor_list">
         <c:if test="${vendorList.count != '0'}">

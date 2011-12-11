@@ -8,7 +8,7 @@
     }
 </script>
 
-<div class="all_list">
+<div class="hawker_form">
     <div class="content_header">Hawker Details</div>
     <form method="POST" action="<%=request.getContextPath()%>/hawker/list" id="hawker_list">
         <c:if test="${hawkerList.count != '0'}">

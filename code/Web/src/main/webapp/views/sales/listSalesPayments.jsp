@@ -48,9 +48,9 @@
             </select>
         </span>
     </div>
-    <div class="section">
-        <span class="left"><input class="buttons" type="button" value="Fetch Payments" id="fetch_payments"/></span
-    </div></br></br>
-    <div class="payments">
-    </div>
+</div>	
+<div class="button_div">
+	<span class="left"><input class="buttons" type="button" value="Fetch Payments" id="fetch_payments"/></span
+</div></br></br>
+<div class="payments">
 </div>

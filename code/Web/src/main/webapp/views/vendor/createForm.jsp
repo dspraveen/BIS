@@ -21,8 +21,9 @@
         return true;
     }
 </script>
-<form class="vendor_form" commandName="vendor" method="POST" action="<%=request.getContextPath()%>/vendor/create"  onsubmit="return validateForm();">
-    <div>
+
+<form commandName="vendor" method="POST" action="<%=request.getContextPath()%>/vendor/create"  onsubmit="return validateForm();">
+    <div class="vendor_form">
         <div class="content_header">Vendor Creation Form</div>
         <div class="section">
             <span class="left"><label>Vendor Name:</label></span
@@ -48,9 +49,8 @@
             <span class="left"><label>Vendor Alternate Phone Number:</label></span
             <span class="right"><form:input path="vendor.alternatePhone" /></span>
         </div>
-
-        <div class="section">
+	</div>	
+    <div class="button_div">
             <span class="center"><input class="buttons" type="submit" value="Submit"/> <input class="buttons" type="reset" value="Clear"/></span>
-        </div>
     </div>
 </form>

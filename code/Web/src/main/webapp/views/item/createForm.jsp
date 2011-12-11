@@ -11,9 +11,10 @@
         return true;
     }
 </script>
-<form  class="item_form" method="POST" action="<%=request.getContextPath()%>/item/create"  onsubmit="return validateForm();">
-    <div class="content_header">Item Creation Form</div>
-    <div>
+
+<form  method="POST" action="<%=request.getContextPath()%>/item/create"  onsubmit="return validateForm();">
+    <div class="item_form">
+	    <div class="content_header">Item Creation Form</div>
         <div class="section">
             <span class="left"><label>Item Name:</label></span
             <span class="right"><form:input path="item.itemName" class="item_name"/>*</span>
@@ -34,8 +35,9 @@
             <span class="left"><label>Item Returnable:</label></span
             <span class="right"><form:select path="item.returnable" items="${itemReturnTypes}"/></span>
         </div>
-        <div class="section">
-            <span class="center"><input class="buttons" type="submit" value="Submit"/> <input class="buttons" type="reset" value="Clear"/></span>
-        </div>
     </div>
+    <div class="button_div">
+         <input class="buttons" type="submit" value="Submit"/> 
+		 <input class="buttons" type="reset" value="Clear"/>
+    </div>	
 </form>

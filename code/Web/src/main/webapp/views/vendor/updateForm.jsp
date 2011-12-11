@@ -18,9 +18,9 @@
     }
 </script>
 <form method="POST" action="<%=request.getContextPath()%>/vendor/update" onsubmit="return validateForm();">
-    <div class="content_header">Vendor Update Form</div>
     <form:hidden path="vendor.vendorId"/>
-    <div>
+    <div class="vendor_form">
+        <div class="content_header">Vendor Update Form</div>
         <div class="section">
             <span class="left"><label>Vendor Name:</label></span>
             <span class="right"><form:input path="vendor.vendorName" class="vendor_name" readonly="true"/>*</span>
@@ -45,9 +45,9 @@
             <span class="left"><label>Vendor Alternate Phone Number:</label></span
             <span class="right"><form:input path="vendor.alternatePhone" /></span>
         </div>
-        <div class="section">
-            <span class="center"><input type="submit" value="Update"/></span>
-        </div>
     </div>
+        <div class="button_div">
+            <span class="left"><input class="buttons" type="submit" value="Update"/></span>
+        </div>
 </form>
 

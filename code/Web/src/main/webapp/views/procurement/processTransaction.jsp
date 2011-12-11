@@ -6,46 +6,47 @@
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/transactionDetails.js"></script>
 <c:choose>
     <c:when test="${procurementTransaction.editable}">
-		<div class="transaction_detail">	
+	
         <form class="details_table" method="POST" action="<%=request.getContextPath()%>/procurement/addProcurementTransaction">
-            <div class="content_header">Procurement Transaction Process Form</div>
-            <div class="errors">
-            </div>
-            <div>
-                <form:hidden path="procurementTransaction.transactionId"/>
-                <form:hidden path="procurementTransaction.effectedRowId" id="effectedRowId"/>
-                <form:hidden path="procurementTransaction.changeType" id="changeType"/>
-                <div class="section">
-                    <span class="left"><label>Select Vendor:</label></span
-                    <span class="right">
-                        <form:select path="procurementTransaction.targetId" class="vendor_name">
-                            <c:if test="${!(procurementTransaction.transactionId>0)}">
-                                <form:option value="-1" label="--Please Select"/>
-                            </c:if>
-                            <form:options items="${vendors}" itemLabel="vendorName" itemValue="vendorId" />
-                        </form:select>
-                    </span>
-                </div>
-                <div class="section">
-                    <span class="left"><label>Transaction Date:</label></span
-                    <span class="right"><form:input path="procurementTransaction.transactionDate" class="transaction_date"/></span>
-                </div>
-                <div class="section">
-                    <span class="left"><label>Transaction Type:</label></span
-                    <span class="right">
-                        <form:input path="procurementTransaction.procurementTransactionTypeDescription" disabled='true'/>
-                        <form:hidden path="procurementTransaction.type"/>
-                    </span>
-                </div>
-                <div>
-                     <div class="transaction_details"></div>
-                     <INPUT type="button" value="Add Row" class="add_item"/>
-                     <INPUT type="button" value="Delete Row" class="remove_item"/>
-                 </div>
-                <div class="section">
-                    <span class="center"><input class="buttons" type="submit" value="Submit" class="submit"/> <input class="buttons" type="reset" value="Clear"/></span>
-                </div>
-            </div>
+			<div class="transaction_detail">
+				<div class="content_header">Procurement Transaction Process Form</div>
+				<div class="errors">
+				</div>
+				<div>
+					<form:hidden path="procurementTransaction.transactionId"/>
+					<form:hidden path="procurementTransaction.effectedRowId" id="effectedRowId"/>
+					<form:hidden path="procurementTransaction.changeType" id="changeType"/>
+					<div class="section">
+						<span class="left"><label>Select Vendor:</label></span>
+						<span class="right">
+							<form:select path="procurementTransaction.targetId" class="vendor_name">
+								<c:if test="${!(procurementTransaction.transactionId>0)}">
+									<form:option value="-1" label="--Please Select"/>
+								</c:if>
+								<form:options items="${vendors}" itemLabel="vendorName" itemValue="vendorId" />
+							</form:select>
+						</span>
+					</div>
+					<div class="section">
+						<span class="left"><label>Transaction Date:</label></span
+						<span class="right"><form:input path="procurementTransaction.transactionDate" class="transaction_date"/></span>
+					</div>
+					<div class="section">
+						<span class="left"><label>Transaction Type:</label></span
+						<span class="right">
+							<form:input path="procurementTransaction.procurementTransactionTypeDescription" disabled='true'/>
+							<form:hidden path="procurementTransaction.type"/>
+						</span>
+					</div>
+					<div>
+						 <div class="transaction_details"></div>
+						 <INPUT type="button" value="Add Row" class="add_item"/>
+						 <INPUT type="button" value="Delete Row" class="remove_item"/>
+					 </div>
+				</div>
+			</div>
+			<div class="section">
+				<span class="center"><input class="buttons" type="submit" value="Submit" class="submit"/> <input class="buttons" type="reset" value="Clear"/></span>
 			</div>
         </form>
         <script type="text/javascript">

@@ -2,8 +2,9 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+
+<div class="item_form">
 <div class="content_header">Item Details</div>
-<div>
     <div class="section">
         <span class="left"><label>Item Name:</label></span
         <span class="right"><label>${item.itemName}</label></span>

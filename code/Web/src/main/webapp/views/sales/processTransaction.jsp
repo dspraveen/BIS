@@ -5,8 +5,9 @@
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/transactionDetails.js"></script>
 <c:choose>
     <c:when test="${salesTransaction.editable}">
-        <div class="transaction_detail">
+
         <form class="details_table" method="POST" action="<%=request.getContextPath()%>/sales/addSalesTransaction"  onsubmit="return validateForm();">
+		<div class="transaction_detail">
             <div class="content_header">Sales Transaction Process Form</div>
             <div class="errors">
             </div>
@@ -41,12 +42,13 @@
                      <INPUT type="button" value="Add Row" class="add_item"/>
                      <INPUT type="button" value="Delete Row" class="remove_item"/>
                  </div>
-                <div class="section">
-                    <span class="center"><input class="buttons" type="submit" value="Submit" class="submit"/> <input class="buttons" type="reset" value="Clear"/></span>
-                </div>
             </div>
-        </form>
         </div>
+			<div class="button_div">
+                    <span class="center"><input class="buttons" type="submit" value="Submit" class="submit"/> <input class="buttons" type="reset" value="Clear"/></span>
+            </div>
+		</form>
+
         <script type="text/javascript">
             $(document).ready(function(){
                 $('.transaction_date').datepicker({dateFormat: 'dd-mm-yy' });
@@ -61,7 +63,3 @@
         </c:forEach>
     </c:otherwise>
 </c:choose>
-
-
-
-

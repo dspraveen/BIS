@@ -89,7 +89,7 @@ margin:10px;
 padding: 0;
 border: 2px solid #f2f2f2;
 background-color: #F3F3F3;
-min-height:300px;
+min-height: 242px;
 }
 
 .hawker_form{
@@ -97,7 +97,17 @@ margin:10px;
 padding: 0;
 border: 2px solid #f2f2f2;
 background-color: #F3F3F3;
-min-height:350px;
+min-height:275px;
+}
+
+.button_div
+{ 
+margin:10px;
+padding: 0;
+border: 2px solid #f2f2f2;
+background-color: #F3F3F3;
+float: left;
+margin: 0 0 0 10px;
 }
 
 .vendor_form{
@@ -105,7 +115,7 @@ margin:10px;
 padding: 0;
 border: 2px solid #f2f2f2;
 background-color: #F3F3F3;
-min-height:350px;
+min-height: 270px;
 }
 
 .transaction_detail

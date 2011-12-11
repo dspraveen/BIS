@@ -19,8 +19,8 @@
 </script>
 <form method="POST" action="<%=request.getContextPath()%>/hawker/update" onsubmit="return validateForm();">
     <form:hidden path="hawker.hawkerId"/>
-    <div class="content_header">Hawker Update Form</div>
-    <div>
+    <div class="hawker_form">
+        <div class="content_header">Hawker Update Form</div>
         <div class="section">
             <span class="left"><label>Hawker Name:</label></span>
             <span class="right"><form:input path="hawker.hawkerName" class="hawker_name" readonly="true"/>*</span>
@@ -45,9 +45,10 @@
             <span class="left"><label>Hawker Alternate Phone Number:</label></span
             <span class="right"><form:input path="hawker.alternatePhone" /></span>
         </div>
-        <div class="section">
-            <span class="center"><input type="submit" value="Update"/></span>
-        </div>
     </div>
+        <div class="button_div">
+            <span class="left"><input class="buttons" type="submit" value="Update"/></span>
+        </div>
+
 </form>
 

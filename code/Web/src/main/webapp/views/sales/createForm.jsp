@@ -39,10 +39,10 @@
     }
 </script>
 
-<div class="general_division">
+
 <form  method="POST" action="<%=request.getContextPath()%>/salesPayment/addSalesPayment" onsubmit="return validateForm();">
+<div class="general_division">
     <div class="content_header">Sales Payment Entry Form</div>
-    <div>
         <div class="section">
             <span class="left"><label>Select Hawker:</label></span>
             <span class="right">
@@ -74,11 +74,10 @@
             <span class="left"><label>Remarks:</label></span>
             <span class="right"><form:input path="PaymentHistorySales.remarks" class="remarks"/></span>
         </div>
-        <div class="section">
-            <span class="center"><input class="buttons" type="submit" value="Submit"/> <input class="buttons" type="reset" value="Clear"/><input class="buttons" type="button" value="Lastest Bill" id="Lastest_bill"/></span>
-        </div></br></br></br>
-        <div class="lastBill">
-        </div>
-    </div>
-</form>
+</div>		
+<div class="button_div">
+	<span class="center"><input class="buttons" type="submit" value="Submit"/> <input class="buttons" type="reset" value="Clear"/><input class="buttons" type="button" value="Lastest Bill" id="Lastest_bill"/></span>
+</div></br></br></br>
+<div class="lastBill">
 </div>
+</form>

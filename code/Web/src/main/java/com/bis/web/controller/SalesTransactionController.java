@@ -223,4 +223,9 @@ public class SalesTransactionController extends BaseController {
         }
         return errors;
     }
+
+    @ModelAttribute("hawkers")
+    public List<Hawker> hawkers() {
+        return hawkerMasterService.getAll();
+    }
 }

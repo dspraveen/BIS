@@ -223,4 +223,9 @@ public class ProcurementTransactionController extends BaseController {
         }
         return errors;
     }
+
+    @ModelAttribute("vendors")
+    public List<Vendor> vendors() {
+        return vendorMasterService.getAll();
+    }
 }

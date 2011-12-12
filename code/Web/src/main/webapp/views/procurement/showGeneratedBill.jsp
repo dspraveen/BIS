@@ -42,9 +42,7 @@
 	  <span class="right"><label>${ProcurementBillingDetails.billAmount}</label></span>
 	</div>
 </div>
-
 <br/>
-
 <div class="payment_table">
 <TABLE  width = "100%" >
     <th class="table_header" colspan="2">Quick Payment</th>
@@ -76,8 +74,7 @@
     </div>
 	</td>
 	</tr>
-	</TABLE>
-
+</TABLE>
 </div>
 <div class="section">
 		<span class="left"><input class="buttons" type="submit" value="Save Purchase Bill" class="generate_bill"/></span>
@@ -139,8 +136,6 @@
 		 </TABLE>
 	</div>
 </div>
-
-
 </div>
 <script>
    $(function() {

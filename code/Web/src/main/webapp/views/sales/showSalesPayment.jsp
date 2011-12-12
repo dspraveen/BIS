@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 
-<div>
+<div class="general_division">
     <div class="content_header">Payment Details</div>
     <div class="section">
         <span class="left"><label>Hawker name:</label></span>

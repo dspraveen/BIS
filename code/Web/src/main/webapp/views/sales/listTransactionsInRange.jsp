@@ -3,6 +3,9 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+
+<div class="general_division">
+<h3><label>Sales Transactions For Hawker</label></h3>
 <div id="sales_transactions_accordion">
      <c:forEach var="salesTransaction" items="${salesTransactions}">
         <h3>
@@ -13,7 +16,7 @@
             </a>
          <h3>
          <div>
-            <TABLE  width="350px" border="1">
+            <TABLE  width="610px" border="1">
 				 <thead class="table_header">
 					<TD>Item</TD>
 					<TD>Date Of Publishing</TD>
@@ -34,6 +37,7 @@
             <a href="<%=request.getContextPath()%>/sales/updateForm/${salesTransaction.transactionId}"> Update this transaction</a>
          </div>
      </c:forEach>
+</div>
 </div>
 <script>
     $(function() {

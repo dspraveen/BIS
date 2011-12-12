@@ -4,8 +4,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 
-<div class="sales_transactions" id="sales_payments_accordion">
-	<TABLE  width="900px" border="1">
+<div class="general_division" align="center" id="sales_payments_accordion">
+<h3 align="left"><label>Payments For Hawker</label></h3>
+	<TABLE  width="610px" border="1">
 		<thead class="table_header">
 			<TD>Hawker</TD>
 			<TD>Date</TD>
@@ -28,5 +29,3 @@
 		</c:forEach>
 	 </TABLE>
  </div>
-
-

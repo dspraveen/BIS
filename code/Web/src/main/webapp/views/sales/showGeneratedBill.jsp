@@ -4,11 +4,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 
-<div>
-<h3>Bill Details</h3>
+<div class="section">
+<h2>Bill Details</h2>
 </div>
 <div>
-<div>
+<div class="section">
     <div class="section">
 		<span class="left"><label>Previous Bill Oustanding Amount</label>	</span>
 		<span class="center"><label>:</label></span>
@@ -43,12 +43,9 @@
 	</div>
 </div>
 </br>
-<div style="border:1px solid black; background:#FFFF99">
+<div class="payment_table">
 <TABLE  width = "100%" >
-    <tr>
-		<td><h4>Quick Payment</h4></td>
-		<td/>
-	</tr>
+    <th class="table_header" colspan="2">Quick Payment</th>
 	<tr>
 	<td>
     <div class="section">
@@ -77,11 +74,10 @@
     </div>
 	</td>
 	</tr>
-	</TABLE>
-	<br/>
+</TABLE>
 </div>
 <div class="section">
-		<span class="left"><input type="submit" value="Save Sales Bill" class="generate_bill"/></span>
+		<span class="left"><input class="buttons" type="submit" value="Save Sales Bill" class="generate_bill"/></span>
 </div>
 <br/>
 <br/>
@@ -89,7 +85,6 @@
 <div>
 <h3>Sales and Payment Details</h3>
 </div>
-
     <div id="sales_payments_accordion" class="sales_transactions">
 		<h3>
 		   <a href="">
@@ -97,7 +92,7 @@
 		   </a>
 		</h3>
 		<div>
-        <TABLE  width="500px" border="1">
+        <TABLE  width="610px" border="1">
             <thead class="table_header">
                 <TD>Sl.No</TD>
                 <TD>Date</TD>
@@ -121,7 +116,7 @@
 		   </a>
 		</h3>
 		<div>
-        <TABLE  width="500px" border="1">
+        <TABLE  width="610px" border="1">
             <thead class="table_header">
                 <TD>Sl.No</TD>
                 <TD>Date</TD>
@@ -141,7 +136,6 @@
          </TABLE>
 		</div>
      </div>
-
 </div>
 <script>
    $(function() {

@@ -4,9 +4,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 
-<h3>Bill Details</h3>
-<div class="sales_transactions" id="sales_bills">
-	<TABLE  width="800px" border="1">
+<div class="general_division" id="sales_bills" align="center">
+	<h3 align="left"><label>Bill Details</label></h3>
+	<TABLE  width="610px" border="1">
 		<thead class="table_header">
 			<TD>Hawker</TD>
 			<TD>Start Date</TD>

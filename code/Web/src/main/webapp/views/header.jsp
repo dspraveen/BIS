@@ -5,11 +5,11 @@
 <div id="header">
 	<div id="main_pic">
     <h1 id="logo"></br><span class="highlight">Gorabal </span>Advertising And Marketing</h1>
-    <h2 id="slogan">display some thing here.......</h2>
+    <h2 id="slogan">Digitising Your Business.......</h2>
 	  <div id="header-links">
 		<p>
-			<a href="#">Settings</a>|
-			<a href="#">Profile</a>
+			<a href="#"></a>|
+			<a href="#"></a>
 		 </p>
 	  </div>
 	</div>  

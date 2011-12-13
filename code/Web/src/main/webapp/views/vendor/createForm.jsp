@@ -39,7 +39,7 @@
         </div>
         <div class="section">
             <span class="left"><label>Vendor Address:</label></span
-            <span class="right"><form:input path="vendor.address" /></span>
+            <span class="right"><form:textarea path="vendor.address" /></span>
         </div>
         <div class="section">
             <span class="left"><label>Vendor Primary Phone Number:</label></span

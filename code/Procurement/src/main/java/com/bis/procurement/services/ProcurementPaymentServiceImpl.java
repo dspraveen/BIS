@@ -1,5 +1,6 @@
 package com.bis.procurement.services;
 
+import com.bis.common.DateUtils;
 import com.bis.domain.PaymentHistoryProcurement;
 import com.bis.domain.Vendor;
 import com.bis.procurement.repository.ProcurementPaymentRepository;
@@ -20,6 +21,7 @@ public class ProcurementPaymentServiceImpl implements ProcurementPaymentService 
 
     @Override
     public void addProcurementPayment(PaymentHistoryProcurement paymentHistoryProcurement) {
+        paymentHistoryProcurement.setDate(DateUtils.addTimeToDate(paymentHistoryProcurement.getDate()));
         procurementPaymentRepository.save(paymentHistoryProcurement);
     }
 

@@ -35,7 +35,7 @@
         </div>
         <div class="section">
             <span class="left"><label>Hawker Address:</label></span
-            <span class="right"><form:input path="hawker.address" /></span>
+            <span class="right"><form:textarea path="hawker.address" /></span>
         </div>
         <div class="section">
             <span class="left"><label>Hawker Primary Phone Number:</label></span

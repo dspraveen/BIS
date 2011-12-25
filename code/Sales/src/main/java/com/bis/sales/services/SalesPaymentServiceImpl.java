@@ -1,5 +1,6 @@
 package com.bis.sales.services;
 
+import com.bis.common.DateUtils;
 import com.bis.domain.Hawker;
 import com.bis.domain.PaymentHistorySales;
 import com.bis.sales.repository.SalesPaymentRepository;
@@ -21,6 +22,7 @@ public class SalesPaymentServiceImpl implements SalesPaymentService {
 
     @Override
     public void addSalesPayment(PaymentHistorySales paymentHistorySales) {
+        paymentHistorySales.setDate(DateUtils.addTimeToDate(paymentHistorySales.getDate()));
         salesPaymentRepository.save(paymentHistorySales);
     }
 

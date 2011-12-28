@@ -106,7 +106,9 @@ public class SalesTransactionController extends BaseController {
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ModelAndView list() {
-        return new ModelAndView("sales/list");
+        ModelAndView modelAndView = new ModelAndView("sales/list");
+        modelAndView.addObject("hawkers", hawkerMasterService.getAll());
+        return modelAndView;
     }
 
     @RequestMapping(value = "/transactionsInRange", method = RequestMethod.GET)

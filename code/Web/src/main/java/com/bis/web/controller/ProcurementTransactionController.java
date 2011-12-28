@@ -105,7 +105,9 @@ public class ProcurementTransactionController extends BaseController {
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ModelAndView list() {
-        return new ModelAndView("procurement/list");
+        ModelAndView modelAndView = new ModelAndView("procurement/list");
+        modelAndView.addObject("vendors", vendorMasterService.getAll());
+        return modelAndView;
     }
 
     @RequestMapping(value = "/transactionsInRange", method = RequestMethod.GET)

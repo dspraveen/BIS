@@ -176,7 +176,3 @@ INDEX PT_Details_FKIndex2(Transaction_ID),
     REFERENCES Procurement_Transaction(Transaction_ID)
       ON DELETE NO ACTION
       ON UPDATE NO ACTION);
-
-
-
-

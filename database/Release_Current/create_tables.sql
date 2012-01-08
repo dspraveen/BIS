@@ -2,6 +2,7 @@ CREATE TABLE Alert_Type (
   Alert_Type_Id INTEGER UNSIGNED  NOT NULL   AUTO_INCREMENT,
   Alert_Name VARCHAR(16)  NOT NULL  ,
   Alert_Message VARCHAR(255)  NOT NULL    ,
+  Last_Run_Time TIMESTAMP  NULL    ,
 PRIMARY KEY(Alert_Type_Id));
 
 
@@ -11,6 +12,7 @@ CREATE TABLE Alert_Config (
   Alert_Type_Id INTEGER UNSIGNED  NOT NULL  ,
   Alert_Parameters VARCHAR(255)  NULL  ,
   Default_Config CHAR(1)  NULL    ,
+  Alert_Config_Name VARCHAR(255)  NOT NULL ,
 PRIMARY KEY(Alert_Config_Id)  ,
 INDEX Alert_Config_FKIndex1(Alert_Type_Id),
   FOREIGN KEY(Alert_Type_Id)
@@ -20,10 +22,10 @@ INDEX Alert_Config_FKIndex1(Alert_Type_Id),
 
 
 
-CREATE TABLE Alerts (
+CREATE TABLE Alert (
   Alert_Num INTEGER UNSIGNED  NOT NULL   AUTO_INCREMENT,
   Alert_Type_Id INTEGER UNSIGNED  NOT NULL  ,
-  Altert_Text VARCHAR(255)  NULL  ,
+  Alert_Text VARCHAR(255)  NULL  ,
   Alert_Status CHAR(1)  NULL  ,
   Snooze_Time INTEGER UNSIGNED  NULL  ,
   Alert_Time TIMESTAMP  NULL    ,

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.bis.domain.AlertConfig" table="alert_config" catalog="BIS">
+        <id name="alertConfigId" type="java.lang.Integer">
+            <column name="Alert_Config_Id"/>
+            <generator class="identity"/>
+        </id>
+        <many-to-one name="alertType" class="com.bis.domain.AlertType" column="Alert_Type_Id" cascade="none" not-null="true" lazy="false"/>
+        <property name="alertParameters" type="string">
+            <column name="Alert_Parameters"/>
+        </property>
+        <property name="defaultConfig" type="java.lang.Character">
+            <column name="Default_Config" length="1"/>
+        </property>
+        <property name="alertConfigName" type="string">
+            <column name="Alert_Config_Name" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

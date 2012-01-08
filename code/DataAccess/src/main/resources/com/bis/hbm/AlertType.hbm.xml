@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 8, 2012 5:07:04 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.bis.domain.AlertType" table="alert_type" catalog="BIS">
+        <id name="alertTypeId" type="java.lang.Integer">
+            <column name="Alert_Type_Id"/>
+            <generator class="identity"/>
+        </id>
+        <property name="alertName" type="string">
+            <column name="Alert_Name" length="16" not-null="true"/>
+        </property>
+        <property name="alertMessage" type="string">
+            <column name="Alert_Message" not-null="true"/>
+        </property>
+        <property name="lastRunTime" type="timestamp">
+            <column name="Last_Run_Time" length="19"/>
+        </property>
+    </class>
+</hibernate-mapping>

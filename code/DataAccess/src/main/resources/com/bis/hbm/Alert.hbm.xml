@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.bis.domain.Alert" table="alert" catalog="BIS">
+        <id name="alertNum" type="java.lang.Integer">
+            <column name="Alert_Num" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="alertType" class="com.bis.domain.AlertType" column="Alert_Type_Id" cascade="none" not-null="true" lazy="false"/>
+        <property name="alertText" type="string">
+            <column name="Alert_Text" />
+        </property>
+        <property name="alertStatus" type="java.lang.Character">
+            <column name="Alert_Status" length="1" />
+        </property>
+        <property name="snoozeTime" type="java.lang.Integer">
+            <column name="Snooze_Time" />
+        </property>
+        <property name="alertTime" type="timestamp">
+            <column name="Alert_Time" length="19" />
+        </property>
+    </class>
+</hibernate-mapping>

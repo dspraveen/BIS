@@ -35,6 +35,7 @@
         <module>Inventory</module>
         <module>Procurement</module>
         <module>Sales</module>
+        <module>Reporting</module>
         <module>Web</module>
     </modules>
     <build>

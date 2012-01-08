@@ -1,1 +1,5 @@
--- TODO
+DROP TABLE IF EXISTS Alert_Association; 
+DROP TABLE IF EXISTS Alerts; 
+DROP TABLE IF EXISTS Alert_Config; 
+DROP TABLE IF EXISTS Alert_Type; 
+

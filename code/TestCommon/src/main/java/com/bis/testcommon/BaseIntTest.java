@@ -1,9 +1,9 @@
 package com.bis.testcommon;
 
+import org.apache.commons.lang.StringUtils;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
 import org.hibernate.jdbc.Work;
-import org.junit.After;
 import org.junit.Before;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -34,11 +34,14 @@ public class BaseIntTest extends AbstractTransactionalJUnit4SpringContextTests {
             @Override
             public void execute(Connection connection) throws SQLException {
                 try {
+                    String bisRoot = System.getenv("BIS_ROOT");
+                    if(StringUtils.isEmpty(bisRoot)) throw new Exception("Please set BIS_ROOT env on your machine");
                     connection.createStatement().execute("DROP SCHEMA IF EXISTS BIS");
                     connection.createStatement().execute("CREATE SCHEMA IF NOT EXISTS BIS");
                     connection.createStatement().execute("SET SCHEMA BIS");
-                    connection.createStatement().execute(readFileToString(new File("../database/Release_1.0/create_tables.sql")).replaceAll("FLOAT\\(.*,.*\\)", "FLOAT"));
-                    connection.createStatement().execute(readFileToString(new File("../database/Release_Current/create_tables.sql")).replaceAll("FLOAT\\(.*,.*\\)", "FLOAT"));
+                    System.out.println(new File("../database/Release_1.0/create_tables.sql").getAbsolutePath());
+                    connection.createStatement().execute(readFileToString(new File(bisRoot+"/database/Release_1.0/create_tables.sql")).replaceAll("FLOAT\\(.*,.*\\)", "FLOAT"));
+                    connection.createStatement().execute(readFileToString(new File(bisRoot+"/database/Release_Current/create_tables.sql")).replaceAll("FLOAT\\(.*,.*\\)", "FLOAT"));
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }

@@ -28,54 +28,39 @@ public class AlertsIntTest extends BaseIntTest {
         AlertAssociation alertAssociation = null;
         AlertConfig alertConfig = null;
         AlertType alertType = null;
-        try {
-            alertType = new AlertType();
-            alertType.setAlertMessage("test message");
-            alertType.setAlertName("test");
-            alertTypeRepository.save(alertType);
+        alertType = new AlertType();
+        alertType.setAlertMessage("test message");
+        alertType.setAlertName("test");
+        alertTypeRepository.save(alertType);
 
-            alertConfig = new AlertConfig();
-            alertConfig.setAlertParameters("key=value");
-            alertConfig.setAlertType(alertType);
-            alertConfig.setDefaultConfig('Y');
-            alertConfig.setAlertConfigName("default");
-            alertConfigRepository.save(alertConfig);
+        alertConfig = new AlertConfig();
+        alertConfig.setAlertParameters("key=value");
+        alertConfig.setAlertType(alertType);
+        alertConfig.setDefaultConfig('Y');
+        alertConfig.setAlertConfigName("default");
+        alertConfigRepository.save(alertConfig);
 
-            alertAssociation = new AlertAssociation();
-            alertAssociation.setAlertConfig(alertConfig);
-            alertAssociation.setItemId(1);
-            alertAssociationRepository.save(alertAssociation);
-        } catch(Exception e){
-            e.printStackTrace();
-        }finally {
-            if (alertAssociation != null) alertAssociationRepository.delete(alertAssociation);
-            if (alertConfig != null) alertConfigRepository.delete(alertConfig);
-            if (alertType != null) alertTypeRepository.delete(alertType);
-        }
-
+        alertAssociation = new AlertAssociation();
+        alertAssociation.setAlertConfig(alertConfig);
+        alertAssociation.setItemId(1);
+        alertAssociationRepository.save(alertAssociation);
     }
 
     @Test
     public void shouldPerformCRUDOnAlert() {
         Alert alert = null;
         AlertType alertType = null;
-        try {
-            alertType = new AlertType();
-            alertType.setAlertMessage("test message");
-            alertType.setAlertName("test");
-            alertTypeRepository.save(alertType);
+        alertType = new AlertType();
+        alertType.setAlertMessage("test message");
+        alertType.setAlertName("test");
+        alertTypeRepository.save(alertType);
 
-            alert = new Alert();
-            alert.setAlertType(alertType);
-            alert.setAlertStatus('A');
-            alert.setAlertText("224234");
-            alert.setAlertText("224234");
-            alertRepository.save(alert);
-        } finally {
-            if (alert != null) alertRepository.delete(alert);
-            if (alertType != null) alertTypeRepository.delete(alertType);
-        }
-
+        alert = new Alert();
+        alert.setAlertType(alertType);
+        alert.setAlertStatus('A');
+        alert.setAlertText("224234");
+        alert.setAlertText("224234");
+        alertRepository.save(alert);
     }
 
 }

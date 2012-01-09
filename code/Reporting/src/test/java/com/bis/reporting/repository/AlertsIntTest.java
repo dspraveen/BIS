@@ -5,11 +5,9 @@ import com.bis.domain.AlertAssociation;
 import com.bis.domain.AlertConfig;
 import com.bis.domain.AlertType;
 import com.bis.testcommon.BaseIntTest;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-@Ignore("Ignored until we introduce in memory database")
 public class AlertsIntTest extends BaseIntTest {
 
     @Autowired
@@ -47,7 +45,9 @@ public class AlertsIntTest extends BaseIntTest {
             alertAssociation.setAlertConfig(alertConfig);
             alertAssociation.setItemId(1);
             alertAssociationRepository.save(alertAssociation);
-        } finally {
+        } catch(Exception e){
+            e.printStackTrace();
+        }finally {
             if (alertAssociation != null) alertAssociationRepository.delete(alertAssociation);
             if (alertConfig != null) alertConfigRepository.delete(alertConfig);
             if (alertType != null) alertTypeRepository.delete(alertType);

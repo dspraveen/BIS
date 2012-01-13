@@ -14,6 +14,5 @@ public class AlertAssociationRepository extends BaseRepository<AlertAssociation>
     public AlertAssociationRepository(@Qualifier("sessionFactory") SessionFactory sessionFactory) {
         super(AlertAssociation.class);
         setSessionFactory(sessionFactory);
-        System.out.println("");
     }
 }

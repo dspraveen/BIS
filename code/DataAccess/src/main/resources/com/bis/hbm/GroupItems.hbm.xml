@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.bis.domain.GroupItem" table="group_items" catalog="BIS">
+        <id name="groupItemId" type="java.lang.Integer">
+            <column name="Group_Items_Id" />
+            <generator class="identity" />
+        </id>
+        <property name="itemId" type="java.lang.Integer">
+            <column name="Item_Id" />
+        </property>
+        <property name="vendorId" type="java.lang.Integer">
+            <column name="Vendor_Id" />
+        </property>
+        <property name="hawkerId" type="java.lang.Integer">
+            <column name="Hawker_Id" />
+        </property>
+    </class>
+</hibernate-mapping>

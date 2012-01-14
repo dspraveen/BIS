@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.bis.domain.Group" table="groups" catalog="BIS">
+        <id name="groupId" type="java.lang.Integer">
+            <column name="Group_Id"/>
+            <generator class="identity"/>
+        </id>
+        <property name="groupName" type="string">
+            <column name="Group_Name" length="16"/>
+        </property>
+        <property name="groupText" type="string">
+            <column name="Group_Text"/>
+        </property>
+        <bag name="groupItems" cascade="all" lazy="false">
+            <key column="Group_Id" not-null="true"/>
+            <one-to-many class="com.bis.domain.GroupItem"/>
+        </bag>
+    </class>
+</hibernate-mapping>

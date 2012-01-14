@@ -1,9 +1,6 @@
 package com.bis.reporting.repository;
 
-import com.bis.domain.Alert;
-import com.bis.domain.AlertAssociation;
-import com.bis.domain.AlertConfig;
-import com.bis.domain.AlertType;
+import com.bis.domain.*;
 import com.bis.testcommon.BaseIntTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,40 +19,57 @@ public class AlertsIntTest extends BaseIntTest {
     @Autowired
     private AlertsRepository alertRepository;
 
+    @Autowired
+    private GroupRepository groupRepository;
+
+
+
     @Test
     public void shouldPerformCRUDOnAlertAssociation() {
 
-        AlertAssociation alertAssociation = null;
-        AlertConfig alertConfig = null;
-        AlertType alertType = null;
-        alertType = new AlertType();
+
+        Group group = new Group();
+        group.setGroupName("test");
+        group.setGroupText("test text");
+        group.getGroupItems().add(new GroupItem() {{
+            setHawkerId(1);
+            setVendorId(1);
+            setItemId(1);
+        }});
+        group.getGroupItems().add(new GroupItem() {{
+            setHawkerId(2);
+            setVendorId(2);
+            setItemId(2);
+        }});
+        groupRepository.save(group);
+
+
+        AlertType alertType = new AlertType();
         alertType.setAlertMessage("test message");
         alertType.setAlertName("test");
         alertTypeRepository.save(alertType);
 
-        alertConfig = new AlertConfig();
+        AlertConfig alertConfig = new AlertConfig();
         alertConfig.setAlertParameters("key=value");
         alertConfig.setAlertType(alertType);
         alertConfig.setDefaultConfig('Y');
         alertConfig.setAlertConfigName("default");
         alertConfigRepository.save(alertConfig);
 
-        alertAssociation = new AlertAssociation();
+        AlertAssociation alertAssociation = new AlertAssociation();
         alertAssociation.setAlertConfig(alertConfig);
-        alertAssociation.setItemId(1);
+        alertAssociation.setGroup(group);
         alertAssociationRepository.save(alertAssociation);
     }
 
     @Test
     public void shouldPerformCRUDOnAlert() {
-        Alert alert = null;
-        AlertType alertType = null;
-        alertType = new AlertType();
+        AlertType alertType = new AlertType();
         alertType.setAlertMessage("test message");
         alertType.setAlertName("test");
         alertTypeRepository.save(alertType);
 
-        alert = new Alert();
+        Alert alert = new Alert();
         alert.setAlertType(alertType);
         alert.setAlertStatus('A');
         alert.setAlertText("224234");

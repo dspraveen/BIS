@@ -2,50 +2,31 @@ package com.bis.domain;
 
 public class AlertAssociation implements java.io.Serializable {
 
-	private Integer associationId;
+	private Integer alertAssociationId;
+	private Group group;
 	private AlertConfig alertConfig;
-	private Integer itemId;
-	private Integer hawkerId;
-	private Integer vendorId;
 
-    public Integer getAssociationId() {
-		return this.associationId;
+	public Integer getAlertAssociationId() {
+		return this.alertAssociationId;
 	}
 
-	public void setAssociationId(Integer associationId) {
-		this.associationId = associationId;
+	public void setAlertAssociationId(Integer alertAssociationId) {
+		this.alertAssociationId = alertAssociationId;
 	}
 
-	public AlertConfig getAlertConfig() {
-		return this.alertConfig;
-	}
+    public Group getGroup() {
+        return group;
+    }
 
-	public void setAlertConfig(AlertConfig alertConfig) {
-		this.alertConfig = alertConfig;
-	}
+    public void setGroup(Group group) {
+        this.group = group;
+    }
 
-	public Integer getItemId() {
-		return this.itemId;
-	}
+    public AlertConfig getAlertConfig() {
+        return alertConfig;
+    }
 
-	public void setItemId(Integer itemId) {
-		this.itemId = itemId;
-	}
-
-	public Integer getHawkerId() {
-		return this.hawkerId;
-	}
-
-	public void setHawkerId(Integer hawkerId) {
-		this.hawkerId = hawkerId;
-	}
-
-	public Integer getVendorId() {
-		return this.vendorId;
-	}
-
-	public void setVendorId(Integer vendorId) {
-		this.vendorId = vendorId;
-	}
-
+    public void setAlertConfig(AlertConfig alertConfig) {
+        this.alertConfig = alertConfig;
+    }
 }

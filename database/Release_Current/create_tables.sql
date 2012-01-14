@@ -1,41 +1,57 @@
 CREATE TABLE Alert_Type (
-  Alert_Type_Id INTEGER UNSIGNED  NOT NULL   AUTO_INCREMENT,
-  Alert_Name VARCHAR(16)  NOT NULL  ,
-  Alert_Message VARCHAR(255)  NOT NULL    ,
-  Last_Run_Time TIMESTAMP  NULL    ,
+  Alert_Type_Id INT(5) UNSIGNED  NOT NULL   AUTO_INCREMENT,
+  Alert_Name VARCHAR(16)  NULL,
+  Alert_Message VARCHAR(255)  NULL,
+  Last_Run_Time TIMESTAMP  NULL,
   PRIMARY KEY(Alert_Type_Id)
 );
 
-CREATE TABLE Alert_Config (
-  Alert_Config_Id INTEGER UNSIGNED  NOT NULL   AUTO_INCREMENT,
-  Alert_Type_Id INTEGER UNSIGNED  NOT NULL  ,
-  Alert_Parameters VARCHAR(255)  NULL  ,
-  Default_Config CHAR(1)  NULL    ,
-  Alert_Config_Name VARCHAR(255)  NOT NULL ,
-  PRIMARY KEY(Alert_Config_Id)  ,
-  INDEX Alert_Config_FKIndex1(Alert_Type_Id),
-  FOREIGN KEY(Alert_Type_Id) REFERENCES Alert_Type(Alert_Type_Id) ON DELETE NO ACTION ON UPDATE NO ACTION
+CREATE TABLE Groups (
+  Group_Id INT(5) UNSIGNED  NOT NULL AUTO_INCREMENT,
+  Group_Name VARCHAR(16),
+  Group_Text VARCHAR(255)  NULL,
+  PRIMARY KEY(Group_Id)
+);
+
+CREATE TABLE Group_Items (
+  Group_Items_Id INTEGER UNSIGNED  NOT NULL   AUTO_INCREMENT,
+  Group_Id INT(5) UNSIGNED  NOT NULL,
+  Item_Id INT(5) UNSIGNED  NULL,
+  Vendor_Id INT(5) UNSIGNED  NULL,
+  Hawker_Id INT(5) UNSIGNED  NULL,
+  PRIMARY KEY(Group_Items_Id),
+  FOREIGN KEY(Group_Id) REFERENCES Groups(Group_Id) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  FOREIGN KEY(Item_Id) REFERENCES Item(Item_Code) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  FOREIGN KEY(Vendor_Id) REFERENCES Vendor(Vendor_ID) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  FOREIGN KEY(Hawker_Id) REFERENCES Hawker(Hawker_ID) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
 CREATE TABLE Alert (
   Alert_Num INTEGER UNSIGNED  NOT NULL   AUTO_INCREMENT,
-  Alert_Type_Id INTEGER UNSIGNED  NOT NULL  ,
-  Alert_Text VARCHAR(255)  NULL  ,
-  Alert_Status CHAR(1)  NULL  ,
-  Snooze_Time INTEGER UNSIGNED  NULL  ,
-  Alert_Time TIMESTAMP  NULL    ,
-  PRIMARY KEY(Alert_Num)  ,
-  INDEX Alerts_FKIndex1(Alert_Type_Id),
+  Alert_Type_Id INT(5) UNSIGNED  NOT NULL,
+  Alert_text VARCHAR(255)  NULL,
+  Alert_Status CHAR(1)  NULL,
+  Snooze_Time INTEGER UNSIGNED  NULL,
+  Alert_Time TIMESTAMP  NULL,
+  PRIMARY KEY(Alert_Num),
+  FOREIGN KEY(Alert_Type_Id) REFERENCES Alert_Type(Alert_Type_Id) ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+
+CREATE TABLE Alert_Config (
+  Alert_Config_Id INT(5) UNSIGNED  NOT NULL   AUTO_INCREMENT,
+  Alert_Type_Id INT(5) UNSIGNED  NOT NULL,
+  Alert_Parameters VARCHAR(255)  NULL,
+  Default_Config CHAR(1)  NULL,
+  Alert_Config_Name INTEGER UNSIGNED  NULL,
+  PRIMARY KEY(Alert_Config_Id),
   FOREIGN KEY(Alert_Type_Id) REFERENCES Alert_Type(Alert_Type_Id) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
 CREATE TABLE Alert_Association (
-  Association_Id INTEGER UNSIGNED  NOT NULL   AUTO_INCREMENT,
-  Alert_Config_Id INTEGER UNSIGNED  NOT NULL  ,
-  Item_Id INTEGER UNSIGNED  NULL  ,
-  Hawker_Id INTEGER UNSIGNED  NULL  ,
-  Vendor_Id INTEGER UNSIGNED  NULL    ,
-  PRIMARY KEY(Association_Id)  ,
-  INDEX Alert_Association_FKIndex1(Alert_Config_Id),
-  FOREIGN KEY(Alert_Config_Id) REFERENCES Alert_Config(Alert_Config_Id) ON DELETE NO ACTION ON UPDATE NO ACTION
+  Alert_Association_Id INTEGER UNSIGNED  NOT NULL AUTO_INCREMENT,
+  Group_Id INT(5) UNSIGNED  NOT NULL,
+  Alert_Config_Id INT(5) UNSIGNED  NOT NULL,
+  PRIMARY KEY(Alert_Association_Id), 
+  FOREIGN KEY(Alert_Config_Id) REFERENCES Alert_Config(Alert_Config_Id) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  FOREIGN KEY(Group_Id) REFERENCES Groups(Group_Id) ON DELETE NO ACTION ON UPDATE NO ACTION
 );

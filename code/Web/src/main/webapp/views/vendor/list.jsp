@@ -69,12 +69,13 @@
                       </c:choose>
                     </label></span>
                 </div>
-                <div class="section">
-                    <span class="left"><a href="<%=request.getContextPath()%>/vendor/updateForm/${vendorList.selectedVendor.vendorId}">Update Vendor</a></span>
-                </div>
+
         </c:if>
         <c:if test="${vendorList.count == '0'}">
             <h1>No Vendors to show</h1>
         </c:if>
 	</form>
+</div>
+<div class="button_div">
+	<a href="<%=request.getContextPath()%>/vendor/updateForm/${vendorList.selectedVendor.vendorId}" class="buttons">Update Vendor</a>
 </div>

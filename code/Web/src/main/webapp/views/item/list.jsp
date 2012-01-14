@@ -47,12 +47,12 @@
                     <span class="left"><label>Item Returnable:</label></span
                     <span class="right"><label>${itemList.selectedItem.returnableDescription}</label></span>
                 </div>
-                <div class="section">
-                    <span class="left"><a href="<%=request.getContextPath()%>/item/updateForm/${itemList.selectedItem.itemCode}">Update Item</a></span>
-                </div>
         </c:if>
         <c:if test="${itemList.count == '0'}">
             <h1>No items to show</h1>
         </c:if>
 	</form>
+</div>
+<div class="button_div">
+	<a href="<%=request.getContextPath()%>/item/updateForm/${itemList.selectedItem.itemCode}" class="buttons">Update Item</a>
 </div>

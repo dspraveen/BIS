@@ -45,7 +45,7 @@
             <span class="right"><form:input path="hawker.phoneNumber" /></span>
         </div>
         <div class="section">
-            <span class="left"><label>Hawker Alternate Phone Number:</label></span
+            <span class="left"><label>Alternate Phone Number:</label></span
             <span class="right"><form:input path="hawker.alternatePhone" /></span>
         </div>
     </div>

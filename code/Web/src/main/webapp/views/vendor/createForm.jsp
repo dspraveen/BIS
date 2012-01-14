@@ -46,7 +46,7 @@
             <span class="right"><form:input path="vendor.phoneNumber" /></span>
         </div>
         <div class="section">
-            <span class="left"><label>Vendor Alternate Phone Number:</label></span
+            <span class="left"><label>Alternate Phone Number:</label></span
             <span class="right"><form:input path="vendor.alternatePhone" /></span>
         </div>
 	</div>	

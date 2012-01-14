@@ -69,12 +69,12 @@
                       </c:choose>
                     </label></span>
                 </div>
-                <div class="section">
-                    <span class="left"><a href="<%=request.getContextPath()%>/hawker/updateForm/${hawkerList.selectedHawker.hawkerId}">Update Hawker</a></span>
-                </div>
         </c:if>
         <c:if test="${hawkerList.count == '0'}">
             <h1>No Hawkers to show</h1>
         </c:if>
 	</form>
+</div>
+<div class="button_div">
+	<a href="<%=request.getContextPath()%>/hawker/updateForm/${hawkerList.selectedHawker.hawkerId}" class="buttons">Update Hawker</a>
 </div>

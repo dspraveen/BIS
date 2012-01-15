@@ -263,7 +263,7 @@ margin: 0 10px 0 5px;}
 
 #leftb {
 float: left;
-width: 22%;
+width: 20%;
 margin: 0;	
 padding: 0; 
 display: inline;
@@ -276,7 +276,7 @@ padding:0;}
 
 #leftb ul.sidemenu li {
 margin-bottom:1px;
-border: 1px solid #f2f2f2;}
+border: 0px solid #f2f2f2;}
 
 #leftb ul.sidemenu a {
 display:block;

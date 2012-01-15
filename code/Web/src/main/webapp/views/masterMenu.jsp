@@ -23,5 +23,8 @@
     <li>
       <a href="<%=request.getContextPath()%>/hawker/list">Hawker Details</a>
     </li>
+    <li>
+      <a href="<%=request.getContextPath()%>/reporting/group/showGroups">Groups Administration</a>
+    </li>
   </ul>
 </div>

@@ -44,7 +44,7 @@ public class GroupController {
     @RequestMapping(value = "/showGroups", method = RequestMethod.GET)
     public ModelAndView showGroups() {
         List<Group> groupList = groupService.getAll();
-        return new ModelAndView("reporting/showAllGroups", "groupList", groupList);
+        return new ModelAndView("reporting/showGroups", "groupList", groupList);
     }
 
     @RequestMapping(value = "/createGroup", method = RequestMethod.GET)

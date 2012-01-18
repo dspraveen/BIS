@@ -3,9 +3,9 @@ package com.bis.domain;
 public class GroupItem implements java.io.Serializable {
 
     private Integer groupItemId;
-    private Integer itemId;
-    private Integer vendorId;
-    private Integer hawkerId;
+    private Item item = new Item();
+    private Vendor vendor = new Vendor();
+    private Hawker hawker = new Hawker();
 
     public Integer getGroupItemId() {
         return this.groupItemId;
@@ -15,28 +15,27 @@ public class GroupItem implements java.io.Serializable {
         this.groupItemId = groupItemId;
     }
 
-    public Integer getItemId() {
-        return this.itemId;
+    public Item getItem() {
+        return item;
     }
 
-    public void setItemId(Integer itemId) {
-        this.itemId = itemId;
+    public void setItem(Item item) {
+        this.item = item;
     }
 
-    public Integer getVendorId() {
-        return this.vendorId;
+    public Vendor getVendor() {
+        return vendor;
     }
 
-    public void setVendorId(Integer vendorId) {
-        this.vendorId = vendorId;
+    public void setVendor(Vendor vendor) {
+        this.vendor = vendor;
     }
 
-    public Integer getHawkerId() {
-        return this.hawkerId;
+    public Hawker getHawker() {
+        return hawker;
     }
 
-    public void setHawkerId(Integer hawkerId) {
-        this.hawkerId = hawkerId;
+    public void setHawker(Hawker hawker) {
+        this.hawker = hawker;
     }
-
 }

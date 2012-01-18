@@ -7,4 +7,11 @@
         <put-attribute name="main-content" value="/views/reporting/showGroups.jsp"/>
     </definition>
 
+    <definition name="reporting/updateGroup" extends="master">
+        <put-attribute name="main-content" value="/views/reporting/updateGroup.jsp"/>
+    </definition>
+
+    <definition name="reporting/createGroup" extends="master">
+        <put-attribute name="main-content" value="/views/reporting/createGroup.jsp"/>
+    </definition>
 </tiles-definitions>

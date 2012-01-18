@@ -7,14 +7,8 @@
             <column name="Group_Items_Id" />
             <generator class="identity" />
         </id>
-        <property name="itemId" type="java.lang.Integer">
-            <column name="Item_Id" />
-        </property>
-        <property name="vendorId" type="java.lang.Integer">
-            <column name="Vendor_Id" />
-        </property>
-        <property name="hawkerId" type="java.lang.Integer">
-            <column name="Hawker_Id" />
-        </property>
+        <many-to-one name="item" class="com.bis.domain.Item" column="Item_Code" cascade="none" not-null="true" lazy="false"/>
+        <many-to-one name="hawker" class="com.bis.domain.Hawker" column="Hawker_ID" cascade="none" not-null="true" lazy="false"/>
+        <many-to-one name="vendor" class="com.bis.domain.Vendor" column="Vendor_ID" cascade="none" not-null="true" lazy="false"/>
     </class>
 </hibernate-mapping>

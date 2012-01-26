@@ -26,5 +26,8 @@
     <li>
       <a href="<%=request.getContextPath()%>/group/showGroups">Groups Administration</a>
     </li>
+    <li>
+      <a href="<%=request.getContextPath()%>/alerts/showAlertsConfig">Alerts Administration</a>
+    </li>
   </ul>
 </div>

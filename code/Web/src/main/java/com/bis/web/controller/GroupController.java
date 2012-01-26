@@ -44,13 +44,13 @@ public class GroupController {
     @RequestMapping(value = "/showGroups", method = RequestMethod.GET)
     public ModelAndView showGroups() {
         List<Group> groupList = groupService.getAll();
-        return new ModelAndView("reporting/showGroups", "groupList", groupList);
+        return new ModelAndView("group/showGroups", "groupList", groupList);
     }
 
     @RequestMapping(value = "/createGroup", method = RequestMethod.GET)
     public ModelAndView createForm() {
         Group group = new Group();
-        return new ModelAndView("reporting/createGroup", "group", group);
+        return new ModelAndView("group/createGroup", "group", group);
     }
 
     @Transactional
@@ -58,13 +58,13 @@ public class GroupController {
     public String create(@Valid Group group, BindingResult bindingResult, Model uiModel) {
         uiModel.asMap().clear();
         groupService.save(group);
-        return "redirect:/reporting/showGroups";
+        return "redirect:/group/showGroups";
     }
 
     @RequestMapping(value = "/updateGroup/{id}", method = RequestMethod.GET)
     public ModelAndView updateForm(@PathVariable("id") int groupId) {
         Group group = groupService.getGroup(groupId);
-        return new ModelAndView("reporting/updateGroup", "Group", group);
+        return new ModelAndView("group/updateGroup", "Group", group);
     }
 
     @Transactional
@@ -72,7 +72,7 @@ public class GroupController {
     public String update(@Valid Group group, BindingResult bindingResult, Model uiModel) {
         uiModel.asMap().clear();
         groupService.update(group);
-        return "redirect:/reporting/showGroups";
+        return "redirect:/group/showGroups";
     }
 
     @ModelAttribute("vendors")

@@ -14,4 +14,8 @@ public interface AlertConfigurationService {
     List<AlertType> getAlertTypes();
 
     List<AlertConfig> getAlertConfigs(int alertTypeId);
+
+    AlertType getAlertType(int alertTypeId);
+
+    AlertConfig get(int alertConfigId);
 }

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class AlertConfigurationServiceImpl implements AlertConfigurationService{
+public class AlertConfigurationServiceImpl implements AlertConfigurationService {
 
     private AlertConfigRepository alertConfigRepository;
     private AlertTypeRepository alertTypeRepository;
@@ -24,7 +24,7 @@ public class AlertConfigurationServiceImpl implements AlertConfigurationService{
 
     @Override
     public List<AlertConfig> getAll() {
-       return alertConfigRepository.getAll();
+        return alertConfigRepository.getAll();
     }
 
     @Override
@@ -36,5 +36,15 @@ public class AlertConfigurationServiceImpl implements AlertConfigurationService{
     public List<AlertConfig> getAlertConfigs(int alertTypeId) {
         AlertType alertType = alertTypeRepository.get(alertTypeId);
         return alertConfigRepository.getAlertConfigs(alertType);
+    }
+
+    @Override
+    public AlertType getAlertType(int alertTypeId) {
+        return alertTypeRepository.get(alertTypeId);
+    }
+
+    @Override
+    public AlertConfig get(int alertConfigId) {
+        return alertConfigRepository.get(alertConfigId);
     }
 }

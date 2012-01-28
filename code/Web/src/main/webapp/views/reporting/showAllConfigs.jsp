@@ -35,7 +35,7 @@
 		</tr>
 		</c:forEach>
 	 </TABLE>
-	<a href="<%=request.getContextPath()%>/alerts/#">Update Configuration</a>
+	<a href="<%=request.getContextPath()%>/alerts/updateForm/${alertConfig.alertConfigId}">Update Configuration</a>
 	 </div>
 </c:forEach>
 </div>

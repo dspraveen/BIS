@@ -23,4 +23,7 @@
     <definition name="alerts/newConfig" extends="ajaxSection">
         <put-attribute name="content" value="/views/reporting/newConfig_SUA.jsp"/>
     </definition>
+    <definition name="alerts/updateForm" extends="master">
+        <put-attribute name="main-content" value="/views/reporting/alertsConfigUpdate.jsp"/>
+    </definition>
 </tiles-definitions>

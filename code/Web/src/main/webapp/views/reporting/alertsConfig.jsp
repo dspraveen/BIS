@@ -28,6 +28,15 @@
             })
         });
     });
+
+    function validateForm(){
+        if(!($('.alert_name').val())){
+            alert("Please select alert Type");
+            return false;
+        }
+        return true;
+    }
+
 </script>
 
 <div class="general_division">
@@ -49,5 +58,7 @@
 	<input style="margin-left: 10px;" class="buttons" type="button" value="New Configuration" id="new_config"/>
 </div></br></br>
 
+<form  method="POST" action="<%=request.getContextPath()%>/alerts/createConfig"  onsubmit="return validateForm();">
 <div class="configList">
 </div>
+</form>

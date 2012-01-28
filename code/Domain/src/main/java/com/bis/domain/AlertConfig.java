@@ -1,5 +1,8 @@
 package com.bis.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AlertConfig implements java.io.Serializable {
 
 	private Integer alertConfigId;
@@ -7,6 +10,7 @@ public class AlertConfig implements java.io.Serializable {
 	private String alertParameters;
 	private String alertConfigName;
 	private Character defaultConfig;
+    private List<AlertAssociation> alertAssociations = new ArrayList<AlertAssociation>();
 
     public Integer getAlertConfigId() {
 		return this.alertConfigId;
@@ -48,4 +52,11 @@ public class AlertConfig implements java.io.Serializable {
 		this.defaultConfig = defaultConfig;
 	}
 
+    public List<AlertAssociation> getAlertAssociations() {
+        return alertAssociations;
+    }
+
+    public void setAlertAssociations(List<AlertAssociation> alertAssociations) {
+        this.alertAssociations = alertAssociations;
+    }
 }

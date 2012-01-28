@@ -16,6 +16,17 @@
                 }
             })
         });
+
+        $('#new_config').bind("click",function(){
+            var transactionInRangeUrl = "<%=request.getContextPath()%>/alerts/newConfig?alertTypeId="+$('.alert_name').val();
+            $.ajax({
+                url : transactionInRangeUrl,
+                processData : true,
+                success : function(data) {
+                    $(".configList").html(data);
+                }
+            })
+        });
     });
 </script>
 
@@ -34,8 +45,8 @@
     </div>
 </div>
 
-<div class="button_div">
-	<a href="<%=request.getContextPath()%>/alerts/#" class="buttons">New Configuration</a>
+<div>
+	<input style="margin-left: 10px;" class="buttons" type="button" value="New Configuration" id="new_config"/>
 </div></br></br>
 
 <div class="configList">

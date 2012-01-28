@@ -17,5 +17,9 @@
         <property name="alertConfigName" type="string">
             <column name="Alert_Config_Name" not-null="true"/>
         </property>
+        <bag name="alertAssociations" cascade="all" lazy="false">
+            <key column="alert_config_Id" not-null="true"/>
+            <one-to-many class="com.bis.domain.AlertAssociation"/>
+        </bag>
     </class>
 </hibernate-mapping>

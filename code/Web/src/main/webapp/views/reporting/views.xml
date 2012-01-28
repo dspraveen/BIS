@@ -20,4 +20,7 @@
     <definition name="alerts/showAllConfigs" extends="ajaxSection">
         <put-attribute name="content" value="/views/reporting/showAllConfigs.jsp"/>
     </definition>
+    <definition name="alerts/newConfig" extends="ajaxSection">
+        <put-attribute name="content" value="/views/reporting/newConfig_SUA.jsp"/>
+    </definition>
 </tiles-definitions>

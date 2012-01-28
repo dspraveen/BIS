@@ -24,7 +24,7 @@ public class AlertConfigController {
 
     private AlertConfigurationService alertConfigurationService;
 
-    protected AlertConfigController(){
+    protected AlertConfigController() {
 
     }
 
@@ -52,5 +52,11 @@ public class AlertConfigController {
     public ModelAndView showAllConfigs(@RequestParam(value = "alertTypeId", required = false, defaultValue = "-1") int alertTypeId) {
         List<AlertConfig> alertConfigList = alertConfigurationService.getAlertConfigs(alertTypeId);
         return new ModelAndView("alerts/showAllConfigs", "alertConfigList", alertConfigList);
+    }
+
+    @RequestMapping(value = "/newConfig", method = RequestMethod.GET)
+    public ModelAndView newConfig(@RequestParam(value = "alertTypeId", required = false, defaultValue = "-1") int alertTypeId) {
+        AlertConfig alertConfig = new AlertConfig();
+        return new ModelAndView("alerts/newConfig", "alertConfig", alertConfig);
     }
 }

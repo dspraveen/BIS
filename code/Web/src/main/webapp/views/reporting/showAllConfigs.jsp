@@ -25,11 +25,15 @@
 	<div>
 	<TABLE  width="310px" border="1">
 		<thead class="table_header">
-			<TD>Groups</TD>
+			<TD>Group Name</TD>
+			<TD>Group Text</TD>
 		</thead>
+		<c:forEach var="alertAssociation" items="${alertConfig.alertAssociations}">
 		<tr>
-			<td></td>
+			<td>${alertAssociation.group.groupName}</td>
+			<td>${alertAssociation.group.groupText}</td>
 		</tr>
+		</c:forEach>
 	 </TABLE>
 	<a href="<%=request.getContextPath()%>/alerts/#">Update Configuration</a>
 	 </div>

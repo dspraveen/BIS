@@ -1,10 +1,9 @@
 package com.bis.web.controller;
 
 import com.bis.core.services.HawkerMasterService;
+import com.bis.core.services.ItemMasterService;
 import com.bis.core.services.VendorMasterService;
-import com.bis.domain.Group;
-import com.bis.domain.Hawker;
-import com.bis.domain.Vendor;
+import com.bis.domain.*;
 import com.bis.reporting.services.GroupService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
@@ -30,15 +26,18 @@ public class GroupController {
     private GroupService groupService;
     private VendorMasterService vendorMasterService;
     private HawkerMasterService hawkerMasterService;
+    private ItemMasterService itemMasterService;
+    private Group groupDetails = new Group();
 
     protected GroupController() {
     }
 
     @Autowired
-    public GroupController(VendorMasterService vendorMasterService, HawkerMasterService hawkerMasterService, GroupService groupService) {
+    public GroupController(VendorMasterService vendorMasterService, HawkerMasterService hawkerMasterService, GroupService groupService, ItemMasterService itemMasterService) {
         this.groupService = groupService;
         this.vendorMasterService = vendorMasterService;
         this.hawkerMasterService = hawkerMasterService;
+        this.itemMasterService = itemMasterService;
     }
 
     @RequestMapping(value = "/showGroups", method = RequestMethod.GET)
@@ -50,21 +49,27 @@ public class GroupController {
     @RequestMapping(value = "/createGroup", method = RequestMethod.GET)
     public ModelAndView createForm() {
         Group group = new Group();
+        this.groupDetails.getGroupItems().clear();
+        this.groupDetails.setGroupId(null);
+        this.groupDetails.setGroupName(null);
+        this.groupDetails.setGroupText(null);
         return new ModelAndView("group/createGroup", "group", group);
     }
 
     @Transactional
-    @RequestMapping(value = "/createGroup", method = RequestMethod.POST)
+    @RequestMapping(value = "/createNewGroup", method = RequestMethod.POST)
     public String create(@Valid Group group, BindingResult bindingResult, Model uiModel) {
         uiModel.asMap().clear();
-        groupService.save(group);
+        this.groupDetails.setGroupName(group.getGroupName());
+        this.groupDetails.setGroupText(group.getGroupText());
+        groupService.save(groupDetails);
         return "redirect:/group/showGroups";
     }
 
     @RequestMapping(value = "/updateGroup/{id}", method = RequestMethod.GET)
     public ModelAndView updateForm(@PathVariable("id") int groupId) {
         Group group = groupService.getGroup(groupId);
-        return new ModelAndView("group/updateGroup", "Group", group);
+        return new ModelAndView("group/updateGroup", "group", group);
     }
 
     @Transactional
@@ -73,6 +78,38 @@ public class GroupController {
         uiModel.asMap().clear();
         groupService.update(group);
         return "redirect:/group/showGroups";
+    }
+
+    @RequestMapping(value = "/addNewItem", method = RequestMethod.GET)
+    public ModelAndView addNewItem(@RequestParam(value = "itemCode", required = true, defaultValue = "-1") int itemCode) {
+        Item item = itemMasterService.get(itemCode);
+        groupService.addItemToGroup(groupDetails, item);
+        Group group = new Group();
+        group = groupDetails;
+        return new ModelAndView("group/showGroup", "group", group);
+    }
+
+    @RequestMapping(value = "/addNewVendor", method = RequestMethod.GET)
+    public ModelAndView addNewVendor(@RequestParam(value = "vendorId", required = true, defaultValue = "-1") int vendorId) {
+        Vendor vendor = vendorMasterService.get(vendorId);
+        groupService.addVendorToGroup(groupDetails, vendor);
+        Group group = new Group();
+        group = groupDetails;
+        return new ModelAndView("group/showGroup", "group", group);
+    }
+
+    @RequestMapping(value = "/addNewHawker", method = RequestMethod.GET)
+    public ModelAndView addNewHawker(@RequestParam(value = "hawkerId", required = true, defaultValue = "-1") int hawkerId) {
+        Hawker hawker = hawkerMasterService.get(hawkerId);
+        groupService.addHawkerToGroup(groupDetails, hawker);
+        Group group = new Group();
+        group = groupDetails;
+        return new ModelAndView("group/showGroup", "group", group);
+    }
+
+    @ModelAttribute("items")
+    public List<Item> items() {
+        return itemMasterService.getAll();
     }
 
     @ModelAttribute("vendors")

@@ -6,11 +6,12 @@
     <definition name="group/showGroups" extends="master">
         <put-attribute name="main-content" value="/views/reporting/showGroups.jsp"/>
     </definition>
-
+    <definition name="group/showGroup" extends="ajaxSection">
+        <put-attribute name="content" value="/views/reporting/showGroup.jsp"/>
+    </definition>
     <definition name="group/updateGroup" extends="master">
         <put-attribute name="main-content" value="/views/reporting/updateGroup.jsp"/>
     </definition>
-
     <definition name="group/createGroup" extends="master">
         <put-attribute name="main-content" value="/views/reporting/createGroup.jsp"/>
     </definition>

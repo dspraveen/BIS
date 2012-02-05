@@ -42,22 +42,23 @@
 		<span class="left"><label>Percentage:</label></span>
 		<span class="right"><form:input path="alertConfigParams.percentStock_SUS" class="config_params"/></span>
 	</div>
-	<div>
-		<h3 align="left"><label>Group Selection</label></h3>
-		<div class="section">
-            <span class="left"><label>Unassigned Groups</label></span>
-            <span class="right">
-                <select class="group_name">
-                    <option value="-1">--Please Select</option>
-                    <c:forEach var="group" items="${groups}">
-                        <option value="${group.groupId}">${group.groupName}</option>
-                    </c:forEach>
-                </select>
-                <input type="button" value="Add Group" class="add_group"/>
-            </span>
-        </div>
-	</div>
+
 	<div class="group_selection">
+		<div>
+            <h3 align="left"><label>Group Selection</label></h3>
+            <div class="section">
+                <span class="left"><label>Unassigned Groups</label></span>
+                <span class="right">
+                    <select class="group_name">
+                        <option value="-1">--Please Select</option>
+                        <c:forEach var="group" items="${groups}">
+                            <option value="${group.groupId}">${group.groupName}</option>
+                        </c:forEach>
+                    </select>
+                    <input type="button" value="Add Group" class="add_group"/>
+                </span>
+            </div>
+	    </div>
 	       <h3 align="left"><label>Group List</label></h3>
            <div align="center">
            <table  width="610px" border="1">

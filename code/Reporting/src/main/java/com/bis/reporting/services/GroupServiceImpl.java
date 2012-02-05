@@ -47,7 +47,7 @@ public class GroupServiceImpl implements GroupService {
         boolean flag = true;
         if (groupItems.size() > 0) {
             for (GroupItem groupItem : groupItems) {
-                if (groupItem.getItem() == null) {
+                if (groupItem.getItem() == null || groupItem.getItem().getItemCode() == null) {
                     groupItem.setItem(item);
                     flag = false;
                     break;
@@ -66,7 +66,7 @@ public class GroupServiceImpl implements GroupService {
         boolean flag = true;
         if (groupItems.size() > 0) {
             for (GroupItem groupItem : groupItems) {
-                if (groupItem.getVendor() == null) {
+                if (groupItem.getVendor() == null || groupItem.getVendor().getVendorId() == null) {
                     groupItem.setVendor(vendor);
                     flag = false;
                     break;
@@ -85,7 +85,7 @@ public class GroupServiceImpl implements GroupService {
         boolean flag = true;
         if (groupItems.size() > 0) {
             for (GroupItem groupItem : groupItems) {
-                if (groupItem.getHawker() == null) {
+                if (groupItem.getHawker() == null || groupItem.getHawker().getHawkerId() == null) {
                     groupItem.setHawker(hawker);
                     flag = false;
                     break;
@@ -102,13 +102,16 @@ public class GroupServiceImpl implements GroupService {
     public void removeItemFromGroup(Group group, Item item) {
         List<GroupItem> groupItems = group.getGroupItems();
         for (GroupItem groupItem : groupItems) {
-            if (groupItem.getItem().getItemCode() == item.getItemCode()) {
-                if (groupItem.getVendor().getVendorId() == null && groupItem.getHawker().getHawkerId() == null) {
-                    groupItems.remove(groupItem);
-                } else {
-                    groupItem.setItem(null);
+            if (groupItem.getItem() != null) {
+                if (groupItem.getItem().getItemCode() == item.getItemCode()) {
+                    if ((groupItem.getVendor() == null || groupItem.getVendor().getVendorId() == null) &&
+                            (groupItem.getHawker() == null || groupItem.getHawker().getHawkerId() == null)) {
+                        groupItems.remove(groupItem);
+                    } else {
+                        groupItem.setItem(null);
+                    }
+                    break;
                 }
-                break;
             }
         }
     }
@@ -116,13 +119,16 @@ public class GroupServiceImpl implements GroupService {
     public void removeVendorFromGroup(Group group, Vendor vendor) {
         List<GroupItem> groupItems = group.getGroupItems();
         for (GroupItem groupItem : groupItems) {
-            if (groupItem.getVendor().getVendorId() == vendor.getVendorId()) {
-                if (groupItem.getItem().getItemCode() == null && groupItem.getHawker().getHawkerId() == null) {
-                    groupItems.remove(groupItem);
-                } else {
-                    groupItem.setVendor(null);
+            if (groupItem.getVendor() != null) {
+                if (groupItem.getVendor().getVendorId() == vendor.getVendorId()) {
+                    if ((groupItem.getItem() == null || groupItem.getItem().getItemCode() == null) &&
+                            (groupItem.getHawker() == null || groupItem.getHawker().getHawkerId() == null)) {
+                        groupItems.remove(groupItem);
+                    } else {
+                        groupItem.setVendor(null);
+                    }
+                    break;
                 }
-                break;
             }
         }
     }
@@ -130,13 +136,16 @@ public class GroupServiceImpl implements GroupService {
     public void removeHawkerFromGroup(Group group, Hawker hawker) {
         List<GroupItem> groupItems = group.getGroupItems();
         for (GroupItem groupItem : groupItems) {
-            if (groupItem.getHawker().getHawkerId() == hawker.getHawkerId()) {
-                if (groupItem.getItem().getItemCode() == null && groupItem.getVendor().getVendorId() == null) {
-                    groupItems.remove(groupItem);
-                } else {
-                    groupItem.setHawker(null);
+            if (groupItem.getHawker() != null) {
+                if (groupItem.getHawker().getHawkerId() == hawker.getHawkerId()) {
+                    if ((groupItem.getItem() == null || groupItem.getItem().getItemCode() == null) &&
+                            (groupItem.getVendor() == null || groupItem.getVendor().getVendorId() == null)) {
+                        groupItems.remove(groupItem);
+                    } else {
+                        groupItem.setHawker(null);
+                    }
+                    break;
                 }
-                break;
             }
         }
     }

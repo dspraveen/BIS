@@ -23,6 +23,21 @@ public class AlertConfigurationServiceImpl implements AlertConfigurationService 
     }
 
     @Override
+    public void save(AlertConfig alertConfig) {
+        alertConfigRepository.save(alertConfig);
+    }
+
+    @Override
+    public void update(AlertConfig alertConfig) {
+        alertConfigRepository.update(alertConfig);
+    }
+
+    @Override
+    public void delete(AlertConfig alertConfig) {
+        alertConfigRepository.delete(alertConfig);
+    }
+
+    @Override
     public List<AlertConfig> getAll() {
         return alertConfigRepository.getAll();
     }

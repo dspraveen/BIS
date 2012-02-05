@@ -8,6 +8,5 @@
             <generator class="identity" />
         </id>
         <many-to-one name="group" class="com.bis.domain.Group" column="Group_ID" cascade="none" not-null="true" lazy="false"/>
-        <many-to-one name="alertConfig" class="com.bis.domain.AlertConfig" column="Alert_Config_Id" cascade="none" not-null="true" lazy="false"/>
     </class>
 </hibernate-mapping>

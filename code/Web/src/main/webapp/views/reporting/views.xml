@@ -18,13 +18,25 @@
     <definition name="alerts/showAlertsConfig" extends="master">
         <put-attribute name="main-content" value="/views/reporting/alertsConfig.jsp"/>
     </definition>
+    <definition name="alerts/showConfigs" extends="master">
+        <put-attribute name="main-content" value="/views/reporting/configs/showConfigs.jsp"/>
+    </definition>
     <definition name="alerts/showAllConfigs" extends="ajaxSection">
         <put-attribute name="content" value="/views/reporting/showAllConfigs.jsp"/>
     </definition>
-    <definition name="alerts/newConfig" extends="ajaxSection">
-        <put-attribute name="content" value="/views/reporting/newConfig_SUA.jsp"/>
+    <definition name="alerts/newConfig_SUA" extends="ajaxSection">
+        <put-attribute name="content" value="/views/reporting/configs/newConfig_SUA.jsp"/>
     </definition>
-    <definition name="alerts/updateForm" extends="master">
-        <put-attribute name="main-content" value="/views/reporting/alertsConfigUpdate.jsp"/>
+    <definition name="alerts/newConfig_SUS" extends="ajaxSection">
+        <put-attribute name="content" value="/views/reporting/configs/newConfig_SUS.jsp"/>
+    </definition>
+    <definition name="alerts/updateConfig_SUA" extends="master">
+        <put-attribute name="main-content" value="/views/reporting/configs/updateConfig_SUA.jsp"/>
+    </definition>
+    <definition name="alerts/updateConfig_SUS" extends="master">
+        <put-attribute name="main-content" value="/views/reporting/configs/updateConfig_SUS.jsp"/>
+    </definition>
+    <definition name="alerts/showGroupList" extends="ajaxSection">
+        <put-attribute name="content" value="/views/reporting/showGroupList.jsp"/>
     </definition>
 </tiles-definitions>

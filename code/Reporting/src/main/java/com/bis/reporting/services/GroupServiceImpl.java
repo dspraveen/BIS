@@ -47,7 +47,7 @@ public class GroupServiceImpl implements GroupService {
         boolean flag = true;
         if (groupItems.size() > 0) {
             for (GroupItem groupItem : groupItems) {
-                if (groupItem.getItem().getItemCode() == null) {
+                if (groupItem.getItem() == null) {
                     groupItem.setItem(item);
                     flag = false;
                     break;
@@ -66,7 +66,7 @@ public class GroupServiceImpl implements GroupService {
         boolean flag = true;
         if (groupItems.size() > 0) {
             for (GroupItem groupItem : groupItems) {
-                if (groupItem.getVendor().getVendorId() == null) {
+                if (groupItem.getVendor() == null) {
                     groupItem.setVendor(vendor);
                     flag = false;
                     break;
@@ -85,7 +85,7 @@ public class GroupServiceImpl implements GroupService {
         boolean flag = true;
         if (groupItems.size() > 0) {
             for (GroupItem groupItem : groupItems) {
-                if (groupItem.getHawker().getHawkerId() == null) {
+                if (groupItem.getHawker() == null) {
                     groupItem.setHawker(hawker);
                     flag = false;
                     break;
@@ -98,4 +98,47 @@ public class GroupServiceImpl implements GroupService {
             group.getGroupItems().add(groupItem);
         }
     }
+
+    public void removeItemFromGroup(Group group, Item item) {
+        List<GroupItem> groupItems = group.getGroupItems();
+        for (GroupItem groupItem : groupItems) {
+            if (groupItem.getItem().getItemCode() == item.getItemCode()) {
+                if (groupItem.getVendor().getVendorId() == null && groupItem.getHawker().getHawkerId() == null) {
+                    groupItems.remove(groupItem);
+                } else {
+                    groupItem.setItem(null);
+                }
+                break;
+            }
+        }
+    }
+
+    public void removeVendorFromGroup(Group group, Vendor vendor) {
+        List<GroupItem> groupItems = group.getGroupItems();
+        for (GroupItem groupItem : groupItems) {
+            if (groupItem.getVendor().getVendorId() == vendor.getVendorId()) {
+                if (groupItem.getItem().getItemCode() == null && groupItem.getHawker().getHawkerId() == null) {
+                    groupItems.remove(groupItem);
+                } else {
+                    groupItem.setVendor(null);
+                }
+                break;
+            }
+        }
+    }
+
+    public void removeHawkerFromGroup(Group group, Hawker hawker) {
+        List<GroupItem> groupItems = group.getGroupItems();
+        for (GroupItem groupItem : groupItems) {
+            if (groupItem.getHawker().getHawkerId() == hawker.getHawkerId()) {
+                if (groupItem.getItem().getItemCode() == null && groupItem.getVendor().getVendorId() == null) {
+                    groupItems.remove(groupItem);
+                } else {
+                    groupItem.setHawker(null);
+                }
+                break;
+            }
+        }
+    }
 }
+

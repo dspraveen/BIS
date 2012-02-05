@@ -89,6 +89,15 @@ public class GroupController {
         return new ModelAndView("group/showGroup", "group", group);
     }
 
+    @RequestMapping(value = "/removeItem/{id}", method = RequestMethod.GET)
+    public ModelAndView removeItem(@PathVariable("id") int itemCode) {
+        Item item = itemMasterService.get(itemCode);
+        groupService.removeItemFromGroup(groupDetails, item);
+        Group group = new Group();
+        group = groupDetails;
+        return new ModelAndView("group/showGroup", "group", group);
+    }
+
     @RequestMapping(value = "/addNewVendor", method = RequestMethod.GET)
     public ModelAndView addNewVendor(@RequestParam(value = "vendorId", required = true, defaultValue = "-1") int vendorId) {
         Vendor vendor = vendorMasterService.get(vendorId);
@@ -98,10 +107,28 @@ public class GroupController {
         return new ModelAndView("group/showGroup", "group", group);
     }
 
+    @RequestMapping(value = "/removeVendor/{id}", method = RequestMethod.GET)
+    public ModelAndView removeVendor(@PathVariable("id") int vendorId) {
+        Vendor vendor = vendorMasterService.get(vendorId);
+        groupService.removeVendorFromGroup(groupDetails, vendor);
+        Group group = new Group();
+        group = groupDetails;
+        return new ModelAndView("group/showGroup", "group", group);
+    }
+
     @RequestMapping(value = "/addNewHawker", method = RequestMethod.GET)
     public ModelAndView addNewHawker(@RequestParam(value = "hawkerId", required = true, defaultValue = "-1") int hawkerId) {
         Hawker hawker = hawkerMasterService.get(hawkerId);
         groupService.addHawkerToGroup(groupDetails, hawker);
+        Group group = new Group();
+        group = groupDetails;
+        return new ModelAndView("group/showGroup", "group", group);
+    }
+
+    @RequestMapping(value = "/removeHawker/{id}", method = RequestMethod.GET)
+    public ModelAndView removeHawker(@PathVariable("id") int hawkerId) {
+        Hawker hawker = hawkerMasterService.get(hawkerId);
+        groupService.removeHawkerFromGroup(groupDetails, hawker);
         Group group = new Group();
         group = groupDetails;
         return new ModelAndView("group/showGroup", "group", group);

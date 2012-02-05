@@ -2,19 +2,19 @@ package com.bis.domain;
 
 public enum AlertTypeCode {
 
-   SUA('1'),SUS('2'),SNR('3'),HPNR('4'),HBNG('5'),VPND('6'),VBNG('7');
+   SUA(1),SUS(2),SNR(3),HPNR(4),HBNG(5),VPND(6),VBNG(7);
 
-    private char code;
+    private int code;
 
-    AlertTypeCode(char c) {
+    AlertTypeCode(int c) {
         this.code = c;
     }
 
-    public char getCode() {
+    public int getCode() {
         return code;
     }
 
-    public static String  getNameByCode(char code){
+    public static String  getNameByCode(int code){
         for (AlertTypeCode alertTypeCode : AlertTypeCode.values()) {
             if(alertTypeCode.getCode()==code){
                 return alertTypeCode.name();

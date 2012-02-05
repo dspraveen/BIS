@@ -17,4 +17,7 @@ public interface GroupService {
     void addItemToGroup(Group group, Item item);
     void addVendorToGroup(Group group, Vendor vendor);
     void addHawkerToGroup(Group group, Hawker hawker);
+    void removeItemFromGroup(Group group, Item item);
+    void removeVendorFromGroup(Group group, Vendor vendor);
+    void removeHawkerFromGroup(Group group, Hawker hawker);
 }
